@@ -1,0 +1,51 @@
+/*
+Styles are split per view.
+This file will containt all the imports of styles of all views + styling of general utilities (body, nav).
+*/
+
+/* IMPORT OTHER STYLE SHEETS */
+@import url("home.css");
+@import url("faculties.css");
+@import url("departments.css");
+@import url("login.css");
+@import url("signup.css");
+@import url("posts.css");
+@import url("dashboard.css");
+
+/* GLOBAL VARIABLES */
+:root {
+  --body-bg-color: linear-gradient(to right, #5b3283, #3580ab, #5db5b3);
+  --text-color-primary: rgb(248, 249, 250);
+  --btn-bg-color: #5db5b3;
+  --link-color: rgba(0, 0, 0, 0.55);
+  --card-gradient: linear-gradient(to right, #cc2b5e, #753a88);
+
+  --card-hover: linear-gradient(to right, #e17497, #905fa0);
+  --link-hover: red;
+
+  --card-active: linear-gradient(to right, #90173d, #3f154e);
+}
+
+/* GENERAL STYLES */
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background: var(--body-bg-color);
+  position: relative;
+}
+
+.navbar-nav {
+  width: 100%;
+}
+
+.nav-link:hover {
+  color: var(--link-hover);
+}
+
+footer {
+  width: 100%;
+  min-height: 50px;
+}

@@ -1,0 +1,29 @@
+.server-side-error-div {
+  width: fit-content;
+  background-color: antiquewhite;
+}
+
+.server-side-error-msg {
+  color: #f54242;
+}
+
+.login-page-container__form {
+  max-width: 400px;
+}
+
+.login-page-container__button {
+  background-color: var(--btn-bg-color);
+  color: var(--text-color-primary);
+}
+
+.error-message {
+  font-size: 0.85rem;
+  color: lightcoral
+}
+
+/* EFFECTS */
+
+.login-page-container__button:hover {
+  background-color: var(--link-hover);
+  color: var(--text-color-primary);
+}

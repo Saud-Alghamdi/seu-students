@@ -1,0 +1,15 @@
+.dashboard-page-container {
+  color: var(--text-color-primary);
+  position: relative;
+}
+
+.dashboard-page-container__button {
+  background-color: var(--btn-bg-color);
+  color: var(--text-color-primary);
+  min-width: 200px;
+}
+
+.dashboard-page-container__button:hover {
+  background-color: var(--link-hover);
+  color: var(--text-color-primary);
+}

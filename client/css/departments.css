@@ -1,0 +1,44 @@
+.departments-page-container__department {
+  background: var(--card-gradient);
+  width: 47%;
+  height: 170px;
+  max-width: 225px;
+}
+
+.department-link {
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+}
+
+/* EFFECTS (hover, active) */
+.departments-page-container__department:hover {
+  background: var(--card-hover);
+  cursor: pointer;
+}
+
+.departments-page-container__department:active {
+  background: var(--card-active);
+}
+
+.department-link:hover {
+  color: #f8f9fa; /*Bootstrap's light color*/
+}
+
+/* MEDIA QUERIES */
+
+/* 768px and above */
+@media (min-width: 768px) {
+  .departments-page-container__department {
+    width: 24%;
+    height: 160px;
+  }
+}
+
+/* 992px and above */
+@media (min-width: 992px) {
+  .departments-page-container__department {
+    width: 24%;
+    height: 200px;
+  }
+}

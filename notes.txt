@@ -1,0 +1,133 @@
+#### DB ####
+
+> users table
+
+- id
+- username
+- email
+- password
+- gender  --> Initially, I'm going to have two avatars in my app, one for males and one for females
+- created_at
+- updated_at
+
+> posts table
+
+- id
+- user_id
+- title
+- file_type
+- created_at
+
+
+#### VIEWS ####
+
+- index:
+a welcome page, has three buttons (login, signup, pass without logging in)
+
+- login:
+Javascript validates the input to make sure it has been sent correctly
+
+- signup:
+Javascript validates the input to make sure it has been sent correctly
+
+- faculties:
+Displays all depratments in SEU
+
+/ faculties:
+
+    / Administrative and Financial Sciences
+    - departments --> to view departments
+    
+        / Management  ادارة
+            - posts
+
+        / E-Commerce  تجارة الكترونية
+            - posts
+
+        / Accounting  محاسبة
+            - posts
+
+        / Finance  اقتصاد
+            - posts
+    ____________________________________
+
+    / Computing and Informatics
+    - departments --> to view departments
+        
+        / Computer Science  علوم حاسب
+            - posts
+        
+        / Information Technology  تقنية معلومات
+            - posts
+
+        / Data Science  علوم بيانات
+            - posts
+    ____________________________________
+
+    / Health Sciences
+    - departments --> to view departments
+
+        / Health Informatics   معلوماتية صحية
+            - posts
+
+        / Public Health  صحة عامة
+            - posts
+    ____________________________________
+
+    / Science and Theoritical Studies
+    - departments --> to view departments
+
+        / Law  قانون
+            - posts
+
+        / Digital Media  الاعلام الرقمي
+            - posts
+
+        / English Language and Translation  اللغة الانجليزية والترجمة
+            - posts
+
+
+- Footer
+
+
+- Dashboard:
+    * User Dashboard to manager their account, do tasks like:
+    * manage their posts (update, delete)
+    * manage their account (change username, password, gender)
+
+    - user-dashboard
+    - user-posts
+
+
+
+## REFACTOR:
+refactor the styles and try to make it all boostrap styles as much as possible
+
+
+## VALID - AUTHN - AUTHR
+Create a route to handle the submitted data and validate it
+
+
+## CAREFUL!!!!
+from the gap property inside body elements in iOS <= v14
+
+
+
+
+Future features:
+
+- Faculties dropdown in the navbar that has a dropdown for each faculty's departments etc..
+- Doctor rating
+- Comments
+- Likes
+- Preview the document before downloading it
+
+
+Test links:
+
+http://seu-students.local
+http://seu-students.local/faculties
+http://seu-students.local/login
+http://seu-students.local/signup
+http://seu-students.local/faculties/CI/departments
+http://seu-students.local/faculties/CI/it/posts

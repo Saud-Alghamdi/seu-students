@@ -1,0 +1,28 @@
+.index-page-container {
+  color: var(--text-color-primary);
+}
+
+.index-page-container__main {
+  max-width: 800px;
+}
+
+.index-page-container__button {
+  background-color: var(--btn-bg-color);
+  color: var(--text-color-primary);
+  min-width: 200px;
+}
+
+.index-page-container__skip-link {
+  color: var(--link-color);
+}
+
+/* EFFECTS */
+
+.index-page-container__button:hover {
+  background-color: var(--link-hover);
+  color: var(--text-color-primary);
+}
+
+.index-page-container__skip-link:hover {
+  color: var(--link-hover);
+}

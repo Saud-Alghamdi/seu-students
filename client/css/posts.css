@@ -1,0 +1,15 @@
+.posts-page-container__post {
+  background-color: antiquewhite;
+  height: 160px;
+  width: 90%;
+}
+
+/* MEDIA QUERIES */
+
+/* 992px and above */
+@media (min-width: 992px) {
+  .posts-page-container__post{
+    width: 48%;
+    height: 220px;
+  }
+}

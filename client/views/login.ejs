@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+	<%- include('partials/head.ejs') %>
+	<title>SEU Students</title>
+</head>
+<body class="d-flex flex-column">
+
+	<%- include('partials/nav.ejs') %>
+
+  <main class="login-page-container__main container flex-grow-1 text-light my-4">
+    <header class="text-center">
+      <h1>Login</h1>
+    </header>
+
+    <!-- {{-- @if ($errors->any())
+      <div class="server-side-error-div border border-danger rounded-3 px-4 mx-auto mt-3">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li class="server-side-error-msg mt-2">
+              <strong>{{$error}}</strong>
+            </li>
+          @endforeach
+        </ul>
+      </div>
+    @endif --}} -->
+
+    <form action="/user-login" method="POST" class="login-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
+      <div class="mb-3">
+        <label for="" class="form-label">Email:</label>
+        <input name="email" type="text" class="form-control" id="" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Password:</label>
+        <input name="password" type="password" class="form-control" id="">
+      </div>
+      <button type="submit" class="login-page-container__button btn btn-lg d-block mx-auto mt-4">Log in</button>
+    </form>
+  </main>
+
+  <%- include('partials/footer.ejs') %>
+	
+</body>
+</html>

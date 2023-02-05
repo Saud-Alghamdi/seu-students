@@ -1,0 +1,33 @@
+.signup-page-container {
+  color: var(--text-color-primary);
+}
+
+.server-side-error-div {
+  width: fit-content;
+  background-color: antiquewhite;
+}
+
+.server-side-error-msg {
+  color: #f54242;
+}
+
+.signup-page-container__main {
+  max-width: 500px;
+}
+
+.signup-page-container__button {
+  background-color: var(--btn-bg-color);
+  color: var(--text-color-primary);
+}
+
+.error-message {
+  font-size: 0.85rem;
+  color: lightcoral;
+}
+
+/* EFFECTS */
+
+.signup-page-container__button:hover {
+  background-color: var(--link-hover);
+  color: var(--text-color-primary);
+}

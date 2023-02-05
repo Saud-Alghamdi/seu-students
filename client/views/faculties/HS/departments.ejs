@@ -1,0 +1,26 @@
+<html lang="en">
+  <head>
+    <%- include('../../partials/head.ejs') %>
+    <title>Departments</title>
+  </head>
+  <body class="d-flex flex-column">
+    <%- include('../../partials/nav.ejs') %>
+
+    <main class="departments-page-container__main container flex-grow-1 text-center text-light my-4">
+      <header>
+        <h1>Departments:</h1>
+      </header>
+
+      <div class="departments-flex-container mt-5 d-flex justify-content-center flex-wrap">
+        <div class="departments-page-container__department border-dark rounded-5 p-2 m-1">
+          <a class="department-link d-flex justify-content-center align-items-center text-light fs-5" href="./hi/posts">Health Informatics</a>
+        </div>
+        <div class="departments-page-container__department border-dark rounded-5 p-2 m-1">
+          <a class="department-link d-flex justify-content-center align-items-center text-light fs-5" href="./ph/posts">Public Health</a>
+        </div>
+      </div>
+    </main>
+
+    <%- include('../../partials/footer.ejs') %>
+  </body>
+</html>
