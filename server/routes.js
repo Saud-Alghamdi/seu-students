@@ -1,23 +1,40 @@
 const express = require("express");
 const router = express.Router();
+const RouteHandler = require("./RouteHandler.js");
 
 /*--------------------------------
 ------------MAIN ROUTES-------------
 --------------------------------*/
 
-// home
-router.get("/", (req, res) => {
-  res.render("home");
-});
+//--- Home ---//
+router.get("/", (req, res) => res.render("home"));
 
-// signup
+//--- Sign up ---//
 router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-// login
+router.post("/signup/signup-process", async (req, res) => {
+  await RouteHandler.signupProcess(req, res);
+});
+
+router.post("/signup/checkUsernameExists", async (req, res) => {
+  await RouteHandler.checkUsernameExists(req, res);
+});
+
+router.post("/signup/checkEmailExists", async (req, res) => {
+  await RouteHandler.checkEmailExists(req, res);
+});
+
+//--- login ---///
 router.get("/login", (req, res) => {
-  res.render("login");
+  const feedback = req.query
+
+  if (Object.keys(feedback).length !== 0) {
+    res.render('login', {feedback})
+  } else {
+    res.render('login')
+  }
 });
 
 // faculties
@@ -120,6 +137,30 @@ router.get("/faculties/STS/law/posts", (req, res) => {
 // user dashboard
 router.get("/dashboard/user-dashboard", (req, res) => {
   res.render("dashboard/user-dashboard");
+});
+
+/*--------------------------------
+------------PROCESSING-------------
+--------------------------------*/
+router.post("/signup-process", async (req, res) => {
+  const formData = req.body;
+  const result = await signup(formData);
+  if (result === true) {
+    res.redirect("login");
+  } else {
+    res.redirect("signup");
+  }
+});
+
+// test signup process
+router.post("/signup/process", async (req, res) => {
+  // validate data
+  const formData = req.body;
+  if (formData.username.length < 3 || formData.username.length > 25) {
+    res.render("signup", { msg: "username must be between 3 to 25 characters long" });
+  } else {
+    res.render("login", { msg: "Signed up successfully!" });
+  }
 });
 
 module.exports = router;

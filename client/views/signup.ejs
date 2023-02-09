@@ -10,20 +10,18 @@
       <header class="text-center">
         <h1>Sign up</h1>
       </header>
-<!-- 
-      {{-- @if ($errors->any())
+      
+      <% if(typeof errors !== 'undefined') { %>
       <div class="server-side-error-div border border-danger rounded-3 px-4 mx-auto mt-3">
         <ul>
-          @foreach ($errors->all() as $error)
-          <li class="server-side-error-msg mt-2">
-            <strong>{{ $error }}</strong>
-          </li>
-          @endforeach
+          <% errors.forEach(error => { %>
+          <li class="server-side-error-msg mt-2"><strong><%= error %></strong></li>
+          <% }); %>
         </ul>
       </div>
-      @endif --}} -->
+      <% } %>
 
-      <form action="/user-signup" method="POST" class="form signup-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
+      <form action="/signup/signup-process" method="POST" class="form signup-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
         <div class="form__input-group mb-3">
           <label for="" class="form-label">Username:</label>
           <input name="username" type="text" class="input-field field username-field form-control" />

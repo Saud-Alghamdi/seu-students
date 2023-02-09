@@ -104,17 +104,15 @@ Displays all depratments in SEU
 refactor the styles and try to make it all boostrap styles as much as possible
 
 
-## VALID - AUTHN - AUTHR
-Create a route to handle the submitted data and validate it
-
-
 ## CAREFUL!!!!
-from the gap property inside body elements in iOS <= v14
+DOM elements keep selecting
 
 
+## REFRESH PROBLEMS
+whatever is render after a post has refresh problems
 
 
-Future features:
+## Future features:
 
 - Faculties dropdown in the navbar that has a dropdown for each faculty's departments etc..
 - Doctor rating
@@ -123,11 +121,5 @@ Future features:
 - Preview the document before downloading it
 
 
-Test links:
-
-http://seu-students.local
-http://seu-students.local/faculties
-http://seu-students.local/login
-http://seu-students.local/signup
-http://seu-students.local/faculties/CI/departments
-http://seu-students.local/faculties/CI/it/posts
+iOS: 
+bs-local.com:3000
