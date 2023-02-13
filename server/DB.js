@@ -53,23 +53,24 @@ class DB {
     return result;
   }
 
-  static async login() {
-    let exists = false;
+  static async login(userData) {
+    let result = { success: false, msg: "Something went wrong"};
     try {
       const con = await this.connect();
       const stmt = "SELECT `username`, `password` FROM `users` WHERE `username` = ? AND password = ?";
-      const [rows] = await con.query(stmt, [username, password]);
+      const [rows] = await con.query(stmt, [userData.username, userData.password]);
 
       if (rows.length > 0) {
-        exists = true;
+        result = {success: true, msg: "Log in successful"}
       } else {
-        throw new Error("Username or Password are incorrect");
+        throw new Error("Username or Password is incorrect");
       }
     } catch (err) {
       console.log(err.message);
+      result.msg = err.message
     }
 
-    return exists;
+    return result;
   }
 
   static async logout() {}

@@ -7,14 +7,16 @@ const RouteHandler = require("./RouteHandler.js");
 --------------------------------*/
 
 //--- Home ---//
-router.get("/", (req, res) => res.render("home"));
+router.get("/", (req, res) => {
+  RouteHandler.renderHomePage(req, res);
+});
 
 //--- Sign up ---//
 router.get("/signup", (req, res) => {
-  res.render("signup");
+  RouteHandler.renderSignupPage(req, res);
 });
 
-router.post("/signup/signup-process", async (req, res) => {
+router.post("/signup-process", async (req, res) => {
   await RouteHandler.signupProcess(req, res);
 });
 
@@ -26,16 +28,14 @@ router.post("/signup/checkEmailExists", async (req, res) => {
   await RouteHandler.checkEmailExists(req, res);
 });
 
-//--- login ---//
+//--- Login ---//
 router.get("/login", (req, res) => {
-  
+  RouteHandler.renderLoginPage(req, res);
 });
 
-router.post("/login/login-process", async (req, res) => {
+router.post("/login-process", async (req, res) => {
   await RouteHandler.loginProcess(req, res);
 });
-
-
 
 // faculties
 router.get("/faculties", (req, res) => {

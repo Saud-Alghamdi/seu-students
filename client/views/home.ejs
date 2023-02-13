@@ -1,29 +1,34 @@
 <html lang="en">
-<head>
-	<%- include('partials/head.ejs') %>
-	<title>SEU Students</title>
-</head>
-<body class="d-flex flex-column">
+  <head>
+    <%- include('partials/head.ejs') %>
+    <title>SEU Students</title>
+  </head>
+  <body class="d-flex flex-column">
+    <%- include('partials/nav.ejs') %>
 
-	<%- include('partials/nav.ejs') %>
+    <main class="index-page-container__main container text-center text-light flex-grow-1 my-4">
+      <header class="">
+        <h1>Welcome Students!</h1>
+      </header>
 
-	<main class="index-page-container__main container text-center text-light flex-grow-1 my-4">
-		<header class="">
-      <h1>Welcome Students!</h1>
-		</header>
-		
-		<p class="index-page-container__paragraph my-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint tempore voluptatem minus, enim atque eum ipsam illo, excepturi esse repellendus amet a molestiae, explicabo vel obcaecati? Impedit suscipit molestias nobis.
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam obcaecati repellat repudiandae sequi, adipisci eos, harum non molestias tempore provident atque necessitatibus quaerat minima ratione ducimus.</p>
-		<form action="/signup" method="GET">
-			<button class="index-page-container__button btn btn-lg">Sign up</button>
-		</form>
-		<form action="/login" method="GET">
-			<button class="index-page-container__button btn btn-lg">Log in</button>
-		</form>
-		<a href="/faculties" class="index-page-container__skip-link d-block mt-4">Browse Faculties without signing in</a>
-	</main>
+      <!-- if login successful -->
+      <% if(typeof success !== 'undefined' && success === true) { %>
+      <h4 class="text-warning text-center"><%= msg %></h4>
+      <% } %>
 
-	<%- include('partials/footer.ejs') %>
-	
-</body>
+      <p class="index-page-container__paragraph my-5">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint tempore voluptatem minus, enim atque eum ipsam illo, excepturi esse repellendus amet a molestiae, explicabo vel obcaecati? Impedit suscipit molestias nobis. Lorem ipsum dolor sit
+        amet consectetur adipisicing elit. Nam obcaecati repellat repudiandae sequi, adipisci eos, harum non molestias tempore provident atque necessitatibus quaerat minima ratione ducimus.
+      </p>
+      <form action="/signup" method="GET">
+        <button class="index-page-container__button btn btn-lg">Sign up</button>
+      </form>
+      <form action="/login" method="GET">
+        <button class="index-page-container__button btn btn-lg">Log in</button>
+      </form>
+      <a href="/faculties" class="index-page-container__skip-link d-block mt-4">Browse Faculties without signing in</a>
+    </main>
+
+    <%- include('partials/footer.ejs') %>
+  </body>
 </html>

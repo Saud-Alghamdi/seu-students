@@ -1,7 +1,21 @@
 const DB = require("./DB.js");
 
 class RouteHandler {
-  // Sign up process ( Returns {success: v, msg: v} )
+  //---HOME---//
+  static renderHomePage(req, res) {
+    if (typeof req.query.success === "undefined") {
+      res.render("home");
+    } else if (req.query.success === "true") {
+      res.render("home", { success: true, msg: "Logged in successfully!" });
+    } 
+  }
+
+  //---SIGN UP---//
+  static renderSignupPage(req, res) {
+    res.render("signup");
+  }
+
+  // Sign up process (Returns {success: bool, msg: string} or {success: bool, msg: array})
   static async signupProcess(req, res) {
     const userData = req.body;
     const result = await DB.signup(userData);
@@ -14,20 +28,31 @@ class RouteHandler {
     }
   }
 
-  // Log in process ( Returns true or false )
+  //---LOG IN---//
+  static renderLoginPage(req, res) {
+    if (typeof req.query.success === "undefined") {
+      res.render("login");
+    } else if (req.query.success === "true") {
+      res.render("login", { success: true, msg: "Sign up successful!" });
+    } else if (req.query.success === "false") {
+      res.render("login", { success: false, msg: "Username or password is incorrect" });
+    }
+  }
+
+  // Log in process (Returns {success: bool, msg: string})
   static async loginProcess(req, res) {
     const userData = req.body;
-    const exists = await DB.login(userData);
-    if (exists === true) {
-      console.log(exists);
-      res.redirect(`home?success=${encodeURIComponent(result.success)}`);
+    const result = await DB.login(userData);
+    if (result.success === true) {
+      console.log(result);
+      res.redirect(`/?success=${encodeURIComponent(result.success)}`);
     } else {
-      console.log(exists);
+      console.log(result);
       res.redirect(`login?success=${encodeURIComponent(result.success)}`);
     }
   }
 
-  // Check Username Already Exists in DB (FOR FRONT-END)
+  // Check Username Already Exists in DB (FOR FRONT-END VALIDATION) (Returns bool)
   static async checkUsernameExists(req, res) {
     const username = req.body.username;
     let exists = true;
@@ -49,7 +74,7 @@ class RouteHandler {
     res.json(exists);
   }
 
-  // Check Email Already Exists in DB (FOR FRONT-END)
+  // Check Email Already Exists in DB (FOR FRONT-END VALIDATION) (Returns bool)
   static async checkEmailExists(req, res) {
     const email = req.body.email;
     let exists = true;
