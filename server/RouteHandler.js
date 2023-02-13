@@ -1,7 +1,7 @@
 const DB = require("./DB.js");
 
 class RouteHandler {
-  // Sign up process
+  // Sign up process ( Returns {success: v, msg: v} )
   static async signupProcess(req, res) {
     const userData = req.body;
     const result = await DB.signup(userData);
@@ -10,7 +10,20 @@ class RouteHandler {
       res.redirect(`login?success=${encodeURIComponent(result.success)}&msg=${encodeURIComponent(result.msg)}`);
     } else {
       console.log(result);
-      res.render('signup', {errors: result.errors})
+      res.render("signup", { errors: result.errors });
+    }
+  }
+
+  // Log in process ( Returns true or false )
+  static async loginProcess(req, res) {
+    const userData = req.body;
+    const exists = await DB.login(userData);
+    if (exists === true) {
+      console.log(exists);
+      res.redirect(`home?success=${encodeURIComponent(result.success)}`);
+    } else {
+      console.log(exists);
+      res.redirect(`login?success=${encodeURIComponent(result.success)}`);
     }
   }
 

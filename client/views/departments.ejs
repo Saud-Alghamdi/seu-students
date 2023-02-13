@@ -1,11 +1,11 @@
 <html lang="en">
 <head>
-	<%- include('../../partials/head.ejs') %>
+	<%- include('partials/head.ejs') %>
 	<title>Departments</title>
 </head>
 <body class="d-flex flex-column">
 
-	<%- include('../../partials/nav.ejs') %>
+	<%- include('partials/nav.ejs') %>
     
   <main class="departments-page-container__main container flex-grow-1 text-center text-light my-4">
     <header>
@@ -14,18 +14,18 @@
 
     <div class="departments-flex-container mt-5 d-flex justify-content-center flex-wrap">
       <div class="departments-page-container__department border-dark rounded-5 p-2 m-1">
-        <a class="department-link d-flex justify-content-center align-items-center text-light fs-5" href="./cs/posts">Computer Science</a>
+        <a class="department-link d-flex justify-content-center align-items-center text-light fs-5" href="./departments/acc/posts">Accounting</a>
       </div>
       <div class="departments-page-container__department border-dark rounded-5 p-2 m-1">
-        <a class="department-link d-flex justify-content-center  align-items-center text-light fs-5" href="./it/posts">Information Technology</a>
+        <a class="department-link d-flex justify-content-center  align-items-center text-light fs-5" href="./departments/dig/posts">Dynamic</a>
       </div>
       <div class="departments-page-container__department border-dark rounded-5 p-2 m-1">
-        <a class="department-link d-flex justify-content-center  align-items-center text-light fs-5" href="./ds/posts">Data Science</a>
+        <a class="department-link d-flex justify-content-center  align-items-center text-light fs-5" href="./departments/eng/posts">Dynamic</a>
       </div>
     </div>
   </main>
 
-  <%- include('../../partials/footer.ejs') %>
+  <%- include('partials/footer.ejs') %>
 	
 </body>
 </html>

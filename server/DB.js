@@ -53,7 +53,25 @@ class DB {
     return result;
   }
 
-  static async login() {}
+  static async login() {
+    let exists = false;
+    try {
+      const con = await this.connect();
+      const stmt = "SELECT `username`, `password` FROM `users` WHERE `username` = ? AND password = ?";
+      const [rows] = await con.query(stmt, [username, password]);
+
+      if (rows.length > 0) {
+        exists = true;
+      } else {
+        throw new Error("Username or Password are incorrect");
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+
+    return exists;
+  }
+
   static async logout() {}
   static async update() {}
   static async delete() {}
@@ -63,7 +81,7 @@ class DB {
     let exists = true;
     try {
       const con = await this.connect();
-      const stmt = "SELECT `username` FROM `users` WHERE `Username` = ?";
+      const stmt = "SELECT `username` FROM `users` WHERE `username` = ?";
       const [rows] = await con.query(stmt, [username]);
 
       if (rows.length > 0) {

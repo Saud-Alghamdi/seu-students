@@ -26,16 +26,16 @@ router.post("/signup/checkEmailExists", async (req, res) => {
   await RouteHandler.checkEmailExists(req, res);
 });
 
-//--- login ---///
+//--- login ---//
 router.get("/login", (req, res) => {
-  const feedback = req.query
-
-  if (Object.keys(feedback).length !== 0) {
-    res.render('login', {feedback})
-  } else {
-    res.render('login')
-  }
+  
 });
+
+router.post("/login/login-process", async (req, res) => {
+  await RouteHandler.loginProcess(req, res);
+});
+
+
 
 // faculties
 router.get("/faculties", (req, res) => {
@@ -43,91 +43,91 @@ router.get("/faculties", (req, res) => {
 });
 
 /*--------------------------------
-------------FACULTY DEPARTMENTS ROUTES-------------
+------------FACULTY DEPARTMENTS-------------
 --------------------------------*/
 
-// AFS departments
-router.get("/faculties/AFS/departments", (req, res) => {
-  res.render("faculties/AFS/departments");
+// afs departments
+router.get("/faculties/afs/departments", (req, res) => {
+  res.render("departments");
 });
 
-// CI departments
-router.get("/faculties/CI/departments", (req, res) => {
-  res.render("faculties/CI/departments");
+// ci departments
+router.get("/faculties/ci/departments", (req, res) => {
+  res.render("departments");
 });
 
-// HS departments
-router.get("/faculties/HS/departments", (req, res) => {
-  res.render("faculties/HS/departments");
+// hs departments
+router.get("/faculties/hs/departments", (req, res) => {
+  res.render("departments");
 });
 
-// STS departments
-router.get("/faculties/STS/departments", (req, res) => {
-  res.render("faculties/STS/departments");
+// sts departments
+router.get("/faculties/sts/departments", (req, res) => {
+  res.render("departments");
 });
 
 /*--------------------------------
-------------DEPARTMENT POSTS ROUTES-------------
+------------POSTS-------------
 --------------------------------*/
 
-// AFS --> acc posts
-router.get("/faculties/AFS/acc/posts", (req, res) => {
-  res.render("faculties/AFS/acc/posts");
+// afs --> acc posts
+router.get("/faculties/afs/departments/acc/posts", (req, res) => {
+  res.render("posts");
 });
 
-// AFS --> ecom posts
-router.get("/faculties/AFS/ecom/posts", (req, res) => {
-  res.render("faculties/AFS/ecom/posts");
+// afs --> ecom posts
+router.get("/faculties/afs/ecom/posts", (req, res) => {
+  res.render("posts");
 });
 
-// AFS --> fin posts
-router.get("/faculties/AFS/fin/posts", (req, res) => {
-  res.render("faculties/AFS/fin/posts");
+// afs --> fin posts
+router.get("/faculties/afs/fin/posts", (req, res) => {
+  res.render("posts");
 });
 
-// AFS --> mng posts
-router.get("/faculties/AFS/mng/posts", (req, res) => {
-  res.render("faculties/AFS/mng/posts");
+// afs --> mng posts
+router.get("/faculties/afs/mng/posts", (req, res) => {
+  res.render("posts");
 });
 
-// CI --> cs posts
-router.get("/faculties/CI/cs/posts", (req, res) => {
-  res.render("faculties/CI/cs/posts");
+// ci --> cs posts
+router.get("/faculties/ci/cs/posts", (req, res) => {
+  res.render("posts");
 });
 
-// CI --> it posts
-router.get("/faculties/CI/it/posts", (req, res) => {
-  res.render("faculties/CI/it/posts");
+// ci --> it posts
+router.get("/faculties/ci/it/posts", (req, res) => {
+  res.render("posts");
 });
 
-// CI --> ds posts
-router.get("/faculties/CI/ds/posts", (req, res) => {
-  res.render("faculties/CI/ds/posts");
+// ci --> ds posts
+router.get("/faculties/ci/ds/posts", (req, res) => {
+  res.render("posts");
 });
 
-// HS --> hi posts
-router.get("/faculties/HS/hi/posts", (req, res) => {
-  res.render("faculties/HS/hi/posts");
+// hs --> hi posts
+router.get("/faculties/hs/hi/posts", (req, res) => {
+  res.render("posts");
 });
 
-// HS --> ph posts
-router.get("/faculties/HS/ph/posts", (req, res) => {
-  res.render("faculties/HS/ph/posts");
+// hs --> ph posts
+router.get("/faculties/hs/ph/posts", (req, res) => {
+  res.render("posts");
 });
 
-// STS --> dig posts
-router.get("/faculties/STS/dig/posts", (req, res) => {
-  res.render("faculties/STS/dig/posts");
+// sts --> dig posts
+router.get("/faculties/sts/dig/posts", (req, res) => {
+  res.render("posts");
 });
 
-// STS --> eng posts
-router.get("/faculties/STS/eng/posts", (req, res) => {
-  res.render("faculties/STS/eng/posts");
+// sts --> eng posts
+router.get("/faculties/sts/eng/posts", (req, res) => {
+  res.render("posts");
 });
 
-// STS --> law posts
-router.get("/faculties/STS/law/posts", (req, res) => {
-  res.render("faculties/STS/law/posts");
+// sts --> law posts
+router.get("/faculties/sts/law/posts", (req, res) => {
+  res.render("posts");
 });
 
 /*--------------------------------
@@ -135,8 +135,8 @@ router.get("/faculties/STS/law/posts", (req, res) => {
 --------------------------------*/
 
 // user dashboard
-router.get("/dashboard/user-dashboard", (req, res) => {
-  res.render("dashboard/user-dashboard");
+router.get("/dashboard", (req, res) => {
+  res.render("dashboard");
 });
 
 /*--------------------------------
