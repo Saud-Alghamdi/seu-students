@@ -1,4 +1,5 @@
 const mysql = require("mysql2/promise");
+const bcrypt = require("bcrypt");
 const SignupValidation = require("./SignupValidation");
 
 class DB {
@@ -41,9 +42,10 @@ class DB {
       if (emailExists === true) result.errors.push("Email already exists");
 
       if (result.errors.length === 0) {
+        const hashedPassword = await bcrypt.hash(userData.password, 10);
         const con = await this.connect();
         const stmt = "INSERT INTO `users` (`username`, `email`, `password`, `gender`) VALUES (?, ?, ?, ?)";
-        await con.query(stmt, [userData.username, userData.email, userData.password, userData.gender]);
+        await con.query(stmt, [userData.username, userData.email, hashedPassword, userData.gender]);
         result = { success: true, msg: "Sign up successful" };
       }
     } catch (err) {
@@ -54,20 +56,26 @@ class DB {
   }
 
   static async login(userData) {
-    let result = { success: false, msg: "Something went wrong"};
+    let result = { success: false, msg: "Something went wrong" };
     try {
       const con = await this.connect();
-      const stmt = "SELECT `username`, `password` FROM `users` WHERE `username` = ? AND password = ?";
-      const [rows] = await con.query(stmt, [userData.username, userData.password]);
+      const stmt = "SELECT `username`, `password` FROM `users` WHERE `email` = ?";
+      const [rows] = await con.query(stmt, [userData.email]);
 
-      if (rows.length > 0) {
-        result = {success: true, msg: "Log in successful"}
+      if (rows.length === 0) {
+        throw new Error("Email or password is incorrect");
+      }
+
+      const hashedPassword = rows[0].password;
+      const match = await bcrypt.compare(userData.password, hashedPassword);
+      if (match) {
+        result = { success: true, msg: "Log in successful" };
       } else {
-        throw new Error("Username or Password is incorrect");
+        throw new Error("Email or password is incorrect");
       }
     } catch (err) {
       console.log(err.message);
-      result.msg = err.message
+      result.msg = err.message;
     }
 
     return result;
