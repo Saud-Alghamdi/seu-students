@@ -12,53 +12,25 @@
       </header>
 
       <div class="posts-flex-container container mt-4 d-flex justify-content-center justify-content-lg-between flex-wrap text-dark px-md-5">
+        <% if(typeof posts !== 'undefined') { %> <% posts.forEach(post => { %>
+
         <div class="posts-page-container__post d-flex flex-column border-dark rounded-4 px-2 px-md-4 m-2">
           <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
             <img src="/images/pdf-icon.svg" alt="" height="30" width="30" />
             <h6 class="d-inline mx-2">
-              <a class="" href="#">IT244 Test Bank First Term 2023</a>
+              <a class="" href="#"><%= post.title %></a>
             </h6>
           </div>
           <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
             <img src="/images/male-icon.svg" alt="" height="30" width="30" />
-            <p class="d-inline my-0 mx-2">Ali_6x2</p>
+            <p class="d-inline my-0 mx-2"><%= post.username %></p>
           </div>
           <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <p>2022/05/17 16:04</p>
+            <p><%= post.created_at %></p>
           </div>
         </div>
 
-        <div class="posts-page-container__post d-flex flex-column border-dark rounded-4 px-2 px-md-4 m-2">
-          <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <img src="/images/pdf-icon.svg" alt="" height="30" width="30" />
-            <h6 class="d-inline  mx-2">
-              <a class="" href="#">IT244 Test Bank First Term 2023</a>
-            </h6>
-          </div>
-          <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <img src="/images/male-icon.svg" alt="" height="30" width="30" />
-            <p class="d-inline my-0 mx-2">Ali_6x2</p>
-          </div>
-          <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <p>2022/05/17 16:04</p>
-          </div>
-        </div>
-
-        <div class="posts-page-container__post d-flex flex-column border-dark rounded-4 px-2 px-md-4 m-2">
-          <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <img src="/images/pdf-icon.svg" alt="" height="30" width="30" />
-            <h6 class="d-inline  mx-2">
-              <a class="" href="#">IT244 Test Bank First Term 2023</a>
-            </h6>
-          </div>
-          <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <img src="/images/female-icon.svg" alt="" height="30" width="30" />
-            <p class="d-inline my-0 mx-2">Ali_6x2</p>
-          </div>
-          <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <p>2022/05/17 16:04</p>
-          </div>
-        </div>
+        <% }) %> <% } %>
       </div>
     </main>
 

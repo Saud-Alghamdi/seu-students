@@ -7,7 +7,7 @@ class RouteHandler {
       res.render("home");
     } else if (req.query.success === "true") {
       res.render("home", { success: true, msg: "Logged in successfully!" });
-    } 
+    }
   }
 
   //---SIGN UP---//
@@ -52,7 +52,7 @@ class RouteHandler {
     }
   }
 
-  // Check Username Already Exists in DB (FOR FRONT-END VALIDATION) (Returns bool)
+  // Check Username Already Exists in DB (Frontend Validation), Returns bool
   static async checkUsernameExists(req, res) {
     const username = req.body.username;
     let exists = true;
@@ -74,7 +74,7 @@ class RouteHandler {
     res.json(exists);
   }
 
-  // Check Email Already Exists in DB (FOR FRONT-END VALIDATION) (Returns bool)
+  // Check Email Already Exists in DB (Frontend Validation), Returns bool
   static async checkEmailExists(req, res) {
     const email = req.body.email;
     let exists = true;
@@ -94,6 +94,26 @@ class RouteHandler {
     }
 
     res.json(exists);
+  }
+
+  //--FACULTIES--//
+  static renderFaculties(req, res) {
+    res.render("faculties");
+  }
+
+  //-- DEPARTMENTS --//
+  static async renderDepartments(req, res) {
+    const facultyAbbr = req.params.facultyAbbr;
+    const departments = await DB.getDepartments(facultyAbbr);
+    res.render("departments", { departments });
+  }
+
+  //-- POSTS --//
+  static async renderPosts(req, res) {
+    const facultyAbbr = req.params.facultyAbbr;
+    const departmentAbbr = req.params.departmentAbbr;
+    const posts = await DB.getPosts(facultyAbbr, departmentAbbr);
+    res.render("posts", { posts });
   }
 }
 

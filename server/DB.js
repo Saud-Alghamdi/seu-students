@@ -55,6 +55,7 @@ class DB {
     return result;
   }
 
+  // Login
   static async login(userData) {
     let result = { success: false, msg: "Something went wrong" };
     try {
@@ -85,7 +86,7 @@ class DB {
   static async update() {}
   static async delete() {}
 
-  // Check Username Already Exists in DB
+  // Check Username Already Exists in DB (Backend Valdaition), return true or false
   static async checkUsernameExists(username) {
     let exists = true;
     try {
@@ -105,7 +106,7 @@ class DB {
     return exists;
   }
 
-  // Check Email Already Exists in DB (FOR BACK-END)
+  // Check Email Already Exists in DB (Backend Validation), return true or false
   static async checkEmailExists(email) {
     let exists = true;
     try {
@@ -123,6 +124,43 @@ class DB {
     }
 
     return exists;
+  }
+
+  // Returns departments --> [ {depName, depAbbr, depFac} ]
+  static async getDepartments(facultyAbbr) {
+    let departments = null;
+    try {
+      const con = await this.connect();
+      const stmt = "SELECT `departments`.`name` AS `depName`, `departments`.`abbr` AS `depAbbr`, `faculties`.`abbr` AS `facAbbr` FROM `departments` JOIN `faculties` ON `departments`.`faculty_id` = `faculties`.`id` WHERE `faculties`.`abbr` = ?";
+      const [rows] = await con.query(stmt, [facultyAbbr]);
+
+      departments = rows;
+      console.log(departments);
+    } catch (err) {
+      console.log(err.message);
+    }
+    return departments;
+  }
+
+  // Returns posts
+  static async getPosts(facultyAbbr, departmentAbbr) {
+    let posts = null;
+    try {
+      const con = await this.connect();
+      const stmt = `SELECT users.username, users.gender, posts.title, posts.file_type, posts.created_at 
+                    FROM posts 
+                    INNER JOIN departments ON departments.id = posts.department_id 
+                    INNER JOIN faculties ON faculties.id = departments.faculty_id 
+                    INNER JOIN users ON users.id = posts.user_id 
+                    WHERE faculties.abbr = ? AND departments.abbr = ?`;
+      const [rows] = await con.query(stmt, [facultyAbbr, departmentAbbr]);
+
+      posts = rows;
+      console.log(posts);
+    } catch (err) {
+      console.log(err.message);
+    }
+    return posts;
   }
 }
 

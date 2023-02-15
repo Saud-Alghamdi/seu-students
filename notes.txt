@@ -123,3 +123,11 @@ whatever is render after a post has refresh problems
 
 iOS: 
 bs-local.com:3000
+
+posts:
+
+id   user_id  faculty_id   department_id    title   file_type   created_at  updated_at
+13   37       2            6                Slides1  PDF         2023-02-15  2023-02-15
+14   36       2            5                Slides2  PDF         2023-02-15  2023-02-15
+15   38       1            1                Slides3  PDF         2023-02-15  2023-02-15
+16   36       2            7                Slides4  PDF         2023-02-15  2023-02-15
