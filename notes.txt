@@ -94,22 +94,23 @@ Displays all depratments in SEU
     * User Dashboard to manager their account, do tasks like:
     * manage their posts (update, delete)
     * manage their account (change username, password, gender)
-
     - user-dashboard
     - user-posts
 
 
+## Tasks:
+- Add post + upload a file
+- back button
+- post-login tasks (show username + logout button + avatar in the navbar), (remain logged in 'cookies'), (prevent adding a post when not logged)
+- refactor design of success messages like "Logged in successfully"
+- Add a role (owner, admin, user) and each his functionality
+- try to make styles it all boostrap styles as much as possible
+- fix posts box design (positioning, max length title, date format)
+- Add courses section
+- Translation
+- fix DOM elements keep selecting
 
-## REFACTOR:
-refactor the styles and try to make it all boostrap styles as much as possible
 
-
-## CAREFUL!!!!
-DOM elements keep selecting
-
-
-## REFRESH PROBLEMS
-whatever is render after a post has refresh problems
 
 
 ## Future features:
@@ -124,10 +125,3 @@ whatever is render after a post has refresh problems
 iOS: 
 bs-local.com:3000
 
-posts:
-
-id   user_id  faculty_id   department_id    title   file_type   created_at  updated_at
-13   37       2            6                Slides1  PDF         2023-02-15  2023-02-15
-14   36       2            5                Slides2  PDF         2023-02-15  2023-02-15
-15   38       1            1                Slides3  PDF         2023-02-15  2023-02-15
-16   36       2            7                Slides4  PDF         2023-02-15  2023-02-15

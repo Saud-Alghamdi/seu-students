@@ -1,0 +1,20 @@
+.add-post-page-container__form {
+  max-width: 400px;
+}
+
+.add-post-page-container__button {
+  background-color: var(--btn-bg-color);
+  color: var(--text-color-primary);
+}
+
+.error-message {
+  font-size: 0.85rem;
+  color: lightcoral;
+}
+
+/* EFFECTS */
+
+.add-post-page-container__button:hover {
+  background-color: var(--link-hover);
+  color: var(--text-color-primary);
+}

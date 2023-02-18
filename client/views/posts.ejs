@@ -11,6 +11,10 @@
         <h1>Latest Posts:</h1>
       </header>
 
+      <form class="mt-3" action="./add-post" method="GET">
+        <button class="add-post-btn btn btn-primary">+ Add Post</button>
+      </form>
+      
       <div class="posts-flex-container container mt-4 d-flex justify-content-center justify-content-lg-between flex-wrap text-dark px-md-5">
         <% if(typeof posts !== 'undefined') { %> <% posts.forEach(post => { %>
 

@@ -4,6 +4,11 @@
   width: 90%;
 }
 
+.add-post-btn:hover {
+  background-color: var(--link-hover);
+  color: var(--text-color-primary);
+}
+
 /* MEDIA QUERIES */
 
 /* 992px and above */

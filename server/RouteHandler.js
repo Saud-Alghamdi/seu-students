@@ -115,6 +115,13 @@ class RouteHandler {
     const posts = await DB.getPosts(facultyAbbr, departmentAbbr);
     res.render("posts", { posts });
   }
+
+  //-- RENDER ADD POST PAGE --//
+  static async renderAddPost(req, res) {
+    res.render('add-post')
+  }
+
+  // ADD POST PROCESS
 }
 
 module.exports = RouteHandler;

@@ -1,0 +1,29 @@
+<html lang="en">
+  <head>
+    <%- include('partials/head.ejs') %>
+    <title>Posts</title>
+  </head>
+  <body class="d-flex flex-column gap-4">
+    <%- include('partials/nav.ejs') %>
+
+    <main class="add-post-page-container__main container flex-grow-1 text-light">
+      <header class="text-center">
+        <h1>Add Post:</h1>
+      </header>
+
+      <form action="/uploads" method="POST" class="add-post-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
+        <div class="mb-3">
+          <label for="" class="form-label">Title:</label>
+          <input name="title" type="text" class="form-control" id="" />
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Document:</label>
+          <input type="file" name="documents" id="documents" accept=".pdf, .ppt, .pptx, .doc, .docx" />
+        </div>
+        <button type="submit" class="add-post-page-container__button btn btn-lg d-block mx-auto mt-4">Submit</button>
+      </form>
+    </main>
+
+    <%- include('partials/footer.ejs') %>
+  </body>
+</html>
