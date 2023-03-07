@@ -5,7 +5,6 @@ This file will containt all the imports of styles of all views + styling of gene
 
 /* IMPORT OTHER STYLE SHEETS */
 @import url("home.css");
-@import url("faculties.css");
 @import url("departments.css");
 @import url("login.css");
 @import url("signup.css");

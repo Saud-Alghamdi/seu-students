@@ -2,14 +2,28 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const path = require("path");
-const routes = require("./routes.js");
+const routes = require("./routes");
+const crypto = require("crypto");
+const session = require("express-session");
+const multer = require("multer");
+const upload = multer({dest: 'uploads/'})
 
-// Server setup
+// BASIC CONFIG
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "../client/views")); // views served in views directory
-app.use(express.static(path.join(__dirname, "../client"))); // static files served from client directory
+app.set("views", path.join(__dirname, "../client/views"));
+app.use(express.static(path.join(__dirname, "../client")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// SESSION CONFIG
+app.use(
+  session({
+    secret: crypto.randomBytes(32).toString("hex"),
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 app.use(routes);
 
 app.listen(port, () => console.log("Listening ..."));

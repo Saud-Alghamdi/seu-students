@@ -14,15 +14,29 @@
       <form class="mt-3" action="./add-post" method="GET">
         <button class="add-post-btn btn btn-primary">+ Add Post</button>
       </form>
-      
+
+      <!-- If user clicked on Add Post while he is not logged in -->
+      <% if(typeof err !== 'undefined') { %>
+      <p class="server-side-error-msg mt-2">
+        <strong><%= err %></strong>
+      </p>
+      <% } %>
+
       <div class="posts-flex-container container mt-4 d-flex justify-content-center justify-content-lg-between flex-wrap text-dark px-md-5">
         <% if(typeof posts !== 'undefined') { %> <% posts.forEach(post => { %>
 
         <div class="posts-page-container__post d-flex flex-column border-dark rounded-4 px-2 px-md-4 m-2">
           <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
+            <% if(post.fileType === '.pdf') { %>
             <img src="/images/pdf-icon.svg" alt="" height="30" width="30" />
+            <% } else if (post.fileType === '.doc' || post.fileType === '.docx') { %>
+            <img src="/images/word-icon.svg" alt="" height="30" width="30" />
+            <% } else if (post.fileType === '.ppt' || post.fileType === '.pptx') { %>
+            <img src="/images/powerpoint-icon.svg" alt="" height="30" width="30" />
+            <% } %>
+
             <h6 class="d-inline mx-2">
-              <a class="" href="#"><%= post.title %></a>
+              <a class="" href="/downloadFile?s3FileName=<%= post.s3FileName %>&title=<%= post.title %>" download="<%= post.s3FileName %>"><%= post.title %></a>
             </h6>
           </div>
           <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
@@ -30,7 +44,7 @@
             <p class="d-inline my-0 mx-2"><%= post.username %></p>
           </div>
           <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <p><%= post.created_at %></p>
+            <p><%= post.createdAt %></p>
           </div>
         </div>
 

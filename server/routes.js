@@ -2,10 +2,13 @@ const express = require("express");
 const router = express.Router();
 const RouteHandler = require("./RouteHandler.js");
 
+// multer config for file handling
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 // Home page
-router.get("/", (req, res) => {
-  RouteHandler.renderHomePage(req, res);
-});
+router.get("/", RouteHandler.renderHomePage);
 
 // Sign up page
 router.get("/signup", (req, res) => {
@@ -28,38 +31,42 @@ router.post("/signup/checkEmailExists", async (req, res) => {
 });
 
 // Login page
-router.get("/login", (req, res) => {
-  RouteHandler.renderLoginPage(req, res);
-});
+router.get("/login", RouteHandler.renderLoginPage);
 
 // Login process
 router.post("/login-process", async (req, res) => {
   await RouteHandler.loginProcess(req, res);
 });
 
-// Faculties page
-router.get("/faculties", (req, res) => {
-  RouteHandler.renderFaculties(req, res);
-});
+// Logout
+router.get("/logout", RouteHandler.logout);
 
 // Departments page
-router.get("/faculties/:facultyAbbr", async (req, res) => {
-  await RouteHandler.renderDepartments(req, res);
+router.get("/departments", RouteHandler.renderDepartments);
+
+// Courses page
+router.get("/departments/:depAbbr/courses", async (req, res) => {
+  await RouteHandler.renderCourses(req, res);
 });
 
 // Posts page
-router.get("/faculties/:facultyAbbr/departments/:departmentAbbr/posts", async (req, res) => {
+router.get("/departments/:depAbbr/:courseId/posts", async (req, res) => {
   await RouteHandler.renderPosts(req, res);
 });
 
 // Add Post page
-router.get("/faculties/:facultyAbbr/departments/:departmentAbbr/add-post", async (req, res) => {
-  RouteHandler.renderAddPost(req, res);
+router.get("/departments/:depAbbr/:courseId/add-post", async (req, res) => {
+  await RouteHandler.renderAddPost(req, res);
 });
 
-// Add post process
-router.post("/faculties/:facultyAbbr/departments/:departmentAbbr/add-post-process", async (req, res) => {
+// Add Post Process
+router.post("/departments/:depAbbr/:courseId/add-post/addPostProcess", upload.single("file"), async (req, res) => {
   await RouteHandler.addPostProcess(req, res);
+});
+
+// Download file from post
+router.get("/downloadFile", async (req, res) => {
+  await RouteHandler.downloadFile(req, res);
 });
 
 // user dashboard page

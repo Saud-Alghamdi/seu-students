@@ -12,13 +12,15 @@
       </header>
 
       <div class="departments-flex-container mt-5 d-flex justify-content-center flex-wrap">
-        <% if(typeof departments !== 'undefined') { %> <% departments.forEach(dep => { %>
-
         <div class="departments-page-container__department border-dark rounded-5 p-2 m-1">
-          <a class="department-link d-flex justify-content-center align-items-center text-light fs-5" href="<%= dep.facAbbr %>/departments/<%= dep.depAbbr %>/posts"><%= dep.depName %></a>
+          <a class="department-link d-flex justify-content-center align-items-center text-light fs-5" href="/departments/cs/courses">Computer Science</a>
         </div>
-
-        <% }) %> <% } %>
+        <div class="departments-page-container__department border-dark rounded-5 p-2 m-1">
+          <a class="department-link d-flex justify-content-center align-items-center text-light fs-5" href="/departments/it/courses">Information Technology</a>
+        </div>
+        <div class="departments-page-container__department border-dark rounded-5 p-2 m-1">
+          <a class="department-link d-flex justify-content-center align-items-center text-light fs-5" href="/departments/ds/courses">Data Science</a>
+        </div>
       </div>
     </main>
 

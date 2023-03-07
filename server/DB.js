@@ -56,21 +56,21 @@ class DB {
   }
 
   // Login
-  static async login(userData) {
+  static async login(userCreds) {
     let result = { success: false, msg: "Something went wrong" };
     try {
       const con = await this.connect();
-      const stmt = "SELECT `username`, `password` FROM `users` WHERE `email` = ?";
-      const [rows] = await con.query(stmt, [userData.email]);
+      const stmt = "SELECT * FROM `users` WHERE `email` = ?";
+      const [rows] = await con.query(stmt, [userCreds.email]);
 
       if (rows.length === 0) {
         throw new Error("Email or password is incorrect");
       }
 
       const hashedPassword = rows[0].password;
-      const match = await bcrypt.compare(userData.password, hashedPassword);
+      const match = await bcrypt.compare(userCreds.password, hashedPassword);
       if (match) {
-        result = { success: true, msg: "Log in successful" };
+        result = { success: true, msg: "Log in successful", user: rows[0] };
       } else {
         throw new Error("Email or password is incorrect");
       }
@@ -82,7 +82,6 @@ class DB {
     return result;
   }
 
-  static async logout() {}
   static async update() {}
   static async delete() {}
 
@@ -126,34 +125,35 @@ class DB {
     return exists;
   }
 
-  // Returns departments --> [ {depName, depAbbr, depFac} ]
-  static async getDepartments(facultyAbbr) {
-    let departments = null;
+  // Returns courses
+  static async getCourses(depAbbr) {
+    let courses = null;
     try {
       const con = await this.connect();
-      const stmt = "SELECT `departments`.`name` AS `depName`, `departments`.`abbr` AS `depAbbr`, `faculties`.`abbr` AS `facAbbr` FROM `departments` JOIN `faculties` ON `departments`.`faculty_id` = `faculties`.`id` WHERE `faculties`.`abbr` = ?";
-      const [rows] = await con.query(stmt, [facultyAbbr]);
+      const stmt = `
+        SELECT courses.id, courses.code, courses.name
+        FROM courses
+        INNER JOIN departments ON courses.depId = departments.id
+        WHERE departments.abbr = ?
+        ORDER BY CAST(SUBSTRING_INDEX(courses.code, '-', -1) AS UNSIGNED) ASC
+        `;
+      const [rows] = await con.query(stmt, [depAbbr]);
 
-      departments = rows;
-      console.log(departments);
+      courses = rows;
+      console.log(courses);
     } catch (err) {
       console.log(err.message);
     }
-    return departments;
+    return courses;
   }
 
-  // Returns posts
-  static async getPosts(facultyAbbr, departmentAbbr) {
+  // Return posts
+  static async getPosts(courseId) {
     let posts = null;
     try {
       const con = await this.connect();
-      const stmt = `SELECT users.username, users.gender, posts.title, posts.file_type, posts.created_at 
-                    FROM posts 
-                    INNER JOIN departments ON departments.id = posts.department_id 
-                    INNER JOIN faculties ON faculties.id = departments.faculty_id 
-                    INNER JOIN users ON users.id = posts.user_id 
-                    WHERE faculties.abbr = ? AND departments.abbr = ?`;
-      const [rows] = await con.query(stmt, [facultyAbbr, departmentAbbr]);
+      const stmt = "SELECT posts.title, posts.fileType, posts.s3FileName, users.username, users.gender, posts.createdAt FROM posts JOIN users ON posts.userId = users.id WHERE posts.courseId = ? ORDER BY posts.createdAt DESC";
+      const [rows] = await con.query(stmt, [courseId]);
 
       posts = rows;
       console.log(posts);
@@ -161,6 +161,29 @@ class DB {
       console.log(err.message);
     }
     return posts;
+  }
+
+  // Insert Post to DB
+  static async insertPostInfoToDB(postInfo) {
+    let isSuccess = false;
+    try {
+      const con = await this.connect();
+
+      // Get department ID based on abbreviation
+      const [deptRows] = await con.query("SELECT id FROM Departments WHERE abbr = ?", [postInfo.depAbbr]);
+      const deptId = deptRows[0].id;
+
+      // Insert post info to DB
+      const stmt = "INSERT INTO Posts (userId, depId, courseId, title, s3FileName, s3FileURL, fileType, fileSize) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      const values = [postInfo.userId, deptId, postInfo.courseId, postInfo.title, postInfo.s3FileName, postInfo.s3FileUrl, postInfo.fileType, postInfo.fileSize];
+      const [postRows] = await con.query(stmt, values);
+
+      isSuccess = true;
+      console.log(postRows);
+    } catch (error) {
+      console.error(error);
+    }
+    return isSuccess;
   }
 }
 

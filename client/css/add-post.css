@@ -7,6 +7,10 @@
   color: var(--text-color-primary);
 }
 
+.file-input {
+  width: 100%;
+}
+
 .error-message {
   font-size: 0.85rem;
   color: lightcoral;

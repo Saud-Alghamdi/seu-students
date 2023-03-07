@@ -99,18 +99,15 @@ Displays all depratments in SEU
 
 
 ## Tasks:
-- Add post + upload a file
-- back button
-- post-login tasks (show username + logout button + avatar in the navbar), (remain logged in 'cookies'), (prevent adding a post when not logged)
-- refactor design of success messages like "Logged in successfully"
+- fileSize validation on front-end and back-end
+- session expiration time + prevent users from accessing pages by writing url
 - Add a role (owner, admin, user) and each his functionality
-- try to make styles it all boostrap styles as much as possible
-- fix posts box design (positioning, max length title, date format)
-- Add courses section
+- a huge refactor for the design until it's fully ready for the MVP (bootstraping, layouts, positioning, repeated and inconsistent code, etc.)
+- Clean server side code
+- Forgot Password
+- res status code?
 - Translation
 - fix DOM elements keep selecting
-
-
 
 
 ## Future features:
