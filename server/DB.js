@@ -82,9 +82,6 @@ class DB {
     return result;
   }
 
-  static async update() {}
-  static async delete() {}
-
   // Check Username Already Exists in DB (Backend Valdaition), return true or false
   static async checkUsernameExists(username) {
     let exists = true;
@@ -131,11 +128,12 @@ class DB {
     try {
       const con = await this.connect();
       const stmt = `
-        SELECT courses.id, courses.code, courses.name
-        FROM courses
-        INNER JOIN departments ON courses.depId = departments.id
-        WHERE departments.abbr = ?
-        ORDER BY CAST(SUBSTRING_INDEX(courses.code, '-', -1) AS UNSIGNED) ASC
+      SELECT courses.id, courses.code, courses.name
+      FROM courses
+      INNER JOIN courseDepartments ON courses.id = courseDepartments.courseId
+      INNER JOIN departments ON courseDepartments.depId = departments.id
+      WHERE departments.abbr = ?
+      ORDER BY CAST(SUBSTRING_INDEX(courses.code, '-', -1) AS UNSIGNED) ASC
         `;
       const [rows] = await con.query(stmt, [depAbbr]);
 
@@ -169,13 +167,9 @@ class DB {
     try {
       const con = await this.connect();
 
-      // Get department ID based on abbreviation
-      const [deptRows] = await con.query("SELECT id FROM Departments WHERE abbr = ?", [postInfo.depAbbr]);
-      const deptId = deptRows[0].id;
-
       // Insert post info to DB
-      const stmt = "INSERT INTO Posts (userId, depId, courseId, title, s3FileName, s3FileURL, fileType, fileSize) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-      const values = [postInfo.userId, deptId, postInfo.courseId, postInfo.title, postInfo.s3FileName, postInfo.s3FileUrl, postInfo.fileType, postInfo.fileSize];
+      const stmt = "INSERT INTO Posts (userId, courseId, title, s3FileName, s3FileURL, fileType, fileSize) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      const values = [postInfo.userId, postInfo.courseId, postInfo.title, postInfo.s3FileName, postInfo.s3FileUrl, postInfo.fileType, postInfo.fileSize];
       const [postRows] = await con.query(stmt, values);
 
       isSuccess = true;
@@ -185,6 +179,9 @@ class DB {
     }
     return isSuccess;
   }
+
+  static async update() {}
+  static async delete() {}
 }
 
 module.exports = DB;

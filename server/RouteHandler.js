@@ -137,7 +137,6 @@ class RouteHandler {
     const post = response.post;
     const postInfo = {
       userId: req.session.user.id,
-      depAbbr: req.params.depAbbr,
       courseId: req.params.courseId,
       title: post.title,
       s3FileName: post.fileName,
