@@ -55,31 +55,31 @@ form.addEventListener("submit", async (e) => {
   formData.append("title", title);
   formData.append("file", file);
 
-  const response = await fetch(`${window.location.pathname}/addPostProcess`, {
-    method: "POST",
-    body: formData,
-  });
+  axios
+    .post(`${window.location.pathname}/addPostProcess`, formData)
+    .then((response) => {
+      if (response.status === 200) {
+        const currentPathname = window.location.pathname;
+        const newPathname = currentPathname.replace("add-post", "posts");
+        const redirectUrl = window.location.origin + newPathname;
+        window.location.href = redirectUrl;
+      }
+    })
+    .catch((error) => {
+      const data = error.response.data;
+      const errMsg = data.err;
+      let errorDiv = document.querySelector(".server-side-error-div");
 
-  if (response.status === 200) {
-    const currentPathname = window.location.pathname;
-    const newPathname = currentPathname.replace("add-post", "posts");
-    const redirectUrl = window.location.origin + newPathname;
-    window.location.href = redirectUrl;
-  } else {
-    const data = await response.json();
-    const errMsg = data.err;
-    let errorDiv = document.querySelector(".server-side-error-div");
-
-    if (!errorDiv) {
-      errorDiv = document.createElement("div");
-      errorDiv.classList.add("server-side-error-div", "text-danger", "border", "border-danger", "rounded-3", "px-4", "mx-auto", "mt-3");
-      const headerElement = document.querySelector("header");
-      headerElement.insertAdjacentElement("afterend", errorDiv);
-    }
-    errorDiv.innerHTML = `
-      <ul>
-        <li class="mt-2"><strong class="server-side-error-msg">${errMsg}</strong></li>
-      </ul>
-    `;
-  }
+      if (!errorDiv) {
+        errorDiv = document.createElement("div");
+        errorDiv.classList.add("server-side-error-div", "text-danger", "border", "border-danger", "rounded-3", "px-4", "mx-auto", "mt-3");
+        const headerElement = document.querySelector("header");
+        headerElement.insertAdjacentElement("afterend", errorDiv);
+      }
+      errorDiv.innerHTML = `
+        <ul>
+          <li class="mt-2"><strong class="server-side-error-msg">${errMsg}</strong></li>
+        </ul>
+      `;
+    });
 });

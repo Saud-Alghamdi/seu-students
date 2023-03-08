@@ -22,3 +22,45 @@
 iOS: 
 bs-local.com:3000
 
+how can i do so with my project?
+
+here is my folder structure:
+
+- client
+---- css
+-------- dashboard.css
+-------- departments.css
+-------- home.css
+-------- main.css
+-------- login.css
+-------- signup.css
+---- fonts
+---- images
+-------- img1.png
+-------- img2.svg
+-------- img3.svg
+---- js
+-------- goback.js
+-------- sendFileToServer.js
+-------- SignupFormValidator.js
+---- views
+-------- partials
+------------ footer.ejs
+------------ head.ejs
+------------ nav.ejs
+-------- courses.ejs
+-------- home.ejs
+-------- login.ejs
+-------- signup.ejs
+-------- departments.ejs
+-------- dashboard.ejs
+- server
+---- DB.js
+---- s3.js
+---- server.js
+---- routes.js
+---- RouteHandler.js
+---- SignupValidation.js
+- node_modules
+- .env
+- .package.json
