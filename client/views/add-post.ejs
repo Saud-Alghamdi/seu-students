@@ -6,6 +6,11 @@
   <body class="d-flex flex-column gap-4">
     <%- include('partials/nav.ejs') %>
 
+    <!-- Loader -->
+    <div id="loader-container" class="visually-hidden">
+      <div id="loader"></div>
+    </div>
+
     <main class="add-post-page-container__main container flex-grow-1 text-light">
       <header class="text-center">
         <h1>Add Post:</h1>
@@ -22,7 +27,7 @@
           <input type="file" class="file-input" accept=".pdf, .ppt, .pptx, .doc, .docx" />
           <span class="error-message error-message-file-input"></span>
         </div>
-        <button type="submit" class="add-post-page-container__button btn btn-lg d-block mx-auto mt-4">Submit</button>
+        <button id="submitButton" type="submit" class="add-post-page-container__button btn btn-lg d-block mx-auto mt-4">Submit</button>
       </form>
     </main>
 
@@ -30,5 +35,7 @@
 
     <!-- Send file to server -->
     <script src="/js/sendFileToServer.js"></script>
+    <!-- Loader -->
+    <script src="/js/loader.js"></script>
   </body>
 </html>

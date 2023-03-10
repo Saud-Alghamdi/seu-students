@@ -27,7 +27,11 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
+            <% if (user.gender === 'male') { %>
             <img src="/images/male-icon.svg" alt="Placeholder" width="40" height="40" />
+            <% } else if (user.gender === 'female') { %>
+            <img src="/images/female-icon.svg" alt="Placeholder" width="40" height="40" />
+            <% } %>
           </a>
         </li>
         <!-- if NOT Logged in -->

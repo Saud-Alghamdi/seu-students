@@ -1,14 +1,22 @@
 ## Tasks:
+
+# PRIORTY:
+- user dashboard + roles
+- design (post boxes, loading spinner)
+- Translation
+GG
+
+- Showing error and success messages in alerts just like SEU alerts
+- Adding a loader animation after each page load
 - fileSize validation on front-end and back-end
 - session expiration time + prevent users from accessing pages by writing url
 - Add a role (owner, admin, user) and each his functionality
-- a huge refactor for the design until it's fully ready for the MVP (bootstraping, layouts, positioning, repeated and inconsistent code, etc.)
+- a huge refactor for the design until it's fully ready for the MVP (bootstrap code, layouts, positioning, repeated and inconsistent code, text length in posts, etc.)
+- user dashboard
 - Clean server side code
 - Forgot Password
 - res status code?
 - Translation
-- fix DOM elements keep selecting
-
 
 ## Future features:
 
@@ -18,49 +26,41 @@
 - Likes
 - Preview the document before downloading it
 
-
 iOS: 
 bs-local.com:3000
 
-how can i do so with my project?
 
-here is my folder structure:
+<!-- Loader -->
+        <div id="loader-container" class="visually-hidden">
+            <div id="loader"></div>
+        </div>
 
-- client
----- css
--------- dashboard.css
--------- departments.css
--------- home.css
--------- main.css
--------- login.css
--------- signup.css
----- fonts
----- images
--------- img1.png
--------- img2.svg
--------- img3.svg
----- js
--------- goback.js
--------- sendFileToServer.js
--------- SignupFormValidator.js
----- views
--------- partials
------------- footer.ejs
------------- head.ejs
------------- nav.ejs
--------- courses.ejs
--------- home.ejs
--------- login.ejs
--------- signup.ejs
--------- departments.ejs
--------- dashboard.ejs
-- server
----- DB.js
----- s3.js
----- server.js
----- routes.js
----- RouteHandler.js
----- SignupValidation.js
-- node_modules
-- .env
-- .package.json
+-------
+
+#loader-container{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+}
+
+#loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+----------
+
+loaderContainer.classList.remove("visually-hidden");    // Remove class name

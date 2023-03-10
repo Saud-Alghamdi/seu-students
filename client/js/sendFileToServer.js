@@ -4,6 +4,7 @@ const titleInput = document.querySelector(".title-input");
 const submitButton = document.querySelector(".add-post-page-container__button");
 const titleErrorMsg = document.querySelector(".error-message-title-input");
 const fileErrorMsg = document.querySelector(".error-message-file-input");
+const loaderContainer = document.querySelector("#loader-container");
 const allowedExtensions = [".pdf", ".doc", ".docx", ".ppt", ".pptx"];
 
 // Removes title error on input change
@@ -50,6 +51,9 @@ form.addEventListener("submit", async (e) => {
     e.preventDefault();
     return;
   }
+
+  // Start loader
+  loaderContainer.classList.remove("visually-hidden");
 
   const formData = new FormData();
   formData.append("title", title);

@@ -40,7 +40,11 @@
             </h6>
           </div>
           <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <img src="/images/male-icon.svg" alt="" height="30" width="30" />
+            <% if (post.gender === 'male') { %>
+            <img src="/images/male-icon.svg" alt="Placeholder" width="30" height="30" />
+            <% } else if (post.gender === 'female') { %>
+            <img src="/images/female-icon.svg" alt="Placeholder" width="30" height="30" />
+            <% } %>
             <p class="d-inline my-0 mx-2"><%= post.username %></p>
           </div>
           <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">

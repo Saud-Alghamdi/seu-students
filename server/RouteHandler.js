@@ -106,7 +106,23 @@ class RouteHandler {
   // Render posts page
   static async renderPosts(req, res) {
     const courseId = req.params.courseId;
-    const posts = await DB.getPosts(courseId);
+    let posts = await DB.getPosts(courseId);
+
+    // Convert date format
+    posts.forEach((post) => {
+      const date = new Date(post.createdAt);
+      const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      };
+      post.createdAt = new Intl.DateTimeFormat("en-US", options).format(date);
+    });
+
     if (userIsLoggedIn(req)) {
       res.render("posts", { posts, user: req.session.user });
     } else if (userIsLoggedIn(req) === false && "needLogin" in req.query) {
