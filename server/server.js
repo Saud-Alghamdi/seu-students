@@ -6,7 +6,6 @@ const routes = require("./routes");
 const crypto = require("crypto");
 const session = require("express-session");
 const multer = require("multer");
-const upload = multer({dest: 'uploads/'})
 
 // BASIC CONFIG
 app.set("view engine", "ejs");

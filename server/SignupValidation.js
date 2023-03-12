@@ -55,7 +55,7 @@ class SignupValidation {
 
   // Gender Validation
   static async validateGender(gender) {
-    let result = { success: false, msg: "Invalid gender type" };
+    let result = { success: false, msg: "Please select a gender." };
 
     if (gender === "male" || gender === "female") {
       result = { success: true, msg: "Gender is valid!" };

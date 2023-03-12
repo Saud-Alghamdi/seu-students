@@ -1,6 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const RouteHandler = require("./RouteHandler.js");
+const path = require("path");
+
+// LANG
+function detectLanguageMiddleware(req, res, next) {
+  const supportedLanguages = ["ar", "en"];
+  const userLanguage = req.query.lang || req.headers["accept-language"].split(",")[0].slice(0, 2);
+
+  if (!supportedLanguages.includes(userLanguage)) {
+    res.status(400).send(`Unsupported language ${userLanguage}`);
+    return;
+  }
+
+  req.userLanguage = userLanguage;
+  req.translationFile = require(path.join(__dirname, "../lang/" + userLanguage + ".json"));
+  next();
+}
+router.use(detectLanguageMiddleware);
 
 // multer config for file handling
 const multer = require("multer");

@@ -15,11 +15,18 @@
         <button class="add-post-btn btn btn-primary">+ Add Post</button>
       </form>
 
+      <!-- if post added successfully -->
+      <% if(typeof user !== 'undefined' && typeof success !== 'undefined' && success === true) { %>
+      <script>
+        showToast(true, "<%= msg %>");
+      </script>
+      <% } %>
+
       <!-- If user clicked on Add Post while he is not logged in -->
       <% if(typeof err !== 'undefined') { %>
-      <p class="server-side-error-msg mt-2">
-        <strong><%= err %></strong>
-      </p>
+      <script>
+        showToast(false, "<%= err %>");
+      </script>
       <% } %>
 
       <div class="posts-flex-container container mt-4 d-flex justify-content-center justify-content-lg-between flex-wrap text-dark px-md-5">

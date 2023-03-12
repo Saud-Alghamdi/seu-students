@@ -11,9 +11,11 @@
         <h1>Login:</h1>
       </header>
 
-      <!-- Signup successful -->
+      <!-- Signup successful or Logout successful -->
       <% if(typeof success !== 'undefined' && success === true) { %>
-      <h4 class="text-warning text-center"><%= msg %></h4>
+      <script>
+        showToast(true, "<%= msg %>");
+      </script>
       <% } %>
 
       <!-- Login credentials error -->

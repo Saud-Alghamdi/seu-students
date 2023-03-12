@@ -49,3 +49,8 @@ footer {
   width: 100%;
   min-height: 50px;
 }
+
+footer .lang {
+  cursor: pointer;
+  text-decoration: none;
+}

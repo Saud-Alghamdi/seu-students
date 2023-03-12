@@ -10,14 +10,16 @@ function userIsLoggedIn(req) {
 class RouteHandler {
   // Render home page
   static renderHomePage(req, res) {
+    const success = req.query.success === "true"; // for toast to work
+
     if (userIsLoggedIn(req)) {
       res.render("home", {
-        success: true,
+        success,
         msg: "Logged in successfully!",
         user: req.session.user,
       });
     } else {
-      res.render("home");
+      res.render("home", { success, translation: req.translationFile });
     }
   }
 
@@ -45,7 +47,7 @@ class RouteHandler {
     if (typeof req.query.success === "undefined") {
       res.render("login");
     } else if (req.query.success === "true") {
-      res.render("login", { success: true, msg: "Sign up successful!" });
+      res.render("login", { success: true, msg: "Logout successful!" });
     } else if (req.query.success === "false") {
       res.render("login", {
         success: false,
@@ -61,11 +63,9 @@ class RouteHandler {
 
     if (result.success === true) {
       req.session.user = result.user;
-      console.log(result);
-      res.redirect(`/?success=${encodeURIComponent(result.success)}`);
+      res.redirect(`/?success=true`);
     } else {
-      console.log(result);
-      res.redirect(`login?success=${encodeURIComponent(result.success)}`);
+      res.redirect(`login?success=false`);
     }
   }
 
@@ -105,6 +105,7 @@ class RouteHandler {
 
   // Render posts page
   static async renderPosts(req, res) {
+    const success = req.query.success === "true"; // for toast to work
     const courseId = req.params.courseId;
     let posts = await DB.getPosts(courseId);
 
@@ -124,7 +125,7 @@ class RouteHandler {
     });
 
     if (userIsLoggedIn(req)) {
-      res.render("posts", { posts, user: req.session.user });
+      res.render("posts", { posts, user: req.session.user, success, msg: "Post Added Successfully!" });
     } else if (userIsLoggedIn(req) === false && "needLogin" in req.query) {
       const err = "You must be logged in order to add a post";
       res.render("posts", { posts, err });
@@ -191,7 +192,7 @@ class RouteHandler {
       if (err) {
         console.error("Error destroying session:", err);
       }
-      res.redirect("/login");
+      res.redirect("/login?success=true");
     });
   }
 }

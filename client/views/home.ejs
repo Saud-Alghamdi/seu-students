@@ -1,4 +1,4 @@
-<html lang="en">
+<html>
   <head>
     <%- include('partials/head.ejs') %>
     <title>SEU Students</title>
@@ -8,7 +8,7 @@
 
     <main class="index-page-container__main container text-center text-light flex-grow-1 my-4">
       <header class="">
-        <h1>Welcome Students!</h1>
+        <h1><%= translation.WELCOME_STUDENTS %></h1>
       </header>
 
       <p class="index-page-container__paragraph my-5">
@@ -16,6 +16,14 @@
         amet consectetur adipisicing elit. Nam obcaecati repellat repudiandae sequi, adipisci eos, harum non molestias tempore provident atque necessitatibus quaerat minima ratione ducimus.
       </p>
 
+      <!-- if the user has just logged in (to show him log in successful toast)-->
+      <% if(typeof user !== 'undefined' && typeof success !== 'undefined' && success === true) { %>
+      <script>
+        showToast(true, "<%= msg %>");
+      </script>
+      <% } %>
+
+      <!-- If not logged in -->
       <% if(typeof user === 'undefined') { %>
       <form action="/signup" method="GET">
         <button class="index-page-container__button btn btn-lg">Sign up</button>
@@ -29,4 +37,5 @@
 
     <%- include('partials/footer.ejs') %>
   </body>
+  <script src="js/convertLang.js"></script>
 </html>
