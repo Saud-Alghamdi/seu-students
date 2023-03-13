@@ -71,7 +71,7 @@ class RouteHandler {
     }
   }
 
-  // Check Username Already Exists in DB (For Frontend Validation), Returns json of boolean to the client side
+  // Check Username Already Exists in DB (For Frontend Validation), Returns json of a boolean to the client side
   static async checkUsernameExists(req, res) {
     const username = req.body.username;
     const exists = await DB.checkUsernameExists(username);
