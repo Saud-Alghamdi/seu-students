@@ -29,19 +29,19 @@ form.addEventListener("submit", async (e) => {
   const extension = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
 
   if (!file) {
-    fileErrorMsg.innerText = "You must select a file.";
+    fileErrorMsg.innerText = "يجب اختيار ملف.";
   } else {
     fileErrorMsg.innerText = "";
   }
 
   if (!title) {
-    titleErrorMsg.innerText = "A title is needed.";
+    titleErrorMsg.innerText = "يجب كتابة عنوان.";
   } else {
     titleErrorMsg.innerText = "";
   }
 
   if (!allowedExtensions.includes(extension)) {
-    fileErrorMsg.innerText = "File must be either PDF, Word, or Powerpoint";
+    fileErrorMsg.innerText = "يجب أن يكون نوع الملف PDF أو Word أو Powerpoint.";
     return;
   } else {
     fileErrorMsg.innerText = "";

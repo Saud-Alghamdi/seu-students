@@ -1,4 +1,4 @@
-<html>
+<html dir="rtl">
   <head>
     <%- include('partials/head.ejs') %>
     <title>SEU Students</title>
@@ -8,16 +8,16 @@
 
     <main class="index-page-container__main container text-center text-light flex-grow-1 my-4">
       <header class="">
-        <h1><%= translation.WELCOME_STUDENTS %></h1>
+        <h1>مرحبًا طلاب الجامعة السعودية الإلكترونية!</h1>
       </header>
 
       <p class="index-page-container__paragraph my-5">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint tempore voluptatem minus, enim atque eum ipsam illo, excepturi esse repellendus amet a molestiae, explicabo vel obcaecati? Impedit suscipit molestias nobis. Lorem ipsum dolor sit
-        amet consectetur adipisicing elit. Nam obcaecati repellat repudiandae sequi, adipisci eos, harum non molestias tempore provident atque necessitatibus quaerat minima ratione ducimus.
+        أهلًا بكم في الموقع الإلكتروني الخاص بطلاب الجامعة السعودية الإلكترونية، حيث هدفنا من بناء هذا الموقع هو توفير منصة تمكّن الطلاب من الوصول بسهولة إلى الملفات المتعلقة بالمواد الدراسية. نعتقد أن هذا ليس فقط يعزز تجربة التعلم الخاصة بك، بل
+        سيجعلها أكثر سهولة وكفاءة، ونحن ملتزمون بتحديث نظامنا الأساسي وتحسينه باستمرار لخدمتكم بشكل أفضل. شكرًا لإختيارك لنا ونأمل لكم أفضل التجارب.
       </p>
 
       <!-- if the user has just logged in (to show him log in successful toast)-->
-      <% if(typeof user !== 'undefined' && typeof success !== 'undefined' && success === true) { %>
+      <% if(typeof user !== 'undefined' && typeof loginSuccess !== 'undefined' && loginSuccess === true) { %>
       <script>
         showToast(true, "<%= msg %>");
       </script>
@@ -26,16 +26,15 @@
       <!-- If not logged in -->
       <% if(typeof user === 'undefined') { %>
       <form action="/signup" method="GET">
-        <button class="index-page-container__button btn btn-lg">Sign up</button>
+        <button class="index-page-container__button btn btn-lg">التسجيل</button>
       </form>
       <form action="/login" method="GET">
-        <button class="index-page-container__button btn btn-lg">Log in</button>
+        <button class="index-page-container__button btn btn-lg">تسجيل الدخول</button>
       </form>
-      <a href="/departments" class="index-page-container__skip-link d-block mt-4">Browse Departments without signing in</a>
+      <a href="/departments" class="index-page-container__skip-link d-block mt-4">المتابعة بدون تسجيل دخول</a>
       <% } %>
     </main>
 
     <%- include('partials/footer.ejs') %>
   </body>
-  <script src="js/convertLang.js"></script>
 </html>

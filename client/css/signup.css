@@ -11,6 +11,10 @@
   color: #f54242;
 }
 
+.form-check {
+  width: fit-content;
+}
+
 .signup-page-container__main {
   max-width: 500px;
 }
@@ -22,7 +26,7 @@
 
 .error-message {
   font-size: 0.85rem;
-  color: lightcoral;
+  color: #ff3333;
 }
 
 /* EFFECTS */

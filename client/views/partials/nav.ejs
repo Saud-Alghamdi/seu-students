@@ -1,46 +1,43 @@
 <nav class="navbar navbar-expand-md bg-light py-0">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand m-0" href="/">
       <img src="/images/seu-logo.png" alt="Placeholder" width="50" height="50" class="navbar-logo d-inline-block align-text-top" />
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav justify-content-md-center align-items-md-center">
+      <ul class="navbar-nav align-items-md-center p-0">
         <li class="nav-item px-md-2">
-          <a class="nav-link" aria-current="page" href="/">Home</a>
+          <a class="nav-link" aria-current="page" href="/">الرئيسية</a>
         </li>
         <li class="nav-item px-md-2">
-          <a class="nav-link" href="/departments">Departments</a>
+          <a class="nav-link" href="/departments">التخصصات</a>
         </li>
-        <li class="nav-item px-md-2 me-auto">
-          <a class="nav-link" href="#">Contact us</a>
+        <li class="nav-item px-md-2">
+          <a class="nav-link" href="#">تواصل معنا</a>
         </li>
         <!-- if Logged in -->
         <% if(typeof user !== 'undefined') { %>
-        <li class="nav-item px-md-2">
-          <a class="nav-link" href="/logout">Log out</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><%=user.username%></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <% if (user.gender === 'male') { %>
-            <img src="/images/male-icon.svg" alt="Placeholder" width="40" height="40" />
+        <li class="nav-item px-md-2 d-flex align-items-center">
+          <a class="nav-link" href="#" style="padding-bottom: 0">
+            <%=user.username%> <% if (user.gender === 'male') { %>
+            <img src="/images/male-icon.svg" alt="Placeholder" width="30" height="30" style="padding-bottom: 3px" />
             <% } else if (user.gender === 'female') { %>
-            <img src="/images/female-icon.svg" alt="Placeholder" width="40" height="40" />
+            <img src="/images/female-icon.svg" alt="Placeholder" width="30" height="30" style="padding-bottom: 3px" />
             <% } %>
           </a>
+        </li>
+        <li class="nav-item px-md-2">
+          <a class="nav-link" href="/logout">تسجيل خروج</a>
         </li>
         <!-- if NOT Logged in -->
         <% } else { %>
         <li class="nav-item px-md-2">
-          <a class="nav-link" href="/login">Log in</a>
+          <a class="nav-link" href="/login">تسجيل دخول</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signup">Sign up</a>
+          <a class="nav-link" href="/signup">التسجيل</a>
         </li>
         <% } %>
       </ul>

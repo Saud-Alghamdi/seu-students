@@ -1,4 +1,4 @@
-<html lang="en">
+<html dir="rtl">
   <head>
     <%- include('partials/head.ejs') %>
     <title>SEU Students</title>
@@ -8,7 +8,7 @@
 
     <main class="login-page-container__main container flex-grow-1 text-light my-4">
       <header class="text-center">
-        <h1>Login:</h1>
+        <h1>تسجيل الدخول</h1>
       </header>
 
       <!-- Signup successful or Logout successful -->
@@ -29,14 +29,14 @@
 
       <form action="/login-process" method="POST" class="login-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
         <div class="mb-3">
-          <label for="" class="form-label">Email:</label>
-          <input name="email" type="text" class="form-control" id="" />
+          <label for="" class="form-label">اسم المستخد أو البريد الإلكتروني:</label>
+          <input name="usernameOrEmail" type="text" class="form-control" id="" />
         </div>
         <div class="mb-3">
-          <label for="" class="form-label">Password:</label>
+          <label for="" class="form-label">كلمة المرور:</label>
           <input name="password" type="password" class="form-control" id="" />
         </div>
-        <button type="submit" class="login-page-container__button btn btn-lg d-block mx-auto mt-4">Log in</button>
+        <button type="submit" class="login-page-container__button btn btn-lg d-block mx-auto mt-4">تسجيل دخول</button>
       </form>
     </main>
 

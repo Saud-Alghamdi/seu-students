@@ -1,4 +1,4 @@
-<html lang="en">
+<html dir="rtl">
   <head>
     <%- include('partials/head.ejs') %>
     <title>Posts</title>
@@ -8,11 +8,11 @@
 
     <main class="posts-page-container__main container flex-grow-1 text-center text-light">
       <header>
-        <h1>Latest Posts:</h1>
+        <h1>المنشورات:</h1>
       </header>
 
       <form class="mt-3" action="./add-post" method="GET">
-        <button class="add-post-btn btn btn-primary">+ Add Post</button>
+        <button class="add-post-btn btn btn-primary">+ إضافة منشور</button>
       </form>
 
       <!-- if post added successfully -->
@@ -43,7 +43,7 @@
             <% } %>
 
             <h6 class="d-inline mx-2">
-              <a class="" href="/downloadFile?s3FileName=<%= post.s3FileName %>&title=<%= post.title %>" download="<%= post.s3FileName %>"><%= post.title %></a>
+              <a class="fileLink text-decoration-none fw-bold" href="/downloadFile?s3FileName=<%= post.s3FileName %>&title=<%= post.title %>" download="<%= post.s3FileName %>"><%= post.title %></a>
             </h6>
           </div>
           <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">

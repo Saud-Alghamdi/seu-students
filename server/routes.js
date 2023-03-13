@@ -3,7 +3,7 @@ const router = express.Router();
 const RouteHandler = require("./RouteHandler.js");
 const path = require("path");
 
-// LANG
+// LANG config
 function detectLanguageMiddleware(req, res, next) {
   const supportedLanguages = ["ar", "en"];
   const userLanguage = req.query.lang || req.headers["accept-language"].split(",")[0].slice(0, 2);

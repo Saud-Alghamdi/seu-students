@@ -9,17 +9,18 @@ function userIsLoggedIn(req) {
 
 class RouteHandler {
   // Render home page
+  // home.ejs it checks for two conditions for toast note to appear only once when a user logs in and not on subsequent visit to home.ejs. It checks if there is a query parameter loginSuccess === true and if there is a user session
   static renderHomePage(req, res) {
-    const success = req.query.success === "true"; // for toast to work
+    const loginSuccess = req.query.loginSuccess === "true";
 
     if (userIsLoggedIn(req)) {
       res.render("home", {
-        success,
-        msg: "Logged in successfully!",
+        loginSuccess,
+        msg: "تم تسجيل الدخول بنجاح!",
         user: req.session.user,
       });
     } else {
-      res.render("home", { success, translation: req.translationFile });
+      res.render("home");
     }
   }
 
@@ -35,7 +36,7 @@ class RouteHandler {
 
     if (result.success === true) {
       console.log(result);
-      res.redirect(`login?success=${encodeURIComponent(result.success)}&msg=${encodeURIComponent(result.msg)}`);
+      res.redirect(`login?signupSuccess=true`);
     } else {
       console.log(result);
       res.render("signup", { errors: result.errors });
@@ -44,18 +45,19 @@ class RouteHandler {
 
   // Render login page
   static renderLoginPage(req, res) {
-    if (typeof req.query.success === "undefined") {
-      res.render("login");
-    } else if (req.query.success === "true") {
-      res.render("login", { success: true, msg: "Logout successful!" });
-    } else if (req.query.success === "false") {
+    if (req.query.signupSuccess === "true") {
+      res.render("login", { success: true, msg: "تم التسجيل بنجاح!" });
+    } else if (req.query.logoutSuccess === "true") {
+      res.render("login", { success: true, msg: "تم تسجيل الخروج بنجاح!" });
+    } else if (req.query.loginSuccess === "false") {
       res.render("login", {
         success: false,
-        msg: "Username or password is incorrect",
+        msg: "اسم المستخدم، البريد الإلكتروني، أو كلمة المرور خطأ.",
       });
+    } else {
+      res.render("login");
     }
   }
-
   // Log in process ( Returns {success: bool, msg: string, user: obj })
   static async loginProcess(req, res) {
     const userCreds = req.body;
@@ -63,9 +65,9 @@ class RouteHandler {
 
     if (result.success === true) {
       req.session.user = result.user;
-      res.redirect(`/?success=true`);
+      res.redirect(`/?loginSuccess=true`);
     } else {
-      res.redirect(`login?success=false`);
+      res.redirect(`login?loginSuccess=false`);
     }
   }
 
@@ -125,9 +127,9 @@ class RouteHandler {
     });
 
     if (userIsLoggedIn(req)) {
-      res.render("posts", { posts, user: req.session.user, success, msg: "Post Added Successfully!" });
+      res.render("posts", { posts, user: req.session.user, success, msg: "تم إضافة المنشور بنجاح!" });
     } else if (userIsLoggedIn(req) === false && "needLogin" in req.query) {
-      const err = "You must be logged in order to add a post";
+      const err = "يجب تسجيل الدخول أولًا لإضافة منشور";
       res.render("posts", { posts, err });
     } else {
       res.render("posts", { posts });
@@ -177,7 +179,8 @@ class RouteHandler {
     const getFileFromS3Response = await getFileFromS3(req);
 
     if (getFileFromS3Response.success) {
-      res.setHeader("Content-Disposition", `attachment; filename="${req.query.title}${path.extname(req.query.s3FileName)}"`);
+      const encodedTitle = encodeURIComponent(req.query.title);
+      res.setHeader("Content-Disposition", `attachment; filename="${encodedTitle}${path.extname(req.query.s3FileName)}"`);
       res.setHeader("Content-type", getFileFromS3Response.file.ContentType);
       getFileFromS3Response.file.Body.pipe(res);
     } else {
@@ -192,7 +195,7 @@ class RouteHandler {
       if (err) {
         console.error("Error destroying session:", err);
       }
-      res.redirect("/login?success=true");
+      res.redirect("/login?logoutSuccess=true");
     });
   }
 }

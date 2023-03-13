@@ -24,12 +24,12 @@ const s3 = new S3Client({
 async function insertFileToS3(req) {
   // Check if there is a title present
   if (!req.body.title) {
-    return { err: "a title is needed" };
+    return { err: "يجب كتابة عنوان." };
   }
 
   // Check if there is a file submitted
   if (!req.file) {
-    return { err: "You must upload a file" };
+    return { err: "يجب اختيار ملف." };
   }
 
   // File type validation

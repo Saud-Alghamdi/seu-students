@@ -47,13 +47,13 @@ class SignupFormValidator {
       const lengthRegex = /^.{3,25}$/;
 
       if (!startWithLetterRegex.test(field.value)) {
-        this.setStatus(field, "Username must start with a letter", "error");
+        this.setStatus(field, "اسم المستخدم يجب أن يبدأ بحرف. (انجليزي فقط)", "error");
       } else if (!lettersNumbersUnderscoresRegex.test(field.value)) {
-        this.setStatus(field, "Only letters, numbers and underscores are allowed", "error");
+        this.setStatus(field, "اسم المستخدم يمكن أن يحتوي على حروف وأرقام أو شرطة سفلية فقط.", "error");
       } else if (!lengthRegex.test(field.value)) {
-        this.setStatus(field, "Username must be between 3 and 25 characters", "error");
+        this.setStatus(field, "اسم المستخدم يجب أن يكون ما بين 3 إلى 25 حرف.", "error");
       } else if ((await checkUsernameExists(field.value)) === true) {
-        this.setStatus(field, "Username already exists", "error");
+        this.setStatus(field, "اسم المستخدم موجود مسبقًا.", "error");
       } else {
         this.setStatus(field, null, "success");
       }
@@ -66,9 +66,9 @@ class SignupFormValidator {
     if (field.name === "email") {
       const regex = /\S+@\S+\.\S+/;
       if (!regex.test(field.value)) {
-        this.setStatus(field, "Please enter valid email address", "error");
+        this.setStatus(field, "البريد الإلكتروني خاطئ.", "error");
       } else if ((await checkEmailExists(field.value)) === true) {
-        this.setStatus(field, "Email already exists", "error");
+        this.setStatus(field, "البريد الإلكتروني موجود مسبقًا.", "error");
       } else {
         this.setStatus(field, null, "success");
       }
@@ -82,9 +82,9 @@ class SignupFormValidator {
       const lengthRegex = /^.{6,}$/;
 
       if (containsSpaceRegex.test(field.value)) {
-        this.setStatus(field, "Password must not contain spaces", "error");
+        this.setStatus(field, "لا يمكن أن تحتوي كلمة المرور على مسافة.", "error");
       } else if (!lengthRegex.test(field.value)) {
-        this.setStatus(field, "Password must be at least 6 characters long", "error");
+        this.setStatus(field, "يجب أن يكون طول كلمة المرور 6 أحرف على الأقل.", "error");
       } else {
         this.setStatus(field, null, "success");
       }
@@ -103,7 +103,7 @@ class SignupFormValidator {
       if (isSelected) {
         this.setStatus(field, null, "success");
       } else {
-        this.setStatus(field, "Please select a gender", "error");
+        this.setStatus(field, "فضلًا اختر نوع الجنس.", "error");
       }
     }
   }

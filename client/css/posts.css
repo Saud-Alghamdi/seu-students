@@ -1,5 +1,5 @@
 .posts-page-container__post {
-  background-color: antiquewhite;
+  background-color: #c5d980;
   height: 160px;
   width: 90%;
 }
@@ -9,11 +9,15 @@
   color: var(--text-color-primary);
 }
 
+.fileLink:hover {
+  color: red;
+}
+
 /* MEDIA QUERIES */
 
 /* 992px and above */
 @media (min-width: 992px) {
-  .posts-page-container__post{
+  .posts-page-container__post {
     width: 48%;
     height: 220px;
   }

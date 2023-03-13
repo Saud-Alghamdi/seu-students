@@ -1,4 +1,4 @@
-<html lang="en">
+<html dir="rtl">
   <head>
     <%- include('partials/head.ejs') %>
     <title>SEU Students</title>
@@ -8,7 +8,7 @@
 
     <main class="signup-page-container__main container flex-grow-1 text-light my-4">
       <header class="text-center">
-        <h1>Sign up:</h1>
+        <h1>التسجيل:</h1>
       </header>
 
       <!-- Sign up validation errors-->
@@ -24,33 +24,32 @@
 
       <form action="/signup-process" method="POST" class="form signup-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
         <div class="form__input-group mb-3">
-          <label for="" class="form-label">Username:</label>
+          <label for="" class="form-label">اسم المستخدم:</label>
           <input name="username" type="text" class="input-field field username-field form-control" />
           <span class="error-message"></span>
         </div>
         <div class="form__input-group mb-3">
-          <label for="" class="form-label">Email address:</label>
+          <label for="" class="form-label">البريد الإلكتروني:</label>
           <input name="email" type="email" class="input-field field email-field form-control" aria-describedby="emailHelp" />
           <span class="error-message"></span>
         </div>
         <div class="form__input-group mb-3">
-          <label for="" class="form-label">Password:</label>
+          <label for="" class="form-label">كلمة المرور:</label>
           <input name="password" type="password" class="input-field field password-field form-control" max="30" />
           <span class="error-message"></span>
         </div>
         <div class="form__input-group">
           <span class="error-message"></span>
           <div class="form-check">
-            <input name="gender" class="input-field radio-field male-radio-field form-check-input" type="radio" value="male" />
-            <label class="form-check-label" for=""> Male </label>
+            <label class="form-check-label" for="male-radio">ذكر</label>
+            <input name="gender" id="male-radio" class="input-field radio-field male-radio-field form-check-input" type="radio" value="male" />
           </div>
           <div class="form-check mb-3">
-            <input name="gender" class="input-field radio-field female-radio-field form-check-input" type="radio" value="female" />
-            <label class="form-check-label" for=""> Female </label>
-            <span class="error-message"></span>
+            <label class="form-check-label" for="female-radio">أنثى</label>
+            <input name="gender" id="female-radio" class="input-field radio-field female-radio-field form-check-input" type="radio" value="female" />
           </div>
         </div>
-        <button type="submit" class="signup-page-container__button btn btn-lg d-block mx-auto mt-4">Sign up</button>
+        <button type="submit" class="signup-page-container__button btn btn-lg d-block mx-auto mt-4">التسجيل</button>
       </form>
     </main>
 

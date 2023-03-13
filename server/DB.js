@@ -60,8 +60,8 @@ class DB {
     let result = { success: false, msg: "Something went wrong" };
     try {
       const con = await this.connect();
-      const stmt = "SELECT * FROM `users` WHERE `email` = ?";
-      const [rows] = await con.query(stmt, [userCreds.email]);
+      const stmt = "SELECT * FROM `users` WHERE `email` = ?  OR `username` = ?";
+      const [rows] = await con.query(stmt, [userCreds.usernameOrEmail, userCreds.usernameOrEmail]);
 
       if (rows.length === 0) {
         throw new Error("Email or password is incorrect");
@@ -133,7 +133,7 @@ class DB {
       INNER JOIN courseDepartments ON courses.id = courseDepartments.courseId
       INNER JOIN departments ON courseDepartments.depId = departments.id
       WHERE departments.abbr = ?
-      ORDER BY CAST(SUBSTRING_INDEX(courses.code, '-', -1) AS UNSIGNED) ASC
+      ORDER BY LEFT(courses.code, 1) ASC, CAST(SUBSTRING_INDEX(courses.code, '-', -1) AS UNSIGNED) ASC
         `;
       const [rows] = await con.query(stmt, [depAbbr]);
 
