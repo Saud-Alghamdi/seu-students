@@ -109,11 +109,11 @@ class RouteHandler {
   static async renderPosts(req, res) {
     const success = req.query.success === "true"; // for toast to work
     const courseId = req.params.courseId;
-    let posts = await DB.getPosts(courseId);
+    let { courseCode, posts } = await DB.getPosts(courseId);
 
     // Convert date format
     posts.forEach((post) => {
-      const date = new Date(post.createdAt);
+      const date = new Date(post.created_at);
       const options = {
         year: "numeric",
         month: "long",
@@ -123,16 +123,16 @@ class RouteHandler {
         hour12: true,
         timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       };
-      post.createdAt = new Intl.DateTimeFormat("en-US", options).format(date);
+      post.created_at = new Intl.DateTimeFormat("en-US", options).format(date);
     });
 
     if (userIsLoggedIn(req)) {
-      res.render("posts", { posts, user: req.session.user, success, msg: "تم إضافة المنشور بنجاح!" });
+      res.render("posts", { courseCode, posts, user: req.session.user, success, msg: "تم إضافة المنشور بنجاح!" });
     } else if (userIsLoggedIn(req) === false && "needLogin" in req.query) {
       const err = "يجب تسجيل الدخول أولًا لإضافة منشور";
-      res.render("posts", { posts, err });
+      res.render("posts", { courseCode, posts, err });
     } else {
-      res.render("posts", { posts });
+      res.render("posts", { courseCode, posts });
     }
   }
 
