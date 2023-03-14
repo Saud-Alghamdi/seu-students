@@ -1,5 +1,7 @@
 const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
+const dotenv = require("dotenv");
+dotenv.config();
 const SignupValidation = require("./SignupValidation");
 
 class DB {
@@ -8,9 +10,9 @@ class DB {
     let con;
     try {
       con = await mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        database: "seu-students",
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        database: process.env.DB_NAME,
       });
     } catch (err) {
       console.log(err);
