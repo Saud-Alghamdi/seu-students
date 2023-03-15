@@ -8,11 +8,11 @@ class DB {
   // Connect
   static async connect() {
     const client = new Client({
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      port: process.env.DB_PORT,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
+      host: process.env.PGHOST,
+      user: process.env.PGUSER,
+      port: process.env.PGPORT,
+      password: process.env.PGPASSWORD,
+      database: process.env.PGDATABASE,
     });
 
     try {
