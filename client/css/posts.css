@@ -9,8 +9,12 @@
   color: var(--text-color-primary);
 }
 
+.fileLink {
+  color: blue;
+}
+
 .fileLink:hover {
-  color: red;
+  color: var(--link-hover);
 }
 
 /* MEDIA QUERIES */
