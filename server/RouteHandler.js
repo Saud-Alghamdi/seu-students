@@ -113,7 +113,7 @@ class RouteHandler {
 
     // Convert date format
     posts.forEach((post) => {
-      const date = new Date(post.created_at);
+      const date = new Date(post.createdAt);
       const options = {
         year: "numeric",
         month: "long",
@@ -123,7 +123,7 @@ class RouteHandler {
         hour12: true,
         timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       };
-      post.created_at = new Intl.DateTimeFormat("en-US", options).format(date);
+      post.createdAt = new Intl.DateTimeFormat("en-US", options).format(date);
     });
 
     if (userIsLoggedIn(req)) {
