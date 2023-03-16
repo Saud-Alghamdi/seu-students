@@ -156,7 +156,7 @@ class DB {
       // Fetch the course code for the given courseId
       const courseCodeStmt = "SELECT code FROM courses WHERE id = ?";
       const [courseCodeRows] = await con.query(courseCodeStmt, [courseId]);
-      const courseCode = courseCodeRows.code;
+      const courseCode = courseCodeRows[0].code;
 
       // Fetch the posts for the given courseId
       const postsStmt = `
