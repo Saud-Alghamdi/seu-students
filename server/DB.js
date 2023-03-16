@@ -91,7 +91,7 @@ class DB {
     try {
       const con = await this.connect();
       const stmt = "SELECT username FROM users WHERE username = ?;";
-      const rows = await con.query(stmt, [username]);
+      const [rows] = await con.query(stmt, [username]);
 
       if (rows.length > 0) {
         throw new Error("Username already exists");
@@ -111,7 +111,7 @@ class DB {
     try {
       const con = await this.connect();
       const stmt = "SELECT email FROM users WHERE email = ?;";
-      const rows = await con.query(stmt, [email]);
+      const [rows] = await con.query(stmt, [email]);
 
       if (rows.length > 0) {
         throw new Error("Email already exists");
