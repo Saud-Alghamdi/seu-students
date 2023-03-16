@@ -8,11 +8,11 @@ class DB {
   // Connect
   static async connect() {
     const client = new Client({
-      host: process.env.PGHOST,
-      user: process.env.PGUSER,
-      port: process.env.PGPORT,
-      password: process.env.PGPASSWORD,
-      database: process.env.PGDATABASE,
+      host: process.env.MYSQLHOST,
+      user: process.env.MYSQLUSER,
+      port: process.env.MYSQLPORT,
+      password: process.env.MYSQLPASSWORD,
+      database: process.env.MYSQLDATABASE,
     });
 
     try {
