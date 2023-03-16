@@ -8,7 +8,7 @@
 
     <main class="posts-page-container__main container flex-grow-1 text-center text-light">
       <header>
-        <h1>المنشورات:</h1>
+        <h1>المنشورات لـ <%=courseCode%> :</h1>
       </header>
 
       <form class="mt-3" action="./add-post" method="GET">
@@ -34,16 +34,16 @@
 
         <div class="posts-page-container__post d-flex flex-column border-dark rounded-4 px-2 px-md-4 m-2">
           <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <% if(post.fileType === '.pdf') { %>
+            <% if(post.file_type === '.pdf') { %>
             <img src="/images/pdf-icon.svg" alt="" height="30" width="30" />
-            <% } else if (post.fileType === '.doc' || post.fileType === '.docx') { %>
+            <% } else if (post.file_type === '.doc' || post.file_type === '.docx') { %>
             <img src="/images/word-icon.svg" alt="" height="30" width="30" />
-            <% } else if (post.fileType === '.ppt' || post.fileType === '.pptx') { %>
+            <% } else if (post.file_type === '.ppt' || post.file_type === '.pptx') { %>
             <img src="/images/powerpoint-icon.svg" alt="" height="30" width="30" />
             <% } %>
 
             <h6 class="d-inline mx-2">
-              <a class="fileLink text-decoration-none fw-bold" href="/downloadFile?s3FileName=<%= post.s3FileName %>&title=<%= post.title %>" download="<%= post.s3FileName %>"><%= post.title %></a>
+              <a class="fileLink text-decoration-none fw-bold" href="/downloadFile?s3FileName=<%= post.s3_file_name %>&title=<%= post.title %>" download="<%= post.s3_file_name %>"><%= post.title %></a>
             </h6>
           </div>
           <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
@@ -55,7 +55,7 @@
             <p class="d-inline my-0 mx-2"><%= post.username %></p>
           </div>
           <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <p><%= post.createdAt %></p>
+            <p><%= post.created_at %></p>
           </div>
         </div>
 
