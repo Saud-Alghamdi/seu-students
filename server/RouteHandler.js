@@ -1,5 +1,5 @@
 const DB = require("./DB.js");
-const { insertFileToS3, getFileFromS3 } = require("./s3");
+const { insertFileToS3, getFileFromS3, deleteFileFromS3 } = require("./s3");
 const path = require("path");
 
 // Check user is logged in
@@ -186,6 +186,18 @@ class RouteHandler {
     } else {
       console.log("Error downloading file", err);
       res.status(500).send({ err: "Error downloading file." });
+    }
+  }
+
+  // Delete File
+  static async deleteFile(req, res) {
+    const deleteFileFromS3Response = await deleteFileFromS3(req);
+
+    if (deleteFileFromS3Response === true) {
+      // delete post form database
+      // trigger toast success
+    } else {
+      // trigger toast fail
     }
   }
 

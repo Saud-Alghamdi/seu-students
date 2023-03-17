@@ -1,0 +1,23 @@
+.fa-whatsapp {
+  color: #25d366;
+}
+
+.fa-telegram {
+  color: #0088cc;
+}
+
+.fa-twitter {
+  color: #1da1f2;
+}
+
+.fa-linkedin {
+  color: #0a66c2;
+}
+
+.fa-github {
+  color: #f5f5f5;
+}
+
+.fab:hover {
+  color: var(--link-hover);
+}

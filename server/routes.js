@@ -86,6 +86,12 @@ router.get("/downloadFile", async (req, res) => {
   await RouteHandler.downloadFile(req, res);
 });
 
+// Delete file
+router.post("/deleteFile", async (req, res) => {
+  await RouteHandler.deleteFile(req, res);
+});
+
+
 // user dashboard page
 router.get("/dashboard", (req, res) => {
   res.render("dashboard");

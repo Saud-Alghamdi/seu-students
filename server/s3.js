@@ -6,7 +6,7 @@ dotenv.config();
 const randomFileName = (bytes = 32) => crypto.randomBytes(bytes).toString("hex");
 
 // S3 Confg
-const { S3Client, PutObjectCommand, GetObjectCommand } = require("@aws-sdk/client-s3");
+const { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
 
 bucketName = process.env.BUCKET_NAME;
 bucketRegion = process.env.BUCKET_REGION;
@@ -81,7 +81,12 @@ async function insertFileToS3(req) {
   }
 }
 
+// Get file from S3
 async function getFileFromS3(req) {
+
+  console.log("REQ.QUERY.S3FILENAME IN GET FUNCTION IS:");
+  console.log(req.query.s3FileName);
+
   const params = {
     Bucket: bucketName,
     Key: req.query.s3FileName,
@@ -105,4 +110,26 @@ async function getFileFromS3(req) {
   }
 }
 
-module.exports = { insertFileToS3, getFileFromS3 };
+// Delete file from S3
+async function deleteFileFromS3(req) {
+  console.log("REQ.QUERY.S3FILENAME IN DELETE FUNCTION IS:");
+  console.log(req.query.s3FileName);
+
+  const params = {
+    Bucket: bucketName,
+    Key: req.query.s3FileName,
+  };
+
+  const command = new DeleteObjectCommand(params);
+  const result = await s3.send(command);
+
+  if (result.$metadata.httpStatusCode === 200) {
+    console.log("File deleted successfully!");
+    return true;
+  } else {
+    console.log("Error deleting file ..");
+    return false;
+  }
+}
+
+module.exports = { insertFileToS3, getFileFromS3, deleteFileFromS3 };

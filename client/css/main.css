@@ -11,6 +11,7 @@ This file will containt all the imports of styles of all views + styling of gene
 @import url("posts.css");
 @import url("add-post.css");
 @import url("dashboard.css");
+@import url("footer.css");
 
 /* GLOBAL VARIABLES */
 :root {
@@ -43,14 +44,4 @@ body {
 
 .nav-link:hover {
   color: var(--link-hover);
-}
-
-footer {
-  width: 100%;
-  min-height: 50px;
-}
-
-footer .lang {
-  cursor: pointer;
-  text-decoration: none;
 }
