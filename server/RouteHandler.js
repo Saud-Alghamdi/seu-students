@@ -189,14 +189,19 @@ class RouteHandler {
     }
   }
 
-  // Delete File
+  // Delete File (returns bool)
   static async deleteFile(req, res) {
     const deleteFileFromS3Response = await deleteFileFromS3(req);
+    const s3FileName = req.query.s3FileName;
 
     if (deleteFileFromS3Response === true) {
-      // delete post form database
+      await DB.deletePostFromDB(s3FileName);
+      console.log("post deleted successfully!");
+      res.redirect(`./posts`);
       // trigger toast success
     } else {
+      console.log("failed to delete post ...");
+      res.redirect("./posts");
       // trigger toast fail
     }
   }

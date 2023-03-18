@@ -83,10 +83,6 @@ async function insertFileToS3(req) {
 
 // Get file from S3
 async function getFileFromS3(req) {
-
-  console.log("REQ.QUERY.S3FILENAME IN GET FUNCTION IS:");
-  console.log(req.query.s3FileName);
-
   const params = {
     Bucket: bucketName,
     Key: req.query.s3FileName,
@@ -112,9 +108,6 @@ async function getFileFromS3(req) {
 
 // Delete file from S3
 async function deleteFileFromS3(req) {
-  console.log("REQ.QUERY.S3FILENAME IN DELETE FUNCTION IS:");
-  console.log(req.query.s3FileName);
-
   const params = {
     Bucket: bucketName,
     Key: req.query.s3FileName,
@@ -123,11 +116,13 @@ async function deleteFileFromS3(req) {
   const command = new DeleteObjectCommand(params);
   const result = await s3.send(command);
 
-  if (result.$metadata.httpStatusCode === 200) {
+  if (result.$metadata.httpStatusCode === 204) {
+    // AWS S3 uses 204 status code for successful file delete
     console.log("File deleted successfully!");
     return true;
   } else {
     console.log("Error deleting file ..");
+    console.log(result);
     return false;
   }
 }

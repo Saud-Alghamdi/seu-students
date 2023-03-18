@@ -87,10 +87,9 @@ router.get("/downloadFile", async (req, res) => {
 });
 
 // Delete file
-router.post("/deleteFile", async (req, res) => {
+router.post("/departments/:depAbbr/:courseId/deleteFile", async (req, res) => {
   await RouteHandler.deleteFile(req, res);
 });
-
 
 // user dashboard page
 router.get("/dashboard", (req, res) => {

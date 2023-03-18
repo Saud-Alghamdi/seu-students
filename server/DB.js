@@ -205,8 +205,22 @@ class DB {
     return isSuccess;
   }
 
+  // Delete post from DB
+  static async deletePostFromDB(s3FileName) {
+    let isSuccess = false;
+    try {
+      const con = await this.connect();
+      const stmt = "DELETE FROM posts WHERE s3FileName = ?";
+      const [rows] = await con.query(stmt, [s3FileName]);
+      isSuccess = true;
+      console.log(rows);
+    } catch (err) {
+      console.error(err);
+    }
+    return isSuccess;
+  }
+
   static async update() {}
-  static async delete() {}
 }
 
 module.exports = DB;
