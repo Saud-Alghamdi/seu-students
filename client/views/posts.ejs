@@ -16,16 +16,16 @@
       </form>
 
       <!-- if post added successfully -->
-      <% if(typeof user !== 'undefined' && typeof success !== 'undefined' && success === true) { %>
+      <% if(typeof user !== 'undefined' && typeof postSuccess !== 'undefined') { %>
       <script>
-        showToast(true, "<%= msg %>");
+        showToast(true, "<%= toastMsg %>");
       </script>
       <% } %>
 
       <!-- If user clicked on Add Post while he is not logged in -->
-      <% if(typeof err !== 'undefined') { %>
+      <% if(typeof needLogin !== 'undefined') { %>
       <script>
-        showToast(false, "<%= err %>");
+        showToast(false, "<%= toastMsg %>");
       </script>
       <% } %>
 

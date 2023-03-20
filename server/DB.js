@@ -25,43 +25,32 @@ class DB {
 
   // Sign up
   static async signup(userData) {
-    let result = { success: false, errors: [] };
     try {
       let usernameValidation = await SignupValidation.validateUsername(userData.username);
-      if (!usernameValidation.success) result.errors.push(usernameValidation.msg);
-
       let emailValidation = await SignupValidation.validateEmail(userData.email);
-      if (!emailValidation.success) result.errors.push(emailValidation.msg);
-
       let passwordValidation = await SignupValidation.validatePassword(userData.password);
-      if (!passwordValidation.success) result.errors.push(passwordValidation.msg);
-
       let genderValidation = await SignupValidation.validateGender(userData.gender);
-      if (!genderValidation.success) result.errors.push(genderValidation.msg);
-
       let usernameExists = await this.checkUsernameExists(userData.username);
-      if (usernameExists === true) result.errors.push("Username already exists");
-
       let emailExists = await this.checkEmailExists(userData.email);
-      if (emailExists === true) result.errors.push("Email already exists");
 
-      if (result.errors.length === 0) {
+      if (!usernameValidation.passed || !emailValidation.passed || !passwordValidation.passed || !genderValidation.passed || usernameExists === true || emailExists === true) {
+        throw new Error("Validation failed to pass ...");
+      } else {
         const hashedPassword = await bcrypt.hash(userData.password, 10);
         const con = await this.connect();
         const stmt = "INSERT INTO users (username, email, password, gender) VALUES (?, ?, ?, ?);";
         await con.query(stmt, [userData.username, userData.email, hashedPassword, userData.gender]);
-        result = { success: true, msg: "Sign up successful" };
+        return { isSuccess: true, msg: "Sign up success! (signup method inside DB.js)" };
       }
     } catch (err) {
-      console.log(err.message);
-      result.errors.push(err.message);
+      console.error(err.message);
+      return { isSuccess: false, msg: "Sign up failed .. (signup method inside DB.js)" };
     }
-    return result;
   }
 
   // Login
   static async login(userCreds) {
-    let result = { success: false, msg: "Something went wrong" };
+    let result = { isSuccess: false, msg: "Something went wrong" };
     try {
       const con = await this.connect();
       const stmt = "SELECT * FROM users WHERE email = ? OR username = ?;";
@@ -74,18 +63,19 @@ class DB {
       const hashedPassword = rows[0].password;
       const match = await bcrypt.compare(userCreds.password, hashedPassword);
       if (match) {
-        result = { success: true, msg: "Log in successful", user: rows[0] };
+        result = { isSuccess: true, msg: "Log in successful", user: rows[0] };
       } else {
         throw new Error("Email or password is incorrect");
       }
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
       result.msg = err.message;
     }
 
     return result;
   }
-  // Check Username Already Exists in DB (Backend Valdaition), return true or s3fileurl
+
+  // Check Username Already Exists in DB, return true or false
   static async checkUsernameExists(username) {
     let exists = true;
     try {
@@ -99,13 +89,13 @@ class DB {
         exists = false;
       }
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
     }
 
     return exists;
   }
 
-  // Check Email Already Exists in DB (Backend Validation), return true or false
+  // Check Email Already Exists in DB, return true or false
   static async checkEmailExists(email) {
     let exists = true;
     try {
@@ -119,7 +109,7 @@ class DB {
         exists = false;
       }
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
     }
 
     return exists;
@@ -143,7 +133,7 @@ class DB {
       courses = rows;
       console.log(courses);
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
     }
     return courses;
   }
@@ -181,7 +171,7 @@ class DB {
       // Return an object with the course code and posts array
       return { courseCode, posts };
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
       return null;
     }
   }
@@ -199,8 +189,8 @@ class DB {
       const [rows] = await con.query(stmt, values);
       isSuccess = true;
       console.log(rows);
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err.message);
     }
     return isSuccess;
   }
@@ -215,7 +205,7 @@ class DB {
       isSuccess = true;
       console.log(rows);
     } catch (err) {
-      console.error(err);
+      console.error(err.message);
     }
     return isSuccess;
   }

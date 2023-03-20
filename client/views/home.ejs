@@ -16,10 +16,10 @@
         سيجعلها أكثر سهولة وكفاءة، ونحن ملتزمون بتحديث نظامنا الأساسي وتحسينه باستمرار لخدمتكم بشكل أفضل. شكرًا لإختيارك لنا ونأمل لكم أفضل التجارب.
       </p>
 
-      <!-- if the user has just logged in (to show him log in successful toast)-->
-      <% if(typeof user !== 'undefined' && typeof loginSuccess !== 'undefined' && loginSuccess === true) { %>
+      <!-- if the user has just logged in -->
+      <% if(typeof justLoggedIn !== 'undefined' && typeof toastMsg !== 'undefined') { %>
       <script>
-        showToast(true, "<%= msg %>");
+        showToast(true, "<%= toastMsg %>");
       </script>
       <% } %>
 

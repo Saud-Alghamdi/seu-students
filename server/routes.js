@@ -3,26 +3,12 @@ const router = express.Router();
 const RouteHandler = require("./RouteHandler.js");
 const path = require("path");
 
-// LANG config
-function detectLanguageMiddleware(req, res, next) {
-  const supportedLanguages = ["ar", "en"];
-  const userLanguage = req.query.lang || req.headers["accept-language"].split(",")[0].slice(0, 2);
-
-  if (!supportedLanguages.includes(userLanguage)) {
-    res.status(400).send(`Unsupported language ${userLanguage}`);
-    return;
-  }
-
-  req.userLanguage = userLanguage;
-  req.translationFile = require(path.join(__dirname, "../lang/" + userLanguage + ".json"));
-  next();
-}
-router.use(detectLanguageMiddleware);
-
 // multer config for file handling
 const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+
+//--- ROUTES ---//
 
 // Home page
 router.get("/", RouteHandler.renderHomePage);
@@ -55,25 +41,34 @@ router.post("/login-process", async (req, res) => {
   await RouteHandler.loginProcess(req, res);
 });
 
+// Forgot password page
+router.get("/forgot-password", RouteHandler.renderForgotPasswordPage);
+
+// Send email for Forgot password process
+router.post("/send-email-for-forgot-password", async (req, res) => {
+  await RouteHandler.sendEmailForForgotPasswordProcess(req, res);
+});
+
+
 // Logout
 router.get("/logout", RouteHandler.logout);
 
 // Departments page
-router.get("/departments", RouteHandler.renderDepartments);
+router.get("/departments", RouteHandler.renderDepartmentsPage);
 
 // Courses page
 router.get("/departments/:depAbbr/courses", async (req, res) => {
-  await RouteHandler.renderCourses(req, res);
+  await RouteHandler.renderCoursesPage(req, res);
 });
 
 // Posts page
 router.get("/departments/:depAbbr/:courseId/posts", async (req, res) => {
-  await RouteHandler.renderPosts(req, res);
+  await RouteHandler.renderPostsPage(req, res);
 });
 
 // Add Post page
 router.get("/departments/:depAbbr/:courseId/add-post", async (req, res) => {
-  await RouteHandler.renderAddPost(req, res);
+  await RouteHandler.renderAddPostPage(req, res);
 });
 
 // Add Post Process

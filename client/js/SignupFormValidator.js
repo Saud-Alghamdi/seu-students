@@ -61,7 +61,7 @@ class SignupFormValidator {
 
     /* CHECK VALID EMAIL
     - follows standard email regex
-    - msut no exist in DB
+    - must not exist in DB
     */
     if (field.name === "email") {
       const regex = /\S+@\S+\.\S+/;
@@ -85,6 +85,17 @@ class SignupFormValidator {
         this.setStatus(field, "لا يمكن أن تحتوي كلمة المرور على مسافة.", "error");
       } else if (!lengthRegex.test(field.value)) {
         this.setStatus(field, "يجب أن يكون طول كلمة المرور 6 أحرف على الأقل.", "error");
+      } else {
+        this.setStatus(field, null, "success");
+      }
+    }
+
+    // CHECK REPEAT PASSWORD === PASSWORD
+    if (field.name === "repeat-password") {
+      const passwordField = document.getElementById("password-field");
+
+      if (field.value !== passwordField.value) {
+        this.setStatus(field, "كلمات المرور غير متطابقة.", "error");
       } else {
         this.setStatus(field, null, "success");
       }
@@ -128,7 +139,7 @@ class SignupFormValidator {
 }
 
 const form = document.querySelector(".form");
-const fields = ["username-field", "email-field", "password-field", "radio-field"];
+const fields = ["username-field", "email-field", "password-field", "repeat-password-field", "radio-field"];
 
 // Check username exists function:
 const checkUsernameExists = async (username) => {

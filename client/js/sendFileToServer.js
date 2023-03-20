@@ -64,7 +64,7 @@ form.addEventListener("submit", async (e) => {
     .then((response) => {
       if (response.status === 200) {
         const currentPathname = window.location.pathname;
-        const newPathname = currentPathname.replace("add-post", "posts?success=true");
+        const newPathname = currentPathname.replace("add-post", "posts?postSuccess=true&showToast=true");
         const redirectUrl = window.location.origin + newPathname;
         window.location.href = redirectUrl;
       }

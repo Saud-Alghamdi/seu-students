@@ -1,8 +1,7 @@
-.departments-page-container__department {
+.departments-page-container__div-box {
   background: var(--card-gradient);
-  width: 47%;
-  height: 170px;
-  max-width: 225px;
+  width: 140px;
+  height: 130px;
 }
 
 .department-link {
@@ -12,12 +11,12 @@
 }
 
 /* EFFECTS (hover, active) */
-.departments-page-container__department:hover {
+.departments-page-container__div-box:hover {
   background: var(--card-hover);
   cursor: pointer;
 }
 
-.departments-page-container__department:active {
+.departments-page-container__div-box:active {
   background: var(--card-active);
 }
 
@@ -27,18 +26,42 @@
 
 /* MEDIA QUERIES */
 
-/* 768px and above */
-@media (min-width: 768px) {
-  .departments-page-container__department {
-    width: 24%;
-    height: 160px;
+/* 576px to 767px */
+@media (min-width: 576px) and (max-width: 768px) {
+  .departments-page-container__div-box {
+    width: calc(130px * 1.25);
+    height: calc(130px * 1.15);
   }
 }
 
-/* 992px and above */
-@media (min-width: 992px) {
-  .departments-page-container__department {
-    width: 24%;
-    height: 200px;
+/* 768px to 991px */
+@media (min-width: 768px) and (max-width: 992px){
+  .departments-page-container__div-box {
+    width: calc(130px * 1.40);
+    height: calc(130px * 1.25);
+  }
+}
+
+/* 992px to 1199px */
+@media (min-width: 992px) and (max-width: 1200px){
+  .departments-page-container__div-box {
+    width: calc(130px * 1.55);
+    height: calc(130px * 1.35);
+  }
+}
+
+/* 1200px to 1399px */
+@media (min-width: 1200px) and (max-width: 1400px){
+  .departments-page-container__div-box {
+    width: calc(130px * 1.65);
+    height: calc(130px * 1.45);
+  }
+}
+
+/* 1400px and above */
+@media (min-width: 1400px){
+  .departments-page-container__div-box {
+    width: calc(130px * 1.80);
+    height: calc(130px * 1.55);
   }
 }
