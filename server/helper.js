@@ -8,10 +8,6 @@ function snakeToCamel(str) {
 // Convert DB date to a more readable formatted date
 function formatDate(dateFromDB) {
   const date = new Date(dateFromDB + " UTC");
-  const localDate = new Date(date.toLocaleString("en-US", { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
-
-  console.log(`date is: ${date}`);
-  console.log(`localDate is: ${localDate}`);
 
   const options = {
     year: "numeric",
@@ -22,7 +18,7 @@ function formatDate(dateFromDB) {
     hour12: true,
   };
 
-  return new Intl.DateTimeFormat("en-US", options).format(localDate);
+  return new Intl.DateTimeFormat("en-US", options).format(date);
 }
 
 module.exports = { snakeToCamel, formatDate };
