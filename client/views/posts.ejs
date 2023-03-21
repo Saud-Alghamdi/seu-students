@@ -6,7 +6,13 @@
   <body class="d-flex flex-column gap-4">
     <%- include('partials/nav.ejs') %>
 
-    <main class="posts-page-container__main container flex-grow-1 text-center text-light">
+    <main class="posts-page-container__main position-relative container flex-grow-1 text-center text-light">
+      <!-- Back link -->
+      <a class="text-light text-decoration-none position-absolute" id="back-link" href="#" onclick="history.back()">
+        <i class="fa-solid fa-forward"></i>
+        <span>عودة</span>
+      </a>
+
       <header>
         <h1>المنشورات لـ <%=courseCode%> :</h1>
       </header>

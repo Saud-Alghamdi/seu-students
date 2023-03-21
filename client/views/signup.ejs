@@ -6,17 +6,23 @@
   <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
 
-    <main class="signup-page-container__main container flex-grow-1 text-light my-4">
+    <main class="signup-page-container__main position-relative container flex-grow-1 text-light my-4">
+      <!-- Back link -->
+      <a class="text-light text-decoration-none position-absolute" id="back-link" href="#" onclick="history.back()">
+        <i class="fa-solid fa-forward"></i>
+        <span>عودة</span>
+      </a>
+
       <header class="text-center">
         <h1>التسجيل:</h1>
       </header>
 
       <!-- If sign up failed -->
       <% if(typeof signupSuccess !== 'undefined' && signupSuccess === false && typeof toastMsg !== 'undefined') { %>
-        <script>
-          showToast(false, "<%= toastMsg %>");
-        </script>
-        <% } %>
+      <script>
+        showToast(false, "<%= toastMsg %>");
+      </script>
+      <% } %>
 
       <form action="/signup-process" method="POST" class="form signup-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
         <div class="form__input-group mb-3">

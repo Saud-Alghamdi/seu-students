@@ -6,7 +6,13 @@
   <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
 
-    <main class="departments-page-container__main container flex-grow-1 text-center text-light my-4">
+    <main class="departments-page-container__main container position-relative flex-grow-1 text-center text-light my-4">
+      <!-- Back link -->
+      <a class="text-light text-decoration-none position-absolute" id="back-link" href="#" onclick="history.back()">
+        <i class="fa-solid fa-forward"></i>
+        <span>عودة</span>
+      </a>
+
       <header>
         <h1>التخصصات:</h1>
       </header>

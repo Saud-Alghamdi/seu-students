@@ -15,8 +15,8 @@
   width: fit-content;
 }
 
-.signup-page-container__main {
-  max-width: 500px;
+.signup-page-container__form {
+  max-width: 450px;
 }
 
 .signup-page-container__button {

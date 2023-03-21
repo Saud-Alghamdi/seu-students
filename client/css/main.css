@@ -45,3 +45,13 @@ body {
 .nav-link:hover {
   color: var(--link-hover);
 }
+
+#back-link {
+  top: 10px;
+  right: 8%;
+}
+
+#back-link:hover .fa-forward,
+#back-link:hover span {
+  color: var(--link-hover);
+}
