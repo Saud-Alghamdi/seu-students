@@ -10,6 +10,9 @@ function formatDate(dateFromDB) {
   const date = new Date(dateFromDB + " UTC");
   const localDate = new Date(date.toLocaleString("en-US", { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }));
 
+  console.log(`date is: ${date}`);
+  console.log(`localDate is: ${localDate}`);
+
   const options = {
     year: "numeric",
     month: "long",
