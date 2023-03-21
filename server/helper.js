@@ -16,6 +16,7 @@ function formatDate(dateFromDB) {
     hour: "numeric",
     minute: "numeric",
     hour12: true,
+    timeZone: "Asia/Riyadh",
   };
 
   return new Intl.DateTimeFormat("en-US", options).format(date);
