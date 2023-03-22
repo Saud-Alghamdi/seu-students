@@ -115,7 +115,7 @@ class RouteHandler {
 
   static async sendEmailForForgotPassowrdProcess(req, res) {
     const email = req.body.email;
-    // Easily done by using mailersend service, but requires DNS records for a real domain 
+    // Easily done by using mailersend service, but requires DNS records for a real domain
     // send email process here
     // after sending the random password, update the database with it
   }
@@ -142,7 +142,6 @@ class RouteHandler {
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   static renderDepartmentsPage(req, res) {
-    Promise.reject(new Error("PROMISE REJECTED TEST ERROR!"));
     if (userIsLoggedIn(req)) {
       res.render("departments", { user: req.session.user });
     } else {
