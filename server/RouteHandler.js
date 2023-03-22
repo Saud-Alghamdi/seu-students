@@ -142,6 +142,7 @@ class RouteHandler {
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   static renderDepartmentsPage(req, res) {
+    Promise.reject(new Error("PROMISE REJECTED TEST ERROR!"));
     if (userIsLoggedIn(req)) {
       res.render("departments", { user: req.session.user });
     } else {
