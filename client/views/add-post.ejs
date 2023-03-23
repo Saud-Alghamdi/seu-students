@@ -28,9 +28,15 @@
           <span class="error-message error-message-title-input"></span>
         </div>
         <div class="mb-3">
-          <label for="document" class="form-label">الملف: <small>فقط يقبل (PDF, Word, Powerpoint)</small></label>
-          <input type="file" class="file-input" accept=".pdf, .ppt, .pptx, .doc, .docx" />
-          <span class="error-message error-message-file-input"></span>
+          <label for="document" class="form-label">
+            الملف:
+            <input type="file" class="file-input" accept=".pdf, .ppt, .pptx, .doc, .docx" />
+            <span class="error-message error-message-file-input"></span>
+            <br />
+            <small>فقط يقبل (PDF, Word, Powerpoint).</small>
+            <br />
+            <small>الحد الأقصى لحجم الملف هو 50 MB.</small>
+          </label>
         </div>
         <button id="submitButton" type="submit" class="add-post-page-container__button btn btn-lg d-block mx-auto mt-4">إضافة</button>
       </form>

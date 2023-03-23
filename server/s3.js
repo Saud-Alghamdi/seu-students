@@ -1,4 +1,4 @@
-const path = require("path");
+const helper = require("./helper");
 const crypto = require("crypto");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -32,6 +32,16 @@ async function insertFileToS3(req) {
     return { err: "يجب اختيار ملف." };
   }
 
+  // File size validation
+  const fileSizeInBytes = req.file.size;
+  const fileSizeInKB = helper.bytesToKB(fileSizeInBytes);
+  const maxfileSizeInKB = 50000; // = 50 MB
+  
+  if(fileSizeInKB > maxfileSizeInKB) {
+    console.log("Error.. file Exceeded size limit");
+    return { err: "File is too big .." };
+  }
+
   // File type validation
   const allowedExtensions = [".pdf", ".doc", ".docx", ".ppt", ".pptx"];
   const filePath = req.file.originalname;
@@ -62,7 +72,7 @@ async function insertFileToS3(req) {
       fileName: fileName,
       filePath: `https://s3.amazonaws.com/${bucketName}/${fileName}`,
       fileType: extension,
-      fileSize: req.file.size,
+      fileSizeInKB: helper.bytesToKB(req.file.size),
     };
 
     console.log(post);

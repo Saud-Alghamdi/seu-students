@@ -231,7 +231,7 @@ class RouteHandler {
       s3FileName: post.fileName,
       s3FileUrl: post.filePath,
       fileType: post.fileType,
-      fileSize: post.fileSize,
+      fileSizeInKB: post.fileSizeInKB,
     };
 
     const insertPostToDBResponse = await DB.insertPostInfoToDB(postInfo);

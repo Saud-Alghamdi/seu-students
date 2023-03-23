@@ -22,4 +22,10 @@ function formatDate(dateFromDB) {
   return new Intl.DateTimeFormat("en-US", options).format(date);
 }
 
-module.exports = { snakeToCamel, formatDate };
+// Convert Bytes to KB
+function bytesToKB(bytes) {
+  const KB = bytes / 1024;
+  return parseFloat(KB.toFixed(2));
+}
+
+module.exports = { snakeToCamel, formatDate, bytesToKB };

@@ -23,10 +23,8 @@ fileInput.addEventListener("change", () => {
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const title = titleInput.value;
   const file = fileInput.files[0];
-  const filePath = fileInput.value;
-  const extension = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
+  const title = titleInput.value;
 
   if (!file) {
     fileErrorMsg.innerText = "يجب اختيار ملف.";
@@ -40,8 +38,21 @@ form.addEventListener("submit", async (e) => {
     titleErrorMsg.innerText = "";
   }
 
+  const filePath = fileInput.value;
+  const extension = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
+  const fileSizeInBytes = file.size;
+  const fileSizeInKB = fileSizeInBytes / 1024;
+  const maxfileSizeInKB = 50000; // = 50 MB
+
   if (!allowedExtensions.includes(extension)) {
     fileErrorMsg.innerText = "يجب أن يكون نوع الملف PDF أو Word أو Powerpoint.";
+    return;
+  } else {
+    fileErrorMsg.innerText = "";
+  }
+
+  if (fileSizeInKB > maxfileSizeInKB) {
+    fileErrorMsg.innerText = "يجب أن لا يتجاوز حجم الملف 50 MB.";
     return;
   } else {
     fileErrorMsg.innerText = "";
@@ -52,7 +63,9 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
-  // Start loader
+  /*
+  All conditions above passed? Okay then start the loader!
+  */
   loaderContainer.classList.remove("visually-hidden");
 
   const formData = new FormData();

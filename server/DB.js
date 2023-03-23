@@ -183,8 +183,8 @@ class DB {
       const con = await this.connect();
 
       // Insert post info to DB
-      const stmt = "INSERT INTO posts (userId, courseId, title, s3FileName, s3FileUrl, fileType, fileSize) VALUES (?, ?, ?, ?, ?, ?, ?);";
-      const values = [postInfo.userId, postInfo.courseId, postInfo.title, postInfo.s3FileName, postInfo.s3FileUrl, postInfo.fileType, postInfo.fileSize];
+      const stmt = "INSERT INTO posts (userId, courseId, title, s3FileName, s3FileUrl, fileType, fileSizeInKB) VALUES (?, ?, ?, ?, ?, ?, ?);";
+      const values = [postInfo.userId, postInfo.courseId, postInfo.title, postInfo.s3FileName, postInfo.s3FileUrl, postInfo.fileType, postInfo.fileSizeInKB];
 
       const [rows] = await con.query(stmt, values);
       isSuccess = true;
