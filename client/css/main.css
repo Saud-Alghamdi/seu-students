@@ -54,12 +54,14 @@ body {
 #back-link {
   top: 10px;
   right: 3%;
+  font-size: 18px;
 }
 
 /* Back button On screen sizes 576px and more */
 @media (min-width: 576px) {
   #back-link {
     right: 8%;
+    font-size: 34px;
   }
 }
 
