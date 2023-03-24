@@ -46,6 +46,11 @@ body {
   color: var(--link-hover);
 }
 
+.error-message {
+  font-size: 0.85rem;
+  color: #f06e6e;
+}
+
 #back-link {
   top: 10px;
   right: 3%;

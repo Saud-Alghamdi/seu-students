@@ -24,11 +24,6 @@
   color: var(--text-color-primary);
 }
 
-.error-message {
-  font-size: 0.85rem;
-  color: #ff3333;
-}
-
 /* EFFECTS */
 
 .signup-page-container__button:hover {

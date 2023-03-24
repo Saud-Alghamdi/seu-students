@@ -16,6 +16,10 @@
   color: var(--link-color);
 }
 
+.forgot-password-link {
+  color: #4287f5;
+}
+
 /* EFFECTS */
 
 .index-page-container__button:hover {
