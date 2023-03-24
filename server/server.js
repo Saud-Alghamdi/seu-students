@@ -5,7 +5,6 @@ const path = require("path");
 const routes = require("./routes");
 const crypto = require("crypto");
 const session = require("express-session");
-const multer = require("multer");
 
 // BASIC CONFIG
 app.set("view engine", "ejs");
