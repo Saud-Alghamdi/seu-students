@@ -42,7 +42,8 @@ body {
   width: 100%;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:active {
   color: var(--link-hover);
 }
 

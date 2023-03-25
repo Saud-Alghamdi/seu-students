@@ -26,7 +26,8 @@
 
 /* EFFECTS */
 
-.signup-page-container__button:hover {
+.signup-page-container__button:hover,
+.signup-page-container__button:active {
   background-color: var(--link-hover);
   color: var(--text-color-primary);
 }

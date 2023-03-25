@@ -16,9 +16,17 @@
   color: var(--text-color-primary);
 }
 
+.forgot-password-link, .signup-link {
+  color: #71bcf5;
+}
+
 /* EFFECTS */
 
-.login-page-container__button:hover {
+.login-page-container__button:hover, .login-page-container__button:active {
   background-color: var(--link-hover);
   color: var(--text-color-primary);
+}
+
+.forgot-password-link:hover, .signup-link:hover,  .forgot-password-link:active, .signup-link:active{
+  color: red;
 }

@@ -17,7 +17,8 @@
   background: #0099cc;
 }
 
-.add-post-btn:hover {
+.add-post-btn:hover,
+.add-post-btn:active {
   background-color: var(--link-hover);
   color: var(--text-color-primary);
 }

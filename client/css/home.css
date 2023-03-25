@@ -16,17 +16,19 @@
   color: var(--link-color);
 }
 
-.forgot-password-link {
-  color: #4287f5;
+.index-page-container__skip-link {
+  color: #71bcf5;
 }
 
 /* EFFECTS */
 
-.index-page-container__button:hover {
+.index-page-container__button:hover,
+.index-page-container__button:active {
   background-color: var(--link-hover);
   color: var(--text-color-primary);
 }
 
-.index-page-container__skip-link:hover {
+.index-page-container__skip-link:hover,
+.index-page-container__skip-link:active {
   color: var(--link-hover);
 }

@@ -46,7 +46,8 @@
 
 /* EFFECTS */
 
-.add-post-page-container__button:hover {
+.add-post-page-container__button:hover,
+.add-post-page-container__button:active {
   background-color: var(--link-hover);
   color: var(--text-color-primary);
 }

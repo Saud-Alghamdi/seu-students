@@ -20,7 +20,7 @@
   background: var(--card-active);
 }
 
-.department-link:hover {
+.department-link:hover, .department-link:active  {
   color: #f8f9fa; /*Bootstrap's light color*/
 }
 
