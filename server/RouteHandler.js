@@ -156,9 +156,9 @@ class RouteHandler {
     const depAbbr = req.params.depAbbr;
     const courses = await DB.getCourses(depAbbr);
     if (userIsLoggedIn(req)) {
-      res.render("courses", { courses, user: req.session.user });
+      res.render("courses", { depAbbr, courses, user: req.session.user });
     } else {
-      res.render("courses", { courses });
+      res.render("courses", { depAbbr, courses });
     }
   }
 
