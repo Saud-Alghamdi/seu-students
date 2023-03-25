@@ -13,7 +13,13 @@
       </a>
 
       <header>
-        <h1>المواد:</h1>
+        <% if(depAbbr === 'CS') { %>
+        <h1>مواد علوم الحاسب:</h1>
+        <% } else if(depAbbr === 'IT') { %>
+        <h1>مواد تقنية المعلومات:</h1>
+        <% } else if(depAbbr === 'DS') { %>
+        <h1>مواد علوم البيانات:</h1>
+        <% } %>
       </header>
 
       <div class="departments-flex-container mt-5 d-flex justify-content-center flex-wrap">
