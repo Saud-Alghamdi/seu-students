@@ -6,7 +6,7 @@
   <body class="d-flex flex-column gap-4">
     <%- include('partials/nav.ejs') %>
 
-    <main class="posts-page-container__main position-relative container flex-grow-1 text-center text-light">
+    <main class="posts-page-container__main position-relative flex-grow-1 text-center text-light">
       <!-- Back link -->
       <a class="text-light text-decoration-none position-absolute" id="back-link" href="#" onclick="history.back()">
         <i class="fa-sharp fa-solid fa-arrow-right-long"></i>
@@ -34,38 +34,36 @@
       </script>
       <% } %>
 
-      <div class="posts-flex-container container mt-4 d-flex justify-content-center justify-content-lg-between flex-wrap text-dark px-md-5">
+      <div class="posts-flex-container mt-4 d-flex justify-content-center flex-wrap text-dark px-md-5">
         <% if(typeof posts !== 'undefined') { %> <% posts.forEach(post => { %>
-
-        <div class="posts-page-container__post d-flex flex-column border-dark rounded-4 px-2 px-md-4 m-2">
-          <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <% if(post.fileType === '.pdf') { %>
-            <img src="/images/pdf-icon.svg" alt="" height="30" width="30" />
-            <% } else if (post.fileType === '.doc' || post.fileType === '.docx') { %>
-            <img src="/images/word-icon.svg" alt="" height="30" width="30" />
-            <% } else if (post.fileType === '.ppt' || post.fileType === '.pptx') { %>
-            <img src="/images/powerpoint-icon.svg" alt="" height="30" width="30" />
-            <% } %>
-
-            <h6 class="d-inline mx-2">
-              <a class="fileLink text-decoration-none fw-bold" href="/downloadFile?s3FileName=<%= post.s3FileName %>&title=<%= post.title %>" download="<%= post.s3FileName %>"><%= post.title %></a>
-            </h6>
+        <a class="fileLink text-decoration-none d-block" href="/downloadFile?s3FileName=<%= post.s3FileName %>&title=<%= post.title %>" download="<%= post.s3FileName %>">
+          <div class="posts-page-container__post d-flex flex-column border-dark rounded-4 px-3 m-2 shadow-lg">
+            <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
+              <% if(post.fileType === '.pdf') { %>
+              <img class="post-file-icon" src="/images/pdf-icon.svg" alt="" height="30" width="30" />
+              <% } else if (post.fileType === '.doc' || post.fileType === '.docx') { %>
+              <img class="post-file-icon" src="/images/word-icon.svg" alt="" height="30" width="30" />
+              <% } else if (post.fileType === '.ppt' || post.fileType === '.pptx') { %>
+              <img class="post-file-icon" src="/images/powerpoint-icon.svg" alt="" height="30" width="30" />
+              <% } %>
+              <h6 class="post-title text-end fw-bolder d-inline mx-2"><%= post.title %></h6>
+            </div>
+            <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
+              <% if (post.gender === 'male') { %>
+              <img class="post-user-icon" src="/images/male-icon.svg" alt="Placeholder" width="25" height="25" />
+              <% } else if (post.gender === 'female') { %>
+              <img class="post-user-icon" src="/images/female-icon.svg" alt="Placeholder" width="25" height="25" />
+              <% } %>
+              <small class="post-username d-inline my-0 mx-2"><%= post.username %></small>
+            </div>
+            <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
+              <small class="post-date"><%= post.createdAt %></small>
+              <!-- <form action="./deleteFile?s3FileName=post.s3FileName" method="POST">
+                    <button class="delete-file-btn btn btn-danger">Delete</button>
+                  </form> -->
+            </div>
           </div>
-          <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <% if (post.gender === 'male') { %>
-            <img src="/images/male-icon.svg" alt="Placeholder" width="30" height="30" />
-            <% } else if (post.gender === 'female') { %>
-            <img src="/images/female-icon.svg" alt="Placeholder" width="30" height="30" />
-            <% } %>
-            <p class="d-inline my-0 mx-2"><%= post.username %></p>
-          </div>
-          <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
-            <p><%= post.createdAt %></p>
-            <form action="./deleteFile?s3FileName=<%=post.s3FileName%>" method="POST">
-              <button class="delete-file-btn btn btn-danger">Delete</button>
-            </form>
-          </div>
-        </div>
+        </a>
         <% }) %> <% } %>
       </div>
     </main>
