@@ -9,7 +9,7 @@
   min-width: 200px;
 }
 
-.dashboard-page-container__button:hover {
+.dashboard-page-container__button:hover,
+.dashboard-page-container__button:active {
   background-color: var(--link-hover);
-  color: var(--text-color-primary);
 }

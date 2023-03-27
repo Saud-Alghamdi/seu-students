@@ -1,6 +1,6 @@
-// This is a signup backend validation in case client side validation got bypassed (it doesn't return any feedback to the user)
+// This is a user data backend validation in case client side validation got bypassed (it doesn't return any feedback to the user)
 
-class SignupValidation {
+class userDataValidation {
   // Username validation
   static async validateUsername(username) {
     let result = { passed: false, msg: "Invalid username format" };
@@ -26,7 +26,7 @@ class SignupValidation {
   static async validateEmail(email) {
     let result = { passed: false, msg: "Invalid email address" };
 
-    const regex = /\S+@\S+\.\S+/;
+    const regex = /^(?!.*\s)\S+@\S+\.\S+$/;
 
     if (!regex.test(email)) {
       result = { passed: false, msg: "Invalid email address format" };
@@ -67,4 +67,4 @@ class SignupValidation {
   }
 }
 
-module.exports = SignupValidation;
+module.exports = userDataValidation;

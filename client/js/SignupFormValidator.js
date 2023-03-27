@@ -64,7 +64,7 @@ class SignupFormValidator {
     - must not exist in DB
     */
     if (field.name === "email") {
-      const regex = /\S+@\S+\.\S+/;
+      const regex = /^(?!.*\s)\S+@\S+\.\S+$/;
       if (!regex.test(field.value)) {
         this.setStatus(field, "البريد الإلكتروني خاطئ.", "error");
       } else if ((await checkEmailExists(field.value)) === true) {

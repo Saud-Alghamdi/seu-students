@@ -2,15 +2,6 @@
   color: var(--text-color-primary);
 }
 
-.server-side-error-div {
-  width: fit-content;
-  background-color: antiquewhite;
-}
-
-.server-side-error-msg {
-  color: #f54242;
-}
-
 .form-check {
   width: fit-content;
 }

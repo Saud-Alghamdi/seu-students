@@ -291,9 +291,64 @@ class RouteHandler {
       res.redirect("/login?logoutSuccess=true&showToast=true");
     });
   }
-}
 
-//|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+  static renderDashboardPage(req, res) {
+    if (userIsLoggedIn(req)) {
+      res.render("dashboard", { user: req.session.user });
+    } else {
+      res.send("<h3>Unauthorized access .. You must log in first</h3>");
+    }
+  }
+
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+  static renderMyAccountPage(req, res) {
+    if (req.query.updateSuccess === "true") {
+      res.render("my-account", {
+        user: req.session.user,
+        updateSuccess: true,
+        toastMsg: "تم تحديث معلوماتك بنجاح!",
+      });
+    } else if (!userIsLoggedIn(req)) {
+      res.send("<h3>Unauthorized access .. You must log in first</h3>");
+    } else {
+      res.render("my-account", { user: req.session.user });
+    }
+  }
+
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+  static async updateUserDataProcess(req, res) {
+    const userData = req.body;
+    userData.id = req.session.user.id;
+    const result = await DB.updateUserData(userData);
+    if (result.isSuccess === true) {
+      if (result.newUsername) req.session.user.username = result.newUsername;
+      if (result.newEmail) req.session.user.email = result.newEmail;
+      res.json({ isSuccess: true });
+    } else {
+      res.json({ isSuccess: false });
+    }
+  }
+
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+  static renderMyPostsPage(req, res) {
+    if (userIsLoggedIn(req)) {
+      res.render("my-posts", { user: req.session.user });
+    } else {
+      res.send("<h3>Unauthorized access .. You must log in first</h3>");
+    }
+  }
+
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+}
 
 module.exports = RouteHandler;

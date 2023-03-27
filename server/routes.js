@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const RouteHandler = require("./RouteHandler.js");
-const path = require("path");
 
 // multer config for file handling
 const multer = require("multer");
@@ -49,7 +48,6 @@ router.post("/send-email-for-forgot-password", async (req, res) => {
   await RouteHandler.sendEmailForForgotPasswordProcess(req, res);
 });
 
-
 // Logout
 router.get("/logout", RouteHandler.logout);
 
@@ -86,9 +84,18 @@ router.post("/departments/:depAbbr/:courseId/deleteFile", async (req, res) => {
   await RouteHandler.deleteFile(req, res);
 });
 
-// user dashboard page
-router.get("/dashboard", (req, res) => {
-  res.render("dashboard");
-});
+// User dashboard page
+router.get("/dashboard", RouteHandler.renderDashboardPage);
+
+// User account page
+router.get("/dashboard/my-account", RouteHandler.renderMyAccountPage);
+
+// Update user data process
+router.post("/dashboard/updateUserData", async (req, res) => {
+  await RouteHandler.updateUserDataProcess(req, res)
+})
+
+// User posts page
+router.get("/dashboard/my-posts", RouteHandler.renderMyPostsPage);
 
 module.exports = router;

@@ -1,3 +1,17 @@
+.my-account-page-container__main {
+  max-width: 1000px;
+}
+
+.my-account-form-input {
+  width: 220px;
+  height: 30px;
+}
+
+.my-account-page-container__main .update-btn {
+  background-color: var(--btn-bg-color);
+  color: var(--text-color-primary);
+}
+
 #loader-container {
   position: absolute;
   height: 100%;
@@ -27,23 +41,14 @@
   }
 }
 
-.add-post-page-container__form {
-  max-width: 400px;
-}
-
-.add-post-page-container__button {
-  background-color: var(--btn-bg-color);
-  color: var(--text-color-primary);
-}
-
-.file-input {
-  width: 100%;
-}
-
 /* EFFECTS */
 
-.add-post-page-container__button:hover,
-.add-post-page-container__button:active {
+.my-account-form:active {
+  border: none;
+  box-shadow: none;
+}
+
+.my-account-page-container__main button:hover,
+.my-account-page-container__main button:active {
   background-color: var(--link-hover);
-  color: var(--text-color-primary);
 }

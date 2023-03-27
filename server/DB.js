@@ -2,7 +2,7 @@ const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
-const SignupValidation = require("./SignupValidation");
+const userDataValidation = require("./UserDataValidation");
 
 class DB {
   // Connect
@@ -26,10 +26,10 @@ class DB {
   // Sign up
   static async signup(userData) {
     try {
-      let usernameValidation = await SignupValidation.validateUsername(userData.username);
-      let emailValidation = await SignupValidation.validateEmail(userData.email);
-      let passwordValidation = await SignupValidation.validatePassword(userData.password);
-      let genderValidation = await SignupValidation.validateGender(userData.gender);
+      let usernameValidation = await userDataValidation.validateUsername(userData.username);
+      let emailValidation = await userDataValidation.validateEmail(userData.email);
+      let passwordValidation = await userDataValidation.validatePassword(userData.password);
+      let genderValidation = await userDataValidation.validateGender(userData.gender);
       let usernameExists = await this.checkUsernameExists(userData.username);
       let emailExists = await this.checkEmailExists(userData.email);
 
@@ -69,7 +69,7 @@ class DB {
       }
     } catch (err) {
       console.error(err.message);
-      result.msg = err.message;
+      result.msg = err;
     }
 
     return result;
@@ -210,7 +210,42 @@ class DB {
     return isSuccess;
   }
 
-  static async update() {}
+  // Update user account data (Builds the query depending on the properties given dynamically)
+  static async updateUserData(userData) {
+    let result = {};
+    try {
+      const con = await this.connect();
+      let stmt = `UPDATE users SET `;
+      let values = [];
+
+      if (userData.username) {
+        stmt += `username = ?, `;
+        values.push(userData.username);
+        result.newUsername = userData.username;
+      }
+
+      if (userData.email) {
+        stmt += `email = ?, `;
+        values.push(userData.email);
+        result.newEmail = userData.email;
+      }
+
+      // Remove the trailing comma and space from the stmt string
+      stmt = stmt.slice(0, -2);
+
+      // Add the WHERE clause to identify the user to update
+      stmt += ` WHERE id = ?`;
+      values.push(userData.id);
+
+      const [rows] = await con.query(stmt, values);
+      console.log(rows);
+      result.isSuccess = true;
+    } catch (err) {
+      console.error(err.message);
+      result.isSuccess = false;
+    }
+    return result;
+  }
 }
 
 module.exports = DB;
