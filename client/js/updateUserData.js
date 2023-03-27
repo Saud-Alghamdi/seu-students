@@ -56,6 +56,7 @@ updateEmailButton.addEventListener("click", async (e) => {
 
   const cancelButton = document.querySelector(".new-email-cancel-btn");
   cancelButton.addEventListener("click", (e) => {
+    e.preventDefault();
     updateEmailForm.classList.add("visually-hidden");
   });
 
