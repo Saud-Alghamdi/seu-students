@@ -18,7 +18,7 @@
     </script>
     <% } %>
 
-    <main class="my-account-page-container__main position-relative container text-light flex-grow-1">
+    <main class="my-account-page-container__main container position-relative text-light flex-grow-1">
       <!-- Back link -->
       <a class="text-light text-decoration-none position-absolute" id="back-link" href="#" onclick="history.back()">
         <i class="fa-sharp fa-solid fa-arrow-right-long"></i>
@@ -31,32 +31,32 @@
       <section class="mt-5">
         <!-- update Username -->
         <div class="username-data-wrapper mt-4">
-          <h5 class="username-label d-block">اسم المستخدم:</h5>
-          <p class="current-username d-inline-block"><%= user.username %></p>
-          <button class="update-btn update-username-btn btn btn-sm mx-2">تغيير</button>
+          <h4 class="username-label d-block">اسم المستخدم:</h4>
+          <p class="current-username d-inline-block fs-5"><%= user.username %></p>
+          <button class="update-btn update-username-btn btn mx-2">تغيير</button>
 
           <!-- Update username secret form -->
           <form class="my-account-form new-username-form mb-5 visually-hidden">
             <label class="d-block" for="">اسم المستخدم الجديد:</label>
             <input class="my-account-form-input new-username-input form-control d-inline mt-2" type="text" name="username" id="" />
-            <button class="save-btn new-username-save-btn btn btn-primary btn-sm">حفظ</button>
-            <button class="cancel-btn new-username-cancel-btn btn btn-warning btn-sm border-0">إلغاء</button>
+            <button class="save-btn new-username-save-btn btn btn-primary">حفظ</button>
+            <button class="cancel-btn new-username-cancel-btn btn btn-warning border-0">إلغاء</button>
             <span class="text-warning d-block error-message username-error-message fw-bold"></span>
           </form>
         </div>
 
         <!-- update email -->
         <div class="email-data-wrapper mt-4">
-          <h5 class="email-label d-block">البريد الإلكتروني:</h5>
-          <p class="current-email d-inline-block"><%= user.email %></p>
-          <button class="update-btn update-email-btn btn btn-sm mx-2">تغيير</button>
+          <h4 class="email-label d-block">البريد الإلكتروني:</h4>
+          <p class="current-email d-inline-block fs-5"><%= user.email %></p>
+          <button class="update-btn update-email-btn btn mx-2">تغيير</button>
 
           <!-- Update email secret form -->
           <form class="my-account-form new-email-form mb-5 visually-hidden">
             <label class="d-block" for="">البريد الإلكتروني الجديد:</label>
             <input class="my-account-form-input new-email-input form-control d-inline mt-2" type="text" name="email" id="" />
-            <button class="save-btn new-email-save-btn btn btn-primary btn-sm">حفظ</button>
-            <button class="cancel-btn new-email-cancel-btn btn btn-warning btn-sm border-0">إلغاء</button>
+            <button class="save-btn new-email-save-btn btn btn-primary">حفظ</button>
+            <button class="cancel-btn new-email-cancel-btn btn btn-warning border-0">إلغاء</button>
             <span class="text-warning d-block error-message email-error-message fw-bold"></span>
           </form>
         </div>

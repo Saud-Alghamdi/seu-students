@@ -92,10 +92,12 @@ router.get("/dashboard/my-account", RouteHandler.renderMyAccountPage);
 
 // Update user data process
 router.post("/dashboard/updateUserData", async (req, res) => {
-  await RouteHandler.updateUserDataProcess(req, res)
-})
+  await RouteHandler.updateUserDataProcess(req, res);
+});
 
 // User posts page
-router.get("/dashboard/my-posts", RouteHandler.renderMyPostsPage);
+router.get("/dashboard/my-posts", async (req, res) => {
+  await RouteHandler.renderMyPostsPage(req, res);
+});
 
 module.exports = router;

@@ -339,10 +339,28 @@ class RouteHandler {
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-  static renderMyPostsPage(req, res) {
-    if (userIsLoggedIn(req)) {
-      res.render("my-posts", { user: req.session.user });
-    } else {
+  static async renderMyPostsPage(req, res) {
+    try {
+      const userId = req.session.user.id;
+      const posts = await DB.getPostsOfUser(userId);
+
+      // Logged in + there are posts
+      if (userIsLoggedIn(req) && posts.length > 0) {
+        posts.forEach((post) => {
+          post.createdAt = helper.formatDate(post.createdAt);
+        });
+        res.render("my-posts", { user: req.session.user, areTherePosts: true, posts });
+      }
+      // Logged in + there are NO posts
+      else if (userIsLoggedIn(req) && posts.length === 0) {
+        res.render("my-posts", { user: req.session.user, areTherePosts: false, msg: "لم تقم بإضافة منشورات من قبل." });
+      }
+      // Other
+      else {
+        res.send("<h3>Unauthorized access .. You must log in first</h3>");
+      }
+    } catch (err) {
+      console.error(err.message);
       res.send("<h3>Unauthorized access .. You must log in first</h3>");
     }
   }

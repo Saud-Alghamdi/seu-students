@@ -6,7 +6,7 @@
   <body class="d-flex flex-column gap-4">
     <%- include('partials/nav.ejs') %>
 
-    <main class="dashboard-page-container__main position-relative container text-center text-light flex-grow-1">
+    <main class="dashboard-page-container__main position-relative text-center text-light flex-grow-1">
       <!-- Back link -->
       <a class="text-light text-decoration-none position-absolute" id="back-link" href="#" onclick="history.back()">
         <i class="fa-sharp fa-solid fa-arrow-right-long"></i>
@@ -16,12 +16,42 @@
         <h1>منشوراتي:</h1>
       </header>
 
-      <form action="/my-account" class="mt-5">
-        <button class="dashboard-page-container__button btn btn-lg">معلومات حسابي</button>
-      </form>
-      <form action="/my-posts">
-        <button class="dashboard-page-container__button btn btn-lg">منشوراتي</button>
-      </form>
+      <!-- If there are no posts -->
+      <% if(typeof areTherePosts !== 'undefined' && areTherePosts === false) { %>
+      <h6 class="text-center mt-5"><%= msg %></h6>
+      <% } %>
+
+      <div class="myposts-flex-container mt-4 d-flex justify-content-center flex-wrap text-dark px-md-5">
+        <% if(typeof posts !== 'undefined') { %> <% posts.forEach(post => { %>
+        <div class="myposts-page-container__post d-flex flex-column border-dark rounded-4 px-3 m-2 shadow-lg">
+          <div class="myposts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
+            <% if(post.fileType === '.pdf') { %>
+            <img class="post-file-icon" src="/images/pdf-icon.svg" alt="" height="30" width="30" />
+            <% } else if (post.fileType === '.doc' || post.fileType === '.docx') { %>
+            <img class="post-file-icon" src="/images/word-icon.svg" alt="" height="30" width="30" />
+            <% } else if (post.fileType === '.ppt' || post.fileType === '.pptx') { %>
+            <img class="post-file-icon" src="/images/powerpoint-icon.svg" alt="" height="30" width="30" />
+            <% } %>
+            <h6 class="post-title text-end fw-bolder d-inline mx-2"><%= post.title %></h6>
+          </div>
+          <div class="myposts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
+            <% if (post.gender === 'male') { %>
+            <img class="post-user-icon" src="/images/male-icon.svg" alt="Placeholder" width="25" height="25" />
+            <% } else if (post.gender === 'female') { %>
+            <img class="post-user-icon" src="/images/female-icon.svg" alt="Placeholder" width="25" height="25" />
+            <% } %>
+            <small class="post-username d-inline my-0 mx-2"><%= post.username %></small>
+          </div>
+          <div class="myposts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
+            <small class="post-date"><%= post.createdAt %></small>
+            <button class="delete-post-btn btn btn-danger">حذف</button>
+            <!-- <form action="./deleteFile?s3FileName=post.s3FileName" method="POST">
+                    <button class="delete-file-btn btn btn-danger">Delete</button>
+                  </form> -->
+          </div>
+        </div>
+        <% }) %> <% } %>
+      </div>
     </main>
 
     <%- include('partials/footer.ejs') %>

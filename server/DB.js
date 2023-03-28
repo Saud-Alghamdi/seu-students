@@ -246,6 +246,34 @@ class DB {
     }
     return result;
   }
+
+  static async getPostsOfUser(userId) {
+    try {
+      const con = await this.connect();
+      const stmt = `
+      SELECT
+        posts.title,
+        posts.fileType,
+        posts.s3FileName,
+        users.username,
+        users.gender,
+        posts.createdAt
+      FROM
+        posts
+        JOIN users ON posts.userId = users.id
+      WHERE
+        posts.userId = ?
+      ORDER BY
+        posts.createdAt DESC;
+    `;
+      const [postsRows] = await con.query(stmt, [userId]);
+      const posts = postsRows;
+      return posts;
+    } catch (err) {
+      console.error(err.message);
+      return null;
+    }
+  }
 }
 
 module.exports = DB;
