@@ -330,6 +330,7 @@ class RouteHandler {
     if (result.isSuccess === true) {
       if (result.newUsername) req.session.user.username = result.newUsername;
       if (result.newEmail) req.session.user.email = result.newEmail;
+      if (result.newPassword) req.session.user.password = result.newPassword;
       res.json({ isSuccess: true });
     } else {
       res.json({ isSuccess: false });

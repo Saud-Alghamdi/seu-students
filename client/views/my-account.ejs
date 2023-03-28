@@ -35,7 +35,7 @@
           <p class="current-username d-inline-block fs-5"><%= user.username %></p>
           <button class="update-btn update-username-btn btn mx-2">تغيير</button>
 
-          <!-- Update username secret form -->
+          <!-- Update username hidden form -->
           <form class="my-account-form new-username-form mb-5 visually-hidden">
             <label class="d-block" for="">اسم المستخدم الجديد:</label>
             <input class="my-account-form-input new-username-input form-control d-inline mt-2" type="text" name="username" id="" />
@@ -51,13 +51,31 @@
           <p class="current-email d-inline-block fs-5"><%= user.email %></p>
           <button class="update-btn update-email-btn btn mx-2">تغيير</button>
 
-          <!-- Update email secret form -->
+          <!-- Update email hidden form -->
           <form class="my-account-form new-email-form mb-5 visually-hidden">
             <label class="d-block" for="">البريد الإلكتروني الجديد:</label>
-            <input class="my-account-form-input new-email-input form-control d-inline mt-2" type="text" name="email" id="" />
+            <input class="my-account-form-input new-email-input form-control d-inline mt-2" type="email" name="email" id="" />
             <button class="save-btn new-email-save-btn btn btn-primary">حفظ</button>
             <button class="cancel-btn new-email-cancel-btn btn btn-warning border-0">إلغاء</button>
             <span class="text-warning d-block error-message email-error-message fw-bold"></span>
+          </form>
+        </div>
+
+        <!-- update password -->
+        <div class="password-data-wrapper mt-4">
+          <h4 class="password-label d-block">كلمة المرور:</h4>
+          <p class="current-password d-inline-block fs-5">•••••••••••••</p>
+          <button class="update-btn update-password-btn btn mx-2">تغيير</button>
+
+          <!-- Update password hidden form -->
+          <form class="my-account-form new-password-form mb-5 visually-hidden">
+            <label class="d-block" for="">كلمة المرور الجديدة:</label>
+            <input class="my-account-form-input new-password-input form-control d-inline mt-2" type="password" name="password" id="" />
+            <label class="d-block mt-2" for="">إعادة كتابة كلمة المرور الجديدة:</label>
+            <input class="d-block my-account-form-input repeat-new-password-input form-control d-inline mt-2" type="password" name="repeat-password" id="" />
+            <span class="text-warning d-block error-message password-error-message fw-bold"></span>
+            <button class="mt-2 save-btn new-password-save-btn btn btn-primary">حفظ</button>
+            <button class="mt-2 cancel-btn new-password-cancel-btn btn btn-warning border-0">إلغاء</button>
           </form>
         </div>
       </section>

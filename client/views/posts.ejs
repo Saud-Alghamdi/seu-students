@@ -35,7 +35,7 @@
       <% } %>
 
       <div class="posts-flex-container mt-4 d-flex justify-content-center flex-wrap text-dark px-md-5">
-        <% if(typeof posts !== 'undefined') { %> <% posts.forEach(post => { %>
+        <% if(typeof posts !== 'undefined' && posts.length > 0) { %> <% posts.forEach(post => { %>
         <a class="fileLink text-decoration-none d-block" href="/downloadFile?s3FileName=<%= post.s3FileName %>&title=<%= post.title %>" download="<%= post.s3FileName %>">
           <div class="posts-page-container__post d-flex flex-column border-dark rounded-4 px-3 m-2 shadow-lg">
             <div class="posts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
@@ -64,7 +64,9 @@
             </div>
           </div>
         </a>
-        <% }) %> <% } %>
+        <% })} else { %>
+        <h6 class="text-light">لا توجد منشورات حاليًا لهذه المادة.</h6>
+        <% } %>
       </div>
     </main>
 

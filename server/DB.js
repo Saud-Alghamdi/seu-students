@@ -230,6 +230,13 @@ class DB {
         result.newEmail = userData.email;
       }
 
+      if (userData.password) {
+        stmt += `password = ?, `;
+        userData.password = await bcrypt.hash(userData.password, 10);
+        values.push(userData.password);
+        result.newPassword = userData.password;
+      }
+
       // Remove the trailing comma and space from the stmt string
       stmt = stmt.slice(0, -2);
 

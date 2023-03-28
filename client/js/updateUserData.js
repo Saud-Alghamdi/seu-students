@@ -13,6 +13,12 @@ const currentEmail = document.querySelector(".current-email");
 const updateEmailButton = document.querySelector(".update-email-btn");
 const updateEmailForm = document.querySelector(".new-email-form");
 
+// Password selectors
+const passwordLabel = document.querySelector(".password-data-wrapper");
+const currentPassword = document.querySelector(".current-password");
+const updatePasswordButton = document.querySelector(".update-password-btn");
+const updatePasswordForm = document.querySelector(".new-password-form");
+
 // update username process
 updateUsernameButton.addEventListener("click", async (e) => {
   updateUsernameForm.classList.remove("visually-hidden");
@@ -87,6 +93,44 @@ updateEmailButton.addEventListener("click", async (e) => {
   });
 });
 
+// update password process
+updatePasswordButton.addEventListener("click", async (e) => {
+  updatePasswordForm.classList.remove("visually-hidden");
+
+  const cancelButton = document.querySelector(".new-password-cancel-btn");
+  cancelButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    updatePasswordForm.classList.add("visually-hidden");
+  });
+
+  const saveButton = document.querySelector(".new-password-save-btn");
+  saveButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    loaderContainer.classList.remove("visually-hidden");
+    const newPassword = document.querySelector(".new-password-input").value;
+    const repeatNewPassword = document.querySelector(".repeat-new-password-input").value;
+    const validator = validatePassword(newPassword, repeatNewPassword);
+
+    if (validator.passed === true) {
+      await updateUserDataInServer({ password: newPassword })
+        .then((res) => {
+          console.log(res);
+          loaderContainer.classList.add("visually-hidden");
+          window.location.href = "/dashboard/my-account?updateSuccess=true";
+        })
+        .catch((err) => {
+          console.log(err);
+          loaderContainer.classList.add("visually-hidden");
+          window.location.href = "/dashboard/my-account?updateSuccess=false";
+        });
+    } else {
+      const error = document.querySelector(".password-error-message");
+      error.innerText = validator.errorMsg;
+      loaderContainer.classList.add("visually-hidden");
+    }
+  });
+});
+
 //-----Validators-----// 👇
 
 async function validateUsername(username) {
@@ -134,6 +178,21 @@ async function validateEmail(email) {
     return { passed: false, errorMsg: "البريد الإلكتروني خاطئ." };
   } else if ((await checkEmailExists(email)) === true) {
     return { passed: false, errorMsg: "البريد الإلكتروني موجود مسبقًا." };
+  } else {
+    return { passed: true };
+  }
+}
+
+function validatePassword(password, repeatPassword) {
+  const containsSpaceRegex = /\s/;
+  const lengthRegex = /^.{6,}$/;
+
+  if (password !== repeatPassword) {
+    return { passed: false, errorMsg: "كلمات المرور غير متطابقة." };
+  } else if (containsSpaceRegex.test(password)) {
+    return { passed: false, errorMsg: "لا يمكن أن تحتوي كلمة المرور على مسافة." };
+  } else if (!lengthRegex.test(password)) {
+    return { passed: false, errorMsg: "يجب أن يكون طول كلمة المرور 6 أحرف على الأقل." };
   } else {
     return { passed: true };
   }
