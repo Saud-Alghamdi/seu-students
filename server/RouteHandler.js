@@ -107,7 +107,7 @@ class RouteHandler {
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   static async renderForgotPasswordPage(req, res) {
-    res.render("forgot-password");
+    res.render("reset-password");
   }
 
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

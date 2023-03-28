@@ -41,10 +41,10 @@ router.post("/login-process", async (req, res) => {
 });
 
 // Forgot password page
-router.get("/forgot-password", RouteHandler.renderForgotPasswordPage);
+router.get("/reset-password", RouteHandler.renderForgotPasswordPage);
 
 // Send email for Forgot password process
-router.post("/send-email-for-forgot-password", async (req, res) => {
+router.post("/send-email-for-reset-password", async (req, res) => {
   await RouteHandler.sendEmailForForgotPasswordProcess(req, res);
 });
 
