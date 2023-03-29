@@ -79,11 +79,6 @@ router.get("/downloadFile", async (req, res) => {
   await RouteHandler.downloadFile(req, res);
 });
 
-// Delete file
-router.post("/departments/:depAbbr/:courseId/deleteFile", async (req, res) => {
-  await RouteHandler.deleteFile(req, res);
-});
-
 // User dashboard page
 router.get("/dashboard", RouteHandler.renderDashboardPage);
 
@@ -98,6 +93,11 @@ router.post("/dashboard/updateUserData", async (req, res) => {
 // User posts page
 router.get("/dashboard/my-posts", async (req, res) => {
   await RouteHandler.renderMyPostsPage(req, res);
+});
+
+// Delete Post
+router.post("/dashboard/my-posts/deletePost", async (req, res) => {
+  await RouteHandler.deletePost(req, res);
 });
 
 module.exports = router;

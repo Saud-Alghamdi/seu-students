@@ -14,7 +14,7 @@
 }
 
 .delete-post-btn {
-  margin-right: auto;
+  float: left;
 }
 
 /* MEDIA QUERIES */

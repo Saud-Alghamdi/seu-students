@@ -36,8 +36,8 @@ async function insertFileToS3(req) {
   const fileSizeInBytes = req.file.size;
   const fileSizeInKB = helper.bytesToKB(fileSizeInBytes);
   const maxfileSizeInKB = 50000; // = 50 MB
-  
-  if(fileSizeInKB > maxfileSizeInKB) {
+
+  if (fileSizeInKB > maxfileSizeInKB) {
     console.log("Error.. file Exceeded size limit");
     return { err: "File is too big .." };
   }
@@ -120,11 +120,14 @@ async function getFileFromS3(req) {
 async function deleteFileFromS3(req) {
   const params = {
     Bucket: bucketName,
-    Key: req.query.s3FileName,
+    Key: req.body.s3FileName,
   };
 
   const command = new DeleteObjectCommand(params);
   const result = await s3.send(command);
+
+  console.log("HERE IS THE RESULT OF DELETE FILE IN DELTEFILEFROMS3():");
+  console.log(result);
 
   if (result.$metadata.httpStatusCode === 204) {
     // AWS S3 uses 204 status code for successful file delete

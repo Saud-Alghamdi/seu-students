@@ -264,25 +264,6 @@ class RouteHandler {
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-  static async deleteFile(req, res) {
-    const deleteFileFromS3Response = await deleteFileFromS3(req);
-    const s3FileName = req.query.s3FileName;
-
-    if (deleteFileFromS3Response === true) {
-      await DB.deletePostFromDB(s3FileName);
-      console.log("post deleted successfully!");
-      res.redirect(`./posts`);
-      // trigger toast success
-    } else {
-      console.log("failed to delete post ...");
-      res.redirect("./posts");
-      // trigger toast fail
-    }
-  }
-
-  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-
   static logout(req, res) {
     req.session.destroy((err) => {
       if (err) {
@@ -344,12 +325,32 @@ class RouteHandler {
     try {
       const userId = req.session.user.id;
       const posts = await DB.getPostsOfUser(userId);
+      posts.forEach((post) => {
+        post.createdAt = helper.formatDate(post.createdAt);
+      });
 
-      // Logged in + there are posts
-      if (userIsLoggedIn(req) && posts.length > 0) {
-        posts.forEach((post) => {
-          post.createdAt = helper.formatDate(post.createdAt);
+      // Logged in + there are posts + delete post successful
+      if (userIsLoggedIn(req) && posts.length > 0 && req.query.deletePostSuccess === "true") {
+        res.render("my-posts", {
+          user: req.session.user,
+          areTherePosts: true,
+          posts,
+          deletePostSuccess: true,
+          msg: "تم حذف المنشور بنجاح!",
         });
+      }
+      // Logged in + there are posts + delete post failed
+      else if (userIsLoggedIn(req) && posts.length > 0 && req.query.deletePostSuccess === "false") {
+        res.render("my-posts", {
+          user: req.session.user,
+          areTherePosts: true,
+          posts,
+          deletePostSuccess: false,
+          msg: "فشل حذف المنشور ..",
+        });
+      }
+      // Logged in + there are posts
+      else if (userIsLoggedIn(req) && posts.length > 0) {
         res.render("my-posts", { user: req.session.user, areTherePosts: true, posts });
       }
       // Logged in + there are NO posts
@@ -368,6 +369,23 @@ class RouteHandler {
 
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+  static async deletePost(req, res) {
+    console.log("REQ.BODY IS:");
+    console.log(req.body);
+
+    const deleteFileFromS3Response = await deleteFileFromS3(req);
+    const s3FileName = req.body.s3FileName;
+
+    if (deleteFileFromS3Response === true) {
+      await DB.deletePostFromDB(s3FileName);
+      console.log("post deleted successfully!");
+      res.redirect(`/dashboard/my-posts?deletePostSuccess=true`);
+    } else {
+      console.log("failed to delete post ...");
+      res.redirect("/dashboard/my-postsdeletePostSuccess=false");
+    }
+  }
 }
 
 module.exports = RouteHandler;

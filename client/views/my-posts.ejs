@@ -16,11 +16,26 @@
         <h1>منشوراتي:</h1>
       </header>
 
+      <!-- Delete post success -->
+      <% if(typeof deletePostSuccess !== 'undefined' && deletePostSuccess === true) { %>
+      <script>
+        showToast(true, "<%= msg %>");
+      </script>
+      <% } %>
+
+      <!-- Delete post failed -->
+      <% if(typeof deletePostSuccess !== 'undefined' && deletePostSuccess === false) { %>
+      <script>
+        showToast(false, "<%= msg %>");
+      </script>
+      <% } %>
+
       <!-- If there are no posts -->
       <% if(typeof areTherePosts !== 'undefined' && areTherePosts === false) { %>
       <h6 class="text-center mt-5"><%= msg %></h6>
       <% } %>
 
+      <!-- if there are posts -->
       <div class="myposts-flex-container mt-4 d-flex justify-content-center flex-wrap text-dark px-md-5">
         <% if(typeof posts !== 'undefined') { %> <% posts.forEach(post => { %>
         <div class="myposts-page-container__post d-flex flex-column border-dark rounded-4 px-3 m-2 shadow-lg">
@@ -42,12 +57,12 @@
             <% } %>
             <small class="post-username d-inline my-0 mx-2"><%= post.username %></small>
           </div>
-          <div class="myposts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
+          <div class="myposts-page-container__post-column d-flex justify-content-between align-items-center flex-grow-1">
             <small class="post-date"><%= post.createdAt %></small>
-            <button class="delete-post-btn btn btn-danger">حذف</button>
-            <!-- <form action="./deleteFile?s3FileName=post.s3FileName" method="POST">
-                    <button class="delete-file-btn btn btn-danger">Delete</button>
-                  </form> -->
+            <form class="m-0" action="/dashboard/my-posts/deletePost" method="POST">
+              <input type="hidden" name="s3FileName" value="<%=post.s3FileName%>" />
+              <button class="delete-post-btn btn btn-danger">حذف</button>
+            </form>
           </div>
         </div>
         <% }) %> <% } %>
