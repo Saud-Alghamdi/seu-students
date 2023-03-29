@@ -2,8 +2,8 @@
   color: var(--text-color-primary);
 }
 
-.index-page-container__main {
-  max-width: 1000px;
+.index-page-container__header {
+  max-width: 900px;
 }
 
 .index-page-container__button {
