@@ -252,9 +252,15 @@ class RouteHandler {
 
     if (getFileFromS3Response.success) {
       const encodedTitle = encodeURIComponent(req.query.title);
+
       res.setHeader("Content-Disposition", `attachment; filename="${encodedTitle}${path.extname(req.query.s3FileName)}"`);
+
       res.setHeader("Content-type", getFileFromS3Response.file.ContentType);
+
       getFileFromS3Response.file.Body.pipe(res);
+
+      await DB.incrementFileDownloadCount(req.query.s3FileName);
+      console.log("File downloaded successfully!");
     } else {
       console.log("Error downloading file", err);
       res.status(500).send({ err: "Error downloading file." });

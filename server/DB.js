@@ -23,6 +23,9 @@ class DB {
     return con;
   }
 
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
+
   // Sign up
   static async signup(userData) {
     let con;
@@ -53,6 +56,9 @@ class DB {
       }
     }
   }
+
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
 
   // Login
   static async login(userCreds) {
@@ -87,6 +93,9 @@ class DB {
     return result;
   }
 
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
+
   // Check Username Already Exists in DB, return true or false
   static async checkUsernameExists(username) {
     let exists = true;
@@ -113,6 +122,9 @@ class DB {
     return exists;
   }
 
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
+
   // Check Email Already Exists in DB, return true or false
   static async checkEmailExists(email) {
     let exists = true;
@@ -138,6 +150,9 @@ class DB {
 
     return exists;
   }
+
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
 
   // Returns courses
   static async getCourses(depAbbr) {
@@ -167,6 +182,9 @@ class DB {
     }
     return courses;
   }
+
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
 
   // Return posts
   static async getPosts(courseId) {
@@ -212,7 +230,10 @@ class DB {
     }
   }
 
-  // Insert Post to DB
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
+
+  // Insert Post to DB and then grab the post ID and insert it to fileDownloads
   static async insertPostInfoToDB(postInfo) {
     let isSuccess = false;
     let con;
@@ -220,10 +241,17 @@ class DB {
       con = await this.connect();
 
       // Insert post info to DB
-      const stmt = "INSERT INTO posts (userId, courseId, title, s3FileName, s3FileUrl, fileType, fileSizeInKB) VALUES (?, ?, ?, ?, ?, ?, ?);";
+      const stmt1 = "INSERT INTO posts (userId, courseId, title, s3FileName, s3FileUrl, fileType, fileSizeInKB) VALUES (?, ?, ?, ?, ?, ?, ?);";
       const values = [postInfo.userId, postInfo.courseId, postInfo.title, postInfo.s3FileName, postInfo.s3FileUrl, postInfo.fileType, postInfo.fileSizeInKB];
 
-      const [rows] = await con.query(stmt, values);
+      const [rows] = await con.query(stmt1, values);
+      const postId = rows.insertId; // Get the ID of the inserted post
+
+      // Insert post ID and default download count to fileDownloads table
+      const stmt2 = "INSERT INTO fileDownloads (postId, downloadCount) VALUES (?, ?);";
+      const fileValues = [postId, 0];
+      await con.query(stmt2, fileValues);
+
       isSuccess = true;
       console.log(rows);
     } catch (err) {
@@ -237,14 +265,58 @@ class DB {
     return isSuccess;
   }
 
-  // Delete post from DB
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
+
+  static async incrementFileDownloadCount(s3FileName) {
+    let isSuccess = false;
+    let con;
+    try {
+      con = await this.connect();
+
+      const stmt = `
+      UPDATE fileDownloads
+      SET downloadCount = downloadCount + 1
+      WHERE postId IN (
+        SELECT id
+        FROM posts
+        WHERE s3FileName = ?
+      );
+      `;
+
+      await con.query(stmt, s3FileName);
+      isSuccess = true;
+      console.log("Incremented file download count successfully!");
+    } catch (err) {
+      console.error(err.message);
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
+    }
+
+    return isSuccess;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
+
+  // Delete post from DB, then delete post record in fileDownloads
   static async deletePostFromDB(s3FileName) {
     let isSuccess = false;
     let con;
     try {
       con = await this.connect();
-      const stmt = "DELETE FROM posts WHERE s3FileName = ?";
-      const [rows] = await con.query(stmt, [s3FileName]);
+
+      // Delete from fileDownloads table
+      const stmt1 = "DELETE FROM fileDownloads WHERE postId IN (SELECT id FROM posts WHERE s3FileName = ?)";
+      await con.query(stmt1, [s3FileName]);
+
+      // Delete from posts table
+      const stmt2 = "DELETE FROM posts WHERE s3FileName = ?";
+      const [rows] = await con.query(stmt2, [s3FileName]);
+
       isSuccess = true;
       console.log(rows);
     } catch (err) {
@@ -257,6 +329,9 @@ class DB {
     }
     return isSuccess;
   }
+
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
 
   // Update user account data (Builds the query depending on the properties given dynamically)
   static async updateUserData(userData) {
@@ -307,6 +382,9 @@ class DB {
     }
     return result;
   }
+
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
 
   static async getPostsOfUser(userId) {
     let con;
