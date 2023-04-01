@@ -25,6 +25,7 @@ class DB {
 
   // Sign up
   static async signup(userData) {
+    let con;
     try {
       let usernameValidation = await userDataValidation.validateUsername(userData.username);
       let emailValidation = await userDataValidation.validateEmail(userData.email);
@@ -37,7 +38,7 @@ class DB {
         throw new Error("Validation failed to pass ...");
       } else {
         const hashedPassword = await bcrypt.hash(userData.password, 10);
-        const con = await this.connect();
+        con = await this.connect();
         const stmt = "INSERT INTO users (username, email, password, gender) VALUES (?, ?, ?, ?);";
         await con.query(stmt, [userData.username, userData.email, hashedPassword, userData.gender]);
         return { isSuccess: true, msg: "Sign up success! (signup method inside DB.js)" };
@@ -45,14 +46,20 @@ class DB {
     } catch (err) {
       console.error(err.message);
       return { isSuccess: false, msg: "Sign up failed .. (signup method inside DB.js)" };
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
     }
   }
 
   // Login
   static async login(userCreds) {
     let result = { isSuccess: false, msg: "Something went wrong" };
+    let con;
     try {
-      const con = await this.connect();
+      con = await this.connect();
       const stmt = "SELECT * FROM users WHERE email = ? OR username = ?;";
       const [rows] = await con.query(stmt, [userCreds.usernameOrEmail, userCreds.usernameOrEmail]);
 
@@ -70,6 +77,11 @@ class DB {
     } catch (err) {
       console.error(err.message);
       result.msg = err;
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
     }
 
     return result;
@@ -78,8 +90,9 @@ class DB {
   // Check Username Already Exists in DB, return true or false
   static async checkUsernameExists(username) {
     let exists = true;
+    let con;
     try {
-      const con = await this.connect();
+      con = await this.connect();
       const stmt = "SELECT username FROM users WHERE username = ?;";
       const [rows] = await con.query(stmt, [username]);
 
@@ -90,6 +103,11 @@ class DB {
       }
     } catch (err) {
       console.error(err.message);
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
     }
 
     return exists;
@@ -98,8 +116,9 @@ class DB {
   // Check Email Already Exists in DB, return true or false
   static async checkEmailExists(email) {
     let exists = true;
+    let con;
     try {
-      const con = await this.connect();
+      con = await this.connect();
       const stmt = "SELECT email FROM users WHERE email = ?;";
       const [rows] = await con.query(stmt, [email]);
 
@@ -110,6 +129,11 @@ class DB {
       }
     } catch (err) {
       console.error(err.message);
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
     }
 
     return exists;
@@ -118,8 +142,9 @@ class DB {
   // Returns courses
   static async getCourses(depAbbr) {
     let courses = null;
+    let con;
     try {
-      const con = await this.connect();
+      con = await this.connect();
       const stmt = `
       SELECT courses.id, courses.code, courses.name
       FROM courses
@@ -134,14 +159,20 @@ class DB {
       console.log(courses);
     } catch (err) {
       console.error(err.message);
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
     }
     return courses;
   }
 
   // Return posts
   static async getPosts(courseId) {
+    let con;
     try {
-      const con = await this.connect();
+      con = await this.connect();
 
       // Fetch the course code for the given courseId
       const courseCodeStmt = "SELECT code FROM courses WHERE id = ?";
@@ -173,14 +204,20 @@ class DB {
     } catch (err) {
       console.error(err.message);
       return null;
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
     }
   }
 
   // Insert Post to DB
   static async insertPostInfoToDB(postInfo) {
     let isSuccess = false;
+    let con;
     try {
-      const con = await this.connect();
+      con = await this.connect();
 
       // Insert post info to DB
       const stmt = "INSERT INTO posts (userId, courseId, title, s3FileName, s3FileUrl, fileType, fileSizeInKB) VALUES (?, ?, ?, ?, ?, ?, ?);";
@@ -191,6 +228,11 @@ class DB {
       console.log(rows);
     } catch (err) {
       console.error(err.message);
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
     }
     return isSuccess;
   }
@@ -198,14 +240,20 @@ class DB {
   // Delete post from DB
   static async deletePostFromDB(s3FileName) {
     let isSuccess = false;
+    let con;
     try {
-      const con = await this.connect();
+      con = await this.connect();
       const stmt = "DELETE FROM posts WHERE s3FileName = ?";
       const [rows] = await con.query(stmt, [s3FileName]);
       isSuccess = true;
       console.log(rows);
     } catch (err) {
       console.error(err.message);
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
     }
     return isSuccess;
   }
@@ -213,8 +261,9 @@ class DB {
   // Update user account data (Builds the query depending on the properties given dynamically)
   static async updateUserData(userData) {
     let result = {};
+    let con;
     try {
-      const con = await this.connect();
+      con = await this.connect();
       let stmt = `UPDATE users SET `;
       let values = [];
 
@@ -250,13 +299,19 @@ class DB {
     } catch (err) {
       console.error(err.message);
       result.isSuccess = false;
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
     }
     return result;
   }
 
   static async getPostsOfUser(userId) {
+    let con;
     try {
-      const con = await this.connect();
+      con = await this.connect();
       const stmt = `
       SELECT
         posts.title,
@@ -279,6 +334,11 @@ class DB {
     } catch (err) {
       console.error(err.message);
       return null;
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
     }
   }
 }
