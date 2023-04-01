@@ -18,6 +18,12 @@
   color: #f5f5f5;
 }
 
-.brand-link:hover .fab {
+.fa-envelope {
+  color: beige;
+}
+
+/* EFFECTS */
+
+.brand-link:hover .social-media-icon {
   color: red;
 }
