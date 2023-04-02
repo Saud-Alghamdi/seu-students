@@ -6,6 +6,9 @@ const routes = require("./routes");
 const crypto = require("crypto");
 const session = require("express-session");
 const MemoryStore = require("memorystore")(session);
+const store = new MemoryStore({
+  checkPeriod: 3600000,
+});
 
 // BASIC CONFIG
 app.set("view engine", "ejs");
@@ -29,9 +32,7 @@ app.use(
     secret: crypto.randomBytes(32).toString("hex"),
     resave: false,
     saveUninitialized: false,
-    store: new MemoryStore({
-      checkPeriod: 3600000,
-    }),
+    store: store,
     cookie: {
       maxAge: 3600000,
     },
