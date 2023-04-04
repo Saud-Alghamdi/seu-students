@@ -2,6 +2,8 @@ const DB = require("./DB.js");
 const { insertFileToS3, getFileFromS3, deleteFileFromS3 } = require("./s3");
 const path = require("path");
 const helper = require("./helper");
+const NodeCache = require("node-cache");
+const cache = new NodeCache({ stdTTL: 0 }); // Set cache expiry to 0 means no expiry
 
 // Check user is logged in
 function userIsLoggedIn(req) {
@@ -154,7 +156,19 @@ class RouteHandler {
 
   static async renderCoursesPage(req, res) {
     const depAbbr = req.params.depAbbr;
-    const courses = await DB.getCourses(depAbbr);
+    let courses;
+
+    // Check if courses data is in cache
+    const cacheKey = `courses_${depAbbr}`;
+    const cachedData = cache.get(cacheKey);
+    if (cachedData) {
+      courses = cachedData;
+    } else {
+      // If courses data is not in cache, fetch from database and store in cache
+      courses = await DB.getCourses(depAbbr);
+      cache.set(cacheKey, courses);
+    }
+
     if (userIsLoggedIn(req)) {
       res.render("courses", { depAbbr, courses, user: req.session.user });
     } else {
