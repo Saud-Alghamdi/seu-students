@@ -1,4 +1,6 @@
-// This is a user data backend validation in case client side validation got bypassed (it doesn't return any feedback to the user)
+/* File Purpose:
+a User sign up backend validation in case client side validation got bypassed (it doesn't return any feedback to the user)
+*/
 
 class userDataValidation {
   // Username validation

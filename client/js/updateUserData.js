@@ -1,3 +1,7 @@
+/* File Purpose:
+UI for update user account info (username, email, password, gender) + Sends request to server to update user account info in Database.
+*/
+
 // Loader
 const loaderContainer = document.getElementById("loader-container");
 

@@ -1,3 +1,7 @@
+/* File Purpose:
+Validates selected file type & size on submit. If validated, sends file to server for server to handle it.
+*/
+
 const form = document.querySelector(".add-post-page-container__form");
 const fileInput = document.querySelector(".file-input");
 const titleInput = document.querySelector(".title-input");
@@ -72,6 +76,7 @@ form.addEventListener("submit", async (e) => {
   formData.append("title", title);
   formData.append("file", file);
 
+  // Send file to server for the server to upload it to S3 bucket
   axios
     .post(`${window.location.pathname}/addPostProcess`, formData)
     .then((response) => {
