@@ -21,34 +21,17 @@ const s3 = new S3Client({
   region: bucketRegion,
 });
 
-async function insertFileToS3(req) {
-  // Check if there is a title present
-  if (!req.body.title) {
-    return { err: "يجب كتابة عنوان." };
-  }
-
-  // Check if there is a file submitted
-  if (!req.file) {
-    return { err: "يجب اختيار ملف." };
-  }
-
-  // File size validation
-  const fileSizeInBytes = req.file.size;
+async function insertFileToS3(file) {
+  // File backend validation (in case client side bypassed)
+  const fileSizeInBytes = file.size;
   const fileSizeInKB = helper.bytesToKB(fileSizeInBytes);
   const maxfileSizeInKB = 50000; // = 50 MB
-
-  if (fileSizeInKB > maxfileSizeInKB) {
-    console.log("Error.. file Exceeded size limit");
-    return { err: "File is too big .." };
-  }
-
-  // File type validation
   const allowedExtensions = [".pdf", ".doc", ".docx", ".ppt", ".pptx"];
-  const filePath = req.file.originalname;
+  const filePath = file.originalname;
   const extension = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
 
-  if (!allowedExtensions.includes(extension)) {
-    return { err: "Invalid file type. Only PDF, Word, and PowerPoint files are allowed." };
+  if (!file.title || !file.buffer || fileSizeInKB > maxfileSizeInKB || !allowedExtensions.includes(extension)) {
+    throw new Error("File received in s3.js is unacceptable ..");
   }
 
   // Inserting to S3 Bucket
@@ -57,8 +40,8 @@ async function insertFileToS3(req) {
   const params = {
     Bucket: bucketName,
     Key: fileName,
-    Body: req.file.buffer,
-    ContentType: req.file.mimetype,
+    Body: file.buffer,
+    ContentType: file.mimetype,
   };
 
   const command = new PutObjectCommand(params);
@@ -68,11 +51,11 @@ async function insertFileToS3(req) {
     console.log("File submitted successfully!");
 
     const post = {
-      title: req.body.title,
+      title: file.title,
       fileName: fileName,
       filePath: `https://s3.amazonaws.com/${bucketName}/${fileName}`,
       fileType: extension,
-      fileSizeInKB: helper.bytesToKB(req.file.size),
+      fileSizeInKB: helper.bytesToKB(file.size),
     };
 
     console.log(post);
@@ -92,10 +75,10 @@ async function insertFileToS3(req) {
 }
 
 // Get file from S3
-async function getFileFromS3(req) {
+async function getFileFromS3(s3FileName) {
   const params = {
     Bucket: bucketName,
-    Key: req.query.s3FileName,
+    Key: s3FileName,
   };
 
   const command = new GetObjectCommand(params);
@@ -117,10 +100,10 @@ async function getFileFromS3(req) {
 }
 
 // Delete file from S3
-async function deleteFileFromS3(req) {
+async function deleteFileFromS3(s3FileName) {
   const params = {
     Bucket: bucketName,
-    Key: req.body.s3FileName,
+    Key: s3FileName,
   };
 
   const command = new DeleteObjectCommand(params);

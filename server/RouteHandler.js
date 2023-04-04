@@ -231,7 +231,12 @@ class RouteHandler {
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   static async addPostProcess(req, res) {
-    const response = await insertFileToS3(req);
+    const file = {
+      ...(req.body || {}),
+      ...(req.file || {}),
+    };
+
+    const response = await insertFileToS3(file);
     if (response.err) {
       console.log("insertFileToS3() failed ..");
       res.status(400).json({ err: response.err });
@@ -262,18 +267,19 @@ class RouteHandler {
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   static async downloadFile(req, res) {
-    const getFileFromS3Response = await getFileFromS3(req);
+    const s3FileName = req.query.s3FileName;
+    const getFileFromS3Response = await getFileFromS3(s3FileName);
 
     if (getFileFromS3Response.success) {
       const encodedTitle = encodeURIComponent(req.query.title);
 
-      res.setHeader("Content-Disposition", `attachment; filename="${encodedTitle}${path.extname(req.query.s3FileName)}"`);
+      res.setHeader("Content-Disposition", `attachment; filename="${encodedTitle}${path.extname(s3FileName)}"`);
 
       res.setHeader("Content-type", getFileFromS3Response.file.ContentType);
 
       getFileFromS3Response.file.Body.pipe(res);
 
-      await DB.incrementFileDownloadCount(req.query.s3FileName);
+      await DB.incrementFileDownloadCount(s3FileName);
       console.log("File downloaded successfully!");
     } else {
       console.log("Error downloading file", err);
@@ -391,11 +397,8 @@ class RouteHandler {
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   static async deletePost(req, res) {
-    console.log("REQ.BODY IS:");
-    console.log(req.body);
-
-    const deleteFileFromS3Response = await deleteFileFromS3(req);
     const s3FileName = req.body.s3FileName;
+    const deleteFileFromS3Response = await deleteFileFromS3(s3FileName);
 
     if (deleteFileFromS3Response === true) {
       await DB.deletePostFromDB(s3FileName);
