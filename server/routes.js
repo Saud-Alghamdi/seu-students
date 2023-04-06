@@ -7,6 +7,20 @@ const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+// EMERGENCY TEMORARY MIDDLEWARE
+function redirectCourseIdToDepartments(req, res, next) {
+  const courseCodeRegex = /^[a-zA-Z]+-\d+$/;
+  const courseIdRegex = /^\d+$/;
+
+  if (req.params.courseCode && courseIdRegex.test(req.params.courseCode)) {
+    res.redirect(301, "/departments");
+  } else if (req.params.courseCode && !courseCodeRegex.test(req.params.courseCode)) {
+    res.status(400).send("Invalid course code");
+  } else {
+    next();
+  }
+}
+
 //--- ROUTES ---//
 
 // Home page
@@ -60,7 +74,7 @@ router.get("/departments/:depAbbr/courses", async (req, res) => {
 });
 
 // Posts page
-router.get("/departments/:depAbbr/:courseCode/posts", async (req, res) => {
+router.get("/departments/:depAbbr/:courseCode/posts", redirectCourseIdToDepartments, async (req, res) => {
   await RouteHandler.renderPostsPage(req, res);
 });
 
