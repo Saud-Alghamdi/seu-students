@@ -60,17 +60,17 @@ router.get("/departments/:depAbbr/courses", async (req, res) => {
 });
 
 // Posts page
-router.get("/departments/:depAbbr/:courseId/posts", async (req, res) => {
+router.get("/departments/:depAbbr/:courseCode/posts", async (req, res) => {
   await RouteHandler.renderPostsPage(req, res);
 });
 
 // Add Post page
-router.get("/departments/:depAbbr/:courseId/add-post", async (req, res) => {
+router.get("/departments/:depAbbr/:courseCode/add-post", async (req, res) => {
   await RouteHandler.renderAddPostPage(req, res);
 });
 
 // Add Post Process
-router.post("/departments/:depAbbr/:courseId/add-post/addPostProcess", upload.single("file"), async (req, res) => {
+router.post("/departments/:depAbbr/:courseCode/add-post/addPostProcess", upload.single("file"), async (req, res) => {
   await RouteHandler.addPostProcess(req, res);
 });
 

@@ -39,8 +39,10 @@ class RouteHandler {
         signupSuccess: false,
         toastMsg: "Sign up failed ..",
       });
+    } else {
+      res.render("signup");
     }
-    res.render("signup");
+    
   }
 
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -180,8 +182,8 @@ class RouteHandler {
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   static async renderPostsPage(req, res) {
-    const courseId = req.params.courseId;
-    let { courseCode, posts } = await DB.getPosts(courseId);
+    const courseCode = req.params.courseCode;
+    let posts = await DB.getPosts(courseCode);
 
     posts.forEach((post) => {
       post.createdAt = helper.formatDate(post.createdAt);
@@ -245,7 +247,7 @@ class RouteHandler {
     const post = response.post;
     const postInfo = {
       userId: req.session.user.id,
-      courseId: req.params.courseId,
+      courseCode: req.params.courseCode,
       title: post.title,
       s3FileName: post.fileName,
       s3FileUrl: post.filePath,

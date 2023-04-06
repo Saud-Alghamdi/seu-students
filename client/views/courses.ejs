@@ -26,7 +26,7 @@
         <% if(typeof courses !== 'undefined') { %> <% courses.forEach(course => { %>
 
         <div class="departments-page-container__div-box border-dark rounded-5 p-2 m-1">
-          <a class="department-link d-flex justify-content-center align-items-center text-light fs-3" href="./<%=course.id%>/posts"><%= course.code %></a>
+          <a class="department-link d-flex justify-content-center align-items-center text-light fs-3" href="./<%=course.code%>/posts"><%= course.code %></a>
         </div>
 
         <% }) %> <% } %>

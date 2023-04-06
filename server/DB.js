@@ -187,38 +187,34 @@ class DB {
   //
 
   // Return posts
-  static async getPosts(courseId) {
+  static async getPosts(courseCode) {
     let con;
     try {
       con = await this.connect();
 
-      // Fetch the course code for the given courseId
-      const courseCodeStmt = "SELECT code FROM courses WHERE id = ?";
-      const [courseCodeRows] = await con.query(courseCodeStmt, [courseId]);
-      const courseCode = courseCodeRows[0].code;
-
-      // Fetch the posts for the given courseId
-      const postsStmt = `
-        SELECT
-          posts.title,
-          posts.fileType,
-          posts.s3FileName,
-          users.username,
-          users.gender,
-          posts.createdAt
-        FROM
-          posts
-          JOIN users ON posts.userId = users.id
-        WHERE
-          posts.courseId = ?
-        ORDER BY
-          posts.createdAt DESC;
+      // Fetch the posts for the given course code
+      const stmt = `
+      SELECT
+        posts.title,
+        posts.fileType,
+        posts.s3FileName,
+        users.username,
+        users.gender,
+        posts.createdAt
+      FROM
+        posts
+        JOIN users ON posts.userId = users.id
+        JOIN courses ON posts.courseId = courses.id
+      WHERE
+        courses.code = ?
+      ORDER BY
+        posts.createdAt DESC;
       `;
-      const [postsRows] = await con.query(postsStmt, [courseId]);
-      const posts = postsRows;
+      const [rows] = await con.query(stmt, [courseCode]);
+      const posts = rows;
 
       // Return an object with the course code and posts array
-      return { courseCode, posts };
+      return posts;
     } catch (err) {
       console.error(err.message);
       return null;
@@ -240,12 +236,16 @@ class DB {
     try {
       con = await this.connect();
 
+      // Query the courses table to retrieve the ID of the course with the given code
+      const [courseRows] = await con.query("SELECT id FROM courses WHERE code = ?", [postInfo.courseCode]);
+      const courseId = courseRows[0].id;
+
       // Insert post info to DB
       const stmt1 = "INSERT INTO posts (userId, courseId, title, s3FileName, s3FileUrl, fileType, fileSizeInKB) VALUES (?, ?, ?, ?, ?, ?, ?);";
-      const values = [postInfo.userId, postInfo.courseId, postInfo.title, postInfo.s3FileName, postInfo.s3FileUrl, postInfo.fileType, postInfo.fileSizeInKB];
+      const values = [postInfo.userId, courseId, postInfo.title, postInfo.s3FileName, postInfo.s3FileUrl, postInfo.fileType, postInfo.fileSizeInKB];
 
-      const [rows] = await con.query(stmt1, values);
-      const postId = rows.insertId; // Get the ID of the inserted post
+      const [postRows] = await con.query(stmt1, values);
+      const postId = postRows.insertId; // Get the ID of the inserted post
 
       // Insert post ID and default download count to fileDownloads table
       const stmt2 = "INSERT INTO fileDownloads (postId, downloadCount) VALUES (?, ?);";
@@ -253,7 +253,7 @@ class DB {
       await con.query(stmt2, fileValues);
 
       isSuccess = true;
-      console.log(rows);
+      console.log(postRows);
     } catch (err) {
       console.error(err.message);
     } finally {
