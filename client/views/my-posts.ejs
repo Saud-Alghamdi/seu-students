@@ -61,7 +61,7 @@
             <small class="post-date"><%= post.createdAt %></small>
             <form class="m-0" action="/dashboard/my-posts/deletePost" method="POST">
               <input type="hidden" name="s3FileName" value="<%=post.s3FileName%>" />
-              <button class="delete-post-btn btn btn-danger">حذف</button>
+              <button class="delete-post-btn btn btn-danger text-light">حذف</button>
             </form>
           </div>
         </div>
