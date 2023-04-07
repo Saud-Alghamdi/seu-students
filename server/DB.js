@@ -192,28 +192,42 @@ class DB {
     try {
       con = await this.connect();
 
+      // Check if the course code exists in the courses table
+      const checkStmt = `
+    SELECT
+      COUNT(*) AS count
+    FROM
+      courses
+    WHERE
+      code = ?;
+    `;
+      const [checkRows] = await con.query(checkStmt, [courseCode]);
+      const count = checkRows[0].count;
+      if (count === 0) {
+        return null;
+      }
+
       // Fetch the posts for the given course code
       const stmt = `
-      SELECT
-        posts.title,
-        posts.fileType,
-        posts.s3FileName,
-        users.username,
-        users.gender,
-        posts.createdAt
-      FROM
-        posts
-        JOIN users ON posts.userId = users.id
-        JOIN courses ON posts.courseId = courses.id
-      WHERE
-        courses.code = ?
-      ORDER BY
-        posts.createdAt DESC;
-      `;
+    SELECT
+      posts.title,
+      posts.fileType,
+      posts.s3FileName,
+      users.username,
+      users.gender,
+      posts.createdAt
+    FROM
+      posts
+      JOIN users ON posts.userId = users.id
+      JOIN courses ON posts.courseId = courses.id
+    WHERE
+      courses.code = ?
+    ORDER BY
+      posts.createdAt DESC;
+    `;
       const [rows] = await con.query(stmt, [courseCode]);
       const posts = rows;
 
-      // Return an object with the course code and posts array
       return posts;
     } catch (err) {
       console.error(err.message);

@@ -42,7 +42,6 @@ class RouteHandler {
     } else {
       res.render("signup");
     }
-    
   }
 
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -184,6 +183,12 @@ class RouteHandler {
   static async renderPostsPage(req, res) {
     const courseCode = req.params.courseCode;
     let posts = await DB.getPosts(courseCode);
+
+    // Non-existent course code
+    if (posts === null) {
+      res.redirect("/departments");
+      return;
+    }
 
     posts.forEach((post) => {
       post.createdAt = helper.formatDate(post.createdAt);
