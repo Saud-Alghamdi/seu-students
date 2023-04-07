@@ -257,7 +257,7 @@ class RouteHandler {
       s3FileName: post.fileName,
       s3FileUrl: post.filePath,
       fileType: post.fileType,
-      fileSizeInKB: post.fileSizeInKB,
+      fileSizeInKB: post.compressedFileSizeInKB,
     };
 
     const insertPostToDBResponse = await DB.insertPostInfoToDB(postInfo);
@@ -277,7 +277,23 @@ class RouteHandler {
     const s3FileName = req.query.s3FileName;
     const getFileFromS3Response = await getFileFromS3(s3FileName);
 
-    if (getFileFromS3Response.success) {
+    // if gzip file
+    if (getFileFromS3Response.success && getFileFromS3Response.ContentEncoding === "gzip") {
+      const encodedTitle = encodeURIComponent(req.query.title);
+      const ContentType = getFileFromS3Response.ContentType;
+      const fileBuffer = getFileFromS3Response.buffer;
+
+      res.setHeader("Content-Disposition", `attachment; filename="${encodedTitle}${path.extname(s3FileName)}"`);
+      res.setHeader("Content-type", ContentType);
+
+      res.write(fileBuffer);
+      res.end();
+
+      await DB.incrementFileDownloadCount(s3FileName);
+      console.log("File downloaded successfully!");
+    }
+    // Not gzip file
+    else if (getFileFromS3Response.success && getFileFromS3Response.ContentEncoding !== "gzip") {
       const encodedTitle = encodeURIComponent(req.query.title);
 
       res.setHeader("Content-Disposition", `attachment; filename="${encodedTitle}${path.extname(s3FileName)}"`);

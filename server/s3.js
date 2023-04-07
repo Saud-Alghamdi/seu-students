@@ -1,5 +1,9 @@
 const helper = require("./helper");
 const crypto = require("crypto");
+const util = require("util");
+const zlib = require("zlib");
+const gzipPromise = util.promisify(zlib.gzip);
+const unzipPromse = util.promisify(zlib.unzip);
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -34,14 +38,19 @@ async function insertFileToS3(file) {
     throw new Error("File received in s3.js is unacceptable ..");
   }
 
+  // Compressing file
+  const compresseedFileBuffer = await gzipPromise(file.buffer);
+  const compressedFileSizeInKB = helper.bytesToKB(compresseedFileBuffer.length);
+
   // Inserting to S3 Bucket
   const fileName = randomFileName() + extension;
 
   const params = {
     Bucket: bucketName,
     Key: fileName,
-    Body: file.buffer,
+    Body: compresseedFileBuffer,
     ContentType: file.mimetype,
+    ContentEncoding: "gzip",
   };
 
   const command = new PutObjectCommand(params);
@@ -55,7 +64,8 @@ async function insertFileToS3(file) {
       fileName: fileName,
       filePath: `https://s3.amazonaws.com/${bucketName}/${fileName}`,
       fileType: extension,
-      fileSizeInKB: helper.bytesToKB(file.size),
+      originalFileSizeInKB: helper.bytesToKB(file.size),
+      compressedFileSizeInKB,
     };
 
     console.log(post);
@@ -75,26 +85,48 @@ async function insertFileToS3(file) {
 }
 
 // Get file from S3
-async function getFileFromS3(s3FileName) {
+// Note: There are files that have been uploaded before the implementation of compress library, so they will need a different handling to in order to be downloaded correctly
+async function getFileFromS3(fileName) {
   const params = {
     Bucket: bucketName,
-    Key: s3FileName,
+    Key: fileName,
   };
 
   const command = new GetObjectCommand(params);
   const file = await s3.send(command);
 
   if (file.$metadata.httpStatusCode === 200) {
-    console.log("File retreived successfully!");
-    return {
-      success: true,
-      file,
-    };
+    if (file.ContentEncoding === "gzip") {
+      // if gzip, decompress file first
+      const decompressedFileBuffer = await new Promise((resolve, reject) => {
+        const chunks = [];
+        file.Body.on("data", (chunk) => {
+          chunks.push(chunk);
+        });
+        file.Body.on("end", () => {
+          const buffer = Buffer.concat(chunks);
+          unzipPromse(buffer).then(resolve).catch(reject);
+        });
+      });
+
+      return {
+        success: true,
+        ContentEncoding: file.ContentEncoding,
+        buffer: decompressedFileBuffer,
+        ContentType: file.ContentType,
+      };
+    }
+    // if not gzip
+    else {
+      return {
+        success: true,
+        file,
+      };
+    }
   } else {
-    console.log("Error retreiving file ..");
     return {
-      err: true,
-      file,
+      success: false,
+      error: "Error retrieving file",
     };
   }
 }
