@@ -374,6 +374,7 @@ class RouteHandler {
     try {
       const userId = req.session.user.id;
       const posts = await DB.getPostsOfUser(userId);
+
       posts.forEach((post) => {
         post.createdAt = helper.formatDate(post.createdAt);
       });

@@ -31,7 +31,7 @@
   }
 
   .post-date,
-  .post-username {
+  .post-course-code {
     font-size: 16px;
   }
 }
@@ -48,7 +48,7 @@
   }
 
   .post-date,
-  .post-username {
+  .post-course-code {
     font-size: 18px;
   }
 

@@ -411,10 +411,12 @@ class DB {
         posts.s3FileName,
         users.username,
         users.gender,
-        posts.createdAt
-      FROM
+        posts.createdAt,
+        courses.code AS courseCode
+        FROM
         posts
         JOIN users ON posts.userId = users.id
+        JOIN courses ON posts.courseId = courses.id
       WHERE
         posts.userId = ?
       ORDER BY
