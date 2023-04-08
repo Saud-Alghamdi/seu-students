@@ -5,6 +5,8 @@ const helper = require("./helper");
 const NodeCache = require("node-cache");
 const cache = new NodeCache({ stdTTL: 0 }); // Set cache expiry to 0 means no expiry
 const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+dotenv.config();
 
 // Check user is logged in
 function userIsLoggedIn(req) {
@@ -149,16 +151,18 @@ class RouteHandler {
 
     // Create a nodemailer transporter object
     const transporter = nodemailer.createTransport({
-      service: "hotmail",
+      host: "smtp.privateemail.com",
+      port: 465,
+      secure: true,
       auth: {
-        user: "kau1637143@hotmail.com",
-        pass: "0566611078s",
+        user: process.env.SENDER_EMAIL,
+        pass: process.env.SENDER_PASSWORD,
       },
     });
 
     // Send the password reset email
     const mailOptions = {
-      from: "kau1637143@hotmail.com",
+      from: process.env.SENDER_EMAIL,
       to: userEmail,
       subject: "Password reset",
       text: `Your new password is: ${newRandomPassword}`,
