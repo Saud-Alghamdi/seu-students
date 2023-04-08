@@ -14,6 +14,7 @@ This file will containt all the imports of styles of all views + styling of gene
 @import url("my-account.css");
 @import url("my-posts.css");
 @import url("update-post-title.css");
+@import url("reset-password.css");
 @import url("footer.css");
 
 /* GLOBAL VARIABLES */
