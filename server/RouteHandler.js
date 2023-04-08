@@ -260,7 +260,7 @@ class RouteHandler {
       fileSizeInKB: post.compressedFileSizeInKB,
     };
 
-    const insertPostToDBResponse = await DB.insertPostInfoToDB(postInfo);
+    const insertPostToDBResponse = await DB.insertPostInfo(postInfo);
 
     if (insertPostToDBResponse === true) {
       console.log("All success!");
@@ -386,7 +386,7 @@ class RouteHandler {
           areTherePosts: true,
           posts,
           deletePostSuccess: true,
-          msg: "تم حذف المنشور بنجاح!",
+          toastMsg: "تم حذف المنشور بنجاح!",
         });
       }
       // Logged in + there are posts + delete post failed
@@ -396,7 +396,26 @@ class RouteHandler {
           areTherePosts: true,
           posts,
           deletePostSuccess: false,
-          msg: "فشل حذف المنشور ..",
+          toastMsg: "فشل حذف المنشور ..",
+        });
+      }
+      // Logged in + update post title successful
+      else if (userIsLoggedIn(req) && req.query.updatePostTitleSuccess === "true") {
+        res.render("my-posts", {
+          user: req.session.user,
+          posts,
+          updatePostSuccess: true,
+          toastMsg: "تم تعديل عنوان المنشور بنجاح!",
+        });
+      }
+      // Logged in + update post title failed
+      else if (userIsLoggedIn(req) && req.query.updatePostTitleSuccess === "false") {
+        res.render("my-posts", {
+          user: req.session.user,
+          areTherePosts: true,
+          posts,
+          updatePostSuccess: false,
+          toastMsg: "فشل تعديل عنوان المنشور ..",
         });
       }
       // Logged in + there are posts
@@ -405,7 +424,7 @@ class RouteHandler {
       }
       // Logged in + there are NO posts
       else if (userIsLoggedIn(req) && posts.length === 0) {
-        res.render("my-posts", { user: req.session.user, areTherePosts: false, msg: "لم تقم بإضافة منشورات من قبل." });
+        res.render("my-posts", { user: req.session.user, areTherePosts: false, toastMsg: "لم تقم بإضافة منشورات من قبل." });
       }
       // Other
       else {
@@ -430,7 +449,31 @@ class RouteHandler {
       res.redirect(`/dashboard/my-posts?deletePostSuccess=true`);
     } else {
       console.log("failed to delete post ...");
-      res.redirect("/dashboard/my-postsdeletePostSuccess=false");
+      res.redirect("/dashboard/my-posts?deletePostSuccess=false");
+    }
+  }
+
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+  static async renderUpdatePostTitlePage(req, res) {
+    if (userIsLoggedIn(req)) {
+      res.render("update-post-title", { user: req.session.user });
+    }
+  }
+
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+  static async updatePostTitleProcess(req, res) {
+    const postId = req.params.postId;
+    const newTitle = req.body.newTitle;
+    const response = await DB.updatePostTitle(postId, newTitle);
+
+    if (response === true) {
+      res.redirect("/dashboard/my-posts?updatePostTitleSuccess=true");
+    } else {
+      res.redirect("/dashboard/my-posts?updatePostTitleSuccess=false");
     }
   }
 }

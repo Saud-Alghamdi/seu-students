@@ -1,0 +1,49 @@
+#loader-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+#loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.update-post-title-page-container__form {
+  max-width: 400px;
+}
+
+.update-post-title-page-container__button {
+  background-color: var(--btn-bg-color);
+  color: var(--text-color-primary);
+}
+
+.file-input {
+  width: 100%;
+}
+
+/* EFFECTS */
+
+.update-post-title-page-container__button:hover,
+.update-post-title-page-container__button:active {
+  background-color: var(--link-hover);
+  color: var(--text-color-primary);
+}

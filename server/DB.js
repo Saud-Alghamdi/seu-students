@@ -244,7 +244,7 @@ class DB {
   //
 
   // Insert Post to DB and then grab the post ID and insert it to fileDownloads
-  static async insertPostInfoToDB(postInfo) {
+  static async insertPostInfo(postInfo) {
     let isSuccess = false;
     let con;
     try {
@@ -406,6 +406,7 @@ class DB {
       con = await this.connect();
       const stmt = `
       SELECT
+        posts.id,
         posts.title,
         posts.fileType,
         posts.s3FileName,
@@ -422,8 +423,8 @@ class DB {
       ORDER BY
         posts.createdAt DESC;
     `;
-      const [postsRows] = await con.query(stmt, [userId]);
-      const posts = postsRows;
+      const [rows] = await con.query(stmt, [userId]);
+      const posts = rows;
       return posts;
     } catch (err) {
       console.error(err.message);
@@ -434,6 +435,32 @@ class DB {
         console.log("Database connection closed.");
       }
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
+
+  static async updatePostTitle(postId, newTitle) {
+    let isSuccess = false;
+    let con;
+    try {
+      con = await this.connect();
+      const stmt = `
+        UPDATE posts
+        SET title = ?
+        WHERE id = ?;
+      `;
+      const [result] = await con.query(stmt, [newTitle, postId]);
+      isSuccess = result.affectedRows > 0;
+    } catch (err) {
+      console.error(err);
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
+    }
+    return isSuccess;
   }
 }
 
