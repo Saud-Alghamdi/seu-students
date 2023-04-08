@@ -347,7 +347,7 @@ class DB {
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //
 
-  // Update user account data (Builds the query depending on the properties given dynamically)
+  // Update user account data based in user id (Builds the query depending on the properties given dynamically)
   static async updateUserData(userData) {
     let result = {};
     let con;
@@ -454,6 +454,31 @@ class DB {
       isSuccess = result.affectedRows > 0;
     } catch (err) {
       console.error(err);
+    } finally {
+      if (con) {
+        con.end();
+        console.log("Database connection closed.");
+      }
+    }
+    return isSuccess;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //
+
+  static async updatePasswordViaEmail(email, newPassword) {
+    let isSuccess = false;
+    let con;
+    try {
+      con = await this.connect();
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      const stmt = "UPDATE users SET password = ? WHERE email = ?";
+      const [rows] = await con.query(stmt, [hashedPassword, email]);
+      if (rows.affectedRows > 0) {
+        isSuccess = true;
+      }
+    } catch (err) {
+      console.error(err.message);
     } finally {
       if (con) {
         con.end();

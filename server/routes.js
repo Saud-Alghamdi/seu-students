@@ -40,12 +40,12 @@ router.post("/login-process", async (req, res) => {
   await RouteHandler.loginProcess(req, res);
 });
 
-// Forgot password page
-router.get("/reset-password", RouteHandler.renderForgotPasswordPage);
+// Reset password page
+router.get("/reset-password", RouteHandler.renderResetPasswordPage);
 
-// Send email for Forgot password process
-router.post("/send-email-for-reset-password", async (req, res) => {
-  await RouteHandler.sendEmailForForgotPasswordProcess(req, res);
+// Send email for reset password process
+router.post("/send-email-to-reset-password", async (req, res) => {
+  await RouteHandler.sendEmailToResetPassword(req, res);
 });
 
 // Logout
@@ -101,9 +101,7 @@ router.post("/dashboard/my-posts/deletePost", async (req, res) => {
 });
 
 // Update Post page
-router.post("/dashboard/my-posts/:postId/update-post-title", async (req, res) => {
-  await RouteHandler.renderUpdatePostTitlePage(req, res);
-});
+router.post("/dashboard/my-posts/:postId/update-post-title", RouteHandler.renderUpdatePostTitlePage)
 
 // Update Post process
 router.post("/dashboard/my-posts/:postId/updatePostTitleProcess", async (req, res) => {

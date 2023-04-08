@@ -23,6 +23,20 @@
       </script>
       <% } %>
 
+      <!-- Reset password sent successfully -->
+      <% if(typeof sendResetPasswordSuccess !== 'undefined' && sendResetPasswordSuccess === true) { %>
+      <script>
+        showToast(true, "<%= toastMsg %>");
+      </script>
+      <% } %>
+
+      <!-- Reset password sent successfully -->
+      <% if(typeof sendResetPasswordSuccess !== 'undefined' && sendResetPasswordSuccess === false) { %>
+      <script>
+        showToast(false, "<%= toastMsg %>");
+      </script>
+      <% } %>
+
       <!-- incorrect login credentials -->
       <% if(typeof loginSuccess !== 'undefined' && loginSuccess === false && typeof toastMsg !== 'undefined') { %>
       <script>

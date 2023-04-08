@@ -4,6 +4,7 @@ const path = require("path");
 const helper = require("./helper");
 const NodeCache = require("node-cache");
 const cache = new NodeCache({ stdTTL: 0 }); // Set cache expiry to 0 means no expiry
+const nodemailer = require("nodemailer");
 
 // Check user is logged in
 function userIsLoggedIn(req) {
@@ -78,6 +79,20 @@ class RouteHandler {
         toastMsg: "تم تسجيل الخروج بنجاح!",
       });
     }
+    // coming from reset password + reset sent successfully
+    else if (req.query.sendResetPasswordSuccess === "true") {
+      res.render("login", {
+        sendResetPasswordSuccess: true,
+        toastMsg: "تم إرسال كلمة المرور الجديدة على بريدك الإلكتروني!",
+      });
+    }
+    // coming from reset password + reset failed to send
+    else if (req.query.sendResetPasswordSuccess === "false") {
+      res.render("login", {
+        sendResetPasswordSuccess: false,
+        toastMsg: "حدث خطأ، لم نتمكن من إرسال كلمة المرور الجديدة ..",
+      });
+    }
     // Incorrect login credentials
     else if (req.query.loginSuccess === "false" && req.query.showToast === "true") {
       res.render("login", {
@@ -109,18 +124,56 @@ class RouteHandler {
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-  static async renderForgotPasswordPage(req, res) {
-    res.render("reset-password");
+  static async renderResetPasswordPage(req, res) {
+    if (req.query.emailExists === "false") {
+      res.render("reset-password", {
+        emailExists: false,
+        toastMsg: "البريد الإلكتروني الذي أدخلته غير مسجل لدينا ..",
+      });
+    } else {
+      res.render("reset-password");
+    }
   }
 
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-  static async sendEmailForForgotPassowrdProcess(req, res) {
-    const email = req.body.email;
-    // Easily done by using mailersend service, but requires DNS records for a real domain
-    // send email process here
-    // after sending the random password, update the database with it
+  static async sendEmailToResetPassword(req, res) {
+    const userEmail = req.body.email;
+    const newRandomPassword = Math.random().toString(36).slice(-8);
+    const updatePasswordInDB = await DB.updatePasswordViaEmail(userEmail, newRandomPassword);
+
+    if (updatePasswordInDB === false) {
+      res.redirect("/reset-password?emailExists=false");
+    }
+
+    // Create a nodemailer transporter object
+    const transporter = nodemailer.createTransport({
+      service: "hotmail",
+      auth: {
+        user: "kau1637143@hotmail.com",
+        pass: "0566611078s",
+      },
+    });
+
+    // Send the password reset email
+    const mailOptions = {
+      from: "kau1637143@hotmail.com",
+      to: userEmail,
+      subject: "Password reset",
+      text: `Your new password is: ${newRandomPassword}`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error(error);
+        console.log("Failed to send password reset email");
+        res.redirect("/login?sendResetPasswordSuccess=false");
+      } else {
+        console.log("Password reset email sent: " + info.response);
+        res.redirect("/login?sendResetPasswordSuccess=true");
+      }
+    });
   }
 
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||

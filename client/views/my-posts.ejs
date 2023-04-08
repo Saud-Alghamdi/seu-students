@@ -40,7 +40,7 @@
         <!-- Update post failed -->
       <% if(typeof updatePostSuccess !== 'undefined' && updatePostSuccess === false) { %>
         <script>
-          showToast(true, "<%= toastMsg %>");
+          showToast(false, "<%= toastMsg %>");
         </script>
         <% } %>
 
