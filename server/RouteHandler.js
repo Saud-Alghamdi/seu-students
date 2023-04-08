@@ -147,6 +147,7 @@ class RouteHandler {
 
     if (updatePasswordInDB === false) {
       res.redirect("/reset-password?emailExists=false");
+      return;
     }
 
     // Create a nodemailer transporter object
