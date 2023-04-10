@@ -17,7 +17,7 @@ class RouteHandler {
   static renderHomePage(req, res) {
     // not logged in
     if (!userIsLoggedIn(req)) {
-      res.render("home");
+      res.render("home", { langData: req.session.langData });
     }
     // just logged in
     else if (userIsLoggedIn(req) && req.query.loginSuccess === "true" && req.query.showToast === "true") {

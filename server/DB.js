@@ -255,7 +255,7 @@ class DB {
       const courseId = courseRows[0].id;
 
       // Insert post info to DB
-      const stmt1 = "INSERT INTO posts (userId, courseId, title, s3FileName, s3FileUrl, fileType, fileSizeInKB) VALUES (?, ?, ?, ?, ?, ?, ?);";
+      const stmt1 = "INSERT INTO posts (userId, courseId, title, s3FileName, s3FileUrl, fileType, fileSizeInKB, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW());";
       const values = [postInfo.userId, courseId, postInfo.title, postInfo.s3FileName, postInfo.s3FileUrl, postInfo.fileType, postInfo.fileSizeInKB];
 
       const [postRows] = await con.query(stmt1, values);
