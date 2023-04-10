@@ -243,14 +243,16 @@ class RouteHandler {
     const limit = 10;
     const currentPage = parseInt(req.query.page) || 1;
     const offset = (currentPage - 1) * limit;
-    const { posts, totalPosts } = await DB.getPosts(courseCode, limit, offset);
-    const totalPages = Math.ceil(totalPosts / limit);
+    const result = await DB.getPosts(courseCode, limit, offset);
 
-    // Non-existent course code
-    if (posts === null) {
+    // if course code requested does not exist
+    if (result === null) {
       res.redirect("/departments");
       return;
     }
+
+    const { posts, totalPosts } = result;
+    const totalPages = Math.ceil(totalPosts / limit);
 
     posts.forEach((post) => {
       post.createdAt = helper.formatDate(post.createdAt);
