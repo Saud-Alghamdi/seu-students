@@ -17,6 +17,12 @@
   float: left;
 }
 
+/* EFFECTS */
+.page-number-link:hover,
+.page-number-link:active {
+  color: red !important;
+}
+
 /* MEDIA QUERIES */
 
 /* screens 576px and above */

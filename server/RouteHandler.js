@@ -240,7 +240,11 @@ class RouteHandler {
 
   static async renderPostsPage(req, res) {
     const courseCode = req.params.courseCode;
-    let posts = await DB.getPosts(courseCode);
+    const limit = 10;
+    const currentPage = parseInt(req.query.page) || 1;
+    const offset = (currentPage - 1) * limit;
+    const { posts, totalPosts } = await DB.getPosts(courseCode, limit, offset);
+    const totalPages = Math.ceil(totalPosts / limit);
 
     // Non-existent course code
     if (posts === null) {
@@ -257,6 +261,8 @@ class RouteHandler {
       res.render("posts", {
         courseCode,
         posts,
+        currentPage,
+        totalPages,
         user: req.session.user,
         postSuccess: true,
         toastMsg: "تم إضافة المنشور بنجاح!",
@@ -267,6 +273,8 @@ class RouteHandler {
       res.render("posts", {
         courseCode,
         posts,
+        currentPage,
+        totalPages,
         needLogin: true,
         toastMsg: "يجب تسجيل الدخول أولًا لإضافة منشور",
       });
@@ -276,6 +284,8 @@ class RouteHandler {
       res.render("posts", {
         courseCode,
         posts,
+        currentPage,
+        totalPages,
         user: req.session.user,
       });
     }
@@ -431,7 +441,11 @@ class RouteHandler {
   static async renderMyPostsPage(req, res) {
     try {
       const userId = req.session.user.id;
-      const posts = await DB.getPostsOfUser(userId);
+      const limit = 10;
+      const currentPage = parseInt(req.query.page) || 1;
+      const offset = (currentPage - 1) * limit;
+      const { posts, totalPosts } = await DB.getPostsOfUser(userId, limit, offset);
+      const totalPages = Math.ceil(totalPosts / limit);
 
       posts.forEach((post) => {
         post.createdAt = helper.formatDate(post.createdAt);
@@ -443,6 +457,8 @@ class RouteHandler {
           user: req.session.user,
           areTherePosts: true,
           posts,
+          totalPages,
+          currentPage,
           deletePostSuccess: true,
           toastMsg: "تم حذف المنشور بنجاح!",
         });
@@ -453,6 +469,8 @@ class RouteHandler {
           user: req.session.user,
           areTherePosts: true,
           posts,
+          totalPages,
+          currentPage,
           deletePostSuccess: false,
           toastMsg: "فشل حذف المنشور ..",
         });
@@ -462,6 +480,8 @@ class RouteHandler {
         res.render("my-posts", {
           user: req.session.user,
           posts,
+          totalPages,
+          currentPage,
           updatePostSuccess: true,
           toastMsg: "تم تعديل عنوان المنشور بنجاح!",
         });
@@ -472,19 +492,21 @@ class RouteHandler {
           user: req.session.user,
           areTherePosts: true,
           posts,
+          totalPages,
+          currentPage,
           updatePostSuccess: false,
           toastMsg: "فشل تعديل عنوان المنشور ..",
         });
       }
       // Logged in + there are posts
       else if (userIsLoggedIn(req) && posts.length > 0) {
-        res.render("my-posts", { user: req.session.user, areTherePosts: true, posts });
+        res.render("my-posts", { user: req.session.user, areTherePosts: true, posts, totalPages, currentPage });
       }
       // Logged in + there are NO posts
       else if (userIsLoggedIn(req) && posts.length === 0) {
         res.render("my-posts", { user: req.session.user, areTherePosts: false, toastMsg: "لم تقم بإضافة منشورات من قبل." });
       }
-      // Other
+      // Other - Default
       else {
         res.send("<h3>Unauthorized access .. You must log in first</h3>");
       }

@@ -187,19 +187,16 @@ class DB {
   //
 
   // Return posts
-  static async getPosts(courseCode) {
+  static async getPosts(courseCode, limit = 10, offset = 0) {
     let con;
     try {
       con = await this.connect();
 
       // Check if the course code exists in the courses table
       const checkStmt = `
-    SELECT
-      COUNT(*) AS count
-    FROM
-      courses
-    WHERE
-      code = ?;
+      SELECT COUNT(*) AS count
+      FROM courses
+      WHERE code = ?;
     `;
       const [checkRows] = await con.query(checkStmt, [courseCode]);
       const count = checkRows[0].count;
@@ -208,27 +205,30 @@ class DB {
       }
 
       // Fetch the posts for the given course code
-      const stmt = `
-    SELECT
-      posts.title,
-      posts.fileType,
-      posts.s3FileName,
-      users.username,
-      users.gender,
-      posts.createdAt
-    FROM
-      posts
+      const postsStmt = `
+      SELECT posts.title, posts.fileType, posts.s3FileName, users.username, users.gender, posts.createdAt
+      FROM posts
       JOIN users ON posts.userId = users.id
       JOIN courses ON posts.courseId = courses.id
-    WHERE
-      courses.code = ?
-    ORDER BY
-      posts.createdAt DESC;
+      WHERE courses.code = ?
+      ORDER BY posts.createdAt DESC
+      LIMIT ?
+      OFFSET ?;
     `;
-      const [rows] = await con.query(stmt, [courseCode]);
-      const posts = rows;
+      const [postsRows] = await con.query(postsStmt, [courseCode, limit, offset]);
+      const posts = postsRows;
 
-      return posts;
+      // Count the total number of posts for the given course code
+      const countStmt = `
+      SELECT COUNT(*) AS totalPosts
+      FROM posts
+      JOIN courses ON posts.courseId = courses.id
+      WHERE courses.code = ?;
+    `;
+      const [countRows] = await con.query(countStmt, [courseCode]);
+      const totalPosts = countRows[0].totalPosts;
+
+      return { posts, totalPosts };
     } catch (err) {
       console.error(err.message);
       return null;
@@ -400,32 +400,39 @@ class DB {
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //
 
-  static async getPostsOfUser(userId) {
+  static async getPostsOfUser(userId, limit = 10, offset = 0) {
     let con;
     try {
       con = await this.connect();
       const stmt = `
-      SELECT
-        posts.id,
-        posts.title,
-        posts.fileType,
-        posts.s3FileName,
-        users.username,
-        users.gender,
-        posts.createdAt,
-        courses.code AS courseCode
+        SELECT
+          posts.id,
+          posts.title,
+          posts.fileType,
+          posts.s3FileName,
+          users.username,
+          users.gender,
+          posts.createdAt,
+          courses.code AS courseCode
         FROM
-        posts
-        JOIN users ON posts.userId = users.id
-        JOIN courses ON posts.courseId = courses.id
-      WHERE
-        posts.userId = ?
-      ORDER BY
-        posts.createdAt DESC;
-    `;
-      const [rows] = await con.query(stmt, [userId]);
+          posts
+          JOIN users ON posts.userId = users.id
+          JOIN courses ON posts.courseId = courses.id
+        WHERE
+          posts.userId = ?
+        ORDER BY
+          posts.createdAt DESC
+        LIMIT ?
+        OFFSET ?;
+      `;
+      const [rows] = await con.query(stmt, [userId, limit, offset]);
       const posts = rows;
-      return posts;
+
+      const countStmt = "SELECT COUNT(*) AS totalPosts FROM posts WHERE userId = ?";
+      const [countRows] = await con.query(countStmt, [userId]);
+      const totalPosts = countRows[0].totalPosts;
+
+      return { posts, totalPosts };
     } catch (err) {
       console.error(err.message);
       return null;

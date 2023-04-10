@@ -32,17 +32,17 @@
 
       <!-- Update post success -->
       <% if(typeof updatePostSuccess !== 'undefined' && updatePostSuccess === true) { %>
-        <script>
-          showToast(true, "<%= toastMsg %>");
-        </script>
-        <% } %>
+      <script>
+        showToast(true, "<%= toastMsg %>");
+      </script>
+      <% } %>
 
-        <!-- Update post failed -->
+      <!-- Update post failed -->
       <% if(typeof updatePostSuccess !== 'undefined' && updatePostSuccess === false) { %>
-        <script>
-          showToast(false, "<%= toastMsg %>");
-        </script>
-        <% } %>
+      <script>
+        showToast(false, "<%= toastMsg %>");
+      </script>
+      <% } %>
 
       <!-- If there are no posts -->
       <% if(typeof areTherePosts !== 'undefined' && areTherePosts === false) { %>
@@ -80,6 +80,14 @@
           </div>
         </div>
         <% }) %> <% } %>
+      </div>
+
+      <div class="pagination d-flex flex-row-reverse justify-content-center align-items-center mt-5">
+        <% if(totalPages !== 'undefined') { %> <% for (let i = 1; i <= totalPages; i++) { %> <% if(i === currentPage) { %>
+        <a href="?page=<%= i %>" class="page-number-link text-light mx-2"><%= i %></a>
+        <% } else { %>
+        <a href="?page=<%= i %>" class="page-number-link text-decoration-none text-light mx-2"><%= i %></a>
+        <% } %> <% } %> <% } %>
       </div>
     </main>
 
