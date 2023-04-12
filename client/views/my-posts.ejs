@@ -69,7 +69,7 @@
           <div class="myposts-page-container__post-column d-flex justify-content-between align-items-center flex-grow-1">
             <small class="post-date"><%= post.createdAt %></small>
             <div>
-              <form class="m-0 mx-1 d-inline" action="/dashboard/my-posts/<%=post.id%>/update-post-title" method="POST">
+              <form class="m-0 mx-1 d-inline" action="/dashboard/my-posts/<%=post.id%>/update-post-title" method="GET">
                 <button class="update-post-btn btn btn-sm btn-primary text-light"><%=langData.EDIT_TITLE%></button>
               </form>
               <form class="m-0 d-inline" action="/dashboard/my-posts/deletePost" method="POST">

@@ -100,8 +100,8 @@ router.post("/dashboard/my-posts/deletePost", async (req, res) => {
   await RouteHandler.deletePost(req, res);
 });
 
-// Update Post page
-router.post("/dashboard/my-posts/:postId/update-post-title", RouteHandler.renderUpdatePostTitlePage)
+// Update Post title page
+router.get("/dashboard/my-posts/:postId/update-post-title", RouteHandler.renderUpdatePostTitlePage);
 
 // Update Post process
 router.post("/dashboard/my-posts/:postId/updatePostTitleProcess", async (req, res) => {

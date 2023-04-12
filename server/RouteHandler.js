@@ -27,6 +27,7 @@ class RouteHandler {
         justLoggedIn: true,
         toastMsg: "تم تسجيل الدخول بنجاح!",
         user: req.session.user,
+        langData: req.session.langData,
       });
     }
     // already logged in
