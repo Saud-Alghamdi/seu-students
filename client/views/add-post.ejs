@@ -18,27 +18,27 @@
       </a>
 
       <header class="text-center">
-        <h1>إضافة منشور:</h1>
+        <h1><%=langData.ADD_POST%></h1>
       </header>
 
       <form enctype="multipart/form-data" class="add-post-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
         <div class="mb-3">
-          <label for="" class="form-label">العنوان:</label>
+          <label for="" class="form-label"><%=langData.TITLE%></label>
           <input name="title" type="text" class="title-input form-control" id="title" maxlength="70" />
           <span class="error-message error-message-title-input"></span>
         </div>
         <div class="mb-3">
           <label for="document" class="form-label">
-            الملف:
+            <%=langData.FILE%>
             <input type="file" class="file-input" accept=".pdf, .ppt, .pptx, .doc, .docx" />
             <span class="error-message error-message-file-input"></span>
             <br />
-            <small>فقط يقبل (PDF, Word, Powerpoint).</small>
+            <small><%=langData.FILE_RULE1%></small>
             <br />
-            <small>الحد الأقصى لحجم الملف هو 50 MB.</small>
+            <small><%=langData.FILE_RULE2%></small>
           </label>
         </div>
-        <button id="submitButton" type="submit" class="add-post-page-container__button btn btn-lg d-block mx-auto mt-4">إضافة</button>
+        <button id="submitButton" type="submit" class="add-post-page-container__button btn btn-lg d-block mx-auto mt-4"><%=langData.ADD%></button>
       </form>
     </main>
 

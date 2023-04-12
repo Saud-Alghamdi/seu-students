@@ -1,36 +1,235 @@
 {
-  "HOME_STRING": "Home",
-  "DEPARTMENTS_STRING": "Departments",
-  "CONTACT_US_STRING": "Contact us",
-  "LOGIN_STRING": "Log in",
-  "SIGNUP_STRING": "Sign up",
-  "LOGOUT_STRING": "Log out",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||||||": "||||||||||||||||||||||||| home.ejs |||||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "HOME_PAGE_TITLE": "SEU Students - Home",
+
   "WELCOME_STUDENTS": "Welcome SEU Students!",
-  "WELCOME_MESSAGE": "lorem something ...",
-  "SIGNUP_FAILED": "Sign up failed, something went wrong ..",
-  "SIGNUP_SUCCESSFUL": "Signed up successfully!",
-  "USERNAME_EXISTS": "Username already exists.",
-  "INVALID_USERNAME_NO_START_LETTER": "Username must start with a letter.",
-  "INVALID_USERNAME_CONTENT": "Username can only contain letters, numbers, and underscores.",
-  "INVALID_USERNAME_LENGTH": "Username must be between 3 to 25 characters",
-  "EMAIL_EXISTS": "Email already exists.",
-  "INVALID_EMAIL_FORMAT": "Invalid email address.",
-  "INVALID_PASSWORD_CONTENT": "Password can't contain spaces.",
-  "INVALID_PASSWORD_LENGTH": "Password must be at least 6 characters long.",
-  "NO_GENDER_SELECTED": "Please select a gender.",
-  "LOGIN_SUCCESSFUL": "Logged in successfully!",
-  "LOGIN_FAILED": "Log in failed, something went wrong ..",
-  "INCORRECT_CREDS": "Username, email, or password is incorrect.",
-  "COMPUTER_SCIENCE_STRING": "Computer Science",
-  "INFORMATION_TECHNOLOGY_STRING": "Information Technology",
-  "DATA_SCIENCE_STRING": "Data Science",
-  "POSTS_STRING": "Posts",
-  "NEED_LOGIN_ADD_POST": "You need to log in to add a post.",
-  "ADD_POST_STRING": "Add Post",
-  "MUST_WRITE_TITLE": "A title is needed.",
-  "MUST_UPLOAD_FILE": "You must upload a file",
-  "INVALID_FILE_TYPE": "Invalid file type. Only PDF, Word, and PowerPoint files are allowed.",
-  "POST_FAILED": "Error submitting post, something went wrong ..",
-  "POST_SUCCESS": "Post submitted successfully!",
-  "DEVELOPED_BY": "Developed by:"
+
+  "WELCOME_PARAGRAPH_P1": "Welcome to the dedicated website for students of Saudi Electronic University! Our aim in building this website is to provide a platform that empowers students to easily access study-related files.",
+
+  "WELCOME_PARAGRAPH_P2": "We believe that this will not only enhance your learning experience, but also make it easier and more efficient.",
+
+  "WELCOME_PARAGRAPH_P3": "We are committed to continuously updating and improving our core system to better serve you, and we wish you the best experiences.",
+
+  "LOGIN": "Log in",
+
+  "SIGNUP": "Sign up",
+
+  "CONTINUE_WITHOUT_LOGIN": "Continue without logging in",
+
+  "TARGET_AUDIENCE": "✱ Who is the target audience for this website?",
+
+  "TARGET_AUDIENCE_DESC1": "Currently, the website targets students of the College of Computing and Informatics.",
+
+  "TARGET_AUDIENCE_DESC2": "Support for other colleges will be added in the future.",
+
+  "BENEFITS": "✱ What are the benefits of building this website?",
+
+  "BENEFITS_DESC1": "Facilitating access to study-related files.",
+
+  "FILE_UPLOADERS": "✱ Who will upload the files?",
+
+  "FILE_UPLOADERS_DESC1": "The students themselves will upload the files.",
+
+  "FILE_UPLOADERS_DESC2": "Dear student, any file that you feel will benefit other students, log in and upload it to the platform here.",
+
+  "FILE_UPLOADERS_DESC3": "Useful files that can be shared include:",
+
+  "FILE_UPLOADERS_DESC4": "• Books",
+
+  "FILE_UPLOADERS_DESC5": "• Slides",
+
+  "FILE_UPLOADERS_DESC6": "• Test banks",
+
+  "FILE_UPLOADERS_DESC7": "• Solutions for assignments, quizzes, and homework",
+
+  "FILE_UPLOADERS_DESC8": "And many other useful files for students during their studying of the subject.",
+
+  "STUDENT_JOURNEY": "✱ Student journey inside the website:",
+
+  "STUDENT_JOURNEY_DESC1": "The student chooses their major, and then all the subjects under that major will appear.",
+
+  "STUDENT_JOURNEY_DESC2": "Then the student selects the subject for which they want to search for a related file, such as a textbook for example.",
+
+  "STUDENT_JOURNEY_DESC3": "Upon clicking on the subject, all the files related to that subject will appear.",
+
+  "STUDENT_JOURNEY_DESC4": "The files will be displayed as posts, and by clicking on the post, the file will be automatically downloaded to your device for use.",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||||||": "||||||||||||||||||||||||| signup.ejs |||||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "SIGNUP": "Sign up",
+
+  "USERNAME": "Username:",
+
+  "EMAIL": "Email:",
+
+  "PASSWORD": "Password:",
+
+  "REPEAT_PASSWORD": "Repeat Password:",
+
+  "GENDER": "Gender:",
+
+  "MALE": "Male",
+
+  "FEMALE": "Female",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||||||": "||||||||||||||||||||||||| login.ejs |||||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "LOGIN": "Login",
+
+  "USERNAME_OR_EMAIL": "Username or Email:",
+
+  "PASSWORD": "Password:",
+
+  "FORGOT_PASSWORD": "Forgot Password?",
+
+  "DONT_HAVE_ACCOUNT": "Don't have an account",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||||||": "||||||||||||||||||||||||| reset-password.ejs |||||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "RESET_PASSWORD": "Reset Password:",
+
+  "RESET_PASSWORD_DESC1": "A temporary password will be sent to your email. Use it to log in.",
+
+  "RESET_PASSWORD_DESC2": "You can change it later from your account settings.",
+
+  "EMAIL": "Email:",
+
+  "SEND": "Send",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||": "||||||||||||||||||||||| dashboard.ejs |||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "ACCOUNT_SETTINGS": "Account Settings:",
+
+  "MY_ACCOUNT_INFO": "My Account Info",
+
+  "MY_POSTS": "My Posts",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||": "||||||||||||||||||||||| my-account.ejs |||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "MY_ACCOUNT_INFO": "My Account Info:",
+
+  "USERNAME": "Username:",
+
+  "NEW_USERNAME": "New Username:",
+
+  "EMAIL": "Email:",
+
+  "NEW_EMAIL": "New Email:",
+
+  "PASSWORD": "Password:",
+
+  "NEW_PASSWORD": "New Password:",
+
+  "REPEAT_NEW_PASSWORD": "Repeat New Password:",
+
+  "CHANGE": "Change",
+
+  "SAVE": "Save",
+
+  "CANCEL": "Cancel",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||": "||||||||||||||||||||||| my-posts.ejs |||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "MY_POSTS": "My Posts:",
+
+  "EDIT_TITLE": "Edit Title",
+
+  "DELETE": "Delete",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||": "||||||||||||||||||||||| update_post_title.ejs |||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "UPDATE_POST_TITLE": "Edit Post Title:",
+
+  "NEW_TITLE": "New Title:",
+
+  "EDIT": "Edit",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||": "||||||||||||||||||||||| departments.ejs |||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "DEPARTMENTS": "Departments:",
+
+  "COMPUTER_SCIENCE": "Computer Science",
+
+  "INFORMATION_TECHNOLOGY": "Information Technology",
+
+  "DATA_SCIENCE": "Data Science",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||": "||||||||||||||||||||||| courses.ejs |||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "COMPUTER_SCIENCE_COURSES": "Computer Science Courses:",
+
+  "INFORMATION_TECHNOLOGY_COURSES": "Information Technology Courses:",
+
+  "DATA_SCIENCE_COURSES": "Data Science Courses:",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||": "||||||||||||||||||||||| posts.ejs |||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "POSTS": "Posts",
+
+  "ADD_POST": "+ Add Post",
+
+  "NO_POSTS": "There are currently no posts for this course.",
+
+  "USER_NO_POSTS": "You have not added any posts yet.",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||": "||||||||||||||||||||||| add-post.ejs |||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "ADD_POST": "Add Post",
+
+  "TITLE": "Title:",
+
+  "FILE": "File:",
+
+  "FILE_RULE1": "Accepts only PDF, Word, Powerpoint.",
+
+  "FILE_RULE2": "Maximum file size is 50 MB.",
+
+  "ADD": "Add",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||": "||||||||||||||||||||||| nav.ejs |||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "HOME": "Home",
+
+  "DEPARTMENTS": "Departments",
+
+  "SIGNUP": "Sign Up",
+
+  "LOGIN": "Login",
+
+  "LOGOUT": "Logout",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||": "||||||||||||||||||||||| footer.ejs |||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "COPYRIGHT": "All rights reserved © 2023 : Saud Al-Ghamdi.",
+
+  "CONTACT_ME": "Feel free to reach out to me for any inquiries or concerns via the following channels:"
 }

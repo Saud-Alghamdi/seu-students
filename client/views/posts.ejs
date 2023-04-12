@@ -13,11 +13,11 @@
       </a>
 
       <header>
-        <h1>المنشورات لـ <%=courseCode%> :</h1>
+        <h1><%=langData.POSTS%> <%=courseCode%>:</h1>
       </header>
 
       <form class="mt-3" action="./add-post" method="GET">
-        <button class="add-post-btn btn btn-primary">+ إضافة منشور</button>
+        <button class="add-post-btn btn btn-primary"><%=langData.ADD_POST%></button>
       </form>
 
       <!-- if post added successfully -->
@@ -62,7 +62,7 @@
           </div>
         </a>
         <% })} else { %>
-        <h6 class="text-light">لا توجد منشورات حاليًا لهذه المادة.</h6>
+        <h6 class="text-light"><%=langData.NO_POSTS%></h6>
         <% } %>
       </div>
 

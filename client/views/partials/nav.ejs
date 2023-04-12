@@ -7,17 +7,17 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav align-items-md-center p-0">
+      <ul class="navbar-nav d-flex align-items-md-center p-0">
         <li class="nav-item px-md-2">
-          <a class="nav-link" aria-current="page" href="/">الرئيسية</a>
+          <a class="nav-link" aria-current="page" href="/"><%=langData.HOME%></a>
         </li>
         <li class="nav-item px-md-2">
-          <a class="nav-link" href="/departments">التخصصات</a>
+          <a class="nav-link" href="/departments"><%=langData.DEPARTMENTS%></a>
         </li>
         <!-- if Logged in -->
         <% if(typeof user !== 'undefined') { %>
         <li class="nav-item px-md-2">
-          <a class="nav-link" href="/logout">تسجيل خروج</a>
+          <a class="nav-link" href="/logout"><%=langData.LOGOUT%></a>
         </li>
         <li class="nav-item px-md-2 d-flex align-items-center">
           <a class="nav-link" href="/dashboard" style="padding-bottom: 0">
@@ -31,12 +31,18 @@
         <!-- if NOT Logged in -->
         <% } else { %>
         <li class="nav-item px-md-2">
-          <a class="nav-link" href="/login">تسجيل دخول</a>
+          <a class="nav-link" href="/login"><%=langData.LOGIN%></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signup">التسجيل</a>
+          <a class="nav-link" href="/signup"><%=langData.SIGNUP%></a>
         </li>
         <% } %>
+        <li class="nav-item">
+          <a class="nav-link" href="?lang=ar">العربية</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="?lang=en">English</a>
+        </li>
       </ul>
     </div>
   </div>

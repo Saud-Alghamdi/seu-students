@@ -23,7 +23,7 @@ app.use(
   })
 );
 
-// Session language middleware
+// Language middleware
 function setLang(req, res, next) {
   let userDefaultLang = req.headers["accept-language"].split(",")[0].toLowerCase();
 

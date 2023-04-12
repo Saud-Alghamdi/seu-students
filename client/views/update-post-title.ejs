@@ -18,13 +18,13 @@
       </a>
 
       <header class="text-center">
-        <h1>تعديل عنوان منشور:</h1>
+        <h1><%=langData.UPDATE_POST_TITLE%></h1>
       </header>
 
       <form class="update-post-title-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto" method="POST" action="./updatePostTitleProcess">
-        <label for="" class="form-label">العنوان الجديد:</label>
+        <label for="" class="form-label"><%=langData.NEW_TITLE%></label>
         <input name="newTitle" type="text" class="new-title-input form-control" id="new-title" maxlength="70" />
-        <button id="updateButton" type="submit" class="update-post-title-page-container__button btn btn-lg d-block mx-auto mt-4">تعديل</button>
+        <button id="updateButton" type="submit" class="update-post-title-page-container__button btn btn-lg d-block mx-auto mt-4"><%=langData.EDIT%></button>
       </form>
     </main>
 

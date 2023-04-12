@@ -25,57 +25,57 @@
       </a>
 
       <header class="text-center">
-        <h1>بيانات حسابي:</h1>
+        <h1><%=langData.MY_ACCOUNT_INFO%></h1>
       </header>
 
       <section class="mt-5">
         <!-- update Username -->
         <div class="username-data-wrapper mt-4">
-          <h4 class="username-label d-block">اسم المستخدم:</h4>
+          <h4 class="username-label d-block"><%=langData.USERNAME%></h4>
           <p class="current-username d-inline-block fs-5"><%= user.username %></p>
-          <button class="update-btn update-username-btn btn mx-2">تغيير</button>
+          <button class="update-btn update-username-btn btn mx-2"><%=langData.CHANGE%></button>
 
           <!-- Update username hidden form -->
           <form class="my-account-form new-username-form mb-5 visually-hidden">
-            <label class="d-block" for="">اسم المستخدم الجديد:</label>
+            <label class="d-block" for=""><%=langData.NEW_USERNAME%></label>
             <input class="my-account-form-input new-username-input form-control d-inline mt-2" type="text" name="username" id="" />
-            <button class="save-btn new-username-save-btn btn btn-primary">حفظ</button>
-            <button class="cancel-btn new-username-cancel-btn btn btn-warning border-0">إلغاء</button>
+            <button class="save-btn new-username-save-btn btn btn-primary"><%=langData.SAVE%></button>
+            <button class="cancel-btn new-username-cancel-btn btn btn-warning border-0"><%=langData.CANCEL%></button>
             <span class="text-warning d-block error-message username-error-message fw-bold"></span>
           </form>
         </div>
 
         <!-- update email -->
         <div class="email-data-wrapper mt-4">
-          <h4 class="email-label d-block">البريد الإلكتروني:</h4>
+          <h4 class="email-label d-block"><%=langData.EMAIL%></h4>
           <p class="current-email d-inline-block fs-5"><%= user.email %></p>
-          <button class="update-btn update-email-btn btn mx-2">تغيير</button>
+          <button class="update-btn update-email-btn btn mx-2"><%=langData.CHANGE%></button>
 
           <!-- Update email hidden form -->
           <form class="my-account-form new-email-form mb-5 visually-hidden">
-            <label class="d-block" for="">البريد الإلكتروني الجديد:</label>
+            <label class="d-block" for=""><%=langData.NEW_EMAIL%></label>
             <input class="my-account-form-input new-email-input form-control d-inline mt-2" type="email" name="email" id="" />
-            <button class="save-btn new-email-save-btn btn btn-primary">حفظ</button>
-            <button class="cancel-btn new-email-cancel-btn btn btn-warning border-0">إلغاء</button>
+            <button class="save-btn new-email-save-btn btn btn-primary"><%=langData.SAVE%></button>
+            <button class="cancel-btn new-email-cancel-btn btn btn-warning border-0"><%=langData.CANCEL%></button>
             <span class="text-warning d-block error-message email-error-message fw-bold"></span>
           </form>
         </div>
 
         <!-- update password -->
         <div class="password-data-wrapper mt-4">
-          <h4 class="password-label d-block">كلمة المرور:</h4>
+          <h4 class="password-label d-block"><%=langData.PASSWORD%></h4>
           <p class="current-password d-inline-block fs-5">•••••••••••••</p>
-          <button class="update-btn update-password-btn btn mx-2">تغيير</button>
+          <button class="update-btn update-password-btn btn mx-2"><%=langData.CHANGE%></button>
 
           <!-- Update password hidden form -->
           <form class="my-account-form new-password-form mb-5 visually-hidden">
-            <label class="d-block" for="">كلمة المرور الجديدة:</label>
+            <label class="d-block" for=""><%=langData.NEW_PASSWORD%></label>
             <input class="my-account-form-input new-password-input form-control d-inline mt-2" type="password" name="password" id="" />
-            <label class="d-block mt-2" for="">إعادة كتابة كلمة المرور الجديدة:</label>
+            <label class="d-block mt-2" for=""><%=langData.REPEAT_NEW_PASSWORD%></label>
             <input class="d-block my-account-form-input repeat-new-password-input form-control d-inline mt-2" type="password" name="repeat-password" id="" />
             <span class="text-warning d-block error-message password-error-message fw-bold"></span>
-            <button class="mt-2 save-btn new-password-save-btn btn btn-primary">حفظ</button>
-            <button class="mt-2 cancel-btn new-password-cancel-btn btn btn-warning border-0">إلغاء</button>
+            <button class="mt-2 save-btn new-password-save-btn btn btn-primary"><%=langData.SAVE%></button>
+            <button class="mt-2 cancel-btn new-password-cancel-btn btn btn-warning border-0"><%=langData.CANCEL%></button>
           </form>
         </div>
       </section>

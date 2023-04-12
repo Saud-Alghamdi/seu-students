@@ -17,7 +17,9 @@ class RouteHandler {
   static renderHomePage(req, res) {
     // not logged in
     if (!userIsLoggedIn(req)) {
-      res.render("home", { langData: req.session.langData });
+      res.render("home", {
+        langData: req.session.langData,
+      });
     }
     // just logged in
     else if (userIsLoggedIn(req) && req.query.loginSuccess === "true" && req.query.showToast === "true") {
@@ -29,7 +31,10 @@ class RouteHandler {
     }
     // already logged in
     else if (userIsLoggedIn(req)) {
-      res.render("home", { user: req.session.user });
+      res.render("home", {
+        user: req.session.user,
+        langData: req.session.langData,
+      });
     }
   }
 
@@ -41,9 +46,12 @@ class RouteHandler {
       res.render("signup", {
         signupSuccess: false,
         toastMsg: "Sign up failed ..",
+        langData: req.session.langData,
       });
     } else {
-      res.render("signup");
+      res.render("signup", {
+        langData: req.session.langData,
+      });
     }
   }
 
@@ -72,6 +80,7 @@ class RouteHandler {
       res.render("login", {
         signupSuccess: true,
         toastMsg: "تم التسجيل بنجاح!",
+        langData: req.session.langData,
       });
     }
     // coming from logout
@@ -79,6 +88,7 @@ class RouteHandler {
       res.render("login", {
         logoutSuccess: true,
         toastMsg: "تم تسجيل الخروج بنجاح!",
+        langData: req.session.langData,
       });
     }
     // coming from reset password + reset sent successfully
@@ -86,6 +96,7 @@ class RouteHandler {
       res.render("login", {
         sendResetPasswordSuccess: true,
         toastMsg: "تم إرسال كلمة المرور الجديدة على بريدك الإلكتروني!",
+        langData: req.session.langData,
       });
     }
     // coming from reset password + reset failed to send
@@ -93,6 +104,7 @@ class RouteHandler {
       res.render("login", {
         sendResetPasswordSuccess: false,
         toastMsg: "حدث خطأ، لم نتمكن من إرسال كلمة المرور الجديدة ..",
+        langData: req.session.langData,
       });
     }
     // Incorrect login credentials
@@ -100,11 +112,14 @@ class RouteHandler {
       res.render("login", {
         loginSuccess: false,
         toastMsg: "اسم المستخدم أو البريد الإلكتروني أو كلمة المرور خطأ.",
+        langData: req.session.langData,
       });
     }
     // coming from any other place other than the above
     else {
-      res.render("login");
+      res.render("login", {
+        langData: req.session.langData,
+      });
     }
   }
 
@@ -131,9 +146,12 @@ class RouteHandler {
       res.render("reset-password", {
         emailExists: false,
         toastMsg: "البريد الإلكتروني الذي أدخلته غير مسجل لدينا ..",
+        langData: req.session.langData,
       });
     } else {
-      res.render("reset-password");
+      res.render("reset-password", {
+        langData: req.session.langData,
+      });
     }
   }
 
@@ -204,9 +222,14 @@ class RouteHandler {
 
   static renderDepartmentsPage(req, res) {
     if (userIsLoggedIn(req)) {
-      res.render("departments", { user: req.session.user });
+      res.render("departments", {
+        user: req.session.user,
+        langData: req.session.langData,
+      });
     } else {
-      res.render("departments");
+      res.render("departments", {
+        langData: req.session.langData,
+      });
     }
   }
 
@@ -229,9 +252,18 @@ class RouteHandler {
     }
 
     if (userIsLoggedIn(req)) {
-      res.render("courses", { depAbbr, courses, user: req.session.user });
+      res.render("courses", {
+        depAbbr,
+        courses,
+        user: req.session.user,
+        langData: req.session.langData,
+      });
     } else {
-      res.render("courses", { depAbbr, courses });
+      res.render("courses", {
+        depAbbr,
+        courses,
+        langData: req.session.langData,
+      });
     }
   }
 
@@ -268,6 +300,7 @@ class RouteHandler {
         user: req.session.user,
         postSuccess: true,
         toastMsg: "تم إضافة المنشور بنجاح!",
+        langData: req.session.langData,
       });
     }
     // Trying to visit add-post page while not logged in
@@ -279,6 +312,7 @@ class RouteHandler {
         totalPages,
         needLogin: true,
         toastMsg: "يجب تسجيل الدخول أولًا لإضافة منشور",
+        langData: req.session.langData,
       });
     }
     // Visit posts page anytime while logged in
@@ -289,6 +323,7 @@ class RouteHandler {
         currentPage,
         totalPages,
         user: req.session.user,
+        langData: req.session.langData,
       });
     }
   }
@@ -298,7 +333,10 @@ class RouteHandler {
 
   static async renderAddPostPage(req, res) {
     if (userIsLoggedIn(req)) {
-      res.render("add-post", { user: req.session.user });
+      res.render("add-post", {
+        user: req.session.user,
+        langData: req.session.langData,
+      });
     } else {
       res.redirect("posts?needLogin");
     }
@@ -397,7 +435,10 @@ class RouteHandler {
 
   static renderDashboardPage(req, res) {
     if (userIsLoggedIn(req)) {
-      res.render("dashboard", { user: req.session.user });
+      res.render("dashboard", {
+        user: req.session.user,
+        langData: req.session.langData,
+      });
     } else {
       res.send("<h3>Unauthorized access .. You must log in first</h3>");
     }
@@ -412,11 +453,15 @@ class RouteHandler {
         user: req.session.user,
         updateSuccess: true,
         toastMsg: "تم تحديث معلوماتك بنجاح!",
+        langData: req.session.langData,
       });
     } else if (!userIsLoggedIn(req)) {
       res.send("<h3>Unauthorized access .. You must log in first</h3>");
     } else {
-      res.render("my-account", { user: req.session.user });
+      res.render("my-account", {
+        user: req.session.user,
+        langData: req.session.langData,
+      });
     }
   }
 
@@ -463,6 +508,7 @@ class RouteHandler {
           currentPage,
           deletePostSuccess: true,
           toastMsg: "تم حذف المنشور بنجاح!",
+          langData: req.session.langData,
         });
       }
       // Logged in + there are posts + delete post failed
@@ -475,6 +521,7 @@ class RouteHandler {
           currentPage,
           deletePostSuccess: false,
           toastMsg: "فشل حذف المنشور ..",
+          langData: req.session.langData,
         });
       }
       // Logged in + update post title successful
@@ -486,6 +533,7 @@ class RouteHandler {
           currentPage,
           updatePostSuccess: true,
           toastMsg: "تم تعديل عنوان المنشور بنجاح!",
+          langData: req.session.langData,
         });
       }
       // Logged in + update post title failed
@@ -498,15 +546,28 @@ class RouteHandler {
           currentPage,
           updatePostSuccess: false,
           toastMsg: "فشل تعديل عنوان المنشور ..",
+          langData: req.session.langData,
         });
       }
       // Logged in + there are posts
       else if (userIsLoggedIn(req) && posts.length > 0) {
-        res.render("my-posts", { user: req.session.user, areTherePosts: true, posts, totalPages, currentPage });
+        res.render("my-posts", {
+          user: req.session.user,
+          areTherePosts: true,
+          posts,
+          totalPages,
+          currentPage,
+          langData: req.session.langData,
+        });
       }
       // Logged in + there are NO posts
       else if (userIsLoggedIn(req) && posts.length === 0) {
-        res.render("my-posts", { user: req.session.user, areTherePosts: false, toastMsg: "لم تقم بإضافة منشورات من قبل." });
+        res.render("my-posts", {
+          user: req.session.user,
+          areTherePosts: false,
+          toastMsg: "لم تقم بإضافة منشورات من قبل.",
+          langData: req.session.langData,
+        });
       }
       // Other - Default
       else {
@@ -540,7 +601,10 @@ class RouteHandler {
 
   static async renderUpdatePostTitlePage(req, res) {
     if (userIsLoggedIn(req)) {
-      res.render("update-post-title", { user: req.session.user });
+      res.render("update-post-title", {
+        user: req.session.user,
+        langData: req.session.langData,
+      });
     }
   }
 

@@ -13,7 +13,7 @@
       </a>
 
       <header class="text-center">
-        <h1>التسجيل:</h1>
+        <h1><%=langData.SIGNUP%></h1>
       </header>
 
       <!-- If sign up failed -->
@@ -25,38 +25,38 @@
 
       <form action="/signup-process" method="POST" class="form signup-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
         <div class="form__input-group mb-3">
-          <label for="" class="form-label">اسم المستخدم:</label>
+          <label for="" class="form-label"><%=langData.USERNAME%></label>
           <input name="username" type="text" class="input-field field username-field form-control" minlength="3" maxlength="25" />
           <span class="error-message"></span>
         </div>
         <div class="form__input-group mb-3">
-          <label for="" class="form-label">البريد الإلكتروني:</label>
+          <label for="" class="form-label"><%=langData.EMAIL%></label>
           <input name="email" type="email" class="input-field field email-field form-control" aria-describedby="emailHelp" />
           <span class="error-message"></span>
         </div>
         <div class="form__input-group mb-3">
-          <label for="" class="form-label">كلمة المرور:</label>
+          <label for="" class="form-label"><%=langData.PASSWORD%></label>
           <input name="password" type="password" class="input-field field password-field form-control" id="password-field" minlength="6" maxlength="30" />
           <span class="error-message"></span>
         </div>
         <div class="form__input-group mb-3">
-          <label for="" class="form-label">إعادة كتابة كلمة المرور:</label>
+          <label for="" class="form-label"><%=langData.REPEAT_PASSWORD%></label>
           <input name="repeat-password" type="password" class="input-field field repeat-password-field form-control" id="repeat-password-field" minlength="6" maxlength="30" />
           <span class="error-message"></span>
         </div>
         <div class="form__input-group">
           <span class="error-message"></span>
-          <label class="mb-2" for="">الجنس:</label>
+          <label class="mb-2" for=""><%=langData.GENDER%></label>
           <div class="form-check">
-            <label class="form-check-label" for="male-radio">ذكر</label>
+            <label class="form-check-label" for="male-radio"><%=langData.MALE%></label>
             <input name="gender" id="male-radio" class="input-field radio-field male-radio-field form-check-input" type="radio" value="male" />
           </div>
           <div class="form-check mb-3">
-            <label class="form-check-label" for="female-radio">أنثى</label>
+            <label class="form-check-label" for="female-radio"><%=langData.FEMALE%></label>
             <input name="gender" id="female-radio" class="input-field radio-field female-radio-field form-check-input" type="radio" value="female" />
           </div>
         </div>
-        <button type="submit" class="signup-page-container__button btn btn-lg d-block mx-auto mt-4">التسجيل</button>
+        <button type="submit" class="signup-page-container__button btn btn-lg d-block mx-auto mt-4"><%=langData.SIGNUP%></button>
       </form>
     </main>
 
