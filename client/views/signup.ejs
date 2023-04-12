@@ -1,7 +1,7 @@
 <html dir="rtl">
   <head>
     <%- include('partials/head.ejs') %>
-    <title>التسجيل</title>
+    <title><%=langData.SIGNUP_PAGE_TITLE%></title>
   </head>
   <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
@@ -17,9 +17,9 @@
       </header>
 
       <!-- If sign up failed -->
-      <% if(typeof signupSuccess !== 'undefined' && signupSuccess === false && typeof toastMsg !== 'undefined') { %>
+      <% if(typeof signupSuccess !== 'undefined' && signupSuccess === false) { %>
       <script>
-        showToast(false, "<%= toastMsg %>");
+        showToast(false, "<%= langData.SIGNUP_FAIL_TOAST %>");
       </script>
       <% } %>
 
@@ -45,16 +45,16 @@
           <span class="error-message"></span>
         </div>
         <div class="form__input-group">
-          <span class="error-message"></span>
           <label class="mb-2" for=""><%=langData.GENDER%></label>
           <div class="form-check">
             <label class="form-check-label" for="male-radio"><%=langData.MALE%></label>
             <input name="gender" id="male-radio" class="input-field radio-field male-radio-field form-check-input" type="radio" value="male" />
           </div>
-          <div class="form-check mb-3">
+          <div class="form-check">
             <label class="form-check-label" for="female-radio"><%=langData.FEMALE%></label>
             <input name="gender" id="female-radio" class="input-field radio-field female-radio-field form-check-input" type="radio" value="female" />
           </div>
+          <span class="error-message"></span>
         </div>
         <button type="submit" class="signup-page-container__button btn btn-lg d-block mx-auto mt-4"><%=langData.SIGNUP%></button>
       </form>

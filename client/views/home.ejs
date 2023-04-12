@@ -22,9 +22,9 @@
       </header>
 
       <!-- if the user has just logged in -->
-      <% if(typeof justLoggedIn !== 'undefined' && typeof toastMsg !== 'undefined') { %>
+      <% if(typeof justLoggedIn !== 'undefined') { %>
       <script>
-        showToast(true, "<%= toastMsg %>");
+        showToast(true, "<%= langData.LOGIN_SUCCESS_TOAST %>");
       </script>
       <% } %>
 

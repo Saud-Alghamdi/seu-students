@@ -61,6 +61,8 @@
   "|||||||||||||||||||": "||||||||||||||||||||||||| signup.ejs |||||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
+  "SIGNUP_PAGE_TITLE": "SEU Students - Signup",
+
   "SIGNUP": "Sign up",
 
   "USERNAME": "Username:",
@@ -81,6 +83,8 @@
   "|||||||||||||||||||": "||||||||||||||||||||||||| login.ejs |||||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
+  "LOGIN_PAGE_TITLE": "SEU Students - Login",
+
   "LOGIN": "Login",
 
   "USERNAME_OR_EMAIL": "Username or Email:",
@@ -94,6 +98,8 @@
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||||||": "||||||||||||||||||||||||| reset-password.ejs |||||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "RESET_PASSWORD_PAGE_TITLE": "SEU Students - Reset Password",
 
   "RESET_PASSWORD": "Reset Password:",
 
@@ -109,7 +115,9 @@
   "|||||||||||||||": "||||||||||||||||||||||| dashboard.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "ACCOUNT_SETTINGS": "Account Settings:",
+  "DASHBOARD_PAGE_TITLE": "SEU Students - Dashboard",
+
+  "DASHBOARD": "Dashboard:",
 
   "MY_ACCOUNT_INFO": "My Account Info",
 
@@ -118,6 +126,8 @@
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| my-account.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "MY_ACCOUNT_PAGE_TITLE": "SEU Students - My Account",
 
   "MY_ACCOUNT_INFO": "My Account Info:",
 
@@ -145,6 +155,8 @@
   "|||||||||||||||": "||||||||||||||||||||||| my-posts.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
+  "MY_POSTS_PAGE_TITLE": "SEU Students - My Posts",
+
   "MY_POSTS": "My Posts:",
 
   "EDIT_TITLE": "Edit Title",
@@ -155,6 +167,8 @@
   "|||||||||||||||": "||||||||||||||||||||||| update_post_title.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
+  "UPDATE_POST_TITLE_PAGE_TITLE": "SEU Students - Update Post Title",
+
   "UPDATE_POST_TITLE": "Edit Post Title:",
 
   "NEW_TITLE": "New Title:",
@@ -164,6 +178,8 @@
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| departments.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "DEPARTMENTS_PAGE_TITLE": "SEU Students - Departments",
 
   "DEPARTMENTS": "Departments:",
 
@@ -177,6 +193,8 @@
   "|||||||||||||||": "||||||||||||||||||||||| courses.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
+  "COURSES_PAGE_TITLE": "SEU Students - Courses",
+
   "COMPUTER_SCIENCE_COURSES": "Computer Science Courses:",
 
   "INFORMATION_TECHNOLOGY_COURSES": "Information Technology Courses:",
@@ -186,6 +204,8 @@
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| posts.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "POSTS_PAGE_TITLE": "SEU Students - Posts",
 
   "POSTS": "Posts",
 
@@ -198,6 +218,8 @@
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| add-post.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "ADD_POST_PAGE_TITLE": "SEU Students - Add Post",
 
   "ADD_POST": "Add Post",
 
@@ -231,5 +253,41 @@
 
   "COPYRIGHT": "All rights reserved © 2023 : Saud Al-Ghamdi.",
 
-  "CONTACT_ME": "Feel free to reach out to me for any inquiries or concerns via the following channels:"
+  "CONTACT_ME": "Feel free to reach out to me for any inquiries or concerns via the following channels:",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||": "||||||||||||||||||||||| Toast Messages |||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "LOGIN_SUCCESS_TOAST": "Login successful!",
+
+  "LOGIN_FAIL_TOAST": "Login failed, incorrect credentials.",
+
+  "SIGNUP_SUCCESS_TOAST": "Sign up successful!",
+
+  "SIGNUP_FAIL_TOAST": "Sign up failed, please try again.",
+
+  "LOGOUT_SUCCESS_TOAST": "Log out successful!",
+
+  "RESET_PASSWORD_SEND_SUCCESS_TOAST": "New password has been sent to your email!",
+
+  "RESET_PASSWORD_SEND_FAIL_TOAST": "Failed to send new password to your email, please try again.",
+
+  "EMAIL_DOESNT_EXIST_TOAST": "The entered email is not registered on the site.",
+
+  "ADD_POST_SUCCESS_TOAST": "Post added successfully!",
+
+  "ADD_POST_FAIL_TOAST": "Failed to add post, please try again.",
+
+  "MUST_LOGIN_TO_ADD_POST_TOAST": "You must log in first to add a post.",
+
+  "DELETE_POST_SUCCESS_TOAST": "Post deleted successfully!",
+
+  "DELETE_POST_FAIL_TOAST": "Failed to delete post, please try again.",
+
+  "UPDATE_POST_TITLE_SUCCESS_TOAST": "Post title updated successfully!",
+
+  "UPDATE_POST_TITLE_FAIL_TOAST": "Failed to update post title, please try again.",
+
+  "UPDATE_ACCOUNT_INFO_SUCCESS_TOAST": "Your information has been updated successfully!"
 }

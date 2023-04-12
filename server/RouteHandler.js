@@ -22,10 +22,9 @@ class RouteHandler {
       });
     }
     // just logged in
-    else if (userIsLoggedIn(req) && req.query.loginSuccess === "true" && req.query.showToast === "true") {
+    else if (userIsLoggedIn(req) && req.query.loginSuccess === "true") {
       res.render("home", {
         justLoggedIn: true,
-        toastMsg: "تم تسجيل الدخول بنجاح!",
         user: req.session.user,
         langData: req.session.langData,
       });
@@ -46,7 +45,6 @@ class RouteHandler {
     if (req.query.signupSuccess === "false") {
       res.render("signup", {
         signupSuccess: false,
-        toastMsg: "Sign up failed ..",
         langData: req.session.langData,
       });
     } else {
@@ -65,10 +63,10 @@ class RouteHandler {
 
     if (result.isSuccess === true) {
       console.log("Sign up process successful! (signup process in RouteHandler.js)");
-      res.redirect(`login?signupSuccess=true&showToast=true`);
+      res.redirect(`login?signupSuccess=true`);
     } else if (result.isSuccess === false) {
       console.log("Sign up process failed ... (signup process in RouteHandler.js)");
-      res.redirect("signup?signupSuccess=true&showToast=true");
+      res.redirect("signup?signupSuccess=true");
     }
   }
 
@@ -77,18 +75,16 @@ class RouteHandler {
 
   static renderLoginPage(req, res) {
     // coming from signup
-    if (req.query.signupSuccess === "true" && req.query.showToast === "true") {
+    if (req.query.signupSuccess === "true") {
       res.render("login", {
         signupSuccess: true,
-        toastMsg: "تم التسجيل بنجاح!",
         langData: req.session.langData,
       });
     }
     // coming from logout
-    else if (req.query.logoutSuccess === "true" && req.query.showToast === "true") {
+    else if (req.query.logoutSuccess === "true") {
       res.render("login", {
         logoutSuccess: true,
-        toastMsg: "تم تسجيل الخروج بنجاح!",
         langData: req.session.langData,
       });
     }
@@ -96,7 +92,6 @@ class RouteHandler {
     else if (req.query.sendResetPasswordSuccess === "true") {
       res.render("login", {
         sendResetPasswordSuccess: true,
-        toastMsg: "تم إرسال كلمة المرور الجديدة على بريدك الإلكتروني!",
         langData: req.session.langData,
       });
     }
@@ -104,15 +99,13 @@ class RouteHandler {
     else if (req.query.sendResetPasswordSuccess === "false") {
       res.render("login", {
         sendResetPasswordSuccess: false,
-        toastMsg: "حدث خطأ، لم نتمكن من إرسال كلمة المرور الجديدة ..",
         langData: req.session.langData,
       });
     }
     // Incorrect login credentials
-    else if (req.query.loginSuccess === "false" && req.query.showToast === "true") {
+    else if (req.query.loginSuccess === "false") {
       res.render("login", {
         loginSuccess: false,
-        toastMsg: "اسم المستخدم أو البريد الإلكتروني أو كلمة المرور خطأ.",
         langData: req.session.langData,
       });
     }
@@ -133,9 +126,9 @@ class RouteHandler {
 
     if (result.isSuccess === true) {
       req.session.user = result.user;
-      res.redirect(`/?loginSuccess=true&showToast=true`);
+      res.redirect(`/?loginSuccess=true`);
     } else if (result.isSuccess === false) {
-      res.redirect(`/login?loginSuccess=false&showToast=true`);
+      res.redirect(`/login?loginSuccess=false`);
     }
   }
 
@@ -146,7 +139,6 @@ class RouteHandler {
     if (req.query.emailExists === "false") {
       res.render("reset-password", {
         emailExists: false,
-        toastMsg: "البريد الإلكتروني الذي أدخلته غير مسجل لدينا ..",
         langData: req.session.langData,
       });
     } else {
@@ -292,7 +284,7 @@ class RouteHandler {
     });
 
     // Redirected after successfully adding post
-    if (userIsLoggedIn(req) && req.query.postSuccess === "true" && req.query.showToast === "true") {
+    if (userIsLoggedIn(req) && req.query.postSuccess === "true") {
       res.render("posts", {
         courseCode,
         posts,
@@ -300,7 +292,6 @@ class RouteHandler {
         totalPages,
         user: req.session.user,
         postSuccess: true,
-        toastMsg: "تم إضافة المنشور بنجاح!",
         langData: req.session.langData,
       });
     }
@@ -312,7 +303,6 @@ class RouteHandler {
         currentPage,
         totalPages,
         needLogin: true,
-        toastMsg: "يجب تسجيل الدخول أولًا لإضافة منشور",
         langData: req.session.langData,
       });
     }
@@ -427,7 +417,7 @@ class RouteHandler {
       if (err) {
         console.error("Error destroying session:", err);
       }
-      res.redirect("/login?logoutSuccess=true&showToast=true");
+      res.redirect("/login?logoutSuccess=true");
     });
   }
 
@@ -453,7 +443,6 @@ class RouteHandler {
       res.render("my-account", {
         user: req.session.user,
         updateSuccess: true,
-        toastMsg: "تم تحديث معلوماتك بنجاح!",
         langData: req.session.langData,
       });
     } else if (!userIsLoggedIn(req)) {
@@ -508,7 +497,6 @@ class RouteHandler {
           totalPages,
           currentPage,
           deletePostSuccess: true,
-          toastMsg: "تم حذف المنشور بنجاح!",
           langData: req.session.langData,
         });
       }
@@ -521,7 +509,6 @@ class RouteHandler {
           totalPages,
           currentPage,
           deletePostSuccess: false,
-          toastMsg: "فشل حذف المنشور ..",
           langData: req.session.langData,
         });
       }
@@ -532,8 +519,7 @@ class RouteHandler {
           posts,
           totalPages,
           currentPage,
-          updatePostSuccess: true,
-          toastMsg: "تم تعديل عنوان المنشور بنجاح!",
+          updatePostTitleSuccess: true,
           langData: req.session.langData,
         });
       }
@@ -545,8 +531,7 @@ class RouteHandler {
           posts,
           totalPages,
           currentPage,
-          updatePostSuccess: false,
-          toastMsg: "فشل تعديل عنوان المنشور ..",
+          updatePostTitleSuccess: false,
           langData: req.session.langData,
         });
       }
@@ -566,7 +551,6 @@ class RouteHandler {
         res.render("my-posts", {
           user: req.session.user,
           areTherePosts: false,
-          toastMsg: "لم تقم بإضافة منشورات من قبل.",
           langData: req.session.langData,
         });
       }

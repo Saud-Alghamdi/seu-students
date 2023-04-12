@@ -1,7 +1,7 @@
 <html dir="rtl">
   <head>
     <%- include('partials/head.ejs') %>
-    <title>منشوراتي</title>
+    <title><%=langData.MY_POSTS_PAGE_TITLE%></title>
   </head>
   <body class="d-flex flex-column gap-4">
     <%- include('partials/nav.ejs') %>
@@ -19,28 +19,28 @@
       <!-- Delete post success -->
       <% if(typeof deletePostSuccess !== 'undefined' && deletePostSuccess === true) { %>
       <script>
-        showToast(true, "<%= toastMsg %>");
+        showToast(true, "<%= langData.DELETE_POST_SUCCESS_TOAST %>");
       </script>
       <% } %>
 
       <!-- Delete post failed -->
       <% if(typeof deletePostSuccess !== 'undefined' && deletePostSuccess === false) { %>
       <script>
-        showToast(false, "<%= toastMsg %>");
+        showToast(false, "<%= langData.DELETE_POST_FAIL_TOAST %>");
       </script>
       <% } %>
 
       <!-- Update post success -->
-      <% if(typeof updatePostSuccess !== 'undefined' && updatePostSuccess === true) { %>
+      <% if(typeof updatePostTitleSuccess !== 'undefined' && updatePostTitleSuccess === true) { %>
       <script>
-        showToast(true, "<%= toastMsg %>");
+        showToast(true, "<%= langData.UPDATE_POST_SUCCESS_TOAST %>");
       </script>
       <% } %>
 
       <!-- Update post failed -->
-      <% if(typeof updatePostSuccess !== 'undefined' && updatePostSuccess === false) { %>
+      <% if(typeof updatePostTitleSuccess !== 'undefined' && updatePostTitleSuccess === false) { %>
       <script>
-        showToast(false, "<%= toastMsg %>");
+        showToast(false, "<%= langData.UPDATE_POST_FAIL_TOAST %>");
       </script>
       <% } %>
 
