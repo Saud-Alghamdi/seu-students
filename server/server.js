@@ -25,20 +25,23 @@ app.use(
 
 // Language middleware
 function setLang(req, res, next) {
-  let userDefaultLang = req.headers["accept-language"].split(",")[0].toLowerCase();
+  let userLanguage;
 
-  if (req.session && req.query.lang) {
-    userDefaultLang = req.query.lang;
-    req.session.userLanguage = userDefaultLang;
+  if (req.query.lang) {
+    userLanguage = req.query.lang;
+    req.session.userLanguage = userLanguage;
   } else if (req.session.userLanguage) {
-    userDefaultLang = req.session.userLanguage;
+    userLanguage = req.session.userLanguage;
+  } else {
+    userLanguage = req.headers["accept-language"].split(",")[0].toLowerCase();
   }
 
-  // Attach the userDefaultLang to the req object
-  req.userDefaultLang = userDefaultLang;
-
   // Creates a langData property on the session object and attaches the translation file to it
-  req.session.langData = require(`../lang/${req.userDefaultLang}.json`);
+  req.session.langData = require(`../lang/${userLanguage}.json`);
+
+  console.log(`Language is now: ${userLanguage}`);
+  console.log("__________________________");
+  console.log("__________________________");
 
   next();
 }

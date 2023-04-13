@@ -413,9 +413,13 @@ class RouteHandler {
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   static logout(req, res) {
-    req.session.destroy((err) => {
+    // Delete req.session.user property
+    delete req.session.user;
+
+    // Save changes to session and redirect to logout success page
+    req.session.save((err) => {
       if (err) {
-        console.error("Error destroying session:", err);
+        console.error("Error saving session:", err);
       }
       res.redirect("/login?logoutSuccess=true");
     });
