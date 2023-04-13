@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const path = require("path");
 const RouteHandler = require("./RouteHandler.js");
 
 // multer config for file handling
@@ -106,6 +107,14 @@ router.get("/dashboard/my-posts/:postId/update-post-title", RouteHandler.renderU
 // Update Post process
 router.post("/dashboard/my-posts/:postId/updatePostTitleProcess", async (req, res) => {
   await RouteHandler.updatePostTitleProcess(req, res);
+});
+
+// Send language json file to client-side javascript
+router.get("/langData", (req, res) => {
+  const userLanguage = req.session.userLanguage;
+  const fileName = `${userLanguage}.json`;
+  const filePath = path.join(__dirname, "../lang", fileName);
+  res.sendFile(filePath);
 });
 
 module.exports = router;

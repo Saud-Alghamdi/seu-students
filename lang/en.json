@@ -289,5 +289,37 @@
 
   "UPDATE_POST_TITLE_FAIL_TOAST": "Failed to update post title, please try again.",
 
-  "UPDATE_ACCOUNT_INFO_SUCCESS_TOAST": "Your information has been updated successfully!"
+  "UPDATE_ACCOUNT_INFO_SUCCESS_TOAST": "Your information has been updated successfully!",
+
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+  "|||||||||||||||": "||||||||||||||||||||||| Client Side validations |||||||||||||||||||||||--",
+  "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
+
+  "USERNAME_INVALID_START": "Username must start with a letter. (English only)",
+
+  "USERNAME_INVALID_CONTENT": "Username can only contain letters, numbers, or underscores.",
+
+  "USERNAME_INVALID_LENGTH": "Username must be between 3 and 25 characters.",
+
+  "USERNAME_EXISTS": "Username already exists.",
+
+  "EMAIL_INVALID": "Invalid email.",
+
+  "EMAIL_EXISTS": "Email already exists.",
+
+  "PASSWORD_HAS_SPACE": "Password cannot contain spaces.",
+
+  "PASSWORD_INVALID_LENGTH": "Password must be at least 6 characters long.",
+
+  "PASSWORDS_NO_MATCH": "Passwords do not match.",
+
+  "GENDER_NOT_SELECTED": "Please select a gender.",
+
+  "NO_FILE_SELECTED": "File must be selected.",
+
+  "NO_TITLE_WRITTEN": "Title must be written.",
+
+  "INVALID_FILE_TYPE": "File type must be PDF, Word, or PowerPoint.",
+
+  "INVALID_FILE_SIZE": "File size must not exceed 50 MB."
 }

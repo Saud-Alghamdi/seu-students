@@ -1,3 +1,10 @@
+let langData = fetch("/langData")
+  .then((res) => res.json())
+  .then((data) => {
+    langData = data;
+  })
+  .catch((err) => console.log(err));
+
 class SignupFormValidator {
   constructor(form, fields) {
     this.form = form;
@@ -47,13 +54,13 @@ class SignupFormValidator {
       const lengthRegex = /^.{3,25}$/;
 
       if (!startWithLetterRegex.test(field.value)) {
-        this.setStatus(field, "اسم المستخدم يجب أن يبدأ بحرف. (انجليزي فقط)", "error");
+        this.setStatus(field, await langData.USERNAME_INVALID_START, "error");
       } else if (!lettersNumbersUnderscoresRegex.test(field.value)) {
-        this.setStatus(field, "اسم المستخدم يمكن أن يحتوي على حروف وأرقام أو شرطة سفلية فقط.", "error");
+        this.setStatus(field, await langData.USERNAME_INVALID_CONTENT, "error");
       } else if (!lengthRegex.test(field.value)) {
-        this.setStatus(field, "اسم المستخدم يجب أن يكون ما بين 3 إلى 25 حرف.", "error");
+        this.setStatus(field, await langData.USERNAME_INVALID_LENGTH, "error");
       } else if ((await checkUsernameExists(field.value)) === true) {
-        this.setStatus(field, "اسم المستخدم موجود مسبقًا.", "error");
+        this.setStatus(field, await langData.USERNAME_EXISTS, "error");
       } else {
         this.setStatus(field, null, "success");
       }
@@ -66,15 +73,16 @@ class SignupFormValidator {
     if (field.name === "email") {
       const regex = /^(?!.*\s)\S+@\S+\.\S+$/;
       if (!regex.test(field.value)) {
-        this.setStatus(field, "البريد الإلكتروني خاطئ.", "error");
+        this.setStatus(field, await langData.EMAIL_INVALID, "error");
       } else if ((await checkEmailExists(field.value)) === true) {
-        this.setStatus(field, "البريد الإلكتروني موجود مسبقًا.", "error");
+        this.setStatus(field, await langData.EMAIL_EXISTS, "error");
       } else {
         this.setStatus(field, null, "success");
       }
     }
 
     /* CHECK VALID PASSWORD:
+    - No spaces
     - between 6 and 30 characters
     */
     if (field.name === "password") {
@@ -82,9 +90,9 @@ class SignupFormValidator {
       const lengthRegex = /^.{6,}$/;
 
       if (containsSpaceRegex.test(field.value)) {
-        this.setStatus(field, "لا يمكن أن تحتوي كلمة المرور على مسافة.", "error");
+        this.setStatus(field, await langData.PASSWORD_HAS_SPACE, "error");
       } else if (!lengthRegex.test(field.value)) {
-        this.setStatus(field, "يجب أن يكون طول كلمة المرور 6 أحرف على الأقل.", "error");
+        this.setStatus(field, await langData.PASSWORD_INVALID_LENGTH, "error");
       } else {
         this.setStatus(field, null, "success");
       }
@@ -95,7 +103,7 @@ class SignupFormValidator {
       const passwordField = document.getElementById("password-field");
 
       if (field.value !== passwordField.value) {
-        this.setStatus(field, "كلمات المرور غير متطابقة.", "error");
+        this.setStatus(field, langData.PASSWORDS_NO_MATCH, "error");
       } else {
         this.setStatus(field, null, "success");
       }
@@ -114,7 +122,7 @@ class SignupFormValidator {
       if (isSelected) {
         this.setStatus(field, null, "success");
       } else {
-        this.setStatus(field, "فضلًا اختر نوع الجنس.", "error");
+        this.setStatus(field, langData.GENDER_NOT_SELECTED, "error");
       }
     }
   }

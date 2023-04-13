@@ -1,6 +1,12 @@
 /* File Purpose:
 Validates selected file type & size on submit. If validated, sends file to server for server to handle it.
 */
+let langData = fetch("/langData")
+  .then((res) => res.json())
+  .then((data) => {
+    langData = data;
+  })
+  .catch((err) => console.log(err));
 
 const form = document.querySelector(".add-post-page-container__form");
 const fileInput = document.querySelector(".file-input");
@@ -31,13 +37,13 @@ form.addEventListener("submit", async (e) => {
   const title = titleInput.value;
 
   if (!file) {
-    fileErrorMsg.innerText = "يجب اختيار ملف.";
+    fileErrorMsg.innerText = await langData.NO_FILE_SELECTED;
   } else {
     fileErrorMsg.innerText = "";
   }
 
   if (!title) {
-    titleErrorMsg.innerText = "يجب كتابة عنوان.";
+    titleErrorMsg.innerText = await langData.NO_TITLE_WRITTEN;
   } else {
     titleErrorMsg.innerText = "";
   }
@@ -49,14 +55,14 @@ form.addEventListener("submit", async (e) => {
   const maxfileSizeInKB = 50000; // = 50 MB
 
   if (!allowedExtensions.includes(extension)) {
-    fileErrorMsg.innerText = "يجب أن يكون نوع الملف PDF أو Word أو Powerpoint.";
+    fileErrorMsg.innerText = await langData.INVALID_FILE_TYPE;
     return;
   } else {
     fileErrorMsg.innerText = "";
   }
 
   if (fileSizeInKB > maxfileSizeInKB) {
-    fileErrorMsg.innerText = "يجب أن لا يتجاوز حجم الملف 50 MB.";
+    fileErrorMsg.innerText = await langData.INVALID_FILE_SIZE;
     return;
   } else {
     fileErrorMsg.innerText = "";
