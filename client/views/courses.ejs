@@ -1,7 +1,7 @@
-<html dir="rtl">
+<html dir="<%=langDirection%>">
   <head>
     <%- include('partials/head.ejs') %>
-    <title><%=langData.COURSES_PAGE_TITLE%></title>
+    <title><%=langData.coursesPage_TITLE%></title>
   </head>
   <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
@@ -14,11 +14,11 @@
 
       <header>
         <% if(depAbbr === 'CS') { %>
-        <h1><%=langData.COMPUTER_SCIENCE_COURSES%></h1>
+        <h1><%=langData.coursesPage_COMPUTER_SCIENCE_COURSES%></h1>
         <% } else if(depAbbr === 'IT') { %>
-        <h1><%=langData.INFORMATION_TECHNOLOGY_COURSES%></h1>
+        <h1><%=langData.coursesPage_INFORMATION_TECHNOLOGY_COURSES%></h1>
         <% } else if(depAbbr === 'DS') { %>
-        <h1><%=langData.DATA_SCIENCE_COURSES%></h1>
+        <h1><%=langData.coursesPage_DATA_SCIENCE_COURSES%></h1>
         <% } %>
       </header>
 

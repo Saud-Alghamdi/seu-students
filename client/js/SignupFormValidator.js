@@ -54,13 +54,13 @@ class SignupFormValidator {
       const lengthRegex = /^.{3,25}$/;
 
       if (!startWithLetterRegex.test(field.value)) {
-        this.setStatus(field, await langData.USERNAME_INVALID_START, "error");
+        this.setStatus(field, await langData.val_USERNAME_INVALID_START, "error");
       } else if (!lettersNumbersUnderscoresRegex.test(field.value)) {
-        this.setStatus(field, await langData.USERNAME_INVALID_CONTENT, "error");
+        this.setStatus(field, await langData.val_USERNAME_INVALID_CONTENT, "error");
       } else if (!lengthRegex.test(field.value)) {
-        this.setStatus(field, await langData.USERNAME_INVALID_LENGTH, "error");
+        this.setStatus(field, await langData.val_USERNAME_INVALID_LENGTH, "error");
       } else if ((await checkUsernameExists(field.value)) === true) {
-        this.setStatus(field, await langData.USERNAME_EXISTS, "error");
+        this.setStatus(field, await langData.val_USERNAME_EXISTS, "error");
       } else {
         this.setStatus(field, null, "success");
       }
@@ -73,9 +73,9 @@ class SignupFormValidator {
     if (field.name === "email") {
       const regex = /^(?!.*\s)\S+@\S+\.\S+$/;
       if (!regex.test(field.value)) {
-        this.setStatus(field, await langData.EMAIL_INVALID, "error");
+        this.setStatus(field, await langData.val_EMAIL_INVALID, "error");
       } else if ((await checkEmailExists(field.value)) === true) {
-        this.setStatus(field, await langData.EMAIL_EXISTS, "error");
+        this.setStatus(field, await langData.val_EMAIL_EXISTS, "error");
       } else {
         this.setStatus(field, null, "success");
       }
@@ -90,9 +90,9 @@ class SignupFormValidator {
       const lengthRegex = /^.{6,}$/;
 
       if (containsSpaceRegex.test(field.value)) {
-        this.setStatus(field, await langData.PASSWORD_HAS_SPACE, "error");
+        this.setStatus(field, await langData.val_PASSWORD_HAS_SPACE, "error");
       } else if (!lengthRegex.test(field.value)) {
-        this.setStatus(field, await langData.PASSWORD_INVALID_LENGTH, "error");
+        this.setStatus(field, await langData.val_PASSWORD_INVALID_LENGTH, "error");
       } else {
         this.setStatus(field, null, "success");
       }
@@ -103,7 +103,7 @@ class SignupFormValidator {
       const passwordField = document.getElementById("password-field");
 
       if (field.value !== passwordField.value) {
-        this.setStatus(field, langData.PASSWORDS_NO_MATCH, "error");
+        this.setStatus(field, langData.val_PASSWORDS_NO_MATCH, "error");
       } else {
         this.setStatus(field, null, "success");
       }
@@ -122,7 +122,7 @@ class SignupFormValidator {
       if (isSelected) {
         this.setStatus(field, null, "success");
       } else {
-        this.setStatus(field, langData.GENDER_NOT_SELECTED, "error");
+        this.setStatus(field, langData.val_GENDER_NOT_SELECTED, "error");
       }
     }
   }

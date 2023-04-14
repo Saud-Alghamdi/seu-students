@@ -36,12 +36,9 @@ function setLang(req, res, next) {
     userLanguage = req.headers["accept-language"].split(",")[0].toLowerCase();
   }
 
-  // Creates a langData property on the session object and attaches the translation file to it
+  // Creates a langData and langDirection property on the session object and attaches the translation file and direction to it
   req.session.langData = require(`../lang/${userLanguage}.json`);
-
-  console.log(`Language is now: ${userLanguage}`);
-  console.log("__________________________");
-  console.log("__________________________");
+  req.session.langDirection = userLanguage === "ar" ? "rtl" : "ltr";
 
   next();
 }

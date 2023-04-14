@@ -1,7 +1,7 @@
-<html dir="rtl">
+<html dir="<%=langDirection%>">
   <head>
     <%- include('partials/head.ejs') %>
-    <title><%=langData.DEPARTMENTS_PAGE_TITLE%></title>
+    <title><%=langData.departmentsPage_TITLE%></title>
   </head>
   <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
@@ -13,18 +13,18 @@
       </a>
 
       <header>
-        <h1><%=langData.DEPARTMENTS%></h1>
+        <h1><%=langData.departmentsPage_DEPARTMENTS%></h1>
       </header>
 
       <div class="departments-flex-container mt-5 d-flex justify-content-center flex-wrap">
         <div class="departments-page-container__div-box border-dark rounded-5 p-2 m-1">
-          <a class="department-link d-flex justify-content-center align-items-center text-light fs-4" href="/departments/CS/courses"><%=langData.COMPUTER_SCIENCE%></a>
+          <a class="department-link d-flex justify-content-center align-items-center text-light fs-4" href="/departments/CS/courses"><%=langData.departmentsPage_COMPUTER_SCIENCE%></a>
         </div>
         <div class="departments-page-container__div-box border-dark rounded-5 p-2 m-1">
-          <a class="department-link d-flex justify-content-center align-items-center text-light fs-4" href="/departments/IT/courses"><%=langData.INFORMATION_TECHNOLOGY%></a>
+          <a class="department-link d-flex justify-content-center align-items-center text-light fs-4" href="/departments/IT/courses"><%=langData.departmentsPage_INFORMATION_TECHNOLOGY%></a>
         </div>
         <div class="departments-page-container__div-box border-dark rounded-5 p-2 m-1">
-          <a class="department-link d-flex justify-content-center align-items-center text-light fs-4" href="/departments/DS/courses"><%=langData.DATA_SCIENCE%></a>
+          <a class="department-link d-flex justify-content-center align-items-center text-light fs-4" href="/departments/DS/courses"><%=langData.departmentsPage_DATA_SCIENCE%></a>
         </div>
       </div>
     </main>

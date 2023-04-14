@@ -1,7 +1,7 @@
-<html dir="rtl">
+<html dir="<%=langDirection%>">
   <head>
     <%- include('partials/head.ejs') %>
-    <title><%=langData.POSTS_PAGE_TITLE%></title>
+    <title><%=langData.postsPage_TITLE%></title>
   </head>
   <body class="d-flex flex-column gap-4">
     <%- include('partials/nav.ejs') %>
@@ -13,24 +13,24 @@
       </a>
 
       <header>
-        <h1><%=langData.POSTS%> <%=courseCode%>:</h1>
+        <h1><%=langData.postsPage_POSTS%> <%=courseCode%>:</h1>
       </header>
 
       <form class="mt-3" action="./add-post" method="GET">
-        <button class="add-post-btn btn btn-primary"><%=langData.ADD_POST%></button>
+        <button class="add-post-btn btn btn-primary"><%=langData.postsPage_ADD_POST%></button>
       </form>
 
       <!-- if post added successfully -->
       <% if(typeof user !== 'undefined' && typeof postSuccess !== 'undefined') { %>
       <script>
-        showToast(true, "<%= langData.ADD_POST_SUCCESS_TOAST %>");
+        showToast(true, "<%= langData.toast_ADD_POST_SUCCESS %>");
       </script>
       <% } %>
 
       <!-- If user clicked on Add Post while he is not logged in -->
       <% if(typeof needLogin !== 'undefined') { %>
       <script>
-        showToast(false, "<%= langData.MUST_LOGIN_TO_ADD_POST_TOAST %>");
+        showToast(false, "<%= langData.toast_MUST_LOGIN_TO_ADD_POST %>");
       </script>
       <% } %>
 
@@ -62,7 +62,7 @@
           </div>
         </a>
         <% })} else { %>
-        <h6 class="text-light"><%=langData.NO_POSTS%></h6>
+        <h6 class="text-light"><%=langData.postsPage_NO_POSTS%></h6>
         <% } %>
       </div>
 

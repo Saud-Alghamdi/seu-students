@@ -1,7 +1,7 @@
-<html dir="rtl">
+<html dir="<%=langDirection%>">
   <head>
     <%- include('partials/head.ejs') %>
-    <title><%=langData.LOGIN_PAGE_TITLE%></title>
+    <title><%=langData.loginPage_TITLE%></title>
   </head>
   <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
@@ -13,56 +13,56 @@
       </a>
 
       <header class="text-center">
-        <h1><%=langData.LOGIN%></h1>
+        <h1><%=langData.loginPage_LOGIN%></h1>
       </header>
 
       <!-- Signup successful -->
       <% if(typeof signupSuccess !== 'undefined' && signupSuccess === true) { %>
       <script>
-        showToast(true, "<%= langData.SIGNUP_SUCCESS_TOAST %>");
+        showToast(true, "<%= langData.toast_SIGNUP_SUCCESS %>");
       </script>
       <% } %>
 
       <!-- Logout successful -->
       <% if(typeof logoutSuccess !== 'undefined' && logoutSuccess === true) { %>
       <script>
-        showToast(true, "<%= langData.LOGOUT_SUCCESS_TOAST %>");
+        showToast(true, "<%= langData.toast_LOGOUT_SUCCESS %>");
       </script>
       <% } %>
 
       <!-- Reset password sent successfully -->
       <% if(typeof sendResetPasswordSuccess !== 'undefined' && sendResetPasswordSuccess === true) { %>
       <script>
-        showToast(true, "<%= langData.RESET_PASSWORD_SEND_SUCCESS_TOAST %>");
+        showToast(true, "<%= langData.toast_RESET_PASSWORD_SEND_SUCCESS %>");
       </script>
       <% } %>
 
       <!-- Reset password failed to send -->
       <% if(typeof sendResetPasswordSuccess !== 'undefined' && sendResetPasswordSuccess === false) { %>
       <script>
-        showToast(false, "<%= langData.RESET_PASSWORD_SEND_FAIL_TOAST %>");
+        showToast(false, "<%= langData.toast_RESET_PASSWORD_SEND_FAIL %>");
       </script>
       <% } %>
 
       <!-- incorrect login credentials -->
       <% if(typeof loginSuccess !== 'undefined' && loginSuccess === false) { %>
       <script>
-        showToast(false, "<%= langData.LOGIN_FAIL_TOAST %>");
+        showToast(false, "<%= langData.toast_LOGIN_FAIL %>");
       </script>
       <% } %>
 
       <form action="/login-process" method="POST" class="login-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
         <div class="mb-3">
-          <label for="" class="form-label"><%=langData.USERNAME_OR_EMAIL%></label>
+          <label for="" class="form-label"><%=langData.loginPage_USERNAME_OR_EMAIL%></label>
           <input name="usernameOrEmail" type="text" class="form-control" id="" />
         </div>
         <div class="mb-3">
-          <label for="" class="form-label"><%=langData.PASSWORD%></label>
+          <label for="" class="form-label"><%=langData.loginPage_PASSWORD%></label>
           <input name="password" type="password" class="form-control" id="" />
         </div>
-        <a class="reset-password-link d-block mb-2" href="/reset-password"><%=langData.FORGOT_PASSWORD%></a>
-        <a class="signup-link" href="/signup"><%=langData.DONT_HAVE_ACCOUNT%></a>
-        <button type="submit" class="login-page-container__button btn btn-lg d-block mx-auto mt-4"><%=langData.LOGIN%></button>
+        <a class="reset-password-link d-block mb-2" href="/reset-password"><%=langData.loginPage_FORGOT_PASSWORD%></a>
+        <a class="signup-link" href="/signup"><%=langData.loginPage_DONT_HAVE_ACCOUNT%></a>
+        <button type="submit" class="login-page-container__button btn btn-lg d-block mx-auto mt-4"><%=langData.loginPage_LOGIN%></button>
       </form>
     </main>
 

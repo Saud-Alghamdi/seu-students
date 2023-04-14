@@ -37,13 +37,13 @@ form.addEventListener("submit", async (e) => {
   const title = titleInput.value;
 
   if (!file) {
-    fileErrorMsg.innerText = await langData.NO_FILE_SELECTED;
+    fileErrorMsg.innerText = await langData.val_NO_FILE_SELECTED;
   } else {
     fileErrorMsg.innerText = "";
   }
 
   if (!title) {
-    titleErrorMsg.innerText = await langData.NO_TITLE_WRITTEN;
+    titleErrorMsg.innerText = await langData.val_NO_TITLE_WRITTEN;
   } else {
     titleErrorMsg.innerText = "";
   }
@@ -55,14 +55,14 @@ form.addEventListener("submit", async (e) => {
   const maxfileSizeInKB = 50000; // = 50 MB
 
   if (!allowedExtensions.includes(extension)) {
-    fileErrorMsg.innerText = await langData.INVALID_FILE_TYPE;
+    fileErrorMsg.innerText = await langData.val_INVALID_FILE_TYPE;
     return;
   } else {
     fileErrorMsg.innerText = "";
   }
 
   if (fileSizeInKB > maxfileSizeInKB) {
-    fileErrorMsg.innerText = await langData.INVALID_FILE_SIZE;
+    fileErrorMsg.innerText = await langData.val_INVALID_FILE_SIZE;
     return;
   } else {
     fileErrorMsg.innerText = "";

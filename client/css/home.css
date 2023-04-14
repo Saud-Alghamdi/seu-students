@@ -1,7 +1,3 @@
-.index-page-container {
-  color: var(--text-color-primary);
-}
-
 .index-page-container__header {
   max-width: 900px;
 }

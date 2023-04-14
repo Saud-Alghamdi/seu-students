@@ -1,7 +1,7 @@
-<html dir="rtl">
+<html dir="<%=langDirection%>">
   <head>
     <%- include('partials/head.ejs') %>
-    <title><%=langData.DASHBOARD_PAGE_TITLE%></title>
+    <title><%=langData.dashboardPage_TITLE%></title>
   </head>
   <body class="d-flex flex-column gap-4">
     <%- include('partials/nav.ejs') %>
@@ -13,14 +13,14 @@
       </a>
 
       <header>
-        <h1><%=langData.DASHBOARD%></h1>
+        <h1><%=langData.dashboardPage_DASHBOARD%></h1>
       </header>
 
       <form action="/dashboard/my-account" class="mt-5">
-        <button class="dashboard-page-container__button btn btn-lg"><%=langData.MY_ACCOUNT_INFO%></button>
+        <button class="dashboard-page-container__button btn btn-lg"><%=langData.dashboardPage_MY_ACCOUNT_INFO%></button>
       </form>
       <form action="/dashboard/my-posts">
-        <button class="dashboard-page-container__button btn btn-lg"><%=langData.MY_POSTS%></button>
+        <button class="dashboard-page-container__button btn btn-lg"><%=langData.dashboardPage_MY_POSTS%></button>
       </form>
     </main>
 

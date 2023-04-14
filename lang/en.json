@@ -3,323 +3,323 @@
   "|||||||||||||||||||": "||||||||||||||||||||||||| home.ejs |||||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "HOME_PAGE_TITLE": "SEU Students - Home",
+  "homePage_TITLE": "SEU Students - Home",
 
-  "WELCOME_STUDENTS": "Welcome SEU Students!",
+  "homePage_WELCOME_STUDENTS": "Welcome SEU Students!",
 
-  "WELCOME_PARAGRAPH_P1": "Welcome to the dedicated website for students of Saudi Electronic University! Our aim in building this website is to provide a platform that empowers students to easily access study-related files.",
+  "homePage_WELCOME_PARAGRAPH_P1": "Welcome to the dedicated website for students of Saudi Electronic University! Our aim in building this website is to provide a platform that empowers students to easily access study-related files.",
 
-  "WELCOME_PARAGRAPH_P2": "We believe that this will not only enhance your learning experience, but also make it easier and more efficient.",
+  "homePage_WELCOME_PARAGRAPH_P2": "We believe that this will not only enhance your learning experience, but also make it easier and more efficient.",
 
-  "WELCOME_PARAGRAPH_P3": "We are committed to continuously updating and improving our core system to better serve you, and we wish you the best experiences.",
+  "homePage_WELCOME_PARAGRAPH_P3": "We are committed to continuously updating and improving our core system to better serve you, and we wish you the best experiences.",
 
-  "LOGIN": "Log in",
+  "homePage_LOGIN": "Log in",
 
-  "SIGNUP": "Sign up",
+  "homePage_SIGNUP": "Sign up",
 
-  "CONTINUE_WITHOUT_LOGIN": "Continue without logging in",
+  "homePage_CONTINUE_WITHOUT_LOGIN": "Continue without logging in",
 
-  "TARGET_AUDIENCE": "✱ Who is the target audience for this website?",
+  "homePage_TARGET_AUDIENCE": "✱ Who is the target audience for this website?",
 
-  "TARGET_AUDIENCE_DESC1": "Currently, the website targets students of the College of Computing and Informatics.",
+  "homePage_TARGET_AUDIENCE_DESC1": "Currently, the website targets students of the College of Computing and Informatics.",
 
-  "TARGET_AUDIENCE_DESC2": "Support for other colleges will be added in the future.",
+  "homePage_TARGET_AUDIENCE_DESC2": "Support for other colleges will be added in the future.",
 
-  "BENEFITS": "✱ What are the benefits of building this website?",
+  "homePage_BENEFITS": "✱ What are the benefits of building this website?",
 
-  "BENEFITS_DESC1": "Facilitating access to study-related files.",
+  "homePage_BENEFITS_DESC1": "Facilitating access to study-related files.",
 
-  "FILE_UPLOADERS": "✱ Who will upload the files?",
+  "homePage_FILE_UPLOADERS": "✱ Who will upload the files?",
 
-  "FILE_UPLOADERS_DESC1": "The students themselves will upload the files.",
+  "homePage_FILE_UPLOADERS_DESC1": "The students themselves will upload the files.",
 
-  "FILE_UPLOADERS_DESC2": "Dear student, any file that you feel will benefit other students, log in and upload it to the platform here.",
+  "homePage_FILE_UPLOADERS_DESC2": "Dear student, any file that you feel will benefit other students, log in and upload it to the platform here.",
 
-  "FILE_UPLOADERS_DESC3": "Useful files that can be shared include:",
+  "homePage_FILE_UPLOADERS_DESC3": "Useful files that can be shared include:",
 
-  "FILE_UPLOADERS_DESC4": "• Books",
+  "homePage_FILE_UPLOADERS_DESC4": "• Books",
 
-  "FILE_UPLOADERS_DESC5": "• Slides",
+  "homePage_FILE_UPLOADERS_DESC5": "• Slides",
 
-  "FILE_UPLOADERS_DESC6": "• Test banks",
+  "homePage_FILE_UPLOADERS_DESC6": "• Test banks",
 
-  "FILE_UPLOADERS_DESC7": "• Solutions for assignments, quizzes, and homework",
+  "homePage_FILE_UPLOADERS_DESC7": "• Solutions for assignments, quizzes, and homework",
 
-  "FILE_UPLOADERS_DESC8": "And many other useful files for students during their studying of the subject.",
+  "homePage_FILE_UPLOADERS_DESC8": "And many other useful files for students during their studying of the subject.",
 
-  "STUDENT_JOURNEY": "✱ Student journey inside the website:",
+  "homePage_STUDENT_JOURNEY": "✱ Student journey inside the website:",
 
-  "STUDENT_JOURNEY_DESC1": "The student chooses their major, and then all the subjects under that major will appear.",
+  "homePage_STUDENT_JOURNEY_DESC1": "The student chooses their major, and then all the subjects under that major will appear.",
 
-  "STUDENT_JOURNEY_DESC2": "Then the student selects the subject for which they want to search for a related file, such as a textbook for example.",
+  "homePage_STUDENT_JOURNEY_DESC2": "Then the student selects the subject for which they want to search for a related file, such as a textbook for example.",
 
-  "STUDENT_JOURNEY_DESC3": "Upon clicking on the subject, all the files related to that subject will appear.",
+  "homePage_STUDENT_JOURNEY_DESC3": "Upon clicking on the subject, all the files related to that subject will appear.",
 
-  "STUDENT_JOURNEY_DESC4": "The files will be displayed as posts, and by clicking on the post, the file will be automatically downloaded to your device for use.",
+  "homePage_STUDENT_JOURNEY_DESC4": "The files will be displayed as posts, and by clicking on the post, the file will be automatically downloaded to your device for use.",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||||||": "||||||||||||||||||||||||| signup.ejs |||||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "SIGNUP_PAGE_TITLE": "SEU Students - Signup",
+  "signupPage_TITLE": "SEU Students - Signup",
 
-  "SIGNUP": "Sign up",
+  "signupPage_SIGNUP": "Sign up",
 
-  "USERNAME": "Username:",
+  "signupPage_USERNAME": "Username:",
 
-  "EMAIL": "Email:",
+  "signupPage_EMAIL": "Email:",
 
-  "PASSWORD": "Password:",
+  "signupPage_PASSWORD": "Password:",
 
-  "REPEAT_PASSWORD": "Repeat Password:",
+  "signupPage_REPEAT_PASSWORD": "Repeat Password:",
 
-  "GENDER": "Gender:",
+  "signupPage_GENDER": "Gender:",
 
-  "MALE": "Male",
+  "signupPage_MALE": "Male",
 
-  "FEMALE": "Female",
+  "signupPage_FEMALE": "Female",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||||||": "||||||||||||||||||||||||| login.ejs |||||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "LOGIN_PAGE_TITLE": "SEU Students - Login",
+  "loginPage_TITLE": "SEU Students - Login",
 
-  "LOGIN": "Login",
+  "loginPage_LOGIN": "Login",
 
-  "USERNAME_OR_EMAIL": "Username or Email:",
+  "loginPage_USERNAME_OR_EMAIL": "Username or Email:",
 
-  "PASSWORD": "Password:",
+  "loginPage_PASSWORD": "Password:",
 
-  "FORGOT_PASSWORD": "Forgot Password?",
+  "loginPage_FORGOT_PASSWORD": "Forgot Password?",
 
-  "DONT_HAVE_ACCOUNT": "Don't have an account",
+  "loginPage_DONT_HAVE_ACCOUNT": "Don't have an account",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||||||": "||||||||||||||||||||||||| reset-password.ejs |||||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "RESET_PASSWORD_PAGE_TITLE": "SEU Students - Reset Password",
+  "resetPasswordPage_TITLE": "SEU Students - Reset Password",
 
-  "RESET_PASSWORD": "Reset Password:",
+  "resetPasswordPage_RESET_PASSWORD": "Reset Password:",
 
-  "RESET_PASSWORD_DESC1": "A temporary password will be sent to your email. Use it to log in.",
+  "resetPasswordPage_RESET_PASSWORD_DESC1": "A temporary password will be sent to your email. Use it to log in.",
 
-  "RESET_PASSWORD_DESC2": "You can change it later from your account settings.",
+  "resetPasswordPage_RESET_PASSWORD_DESC2": "You can change it later from your account settings.",
 
-  "EMAIL": "Email:",
+  "resetPasswordPage_EMAIL": "Email:",
 
-  "SEND": "Send",
+  "resetPasswordPage_SEND": "Send",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| dashboard.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "DASHBOARD_PAGE_TITLE": "SEU Students - Dashboard",
+  "dashboardPage_TITLE": "SEU Students - Dashboard",
 
-  "DASHBOARD": "Dashboard:",
+  "dashboardPage_DASHBOARD": "Dashboard:",
 
-  "MY_ACCOUNT_INFO": "My Account Info",
+  "dashboardPage_MY_ACCOUNT_INFO": "My Account Info",
 
-  "MY_POSTS": "My Posts",
+  "dashboardPage_MY_POSTS": "My Posts",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| my-account.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "MY_ACCOUNT_PAGE_TITLE": "SEU Students - My Account",
+  "myAccountPage_TITLE": "SEU Students - My Account",
 
-  "MY_ACCOUNT_INFO": "My Account Info:",
+  "myAccountPage_MY_ACCOUNT_INFO": "My Account Info:",
 
-  "USERNAME": "Username:",
+  "myAccountPage_USERNAME": "Username:",
 
-  "NEW_USERNAME": "New Username:",
+  "myAccountPage_NEW_USERNAME": "New Username:",
 
-  "EMAIL": "Email:",
+  "myAccountPage_EMAIL": "Email:",
 
-  "NEW_EMAIL": "New Email:",
+  "myAccountPage_NEW_EMAIL": "New Email:",
 
-  "PASSWORD": "Password:",
+  "myAccountPage_PASSWORD": "Password:",
 
-  "NEW_PASSWORD": "New Password:",
+  "myAccountPage_NEW_PASSWORD": "New Password:",
 
-  "REPEAT_NEW_PASSWORD": "Repeat New Password:",
+  "myAccountPage_REPEAT_NEW_PASSWORD": "Repeat New Password:",
 
-  "CHANGE": "Change",
+  "myAccountPage_CHANGE": "Change",
 
-  "SAVE": "Save",
+  "myAccountPage_SAVE": "Save",
 
-  "CANCEL": "Cancel",
+  "myAccountPage_CANCEL": "Cancel",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| my-posts.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "MY_POSTS_PAGE_TITLE": "SEU Students - My Posts",
+  "myPostsPage_TITLE": "SEU Students - My Posts",
 
-  "MY_POSTS": "My Posts:",
+  "myPostsPage_MY_POSTS": "My Posts:",
 
-  "EDIT_TITLE": "Edit Title",
+  "myPostsPage_EDIT_TITLE": "Edit Title",
 
-  "DELETE": "Delete",
+  "myPostsPage_DELETE": "Delete",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| update_post_title.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "UPDATE_POST_TITLE_PAGE_TITLE": "SEU Students - Update Post Title",
+  "updatePostTitlePage_TITLE": "SEU Students - Update Post Title",
 
-  "UPDATE_POST_TITLE": "Edit Post Title:",
+  "updatePostTitlePage_UPDATE_POST_TITLE": "Edit Post Title:",
 
-  "NEW_TITLE": "New Title:",
+  "updatePostTitlePage_NEW_TITLE": "New Title:",
 
-  "EDIT": "Edit",
+  "updatePostTitlePage_EDIT": "Edit",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| departments.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "DEPARTMENTS_PAGE_TITLE": "SEU Students - Departments",
+  "departmentsPage_TITLE": "SEU Students - Departments",
 
-  "DEPARTMENTS": "Departments:",
+  "departmentsPage_DEPARTMENTS": "Departments:",
 
-  "COMPUTER_SCIENCE": "Computer Science",
+  "departmentsPage_COMPUTER_SCIENCE": "Computer Science",
 
-  "INFORMATION_TECHNOLOGY": "Information Technology",
+  "departmentsPage_INFORMATION_TECHNOLOGY": "Information Technology",
 
-  "DATA_SCIENCE": "Data Science",
+  "departmentsPage_DATA_SCIENCE": "Data Science",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| courses.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "COURSES_PAGE_TITLE": "SEU Students - Courses",
+  "coursesPage_TITLE": "SEU Students - Courses",
 
-  "COMPUTER_SCIENCE_COURSES": "Computer Science Courses:",
+  "coursesPage_COMPUTER_SCIENCE_COURSES": "Computer Science Courses:",
 
-  "INFORMATION_TECHNOLOGY_COURSES": "Information Technology Courses:",
+  "coursesPage_INFORMATION_TECHNOLOGY_COURSES": "Information Technology Courses:",
 
-  "DATA_SCIENCE_COURSES": "Data Science Courses:",
+  "coursesPage_DATA_SCIENCE_COURSES": "Data Science Courses:",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| posts.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "POSTS_PAGE_TITLE": "SEU Students - Posts",
+  "postsPage_POSTS_PAGE_TITLE": "SEU Students - Posts",
 
-  "POSTS": "Posts",
+  "postsPage_POSTS": "Posts",
 
-  "ADD_POST": "+ Add Post",
+  "postsPage_ADD_POST": "+ Add Post",
 
-  "NO_POSTS": "There are currently no posts for this course.",
+  "postsPage_NO_POSTS": "There are currently no posts for this course.",
 
-  "USER_NO_POSTS": "You have not added any posts yet.",
+  "postsPage_USER_NO_POSTS": "You have not added any posts yet.",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| add-post.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "ADD_POST_PAGE_TITLE": "SEU Students - Add Post",
+  "addPostPage_TITLE": "SEU Students - Add Post",
 
-  "ADD_POST": "Add Post",
+  "addPostPage_ADD_POST": "Add Post",
 
-  "TITLE": "Title:",
+  "addPostPage_POST_TITLE": "Title:",
 
-  "FILE": "File:",
+  "addPostPage_FILE": "File:",
 
-  "FILE_RULE1": "Accepts only PDF, Word, Powerpoint.",
+  "addPostPage_FILE_RULE1": "Accepts only PDF, Word, Powerpoint.",
 
-  "FILE_RULE2": "Maximum file size is 50 MB.",
+  "addPostPage_FILE_RULE2": "Maximum file size is 50 MB.",
 
-  "ADD": "Add",
+  "addPostPage_ADD": "Add",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| nav.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "HOME": "Home",
+  "nav_HOME": "Home",
 
-  "DEPARTMENTS": "Departments",
+  "nav_DEPARTMENTS": "Departments",
 
-  "SIGNUP": "Sign Up",
+  "nav_SIGNUP": "Sign Up",
 
-  "LOGIN": "Login",
+  "nav_LOGIN": "Login",
 
-  "LOGOUT": "Logout",
+  "nav_LOGOUT": "Logout",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| footer.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "COPYRIGHT": "All rights reserved © 2023 : Saud Al-Ghamdi.",
+  "footer_COPYRIGHT": "All rights reserved © 2023 : Saud Al-Ghamdi.",
 
-  "CONTACT_ME": "Feel free to reach out to me for any inquiries or concerns via the following channels:",
+  "footer_CONTACT_ME": "Feel free to reach out to me for any inquiries or concerns via the following channels:",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| Toast Messages |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "LOGIN_SUCCESS_TOAST": "Login successful!",
+  "toast_LOGIN_SUCCESS": "Login successful!",
 
-  "LOGIN_FAIL_TOAST": "Login failed, incorrect credentials.",
+  "toast_LOGIN_FAIL": "Login failed, incorrect credentials.",
 
-  "SIGNUP_SUCCESS_TOAST": "Sign up successful!",
+  "toast_SIGNUP_SUCCESS": "Sign up successful!",
 
-  "SIGNUP_FAIL_TOAST": "Sign up failed, please try again.",
+  "toast_SIGNUP_FAIL": "Sign up failed, please try again.",
 
-  "LOGOUT_SUCCESS_TOAST": "Log out successful!",
+  "toast_LOGOUT_SUCCESS": "Log out successful!",
 
-  "RESET_PASSWORD_SEND_SUCCESS_TOAST": "New password has been sent to your email!",
+  "toast_RESET_PASSWORD_SEND_SUCCESS": "New password has been sent to your email!",
 
-  "RESET_PASSWORD_SEND_FAIL_TOAST": "Failed to send new password to your email, please try again.",
+  "toast_RESET_PASSWORD_SEND_FAIL": "Failed to send new password to your email, please try again.",
 
-  "EMAIL_DOESNT_EXIST_TOAST": "The entered email is not registered on the site.",
+  "toast_EMAIL_DOESNT_EXIST": "The entered email is not registered on the site.",
 
-  "ADD_POST_SUCCESS_TOAST": "Post added successfully!",
+  "toast_ADD_POST_SUCCESS": "Post added successfully!",
 
-  "ADD_POST_FAIL_TOAST": "Failed to add post, please try again.",
+  "toast_ADD_POST_FAIL": "Failed to add post, please try again.",
 
-  "MUST_LOGIN_TO_ADD_POST_TOAST": "You must log in first to add a post.",
+  "toast_MUST_LOGIN_TO_ADD_POST": "You must log in first to add a post.",
 
-  "DELETE_POST_SUCCESS_TOAST": "Post deleted successfully!",
+  "toast_DELETE_POST_SUCCESS": "Post deleted successfully!",
 
-  "DELETE_POST_FAIL_TOAST": "Failed to delete post, please try again.",
+  "toast_DELETE_POST_FAIL": "Failed to delete post, please try again.",
 
-  "UPDATE_POST_TITLE_SUCCESS_TOAST": "Post title updated successfully!",
+  "toast_UPDATE_POST_TITLE_SUCCESS": "Post title updated successfully!",
 
-  "UPDATE_POST_TITLE_FAIL_TOAST": "Failed to update post title, please try again.",
+  "toast_UPDATE_POST_TITLE_FAIL": "Failed to update post title, please try again.",
 
-  "UPDATE_ACCOUNT_INFO_SUCCESS_TOAST": "Your information has been updated successfully!",
+  "toast_UPDATE_ACCOUNT_INFO_SUCCESS": "Your information has been updated successfully!",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| Client Side validations |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
-  "USERNAME_INVALID_START": "Username must start with a letter. (English only)",
+  "val_USERNAME_INVALID_START": "Username must start with a letter. (English only)",
 
-  "USERNAME_INVALID_CONTENT": "Username can only contain letters, numbers, or underscores.",
+  "val_USERNAME_INVALID_CONTENT": "Username can only contain letters, numbers, or underscores.",
 
-  "USERNAME_INVALID_LENGTH": "Username must be between 3 and 25 characters.",
+  "val_USERNAME_INVALID_LENGTH": "Username must be between 3 and 25 characters.",
 
-  "USERNAME_EXISTS": "Username already exists.",
+  "val_USERNAME_EXISTS": "Username already exists.",
 
-  "EMAIL_INVALID": "Invalid email.",
+  "val_EMAIL_INVALID": "Invalid email.",
 
-  "EMAIL_EXISTS": "Email already exists.",
+  "val_EMAIL_EXISTS": "Email already exists.",
 
-  "PASSWORD_HAS_SPACE": "Password cannot contain spaces.",
+  "val_PASSWORD_HAS_SPACE": "Password cannot contain spaces.",
 
-  "PASSWORD_INVALID_LENGTH": "Password must be at least 6 characters long.",
+  "val_PASSWORD_INVALID_LENGTH": "Password must be at least 6 characters long.",
 
-  "PASSWORDS_NO_MATCH": "Passwords do not match.",
+  "val_PASSWORDS_NO_MATCH": "Passwords do not match.",
 
-  "GENDER_NOT_SELECTED": "Please select a gender.",
+  "val_GENDER_NOT_SELECTED": "Please select a gender.",
 
-  "NO_FILE_SELECTED": "File must be selected.",
+  "val_NO_FILE_SELECTED": "File must be selected.",
 
-  "NO_TITLE_WRITTEN": "Title must be written.",
+  "val_NO_TITLE_WRITTEN": "Title must be written.",
 
-  "INVALID_FILE_TYPE": "File type must be PDF, Word, or PowerPoint.",
+  "val_INVALID_FILE_TYPE": "File type must be PDF, Word, or PowerPoint.",
 
-  "INVALID_FILE_SIZE": "File size must not exceed 50 MB."
+  "val_INVALID_FILE_SIZE": "File size must not exceed 50 MB."
 }

@@ -1,7 +1,7 @@
-<html dir="rtl">
+<html dir="<%=langDirection%>">
   <head>
     <%- include('partials/head.ejs') %>
-    <title><%=langData.UPDATE_POST_TITLE_PAGE_TITLE%></title>
+    <title><%=langData.updatePostTitlePage_TITLE%></title>
   </head>
   <body class="d-flex flex-column gap-4">
     <%- include('partials/nav.ejs') %>
@@ -18,13 +18,13 @@
       </a>
 
       <header class="text-center">
-        <h1><%=langData.UPDATE_POST_TITLE%></h1>
+        <h1><%=langData.updatePostTitlePage_UPDATE_POST_TITLE%></h1>
       </header>
 
       <form class="update-post-title-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto" method="POST" action="./updatePostTitleProcess">
-        <label for="" class="form-label"><%=langData.NEW_TITLE%></label>
-        <input name="newTitle" type="text" class="new-title-input form-control" id="new-title" maxlength="70" />
-        <button id="updateButton" type="submit" class="update-post-title-page-container__button btn btn-lg d-block mx-auto mt-4"><%=langData.EDIT%></button>
+        <label for="" class="form-label"><%=langData.updatePostTitlePage_NEW_TITLE%></label>
+        <input name="newTitle" type="text" class="new-title-input form-control" id="new-title" maxlength="70"/>
+        <button id="updateButton" type="submit" class="update-post-title-page-container__button btn btn-lg d-block mx-auto mt-4"><%=langData.updatePostTitlePage_EDIT%></button>
       </form>
     </main>
 

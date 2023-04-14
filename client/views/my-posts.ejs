@@ -1,7 +1,7 @@
-<html dir="rtl">
+<html dir="<%=langDirection%>">
   <head>
     <%- include('partials/head.ejs') %>
-    <title><%=langData.MY_POSTS_PAGE_TITLE%></title>
+    <title><%=langData.myPostsPage_TITLE%></title>
   </head>
   <body class="d-flex flex-column gap-4">
     <%- include('partials/nav.ejs') %>
@@ -13,40 +13,40 @@
       </a>
 
       <header>
-        <h1><%=langData.MY_POSTS%></h1>
+        <h1><%=langData.myPostsPage_MY_POSTS%></h1>
       </header>
 
       <!-- Delete post success -->
       <% if(typeof deletePostSuccess !== 'undefined' && deletePostSuccess === true) { %>
       <script>
-        showToast(true, "<%= langData.DELETE_POST_SUCCESS_TOAST %>");
+        showToast(true, "<%= langData.toast_DELETE_POST_TITLE_SUCCESS %>");
       </script>
       <% } %>
 
       <!-- Delete post failed -->
       <% if(typeof deletePostSuccess !== 'undefined' && deletePostSuccess === false) { %>
       <script>
-        showToast(false, "<%= langData.DELETE_POST_FAIL_TOAST %>");
+        showToast(false, "<%= langData.toast_DELETE_POST_TITLE_FAIL %>");
       </script>
       <% } %>
 
       <!-- Update post success -->
       <% if(typeof updatePostTitleSuccess !== 'undefined' && updatePostTitleSuccess === true) { %>
       <script>
-        showToast(true, "<%= langData.UPDATE_POST_SUCCESS_TOAST %>");
+        showToast(true, "<%= langData.toast_UPDATE_POST_TITLE_SUCCESS %>");
       </script>
       <% } %>
 
       <!-- Update post failed -->
       <% if(typeof updatePostTitleSuccess !== 'undefined' && updatePostTitleSuccess === false) { %>
       <script>
-        showToast(false, "<%= langData.UPDATE_POST_FAIL_TOAST %>");
+        showToast(false, "<%= langData.toast_UPDATE_POST_TITLE_FAIL %>");
       </script>
       <% } %>
 
       <!-- If there are no posts -->
       <% if(typeof areTherePosts !== 'undefined' && areTherePosts === false) { %>
-      <h6 class="text-center mt-5"><%= langData.USER_NO_POSTS %></h6>
+      <h6 class="text-center mt-5"><%= langData.myPostsPage_USER_NO_POSTS %></h6>
       <% } %>
 
       <!-- if there are posts -->
@@ -70,11 +70,11 @@
             <small class="post-date"><%= post.createdAt %></small>
             <div>
               <form class="m-0 mx-1 d-inline" action="/dashboard/my-posts/<%=post.id%>/update-post-title" method="GET">
-                <button class="update-post-btn btn btn-sm btn-primary text-light"><%=langData.EDIT_TITLE%></button>
+                <button class="update-post-btn btn btn-sm btn-primary text-light"><%=langData.myPostsPage_EDIT_TITLE%></button>
               </form>
               <form class="m-0 d-inline" action="/dashboard/my-posts/deletePost" method="POST">
                 <input type="hidden" name="s3FileName" value="<%=post.s3FileName%>" />
-                <button class="delete-post-btn btn btn-sm btn-danger text-light"><%=langData.DELETE%></button>
+                <button class="delete-post-btn btn btn-sm btn-danger text-light"><%=langData.myPostsPage_DELETE%></button>
               </form>
             </div>
           </div>
