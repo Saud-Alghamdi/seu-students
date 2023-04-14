@@ -111,8 +111,8 @@ router.post("/dashboard/my-posts/:postId/updatePostTitleProcess", async (req, re
 
 // Send language json file to client-side javascript
 router.get("/langData", (req, res) => {
-  const userLanguage = req.session.userLanguage;
-  const fileName = `${userLanguage}.json`;
+  const lang = req.session.lang;
+  const fileName = `${lang}.json`;
   const filePath = path.join(__dirname, "../lang", fileName);
   res.sendFile(filePath);
 });
