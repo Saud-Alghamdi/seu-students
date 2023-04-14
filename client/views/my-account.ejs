@@ -30,7 +30,7 @@
 
       <section class="mt-5">
         <!-- update Username -->
-        <div class="username-data-wrapper mt-4">
+        <section class="username-data-wrapper mt-4">
           <h4 class="username-label d-block"><%=langData.myAccountPage_USERNAME%></h4>
           <p class="current-username d-inline-block fs-5"><%= user.username %></p>
           <button class="update-btn update-username-btn btn mx-2"><%=langData.myAccountPage_CHANGE%></button>
@@ -43,10 +43,10 @@
             <button class="cancel-btn new-username-cancel-btn btn btn-warning border-0"><%=langData.myAccountPage_CANCEL%></button>
             <span class="text-warning d-block error-message username-error-message fw-bold"></span>
           </form>
-        </div>
+        </section>
 
         <!-- update email -->
-        <div class="email-data-wrapper mt-4">
+        <section class="email-data-wrapper mt-4">
           <h4 class="email-label d-block"><%=langData.myAccountPage_EMAIL%></h4>
           <p class="current-email d-inline-block fs-5"><%= user.email %></p>
           <button class="update-btn update-email-btn btn mx-2"><%=langData.myAccountPage_CHANGE%></button>
@@ -59,10 +59,10 @@
             <button class="cancel-btn new-email-cancel-btn btn btn-warning border-0"><%=langData.myAccountPage_CANCEL%></button>
             <span class="text-warning d-block error-message email-error-message fw-bold"></span>
           </form>
-        </div>
+        </section>
 
         <!-- update password -->
-        <div class="password-data-wrapper mt-4">
+        <section class="password-data-wrapper mt-4">
           <h4 class="password-label d-block"><%=langData.myAccountPage_PASSWORD%></h4>
           <p class="current-password d-inline-block fs-5">•••••••••••••</p>
           <button class="update-btn update-password-btn btn mx-2"><%=langData.myAccountPage_CHANGE%></button>
@@ -77,7 +77,7 @@
             <button class="mt-2 save-btn new-password-save-btn btn btn-primary"><%=langData.myAccountPage_SAVE%></button>
             <button class="mt-2 cancel-btn new-password-cancel-btn btn btn-warning border-0"><%=langData.myAccountPage_CANCEL%></button>
           </form>
-        </div>
+        </section>
       </section>
     </main>
 
