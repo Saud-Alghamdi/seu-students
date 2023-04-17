@@ -3,30 +3,41 @@
     <%- include('partials/head.ejs') %>
     <title><%=langData.myPostsPage_TITLE%></title>
   </head>
-  <body class="d-flex flex-column gap-4">
+  <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
 
-    <main class="dashboard-page-container__main position-relative text-center text-light flex-grow-1">
-      <!-- Back link -->
-      <a class="text-light text-decoration-none position-absolute" id="back-link" onclick="history.back()">
-        <i class="fa-sharp fa-solid fa-arrow-right-long"></i>
-      </a>
+    <!-- Loader -->
+    <div id="loader-container" class="visually-hidden">
+      <div id="loader"></div>
+    </div>
 
-      <header>
-        <h1><%=langData.myPostsPage_MY_POSTS%></h1>
+    <main class="container position-relative flex-grow-1 text-light my-4">
+      <!-- Back link -->
+      <% if(langDirection === 'rtl') { %>
+      <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
+        <i class="fas fa-reply fa-lg fa-flip-horizontal"></i>
+      </a>
+      <% } else { %>
+      <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
+        <i class="fas fa-reply fa-lg"></i>
+      </a>
+      <% } %>
+
+      <header class="text-center">
+        <h1><%=langData.myPostsPage_HEADER%></h1>
       </header>
 
       <!-- Delete post success -->
       <% if(typeof deletePostSuccess !== 'undefined' && deletePostSuccess === true) { %>
       <script>
-        showToast(true, "<%= langData.toast_DELETE_POST_TITLE_SUCCESS %>");
+        showToast(true, "<%= langData.toast_DELETE_POST_SUCCESS %>");
       </script>
       <% } %>
 
       <!-- Delete post failed -->
       <% if(typeof deletePostSuccess !== 'undefined' && deletePostSuccess === false) { %>
       <script>
-        showToast(false, "<%= langData.toast_DELETE_POST_TITLE_FAIL %>");
+        showToast(false, "<%= langData.toast_DELETE_POST_FAIL %>");
       </script>
       <% } %>
 
@@ -49,45 +60,55 @@
       <h6 class="text-center mt-5"><%= langData.myPostsPage_USER_NO_POSTS %></h6>
       <% } %>
 
-      <!-- if there are posts -->
-      <div class="myposts-flex-container mt-4 d-flex justify-content-center flex-wrap text-dark px-md-5">
-        <% if(typeof posts !== 'undefined') { %> <% posts.forEach(post => { %>
-        <div class="myposts-page-container__post d-flex flex-column border-dark rounded-4 px-3 m-2 shadow-lg">
-          <div class="myposts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
+      <!-- If there are posts -->
+      <div class="posts-container d-flex justify-content-center flex-wrap gap-3 mt-4">
+        <% if(typeof posts !== 'undefined' && posts.length > 0) { %> <% posts.forEach(post => { %>
+        <div class="posts-container-post my-posts d-flex flex-column rounded-5 text-decoration-none text-dark" href="/downloadFile?s3FileName=<%= post.s3FileName %>&title=<%= post.title %>" download="<%= post.s3FileName %>">
+          <!-- Col 1 -->
+          <div class="col posts-container-post-col p-2 px-sm-4 d-flex align-items-center">
             <% if(post.fileType === '.pdf') { %>
-            <img class="post-file-icon" src="/images/pdf-icon.svg" alt="" height="30" width="30" />
+            <img class="post-file-icon p-0" src="/images/pdf-icon.svg" alt="" height="30" width="30" />
             <% } else if (post.fileType === '.doc' || post.fileType === '.docx') { %>
-            <img class="post-file-icon" src="/images/word-icon.svg" alt="" height="30" width="30" />
+            <img class="post-file-icon p-0" src="/images/word-icon.svg" alt="" height="30" width="30" />
             <% } else if (post.fileType === '.ppt' || post.fileType === '.pptx') { %>
-            <img class="post-file-icon" src="/images/powerpoint-icon.svg" alt="" height="30" width="30" />
+            <img class="post-file-icon p-0" src="/images/powerpoint-icon.svg" alt="" height="30" width="30" />
             <% } %>
-            <h6 class="post-title text-end fw-bolder d-inline mx-2"><%= post.title %></h6>
+            <h6 class="posts-container-post-title fw-bolder mx-2"><%= post.title %></h6>
           </div>
-          <div class="myposts-page-container__post-column d-flex justify-content-start align-items-center flex-grow-1">
+          <!-- Col 2 -->
+          <div class="col posts-container-post-col p-2 px-sm-4 d-flex align-items-center">
             <small class="post-course-code"><%=post.courseCode%></small>
           </div>
-          <div class="myposts-page-container__post-column d-flex justify-content-between align-items-center flex-grow-1">
-            <small class="post-date"><%= post.createdAt %></small>
-            <div>
-              <form class="m-0 mx-1 d-inline" action="/dashboard/my-posts/<%=post.id%>/update-post-title" method="GET">
-                <button class="update-post-btn btn btn-sm btn-primary text-light"><%=langData.myPostsPage_EDIT_TITLE%></button>
+          <!-- Col 3 -->
+          <div class="col posts-container-post-col p-2 d-flex align-items-center">
+            <div class="col-8">
+              <small class=""><%= post.createdAt %></small>
+            </div>
+            <div class="col d-flex justify-content-evenly justify-content-sm-center">
+              <form class="m-0" action="/dashboard/my-posts/<%=post.id%>/update-post-title" method="GET">
+                <button class="edit-post-button btn btn-primary btn-sm mx-sm-1 text-light"><%=langData.myPostsPage_EDIT%></button>
               </form>
-              <form class="m-0 d-inline" action="/dashboard/my-posts/deletePost" method="POST">
+              <form class="m-0" action="/dashboard/my-posts/deletePost" method="POST">
                 <input type="hidden" name="s3FileName" value="<%=post.s3FileName%>" />
-                <button class="delete-post-btn btn btn-sm btn-danger text-light"><%=langData.myPostsPage_DELETE%></button>
+                <button class="delete-post-button btn btn-danger btn-sm mx-sm-1"><%=langData.myPostsPage_DELETE%></button>
               </form>
             </div>
           </div>
         </div>
-        <% }) %> <% } %>
+        <% })} else { %>
+        <h6 class=""><%=langData.postsPage_NO_POSTS%></h6>
+        <% } %>
       </div>
 
-      <div class="pagination d-flex flex-row-reverse justify-content-center align-items-center mt-5">
+      <!-- Pagination -->
+      <div class="pagination d-flex justify-content-center align-items-center mt-5">
+        <i><</i>
         <% if(typeof totalPages !== 'undefined') { %> <% for (let i = 1; i <= totalPages; i++) { %> <% if(i === currentPage) { %>
-        <a href="?page=<%= i %>" class="page-number-link text-light mx-2"><%= i %></a>
+        <a href="?page=<%= i %>" class="link page-number-link text-light mx-2"><%= i %></a>
         <% } else { %>
-        <a href="?page=<%= i %>" class="page-number-link text-decoration-none text-light mx-2"><%= i %></a>
+        <a href="?page=<%= i %>" class="link page-number-link text-decoration-none text-light mx-2"><%= i %></a>
         <% } %> <% } %> <% } %>
+        <i>></i>
       </div>
     </main>
 

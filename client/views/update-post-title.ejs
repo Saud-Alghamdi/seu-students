@@ -3,7 +3,7 @@
     <%- include('partials/head.ejs') %>
     <title><%=langData.updatePostTitlePage_TITLE%></title>
   </head>
-  <body class="d-flex flex-column gap-4">
+  <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
 
     <!-- Loader -->
@@ -11,20 +11,26 @@
       <div id="loader"></div>
     </div>
 
-    <main class="update-post-title-page-container__main container position-relative flex-grow-1 text-light">
+    <main class="container position-relative flex-grow-1 text-light my-4">
       <!-- Back link -->
-      <a class="text-light text-decoration-none position-absolute" id="back-link" onclick="history.back()">
-        <i class="fa-sharp fa-solid fa-arrow-right-long"></i>
+      <% if(langDirection === 'rtl') { %>
+      <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
+        <i class="fas fa-reply fa-lg fa-flip-horizontal"></i>
       </a>
+      <% } else { %>
+      <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
+        <i class="fas fa-reply fa-lg"></i>
+      </a>
+      <% } %>
 
       <header class="text-center">
-        <h1><%=langData.updatePostTitlePage_UPDATE_POST_TITLE%></h1>
+        <h1><%=langData.updatePostTitlePage_HEADER%></h1>
       </header>
 
-      <form class="update-post-title-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto" method="POST" action="./updatePostTitleProcess">
+      <form class="form update-post-title-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto" method="POST" action="./updatePostTitleProcess">
         <label for="" class="form-label"><%=langData.updatePostTitlePage_NEW_TITLE%></label>
-        <input name="newTitle" type="text" class="new-title-input form-control" id="new-title" maxlength="70"/>
-        <button id="updateButton" type="submit" class="update-post-title-page-container__button btn btn-lg d-block mx-auto mt-4"><%=langData.updatePostTitlePage_EDIT%></button>
+        <input name="newTitle" type="text" class="new-title-input form-control" id="new-title" maxlength="70" />
+        <button id="updateButton" type="submit" class="update-post-title-page-container__button btn btn-lg btn-regular d-block mx-auto mt-4"><%=langData.updatePostTitlePage_EDIT%></button>
       </form>
     </main>
 

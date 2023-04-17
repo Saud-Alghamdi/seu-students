@@ -3,24 +3,35 @@
     <%- include('partials/head.ejs') %>
     <title><%=langData.dashboardPage_TITLE%></title>
   </head>
-  <body class="d-flex flex-column gap-4">
+  <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
 
-    <main class="dashboard-page-container__main container position-relative text-center text-light flex-grow-1">
-      <!-- Back link -->
-      <a class="text-light text-decoration-none position-absolute" id="back-link" onclick="history.back()">
-        <i class="fa-sharp fa-solid fa-arrow-right-long"></i>
-      </a>
+    <!-- Loader -->
+    <div id="loader-container" class="visually-hidden">
+      <div id="loader"></div>
+    </div>
 
-      <header>
-        <h1><%=langData.dashboardPage_DASHBOARD%></h1>
+    <main class="container position-relative flex-grow-1 text-light my-4">
+      <!-- Back link -->
+      <% if(langDirection === 'rtl') { %>
+      <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
+        <i class="fas fa-reply fa-lg fa-flip-horizontal"></i>
+      </a>
+      <% } else { %>
+      <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
+        <i class="fas fa-reply fa-lg"></i>
+      </a>
+      <% } %>
+
+      <header class="text-center">
+        <h1><%=langData.dashboardPage_HEADER%></h1>
       </header>
 
       <form action="/dashboard/my-account" class="mt-5">
-        <button class="dashboard-page-container__button btn btn-lg"><%=langData.dashboardPage_MY_ACCOUNT_INFO%></button>
+        <button class="btn btn-regular btn-long btn-lg d-block mx-auto"><%=langData.dashboardPage_MY_ACCOUNT_INFO%></button>
       </form>
       <form action="/dashboard/my-posts">
-        <button class="dashboard-page-container__button btn btn-lg"><%=langData.dashboardPage_MY_POSTS%></button>
+        <button class="btn btn-regular btn-long btn-lg d-block mx-auto"><%=langData.dashboardPage_MY_POSTS%></button>
       </form>
     </main>
 

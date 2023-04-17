@@ -8,10 +8,10 @@ let langData = fetch("/langData")
   })
   .catch((err) => console.log(err));
 
-const form = document.querySelector(".add-post-page-container__form");
+const form = document.querySelector(".add-post-form");
 const fileInput = document.querySelector(".file-input");
 const titleInput = document.querySelector(".title-input");
-const submitButton = document.querySelector(".add-post-page-container__button");
+const submitButton = document.querySelector(".add-post-submit-btn");
 const titleErrorMsg = document.querySelector(".error-message-title-input");
 const fileErrorMsg = document.querySelector(".error-message-file-input");
 const loaderContainer = document.querySelector("#loader-container");

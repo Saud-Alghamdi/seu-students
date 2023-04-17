@@ -5,13 +5,15 @@
 
   "homePage_TITLE": "SEU Students - Home",
 
-  "homePage_WELCOME_STUDENTS": "Welcome SEU Students!",
+  "homePage_HEADER": "Welcome SEU Students!",
 
-  "homePage_WELCOME_PARAGRAPH_P1": "Welcome to the dedicated website for students of Saudi Electronic University! Our aim in building this website is to provide a platform that empowers students to easily access study-related files.",
+  "homePage_WELCOME_PARAGRAPH_P1": "Welcome to the dedicated website for students of Saudi Electronic University!",
 
-  "homePage_WELCOME_PARAGRAPH_P2": "We believe that this will not only enhance your learning experience, but also make it easier and more efficient.",
+  "homePage_WELCOME_PARAGRAPH_P2": "Our aim in building this website is to provide a platform that empowers students to easily access study-related files.",
 
-  "homePage_WELCOME_PARAGRAPH_P3": "We are committed to continuously updating and improving our core system to better serve you, and we wish you the best experiences.",
+  "homePage_WELCOME_PARAGRAPH_P3": "We believe that this will not only enhance your learning experience, but also make it easier and more efficient.",
+
+  "homePage_WELCOME_PARAGRAPH_P4": "We are committed to continuously updating and improving our core system to better serve you, and we wish you the best experiences.",
 
   "homePage_LOGIN": "Log in",
 
@@ -63,7 +65,7 @@
 
   "signupPage_TITLE": "SEU Students - Signup",
 
-  "signupPage_SIGNUP": "Sign up",
+  "signupPage_HEADER": "Sign up:",
 
   "signupPage_USERNAME": "Username:",
 
@@ -79,13 +81,15 @@
 
   "signupPage_FEMALE": "Female",
 
+  "signupPage_SIGNUP": "Sign up",
+
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||||||": "||||||||||||||||||||||||| login.ejs |||||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
   "loginPage_TITLE": "SEU Students - Login",
 
-  "loginPage_LOGIN": "Login",
+  "loginPage_HEADER": "Login:",
 
   "loginPage_USERNAME_OR_EMAIL": "Username or Email:",
 
@@ -95,13 +99,15 @@
 
   "loginPage_DONT_HAVE_ACCOUNT": "Don't have an account",
 
+  "loginPage_LOGIN": "Login",
+
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||||||": "||||||||||||||||||||||||| reset-password.ejs |||||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
   "resetPasswordPage_TITLE": "SEU Students - Reset Password",
 
-  "resetPasswordPage_RESET_PASSWORD": "Reset Password:",
+  "resetPasswordPage_HEADER": "Reset Password:",
 
   "resetPasswordPage_RESET_PASSWORD_DESC1": "A temporary password will be sent to your email. Use it to log in.",
 
@@ -117,7 +123,7 @@
 
   "dashboardPage_TITLE": "SEU Students - Dashboard",
 
-  "dashboardPage_DASHBOARD": "Dashboard:",
+  "dashboardPage_HEADER": "Dashboard:",
 
   "dashboardPage_MY_ACCOUNT_INFO": "My Account Info",
 
@@ -129,7 +135,7 @@
 
   "myAccountPage_TITLE": "SEU Students - My Account",
 
-  "myAccountPage_MY_ACCOUNT_INFO": "My Account Info:",
+  "myAccountPage_HEADER": "My Account Info:",
 
   "myAccountPage_USERNAME": "Username:",
 
@@ -157,9 +163,9 @@
 
   "myPostsPage_TITLE": "SEU Students - My Posts",
 
-  "myPostsPage_MY_POSTS": "My Posts:",
+  "myPostsPage_HEADER": "My Posts:",
 
-  "myPostsPage_EDIT_TITLE": "Edit Title",
+  "myPostsPage_EDIT": "Edit",
 
   "myPostsPage_DELETE": "Delete",
 
@@ -169,7 +175,7 @@
 
   "updatePostTitlePage_TITLE": "SEU Students - Update Post Title",
 
-  "updatePostTitlePage_UPDATE_POST_TITLE": "Edit Post Title:",
+  "updatePostTitlePage_HEADER": "Edit Post Title:",
 
   "updatePostTitlePage_NEW_TITLE": "New Title:",
 
@@ -181,7 +187,7 @@
 
   "departmentsPage_TITLE": "SEU Students - Departments",
 
-  "departmentsPage_DEPARTMENTS": "Departments:",
+  "departmentsPage_HEADER": "Departments:",
 
   "departmentsPage_COMPUTER_SCIENCE": "Computer Science",
 
@@ -195,11 +201,11 @@
 
   "coursesPage_TITLE": "SEU Students - Courses",
 
-  "coursesPage_COMPUTER_SCIENCE_COURSES": "Computer Science Courses:",
+  "coursesPage_CS_HEADER": "Computer Science Courses:",
 
-  "coursesPage_INFORMATION_TECHNOLOGY_COURSES": "Information Technology Courses:",
+  "coursesPage_IT_HEADER": "Information Technology Courses:",
 
-  "coursesPage_DATA_SCIENCE_COURSES": "Data Science Courses:",
+  "coursesPage_DS_HEADER": "Data Science Courses:",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| posts.ejs |||||||||||||||||||||||--",
@@ -207,7 +213,7 @@
 
   "postsPage_POSTS_PAGE_TITLE": "SEU Students - Posts",
 
-  "postsPage_POSTS": "Posts",
+  "postsPage_HEADER": "Posts for",
 
   "postsPage_ADD_POST": "+ Add Post",
 
@@ -221,7 +227,7 @@
 
   "addPostPage_TITLE": "SEU Students - Add Post",
 
-  "addPostPage_ADD_POST": "Add Post",
+  "addPostPage_HEADER": "Add Post: ",
 
   "addPostPage_POST_TITLE": "Title:",
 

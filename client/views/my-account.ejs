@@ -3,7 +3,7 @@
     <%- include('partials/head.ejs') %>
     <title><%=langData.myAccountPage_TITLE%></title>
   </head>
-  <body class="d-flex flex-column gap-4">
+  <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
 
     <!-- Loader -->
@@ -18,14 +18,20 @@
     </script>
     <% } %>
 
-    <main class="my-account-page-container__main container position-relative text-light flex-grow-1">
+    <main class="container position-relative flex-grow-1 text-light my-4">
       <!-- Back link -->
-      <a class="text-light text-decoration-none position-absolute" id="back-link" onclick="history.back()">
-        <i class="fa-sharp fa-solid fa-arrow-right-long"></i>
+      <% if(langDirection === 'rtl') { %>
+      <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
+        <i class="fas fa-reply fa-lg fa-flip-horizontal"></i>
       </a>
+      <% } else { %>
+      <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
+        <i class="fas fa-reply fa-lg"></i>
+      </a>
+      <% } %>
 
       <header class="text-center">
-        <h1><%=langData.myAccountPage_MY_ACCOUNT_INFO%></h1>
+        <h1><%=langData.myAccountPage_HEADER%></h1>
       </header>
 
       <section class="mt-5">
@@ -33,7 +39,7 @@
         <section class="username-data-wrapper mt-4">
           <h4 class="username-label d-block"><%=langData.myAccountPage_USERNAME%></h4>
           <p class="current-username d-inline-block fs-5"><%= user.username %></p>
-          <button class="update-btn update-username-btn btn mx-2"><%=langData.myAccountPage_CHANGE%></button>
+          <button class="update-btn update-username-btn btn mx-2 btn-regular"><%=langData.myAccountPage_CHANGE%></button>
 
           <!-- Update username hidden form -->
           <form class="my-account-form new-username-form mb-5 visually-hidden">
@@ -49,12 +55,12 @@
         <section class="email-data-wrapper mt-4">
           <h4 class="email-label d-block"><%=langData.myAccountPage_EMAIL%></h4>
           <p class="current-email d-inline-block fs-5"><%= user.email %></p>
-          <button class="update-btn update-email-btn btn mx-2"><%=langData.myAccountPage_CHANGE%></button>
+          <button class="update-btn update-email-btn btn mx-2 btn-regular"><%=langData.myAccountPage_CHANGE%></button>
 
           <!-- Update email hidden form -->
           <form class="my-account-form new-email-form mb-5 visually-hidden">
             <label class="d-block" for=""><%=langData.myAccountPage_NEW_EMAIL%></label>
-            <input class="my-account-form-input new-email-input form-control d-inline mt-2" type="email" name="email" id="" />
+            <input class="my-account-form-input new-email-input form-control d-inline mt-2" type="text" name="email" id="" />
             <button class="save-btn new-email-save-btn btn btn-primary"><%=langData.myAccountPage_SAVE%></button>
             <button class="cancel-btn new-email-cancel-btn btn btn-warning border-0"><%=langData.myAccountPage_CANCEL%></button>
             <span class="text-warning d-block error-message email-error-message fw-bold"></span>
@@ -65,13 +71,13 @@
         <section class="password-data-wrapper mt-4">
           <h4 class="password-label d-block"><%=langData.myAccountPage_PASSWORD%></h4>
           <p class="current-password d-inline-block fs-5">•••••••••••••</p>
-          <button class="update-btn update-password-btn btn mx-2"><%=langData.myAccountPage_CHANGE%></button>
+          <button class="update-btn update-password-btn btn mx-2 btn-regular"><%=langData.myAccountPage_CHANGE%></button>
 
           <!-- Update password hidden form -->
-          <form class="my-account-form new-password-form mb-5 visually-hidden">
+          <form class="my-account-form-input new-password-form mb-5 visually-hidden">
             <label class="d-block" for=""><%=langData.myAccountPage_NEW_PASSWORD%></label>
             <input class="my-account-form-input new-password-input form-control d-inline mt-2" type="password" name="password" id="" />
-            <label class="d-block mt-2" for=""><%=langData.myAccountPage_REPEAT_NEW_PASSWORD%></label>
+            <label class="d-block mt-2" for=""><%=langData.myAccountPage_NEW_PASSWORD_REPEAT%></label>
             <input class="d-block my-account-form-input repeat-new-password-input form-control d-inline mt-2" type="password" name="repeat-password" id="" />
             <span class="text-warning d-block error-message password-error-message fw-bold"></span>
             <button class="mt-2 save-btn new-password-save-btn btn btn-primary"><%=langData.myAccountPage_SAVE%></button>

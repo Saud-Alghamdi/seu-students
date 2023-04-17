@@ -1,0 +1,13 @@
+.link {
+  color: #71bcf5;
+}
+
+.link:hover,
+.link:focus {
+  color: red !important;
+  cursor: pointer;
+}
+
+.link:active {
+  opacity: 0.5 !important;
+}

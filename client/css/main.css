@@ -1,76 +1,19 @@
-/*
-Styles are split per view.
-This file will containt all the imports of styles of all views + styling of general utilities (body, nav).
-*/
-
-/* IMPORT OTHER STYLE SHEETS */
-@import url("home.css");
+@import url("buttons.css");
+@import url("links.css");
+@import url("nav.css");
+@import url("forms.css");
+@import url("icons.css");
 @import url("departments.css");
-@import url("login.css");
-@import url("signup.css");
+@import url("courses.css");
 @import url("posts.css");
-@import url("add-post.css");
-@import url("dashboard.css");
-@import url("my-account.css");
-@import url("my-posts.css");
-@import url("update-post-title.css");
-@import url("reset-password.css");
-@import url("footer.css");
+@import url("loader.css");
+@import url("text.css");
 
-/* GLOBAL VARIABLES */
-:root {
-  --body-bg-color: linear-gradient(to right, #5b3283, #3580ab, #5db5b3);
-  --text-color-primary: rgb(248, 249, 250);
-  --btn-bg-color: #5db5b3;
-  --link-color: rgba(0, 0, 0, 0.55);
-  --card-gradient: linear-gradient(to right, #cc2b5e, #753a88);
-
-  --card-hover: linear-gradient(to right, #e17497, #905fa0);
-  --link-hover: red;
-
-  --card-active: linear-gradient(to right, #90173d, #3f154e);
-}
-
-/* GENERAL STYLES */
 html {
   height: 100%;
 }
 
 body {
   min-height: 100%;
-  background: var(--body-bg-color);
-  position: relative;
-}
-
-.navbar-nav {
-  width: 100%;
-}
-
-.nav-link:hover,
-.nav-link:active {
-  color: var(--link-hover);
-}
-
-.error-message {
-  font-size: 0.85rem;
-  color: #f06e6e;
-}
-
-#back-link {
-  top: 10px;
-  right: 3%;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-/* Back button On screen sizes 576px and more */
-@media (min-width: 576px) {
-  #back-link {
-    right: 8%;
-    font-size: 34px;
-  }
-}
-
-#back-link:hover .fa-arrow-right-long {
-  color: var(--link-hover);
+  background: linear-gradient(to right, #5b3283, #3580ab, #5db5b3);
 }

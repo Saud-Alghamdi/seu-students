@@ -5,13 +5,15 @@
 
   "homePage_TITLE": "طلاب SEU - الرئيسية",
 
-  "homePage_WELCOME_STUDENTS": "مرحبًا بطلاب الجامعة السعودية الإلكترونية!",
+  "homePage_HEADER": "مرحبًا بطلاب الجامعة السعودية الإلكترونية!",
 
-  "homePage_WELCOME_PARAGRAPH_P1": "أهلًا بكم في الموقع الإلكتروني الخاص بطلاب الجامعة السعودية الإلكترونية، حيث هدفنا من بناء هذا الموقع هو توفير منصة تمكّن الطلاب من الوصول بسهولة إلى الملفات المتعلقة بالمواد الدراسية.",
+  "homePage_WELCOME_PARAGRAPH_P1": "أهلًا بكم في الموقع الإلكتروني الخاص بطلاب الجامعة السعودية الإلكترونية.",
 
-  "homePage_WELCOME_PARAGRAPH_P2": "نعتقد أن هذا ليس فقط يعزز تجربة التعلم الخاصة بك، بل سيجعلها أكثر سهولة وكفاءة.",
+  "homePage_WELCOME_PARAGRAPH_P2": " هدفنا من بناء هذا الموقع هو توفير منصة تمكّن الطلاب من الوصول بسهولة إلى الملفات المتعلقة بالمواد الدراسية.",
 
-  "homePage_WELCOME_PARAGRAPH_P3": "نحن ملتزمون بتحديث نظامنا الأساسي وتحسينه باستمرار لخدمتكم بشكل أفضل، ونأمل لكم أفضل التجارب.",
+  "homePage_WELCOME_PARAGRAPH_P3": "نعتقد أن هذا ليس فقط يعزز تجربة التعلم الخاصة بك، بل سيجعلها أكثر سهولة وكفاءة.",
+
+  "homePage_WELCOME_PARAGRAPH_P4": "نحن ملتزمون بتحديث نظامنا الأساسي وتحسينه باستمرار لخدمتكم بشكل أفضل، ونأمل لكم أفضل التجارب.",
 
   "homePage_SIGNUP": "التسجيل",
 
@@ -63,7 +65,7 @@
 
   "signupPage_TITLE": "طلاب SEU - التسجيل",
 
-  "signupPage_SIGNUP": "التسجيل",
+  "signupPage_HEADER": "التسجيل:",
 
   "signupPage_USERNAME": "اسم المستخدم:",
 
@@ -79,13 +81,15 @@
 
   "signupPage_FEMALE": "أنثى",
 
+  "signupPage_SIGNUP": "التسجيل",
+
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| login.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
   "loginPage_TITLE": "طلاب SEU - تسجيل الدخول",
 
-  "loginPage_LOGIN": "تسجيل دخول",
+  "loginPage_HEADER": "تسجيل دخول:",
 
   "loginPage_USERNAME_OR_EMAIL": "اسم المستخدم أو البريد الإلكتروني:",
 
@@ -95,13 +99,15 @@
 
   "loginPage_DONT_HAVE_ACCOUNT": "ليس لدي حساب",
 
+  "loginPage_LOGIN": "تسجيل دخول",
+
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| reset-password.ejs |||||||||||||||||||||||--",
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
 
   "resetPasswordPage_TITLE": "طلاب SEU - إعادة تعيين كلمة المرور",
 
-  "resetPasswordPage_RESET_PASSWORD": "إعادة تعيين كلمة المرور:",
+  "resetPasswordPage_HEADER": "إعادة تعيين كلمة المرور:",
 
   "resetPasswordPage_RESET_PASSWORD_DESC1": "سيتم إرسال كلمة مرور مؤقتة إلى بريدك الإلكتروني، استعملها لتسجيل الدخول.",
 
@@ -117,7 +123,7 @@
 
   "dashboardPage_TITLE": "طلاب SEU - لوحة التحكم",
 
-  "dashboardPage_DASHBOARD": "لوحة التحكم:",
+  "dashboardPage_HEADER": "لوحة التحكم:",
 
   "dashboardPage_MY_ACCOUNT_INFO": "بيانات حسابي",
 
@@ -129,7 +135,7 @@
 
   "myAccountPage_TITLE": "طلاب SEU - حسابي",
 
-  "myAccountPage_MY_ACCOUNT_INFO": "بيانات حسابي:",
+  "myAccountPage_HEADER": "بيانات حسابي:",
 
   "myAccountPage_USERNAME": "اسم المستخدم:",
 
@@ -157,9 +163,9 @@
 
   "myPostsPage_TITLE": "طلاب SEU - منشوراتي",
 
-  "myPostsPage_MY_POSTS": "منشوراتي:",
+  "myPostsPage_HEADER": "منشوراتي:",
 
-  "myPostsPage_EDIT_TITLE": "تعديل العنوان",
+  "myPostsPage_EDIT": "تعديل",
 
   "myPostsPage_DELETE": "حذف",
 
@@ -171,7 +177,7 @@
 
   "updatePostTitlePage_TITLE": "طلاب SEU - تعديل عنوان منشور",
 
-  "updatePostTitlePage_UPDATE_POST_TITLE": "تعديل عنوان منشور:",
+  "updatePostTitlePage_HEADER": "تعديل عنوان منشور:",
 
   "updatePostTitlePage_NEW_TITLE": "العنوان الجديد:",
 
@@ -183,7 +189,7 @@
 
   "departmentsPage_TITLE": "طلاب SEU - التخصصات",
 
-  "departmentsPage_DEPARTMENTS": "التخصصات:",
+  "departmentsPage_HEADER": "التخصصات:",
 
   "departmentsPage_COMPUTER_SCIENCE": "علوم الحاسب",
 
@@ -197,11 +203,11 @@
 
   "coursesPage_TITLE": "طلاب SEU - المواد",
 
-  "coursesPage_COMPUTER_SCIENCE_COURSES": "مواد علوم الحاسب:",
+  "coursesPage_CS_HEADER": "مواد علوم الحاسب:",
 
-  "coursesPage_INFORMATION_TECHNOLOGY_COURSES": "مواد تقنية المعلومات:",
+  "coursesPage_IT_HEADER": "مواد تقنية المعلومات:",
 
-  "coursesPage_DATA_SCIENCE_COURSES": "مواد علوم البيانات:",
+  "coursesPage_DS_HEADER": "مواد علوم البيانات:",
 
   "|||||||||||||||||||": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||--",
   "|||||||||||||||": "||||||||||||||||||||||| posts.ejs |||||||||||||||||||||||--",
@@ -209,7 +215,7 @@
 
   "postsPage_TITLE": "طلاب SEU - المنشورات",
 
-  "postsPage_POSTS": "المنشورات لـ",
+  "postsPage_HEADER": "المنشورات لـ",
 
   "postsPage_ADD_POST": "+ إضافة منشور",
 
@@ -221,7 +227,7 @@
 
   "addPostPage_TITLE": "طلاب SEU - إضافة منشور",
 
-  "addPostPage_ADD_POST": "إضافة منشور",
+  "addPostPage_HEADER": "إضافة منشور:",
 
   "addPostPage_POST_TITLE": "العنوان:",
 
@@ -316,7 +322,7 @@
   "val_GENDER_NOT_SELECTED": "فضلًا اختر نوع الجنس.",
 
   "val_NO_FILE_SELECTED": "يجب اختيار ملف.",
-  
+
   "val_NO_TITLE_WRITTEN": "يجب كتابة عنوان.",
 
   "val_INVALID_FILE_TYPE": "يجب أن يكون نوع الملف PDF أو Word أو Powerpoint.",

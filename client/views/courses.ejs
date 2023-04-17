@@ -6,30 +6,39 @@
   <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
 
-    <main class="departments-page-container__main container position-relative flex-grow-1 text-center text-light my-4">
-      <!-- Back link -->
-      <a class="text-light text-decoration-none position-absolute" id="back-link" onclick="history.back()">
-        <i class="fa-sharp fa-solid fa-arrow-right-long"></i>
-      </a>
+    <!-- Loader -->
+    <div id="loader-container" class="visually-hidden">
+      <div id="loader"></div>
+    </div>
 
-      <header>
+    <main class="container position-relative flex-grow-1 text-light my-4">
+      <!-- Back link -->
+      <% if(langDirection === 'rtl') { %>
+      <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
+        <i class="fas fa-reply fa-lg fa-flip-horizontal"></i>
+      </a>
+      <% } else { %>
+      <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
+        <i class="fas fa-reply fa-lg"></i>
+      </a>
+      <% } %>
+
+      <header class="text-center">
         <% if(depAbbr === 'CS') { %>
-        <h1><%=langData.coursesPage_COMPUTER_SCIENCE_COURSES%></h1>
+        <h1><%=langData.coursesPage_CS_HEADER%></h1>
         <% } else if(depAbbr === 'IT') { %>
-        <h1><%=langData.coursesPage_INFORMATION_TECHNOLOGY_COURSES%></h1>
+        <h1><%=langData.coursesPage_IT_HEADER%></h1>
         <% } else if(depAbbr === 'DS') { %>
-        <h1><%=langData.coursesPage_DATA_SCIENCE_COURSES%></h1>
+        <h1><%=langData.coursesPage_DS_HEADER%></h1>
         <% } %>
       </header>
 
-      <div class="departments-flex-container mt-5 d-flex justify-content-center flex-wrap">
-        <% if(typeof courses !== 'undefined') { %> <% courses.forEach(course => { %>
-
-        <div class="departments-page-container__div-box border-dark rounded-5 p-2 m-1">
-          <a class="department-link d-flex justify-content-center align-items-center text-light fs-3" href="./<%=course.code%>/posts"><%= course.code %></a>
+      <div class="courses-container container mt-5">
+        <div class="courses-row row justify-content-evenly gap-1">
+          <% if(typeof courses !== 'undefined') { %> <% courses.forEach(course => { %>
+          <a class="course-col col d-flex text-center justify-content-center align-items-center rounded-5 fs-2 text-decoration-none text-light" href="./<%=course.code%>/posts"><%= course.code %></a>
+          <% }) %> <% } %>
         </div>
-
-        <% }) %> <% } %>
       </div>
     </main>
 

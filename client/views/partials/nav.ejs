@@ -6,7 +6,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
       <ul class="navbar-nav d-flex align-items-md-center p-0">
         <li class="nav-item px-md-2">
           <a class="nav-link" aria-current="page" href="/"><%=langData.nav_HOME%></a>
@@ -21,11 +21,11 @@
         </li>
         <li class="nav-item px-md-2 d-flex align-items-center">
           <a class="nav-link" href="/dashboard" style="padding-bottom: 0">
-            <%=user.username%> <% if (user.gender === 'male') { %>
+            <% if (user.gender === 'male') { %>
             <img src="/images/male-icon.svg" alt="Placeholder" width="30" height="30" style="padding-bottom: 3px" />
             <% } else if (user.gender === 'female') { %>
             <img src="/images/female-icon.svg" alt="Placeholder" width="30" height="30" style="padding-bottom: 3px" />
-            <% } %>
+            <% } %> <%=user.username%>
           </a>
         </li>
         <!-- if NOT Logged in -->
@@ -37,11 +37,12 @@
           <a class="nav-link" href="/signup"><%=langData.nav_SIGNUP%></a>
         </li>
         <% } %>
-        <li class="nav-item">
-          <a class="nav-link" href="?lang=ar">العربية</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="?lang=en">English</a>
+      </ul>
+      <ul class="navbar-nav p-0">
+        <li class="nav-item nav-lang py-2 py-sm-0">
+          <a class="nav-link d-inline" href="?lang=ar">العربية</a>
+          &nbsp; | &nbsp;
+          <a class="nav-link d-inline" href="?lang=en">English</a>
         </li>
       </ul>
     </div>

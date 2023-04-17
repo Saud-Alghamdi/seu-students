@@ -6,19 +6,23 @@
   <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
 
-    <!-- DEBUGGER -->
-    <h1><%=langData.homePage_test%></h1>
+    <!-- Loader -->
+    <div id="loader-container" class="visually-hidden">
+      <div id="loader"></div>
+    </div>
 
-    <main class="index-page-container__main container text-light flex-grow-1 my-4">
+    <main class="container position-relative flex-grow-1 text-light my-4">
       <section class="text-center">
-        <header class="index-page-container__header mx-auto">
-          <h1><%=langData.homePage_WELCOME_STUDENTS%></h1>
-          <p class="index-page-container__paragraph my-5">
+        <header class="text-center">
+          <h1><%=langData.homePage_HEADER%></h1>
+          <p class="index-page-container__paragraph my-4 lh-lg">
             <%=langData.homePage_WELCOME_PARAGRAPH_P1%>
-            <br /><br />
+            <br />
             <%=langData.homePage_WELCOME_PARAGRAPH_P2%>
-            <br /><br />
+            <br />
             <%=langData.homePage_WELCOME_PARAGRAPH_P3%>
+            <br />
+            <%=langData.homePage_WELCOME_PARAGRAPH_P4%>
           </p>
         </header>
 
@@ -32,12 +36,12 @@
         <!-- If not logged in -->
         <% if(typeof user === 'undefined') { %>
         <form class="mt-5" action="/signup" method="GET">
-          <button class="index-page-container__button btn btn-lg"><%=langData.homePage_SIGNUP%></button>
+          <button class="index-page-container__button btn btn-regular btn-long btn-lg"><%=langData.homePage_SIGNUP%></button>
         </form>
         <form action="/login" method="GET">
-          <button class="index-page-container__button btn btn-lg"><%=langData.homePage_LOGIN%></button>
+          <button class="index-page-container__button btn btn-regular btn-long btn-lg"><%=langData.homePage_LOGIN%></button>
         </form>
-        <a href="/departments" class="index-page-container__skip-link d-block mt-4"><%=langData.homePage_CONTINUE_WITHOUT_LOGIN%></a>
+        <a href="/departments" class="index-page-container__skip-link link d-block mt-4"><%=langData.homePage_CONTINUE_WITHOUT_LOGIN%></a>
         <% } %>
       </section>
 

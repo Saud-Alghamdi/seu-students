@@ -1,0 +1,39 @@
+.btn {
+  border: none;
+}
+
+.btn-regular {
+  background-color: #5db5b3;
+  color: rgb(248, 249, 250);
+}
+
+.btn-long {
+  min-width: 150px;
+}
+
+.btn-regular:hover,
+.btn-regular:focus {
+  background-color: red !important;
+}
+
+.btn:active {
+  opacity: 0.5;
+}
+
+/*----- Media Queries -----*/
+
+/* Between 500px and 800px */
+@media screen and (min-width: 500px) and (max-width: 800px) {
+  .edit-post-button,
+  .delete-post-button {
+    font-size: 18px;
+  }
+}
+
+/* 800px and above */
+@media screen and (min-width: 800px) {
+  .edit-post-button,
+  .delete-post-button {
+    font-size: 20px;
+  }
+}

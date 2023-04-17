@@ -22,8 +22,11 @@
   color: beige;
 }
 
-/* EFFECTS */
+.icon-link:hover .social-media-icon,
+.icon-link:focus .social-media-icon {
+  color: red !important;
+}
 
-.brand-link:hover .social-media-icon {
-  color: red;
+.icon-link:active .social-media-icon {
+  opacity: 0.5;
 }

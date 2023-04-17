@@ -1,0 +1,11 @@
+.nav-item:not(.nav-lang):hover,
+.nav-item:not(.nav-lang):focus,
+.nav-link:hover,
+.nav-link:focus {
+  color: red;
+}
+
+.nav-link:active,
+.nav-link:active {
+  opacity: 0.5;
+}

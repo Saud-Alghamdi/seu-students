@@ -6,14 +6,25 @@
   <body class="d-flex flex-column">
     <%- include('partials/nav.ejs') %>
 
-    <main class="login-page-container__main container position-relative flex-grow-1 text-light my-4">
+    <!-- Loader -->
+    <div id="loader-container" class="visually-hidden">
+      <div id="loader"></div>
+    </div>
+
+    <main class="container position-relative flex-grow-1 text-light my-4">
       <!-- Back link -->
-      <a class="text-light text-decoration-none position-absolute" id="back-link" onclick="history.back()">
-        <i class="fa-sharp fa-solid fa-arrow-right-long"></i>
+      <% if(langDirection === 'rtl') { %>
+      <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
+        <i class="fas fa-reply fa-lg fa-flip-horizontal"></i>
       </a>
+      <% } else { %>
+      <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
+        <i class="fas fa-reply fa-lg"></i>
+      </a>
+      <% } %>
 
       <header class="text-center">
-        <h1><%=langData.loginPage_LOGIN%></h1>
+        <h1><%=langData.loginPage_HEADER%></h1>
       </header>
 
       <!-- Signup successful -->
@@ -51,7 +62,7 @@
       </script>
       <% } %>
 
-      <form action="/login-process" method="POST" class="login-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
+      <form action="/login-process" method="POST" class="login-page__login-form form mt-4 bg-secondary p-4 rounded-5 mx-auto">
         <div class="mb-3">
           <label for="" class="form-label"><%=langData.loginPage_USERNAME_OR_EMAIL%></label>
           <input name="usernameOrEmail" type="text" class="form-control" id="" />
@@ -60,9 +71,9 @@
           <label for="" class="form-label"><%=langData.loginPage_PASSWORD%></label>
           <input name="password" type="password" class="form-control" id="" />
         </div>
-        <a class="reset-password-link d-block mb-2" href="/reset-password"><%=langData.loginPage_FORGOT_PASSWORD%></a>
-        <a class="signup-link" href="/signup"><%=langData.loginPage_DONT_HAVE_ACCOUNT%></a>
-        <button type="submit" class="login-page-container__button btn btn-lg d-block mx-auto mt-4"><%=langData.loginPage_LOGIN%></button>
+        <a class="reset-password-link d-block mb-2 link" href="/reset-password"><%=langData.loginPage_FORGOT_PASSWORD%></a>
+        <a class="signup-link link" href="/signup"><%=langData.loginPage_DONT_HAVE_ACCOUNT%></a>
+        <button type="submit" class="login-page-container__button btn btn-regular btn-lg d-block mx-auto mt-4"><%=langData.loginPage_LOGIN%></button>
       </form>
     </main>
 

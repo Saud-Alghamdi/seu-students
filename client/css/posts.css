@@ -1,72 +1,41 @@
-.posts-flex-container * {
-  color: black;
-}
-
-.posts-page-container__post {
-  background: rgb(220, 220, 227);
-  background: -moz-linear-gradient(90deg, rgba(220, 220, 227, 1) 0%, rgba(0, 224, 255, 1) 100%);
-  background: -webkit-linear-gradient(90deg, rgba(220, 220, 227, 1) 0%, rgba(0, 224, 255, 1) 100%);
+.posts-container-post {
   background: linear-gradient(90deg, rgba(220, 220, 227, 1) 0%, rgba(0, 224, 255, 1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#dcdce3",endColorstr="#00e0ff",GradientType=1);
 
-  height: 160px;
-  width: 320px;
+  height: 180px;
+  width: calc(180px * 1.75);
 }
 
-.posts-page-container__post:hover {
-  background: #0099cc;
+.posts-container-post:not(.my-posts):hover,
+.posts-container-post:not(.my-posts):focus {
+  background: linear-gradient(90deg, rgba(200, 200, 207, 1) 0%, rgba(0, 194, 255, 1) 100%);
 }
 
-.add-post-btn:hover,
-.add-post-btn:active {
-  background-color: var(--link-hover);
-  color: var(--text-color-primary);
+.posts-container-post:not(.my-posts):active {
+  opacity: 0.5;
 }
 
-/* EFFECTS */
-.page-number-link:hover,
-.page-number-link:active {
-  color: red !important;
-}
+/*----- Media Queries -----*/
 
-/* MEDIA QUERIES */
-
-/* screens 576px and above */
-@media (min-width: 576px) {
-  .posts-page-container__post {
-    height: 220px;
-    width: 440px;
+/* Between 500px and 800px */
+@media screen and (min-width: 500px) and (max-width: 800px) {
+  .posts-container-post {
+    font-size: 20px;
+    height: 240px;
+    width: calc(240px * 1.75);
   }
-
-  .post-title {
-    font-size: 18px;
-  }
-
-  .post-date,
-  .post-username {
-    font-size: 16px;
+  .posts-container-post-title {
+    font-size: 20px;
   }
 }
 
-/* screens 1300px and above */
-@media (min-width: 1300px) {
-  .posts-page-container__post {
-    height: 300px;
-    width: 600px;
-  }
-
-  .post-title {
+/* 800px and above */
+@media screen and (min-width: 800px) {
+  .posts-container-post {
     font-size: 22px;
+    height: 320px;
+    width: calc(320px * 1.75);
   }
-
-  .post-date,
-  .post-username {
-    font-size: 18px;
-  }
-
-  .post-user-icon,
-  .post-file-icon {
-    height: 40px;
-    width: 40px;
+  .posts-container-post-title {
+    font-size: 22px;
   }
 }
