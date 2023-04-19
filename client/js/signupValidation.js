@@ -1,6 +1,13 @@
 import axios from "axios";
 import { showLoader } from "./loader.js";
 
+let langData = axios
+  .get("/langData")
+  .then((res) => {
+    langData = res.data;
+  })
+  .catch((err) => console.log(err));
+
 // Inputs
 const signupForm = document.querySelector(".signup-page__form");
 const usernameInput = document.querySelector(".signup-page__username-input");
@@ -100,8 +107,8 @@ export function signupValidation() {
         return false;
       }
 
-      showLoader();
       signupForm.submit();
+      showLoader();
     });
   }
 }
@@ -116,7 +123,7 @@ async function validateUsername(username) {
   const checkUsernameExists = async (username) => {
     let exists = false;
     await axios
-      .post(`checkUsernameExists`, { username })
+      .post(`/checkUsernameExists`, { username })
       .then((res) => (exists = res.data))
       .catch((err) => console.log(err));
 
@@ -126,13 +133,13 @@ async function validateUsername(username) {
   console.log(await checkUsernameExists(username));
 
   if (!startWithLetterRegex.test(username)) {
-    return { passed: false, msg: "Username must start with a letter." };
+    return { passed: false, msg: langData.val_USERNAME_INVALID_START };
   } else if (!lettersNumbersUnderscoresRegex.test(username)) {
-    return { passed: false, msg: "Username can only contain letters, numbers, and underscores." };
+    return { passed: false, msg: langData.val_USERNAME_INVALID_CONTENT };
   } else if (!lengthRegex.test(username)) {
-    return { passed: false, msg: "Username must be between 3 to 25 characters long." };
+    return { passed: false, msg: langData.val_USERNAME_INVALID_LENGTH };
   } else if ((await checkUsernameExists(username)) === true) {
-    return { passed: false, msg: "Username already exists." };
+    return { passed: false, msg: langData.val_USERNAME_EXISTS };
   } else {
     return { passed: true };
   }
@@ -144,7 +151,7 @@ async function validateEmail(email) {
   const checkEmailExists = async (email) => {
     let exists = false;
     await axios
-      .post(`checkEmailExists`, { email })
+      .post(`/checkEmailExists`, { email })
       .then((res) => (exists = res.data))
       .catch((err) => console.log(err));
 
@@ -152,9 +159,9 @@ async function validateEmail(email) {
   };
 
   if (!regex.test(email)) {
-    return { passed: false, msg: "Incorrect Email Format." };
+    return { passed: false, msg: langData.val_EMAIL_INVALID };
   } else if ((await checkEmailExists(email)) === true) {
-    return { passed: false, msg: "Email already exists." };
+    return { passed: false, msg: langData.val_EMAIL_EXISTS };
   } else {
     return { passed: true };
   }
@@ -165,11 +172,11 @@ function validatePassword(password, repeatPassword) {
   const lengthRegex = /^.{6,}$/;
 
   if (containsSpaceRegex.test(password)) {
-    return { passed: false, msg: "Password cannot include spaces." };
+    return { passed: false, msg: langData.val_PASSWORD_HAS_SPACE };
   } else if (!lengthRegex.test(password)) {
-    return { passed: false, msg: "Password must be at least 6 characters long." };
+    return { passed: false, msg: langData.val_PASSWORD_INVALID_LENGTH };
   } else if (password !== repeatPassword) {
-    return { passed: false, msg: "Passwords Do not match." };
+    return { passed: false, msg: langData.val_PASSWORDS_NO_MATCH };
   } else {
     return { passed: true };
   }
@@ -177,7 +184,7 @@ function validatePassword(password, repeatPassword) {
 
 function validateGender(male, female) {
   if (!male && !female) {
-    return { passed: false, msg: "Please select a gender." };
+    return { passed: false, msg: langData.val_GENDER_NOT_SELECTED };
   } else {
     return { passed: true };
   }
