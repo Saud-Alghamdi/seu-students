@@ -34,46 +34,46 @@
       </script>
       <% } %>
 
-      <form action="/signup-process" method="POST" class="form signup-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
+      <form action="/signup-process" method="POST" class="form signup-page__form mt-4 bg-secondary p-4 rounded-5 mx-auto">
         <!-- Username -->
         <div class="form__input-group mb-3">
           <label for="" class="form-label"><%=langData.signupPage_USERNAME%></label>
-          <input name="username" type="text" class="input-field field username-field form-control" minlength="3" maxlength="25" required />
-          <span class="error-message"></span>
+          <input name="username" type="text" class="signup-page__username-input form-control" ="3" ="25" />
+          <span class="signup-page__username-error-message error-message"></span>
         </div>
         <!-- Email-->
         <div class="form__input-group mb-3">
           <label for="" class="form-label"><%=langData.signupPage_EMAIL%></label>
-          <input name="email" type="email" class="input-field field email-field form-control" aria-describedby="emailHelp" required />
-          <span class="error-message"></span>
+          <input name="email" type="email" class="signup-page__email-input email-field form-control" aria-describedby="emailHelp" />
+          <span class="signup-page__email-error-message error-message"></span>
         </div>
         <!-- Password -->
         <div class="form__input-group mb-3">
           <label for="" class="form-label"><%=langData.signupPage_PASSWORD%></label>
-          <input name="password" type="password" class="input-field field password-field form-control" id="password-field" minlength="6" maxlength="30" required />
-          <span class="error-message"></span>
+          <input name="password" type="password" class="signup-page__password-input field password-field form-control" id="password-field" ="6" ="30" />
+          <span class="signup-page__password-error-message error-message"></span>
         </div>
         <!-- Repeat Password -->
         <div class="form__input-group mb-3">
           <label for="" class="form-label"><%=langData.signupPage_REPEAT_PASSWORD%></label>
-          <input name="repeat-password" type="password" class="input-field field repeat-password-field form-control" id="repeat-password-field" minlength="6" maxlength="30" required />
-          <span class="error-message"></span>
+          <input name="repeat-password" type="password" class="signup-page__repeat-password-input field repeat-password-field form-control" id="repeat-password-field" ="6" ="30" />
+          <span class="signup-page__repeat-password-error-message error-message"></span>
         </div>
         <!-- Gender -->
         <div class="form__input-group">
           <label class="mb-2" for=""><%=langData.signupPage_GENDER%></label>
           <div class="form-check d-flex justify-content-start p-0">
-            <input name="gender" id="male-radio" class="input-field radio-field male-radio-field form-check-input mx-2" type="radio" value="male" />
+            <input name="gender" id="male-radio" class="signup-page__male-gender-input form-check-input mx-2" type="radio" value="male" />
             <label class="form-check-label" for="male-radio"><%=langData.signupPage_MALE%></label>
           </div>
           <div class="form-check d-flex justify-content-start p-0">
-            <input name="gender" id="female-radio" class="input-field radio-field female-radio-field form-check-input mx-2" type="radio" value="female" />
+            <input name="gender" id="female-radio" class="signup-page__female-gender-input form-check-input mx-2" type="radio" value="female" />
             <label class="form-check-label" for="female-radio"><%=langData.signupPage_FEMALE%></label>
           </div>
-          <span class="error-message"></span>
+          <span class="signup-page__gender-error-message error-message"></span>
         </div>
         <!-- Submit -->
-        <button type="submit" class="signup-page-container__button btn btn-regular btn-lg d-block mx-auto mt-4"><%=langData.signupPage_SIGNUP%></button>
+        <button type="submit" class="signup-page__button btn btn-regular btn-lg d-block mx-auto mt-4"><%=langData.signupPage_SIGNUP%></button>
       </form>
     </main>
 

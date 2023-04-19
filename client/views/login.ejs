@@ -7,11 +7,11 @@
     <%- include('partials/nav.ejs') %>
 
     <!-- Loader -->
-    <div id="loader-container" class="visually-hidden">
+    <div id="loader-container" class="login-page__loader visually-hidden">
       <div id="loader"></div>
     </div>
 
-    <main class="container position-relative flex-grow-1 text-light my-4">
+    <main class="login-page container position-relative flex-grow-1 text-light my-4">
       <!-- Back link -->
       <% if(langDirection === 'rtl') { %>
       <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
@@ -62,18 +62,18 @@
       </script>
       <% } %>
 
-      <form action="/login-process" method="POST" class="login-page__login-form form mt-4 bg-secondary p-4 rounded-5 mx-auto">
+      <form action="/login-process" method="POST" class="login-page__form form mt-4 bg-secondary p-4 rounded-5 mx-auto">
         <div class="mb-3">
           <label for="" class="form-label"><%=langData.loginPage_USERNAME_OR_EMAIL%></label>
-          <input name="usernameOrEmail" type="text" class="form-control" id="" />
+          <input name="usernameOrEmail" type="text" class="form-control" />
         </div>
         <div class="mb-3">
           <label for="" class="form-label"><%=langData.loginPage_PASSWORD%></label>
-          <input name="password" type="password" class="form-control" id="" />
+          <input name="password" type="password" class="form-control" />
         </div>
         <a class="reset-password-link d-block mb-2 link" href="/reset-password"><%=langData.loginPage_FORGOT_PASSWORD%></a>
         <a class="signup-link link" href="/signup"><%=langData.loginPage_DONT_HAVE_ACCOUNT%></a>
-        <button type="submit" class="login-page-container__button btn btn-regular btn-lg d-block mx-auto mt-4"><%=langData.loginPage_LOGIN%></button>
+        <button type="submit" class="login-page__submit-btn btn btn-regular btn-lg d-block mx-auto mt-4"><%=langData.loginPage_LOGIN%></button>
       </form>
     </main>
 

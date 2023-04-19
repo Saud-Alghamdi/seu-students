@@ -24,12 +24,12 @@ router.post("/signup-process", async (req, res) => {
 });
 
 // Sign up - check username exists
-router.post("/signup/checkUsernameExists", async (req, res) => {
+router.post("/checkUsernameExists", async (req, res) => {
   await RouteHandler.checkUsernameExists(req, res);
 });
 
 // Sign up - check email exists
-router.post("/signup/checkEmailExists", async (req, res) => {
+router.post("/checkEmailExists", async (req, res) => {
   await RouteHandler.checkEmailExists(req, res);
 });
 

@@ -1,6 +1,6 @@
 function showToast(isSuccess, msg) {
-  const greenGradient = 'linear-gradient(to right, #00b09b, #96c93d)';
-  const redGradient = 'linear-gradient(107.2deg, rgb(150, 15, 15) 10.6%, rgb(247, 0, 0) 91.1%)'
+  const greenGradient = "linear-gradient(to right, #00b09b, #96c93d)";
+  const redGradient = "linear-gradient(107.2deg, rgb(150, 15, 15) 10.6%, rgb(247, 0, 0) 91.1%)";
   const background = isSuccess ? greenGradient : redGradient;
 
   Toastify({
