@@ -1,4 +1,8 @@
-.course-col {
+.departments-container {
+  max-width: 800px;
+}
+
+.department-course-col {
   background: linear-gradient(to right, #cc2b5e, #753a88);
   height: 140px;
   flex: 0 0 calc(140px * 1.1);
@@ -6,12 +10,12 @@
   Width will always be 10% (1.1) more than the height.*/
 }
 
-.course-col:hover,
-.course-col:focus {
+.department-course-col:hover,
+.department-course-col:focus {
   background: linear-gradient(to right, #9a1d45, #4e2663);
 }
 
-.course-col:active {
+.department-course-col:active {
   opacity: 0.5;
 }
 
@@ -19,7 +23,7 @@
 
 /* Between 500px to 800px */
 @media screen and (min-width: 500px) and (max-width: 800px) {
-  .course-col {
+  .department-course-col {
     height: 160px;
     flex: 0 0 calc(160px * 1.1);
   }
@@ -27,7 +31,7 @@
 
 /* Between 800px and above */
 @media screen and (min-width: 800px) {
-  .course-col {
+  .department-course-col {
     height: 210px;
     flex: 0 0 calc(210px * 1.1);
   }

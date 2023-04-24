@@ -33,10 +33,10 @@
         <% } %>
       </header>
 
-      <div class="courses-container container mt-5">
+      <div class="courses-container departments-courses-layout container mt-5">
         <div class="courses-row row justify-content-center gap-1">
           <% if(typeof courses !== 'undefined') { %> <% courses.forEach(course => { %>
-          <a class="course-col col d-flex text-center justify-content-center align-items-center rounded-5 fs-2 text-decoration-none text-light" href="./<%=course.code%>/posts"><%= course.code %></a>
+          <a class="department-course-col col d-flex text-center justify-content-center align-items-center rounded-5 fs-2 text-decoration-none text-light" href="./<%=course.code%>/posts"><%= course.code %></a>
           <% }) %> <% } %>
         </div>
       </div>

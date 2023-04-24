@@ -130,8 +130,6 @@ async function validateUsername(username) {
     return exists;
   };
 
-  console.log(await checkUsernameExists(username));
-
   if (!startWithLetterRegex.test(username)) {
     return { passed: false, msg: langData.val_USERNAME_INVALID_START };
   } else if (!lettersNumbersUnderscoresRegex.test(username)) {
