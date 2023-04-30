@@ -96,5 +96,35 @@ export class Validation {
   }
 
   // Validate Post title
+  static async validatePostTitle(title) {
+    const langData = await Validation.loadLangData();
+    if (!title) {
+      return { passed: false, msg: langData.val_NO_TITLE_WRITTEN };
+    } else {
+      return { passed: true };
+    }
+  }
+
   // Validate Post file
+  static async validatePostFile(file) {
+    const langData = await Validation.loadLangData();
+
+    if (!file) {
+      return { passed: false, msg: langData.val_NO_FILE_SELECTED };
+    }
+
+    const allowedExtensions = [".pdf", ".doc", ".docx", ".ppt", ".pptx"];
+    const maxFileSizeInKB = 50000; // = 50 MB
+    const fileName = file.name.toLowerCase();
+    const fileSizeInKB = file.size / 1024; // Convert bytes to KB
+    const fileExtension = fileName.substring(fileName.lastIndexOf("."));
+
+    if (!allowedExtensions.includes(fileExtension)) {
+      return { passed: false, msg: langData.val_INVALID_FILE_TYPE };
+    } else if (fileSizeInKB > maxFileSizeInKB) {
+      return { passed: false, msg: langData.val_INVALID_FILE_SIZE };
+    } else {
+      return { passed: true };
+    }
+  }
 }

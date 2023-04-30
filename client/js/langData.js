@@ -1,13 +1,15 @@
+// Module Purpose: Loads current set language json file
+
 import axios from "axios";
 
-let langDataPromise = null;
+let langData = null;
 
 export function getLangData() {
-  if (!langDataPromise) {
-    langDataPromise = axios
+  if (!langData) {
+    langData = axios
       .get("/langData")
       .then((res) => res.data)
       .catch((err) => console.log(err));
   }
-  return langDataPromise;
+  return langData;
 }

@@ -3,7 +3,7 @@
     <%- include('partials/head.ejs') %>
     <title><%=langData.signupPage_TITLE%></title>
   </head>
-  <body class="d-flex flex-column">
+  <body class="d-flex flex-column" id="signup-page">
     <%- include('partials/nav.ejs') %>
 
     <!-- Loader -->
@@ -38,25 +38,25 @@
         <!-- Username -->
         <div class="form__input-group mb-3">
           <label for="" class="form-label"><%=langData.signupPage_USERNAME%></label>
-          <input name="username" type="text" class="signup-page__username-input form-control" minlength="3" maxlength="25" />
+          <input name="username" type="text" class="signup-page__username-input form-control" minlength="3" maxlength="25" required />
           <span class="signup-page__username-error-message error-message"></span>
         </div>
         <!-- Email-->
         <div class="form__input-group mb-3">
           <label for="" class="form-label"><%=langData.signupPage_EMAIL%></label>
-          <input name="email" type="email" class="signup-page__email-input email-field form-control" aria-describedby="emailHelp" />
+          <input name="email" type="email" class="signup-page__email-input email-field form-control" aria-describedby="emailHelp" required />
           <span class="signup-page__email-error-message error-message"></span>
         </div>
         <!-- Password -->
         <div class="form__input-group mb-3">
           <label for="" class="form-label"><%=langData.signupPage_PASSWORD%></label>
-          <input name="password" type="password" class="signup-page__password-input field password-field form-control" id="password-field" minlength="6" maxlength="30" />
+          <input name="password" type="password" class="signup-page__password-input field password-field form-control" id="password-field" minlength="6" maxlength="30" required />
           <span class="signup-page__password-error-message error-message"></span>
         </div>
         <!-- Repeat Password -->
         <div class="form__input-group mb-3">
           <label for="" class="form-label"><%=langData.signupPage_REPEAT_PASSWORD%></label>
-          <input name="repeat-password" type="password" class="signup-page__repeat-password-input field repeat-password-field form-control" id="repeat-password-field" minlength="6" maxlength="30" />
+          <input name="repeat-password" type="password" class="signup-page__repeat-password-input field repeat-password-field form-control" id="repeat-password-field" minlength="6" maxlength="30" required />
           <span class="signup-page__repeat-password-error-message error-message"></span>
         </div>
         <!-- Gender -->
