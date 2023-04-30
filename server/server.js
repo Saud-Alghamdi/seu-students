@@ -39,7 +39,7 @@ function setLang(req, res, next) {
   // Set language info in session
   req.session.lang = userLanguage;
   req.session.langDirection = userLanguage === "ar" ? "rtl" : "ltr";
-  req.session.langData = require(`../lang/${userLanguage}.json`);
+  req.session.langData = require(`./lang/${userLanguage}.json`);
 
   next();
 }
