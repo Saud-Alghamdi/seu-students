@@ -38,7 +38,7 @@
         <!-- Username -->
         <div class="form__input-group mb-3">
           <label for="" class="form-label"><%=langData.signupPage_USERNAME%></label>
-          <input name="username" type="text" class="signup-page__username-input form-control" ="3" ="25" />
+          <input name="username" type="text" class="signup-page__username-input form-control" minlength="3" maxlength="25" />
           <span class="signup-page__username-error-message error-message"></span>
         </div>
         <!-- Email-->
@@ -50,13 +50,13 @@
         <!-- Password -->
         <div class="form__input-group mb-3">
           <label for="" class="form-label"><%=langData.signupPage_PASSWORD%></label>
-          <input name="password" type="password" class="signup-page__password-input field password-field form-control" id="password-field" ="6" ="30" />
+          <input name="password" type="password" class="signup-page__password-input field password-field form-control" id="password-field" minlength="6" maxlength="30" />
           <span class="signup-page__password-error-message error-message"></span>
         </div>
         <!-- Repeat Password -->
         <div class="form__input-group mb-3">
           <label for="" class="form-label"><%=langData.signupPage_REPEAT_PASSWORD%></label>
-          <input name="repeat-password" type="password" class="signup-page__repeat-password-input field repeat-password-field form-control" id="repeat-password-field" ="6" ="30" />
+          <input name="repeat-password" type="password" class="signup-page__repeat-password-input field repeat-password-field form-control" id="repeat-password-field" minlength="6" maxlength="30" />
           <span class="signup-page__repeat-password-error-message error-message"></span>
         </div>
         <!-- Gender -->
@@ -79,6 +79,4 @@
 
     <%- include('partials/footer.ejs') %>
   </body>
-  <!-- Sign up Form Validator -->
-  <script src="/js/SignupFormValidator.js"></script>
 </html>

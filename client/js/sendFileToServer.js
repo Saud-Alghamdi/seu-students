@@ -18,6 +18,7 @@ const fileErrorMsg = document.querySelector(".error-message-file-input");
 const loader = document.getElementById("loader-container");
 const allowedExtensions = [".pdf", ".doc", ".docx", ".ppt", ".pptx"];
 
+// // On input
 // // Removes title error on input change
 // titleInput.addEventListener("input", () => {
 //   if (titleInput.value.trim().length > 0) {
@@ -30,7 +31,7 @@ const allowedExtensions = [".pdf", ".doc", ".docx", ".ppt", ".pptx"];
 //   fileErrorMsg.innerText = "";
 // });
 
-// Checks the submitted data (file and title)
+// On submit - Checks the submitted data (file and title)
 export function sendFileToServer() {
   if (addPostForm) {
     addPostForm.addEventListener("submit", async (e) => {

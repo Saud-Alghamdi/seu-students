@@ -53,7 +53,6 @@ class userDataValidation {
     } else {
       result = { passed: true, msg: "Password is valid!" };
     }
-
     return result;
   }
 
