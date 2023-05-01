@@ -95,20 +95,7 @@
             </div>
           </div>
         </div>
-        <% })} else { %>
-        <h6 class=""><%=langData.postsPage_NO_POSTS%></h6>
-        <% } %>
-      </div>
-
-      <!-- Pagination -->
-      <div class="pagination d-flex justify-content-center align-items-center mt-5">
-        <i><</i>
-        <% if(typeof totalPages !== 'undefined') { %> <% for (let i = 1; i <= totalPages; i++) { %> <% if(i === currentPage) { %>
-        <a href="?page=<%= i %>" class="link page-number-link text-light mx-2"><%= i %></a>
-        <% } else { %>
-        <a href="?page=<%= i %>" class="link page-number-link text-decoration-none text-light mx-2"><%= i %></a>
-        <% } %> <% } %> <% } %>
-        <i>></i>
+        <% })} %>
       </div>
     </main>
 

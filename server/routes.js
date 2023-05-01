@@ -87,8 +87,8 @@ router.get("/dashboard", RouteHandler.renderDashboardPage);
 router.get("/dashboard/my-account", RouteHandler.renderMyAccountPage);
 
 // Update user data process
-router.post("/dashboard/updateUserData", async (req, res) => {
-  await RouteHandler.updateUserDataProcess(req, res);
+router.post("/dashboard/updateAccountData", async (req, res) => {
+  await RouteHandler.updateAccountDataProcess(req, res);
 });
 
 // User posts page

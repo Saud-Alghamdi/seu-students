@@ -348,7 +348,7 @@ class DB {
   //
 
   // Update user account data based in user id (Builds the query depending on the properties given dynamically)
-  static async updateUserData(userData) {
+  static async updateAccountData(userData) {
     let result = {};
     let con;
     try {
