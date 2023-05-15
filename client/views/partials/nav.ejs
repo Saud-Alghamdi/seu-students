@@ -21,10 +21,11 @@
         </li>
         <li class="nav-item px-md-2 d-flex align-items-center">
           <a class="nav-link" href="/dashboard" style="padding-bottom: 0">
-            <% } %> <%=user.username%> <% if (user.gender === 'male') { %>
+            <%=user.username%> <% if (user.gender === 'male') { %>
             <img src="/images/male-icon.svg" alt="Placeholder" width="30" height="30" style="padding-bottom: 3px" />
             <% } else if (user.gender === 'female') { %>
             <img src="/images/female-icon.svg" alt="Placeholder" width="30" height="30" style="padding-bottom: 3px" />
+            <% } %>
           </a>
         </li>
         <!-- if NOT Logged in -->
