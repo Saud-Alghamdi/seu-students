@@ -1,23 +1,10 @@
 import axios from "axios";
+import { getLangData } from "./langData.js";
 
 export class Validation {
-  static langData = null;
-
-  static async loadLangData() {
-    if (!Validation.langData) {
-      try {
-        const res = await axios.get("/langData");
-        Validation.langData = res.data;
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    return Validation.langData;
-  }
-
   // Validate Username
   static async validateUsername(username) {
-    const langData = await Validation.loadLangData();
+    const langData = await getLangData();
     const startWithLetterRegex = /^[a-zA-Z]/;
     const lettersNumbersUnderscoresRegex = /^[a-zA-Z0-9_]+$/;
     const lengthRegex = /^.{3,25}$/;
@@ -46,7 +33,7 @@ export class Validation {
 
   // Validate Email
   static async validateEmail(email) {
-    const langData = await Validation.loadLangData();
+    const langData = await getLangData();
     const regex = /^(?!.*\s)\S+@\S+\.\S+$/;
 
     const checkEmailExists = async (email) => {
@@ -70,7 +57,7 @@ export class Validation {
 
   // Validate Password
   static async validatePassword(password, repeatPassword) {
-    const langData = await Validation.loadLangData();
+    const langData = await getLangData();
     const containsSpaceRegex = /\s/;
     const lengthRegex = /^.{6,}$/;
 
@@ -87,7 +74,7 @@ export class Validation {
 
   // Validate Gender
   static async validateGender(gender) {
-    const langData = await Validation.loadLangData();
+    const langData = await getLangData();
     if (!gender) {
       return { passed: false, msg: langData.val_GENDER_NOT_SELECTED };
     } else {
@@ -97,7 +84,7 @@ export class Validation {
 
   // Validate Post title
   static async validatePostTitle(title) {
-    const langData = await Validation.loadLangData();
+    const langData = await getLangData();
     if (!title) {
       return { passed: false, msg: langData.val_NO_TITLE_WRITTEN };
     } else {
@@ -107,7 +94,7 @@ export class Validation {
 
   // Validate Post file
   static async validatePostFile(file) {
-    const langData = await Validation.loadLangData();
+    const langData = await getLangData();
 
     if (!file) {
       return { passed: false, msg: langData.val_NO_FILE_SELECTED };

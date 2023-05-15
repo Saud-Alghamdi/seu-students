@@ -294,6 +294,7 @@ class RouteHandler {
     }
 
     const { posts, totalPosts } = result;
+    console.log(totalPosts);
     const totalPages = Math.ceil(totalPosts / limit);
 
     posts.forEach((post) => {

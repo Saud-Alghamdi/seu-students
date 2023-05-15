@@ -1,7 +1,6 @@
 // Module Purpose: validates sign up data on input and on submit.
 
-import { showLoader } from "./loader.js";
-import { Validation } from "./Validation.js";
+import {Validation} from './Validation.js'
 
 // Input Elements
 const signupForm = document.querySelector(".signup-page__form");
@@ -99,7 +98,6 @@ export async function signupValidation() {
     if (usernameErrorMsg.innerText || emailErrorMsg.innerText || passwordErrorMsg.innerText || repeatPasswordErrorMsg.innerText || genderErrorMsg.innerText) {
       return false;
     } else {
-      showLoader();
       signupForm.submit();
     }
   });

@@ -1,26 +1,28 @@
-const mysql = require("mysql2/promise");
+const { Pool } = require("pg");
+// const Validation = require("../client/js/Validation.js");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
-const userDataValidation = require("./UserDataValidation");
+
+const pool = new Pool({
+  user: process.env.USER,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: process.env.PORT,
+});
 
 class DB {
   // Connect
   static async connect() {
-    let con = null;
     try {
-      con = await mysql.createConnection({
-        host: process.env.MYSQLHOST,
-        user: process.env.MYSQLUSER,
-        port: process.env.MYSQLPORT,
-        password: process.env.MYSQLPASSWORD,
-        database: process.env.MYSQLDATABASE,
-      });
-      console.log("Connected to database successfully!");
-    } catch (error) {
-      console.error("Error connecting to database:", error);
+      const con = await pool.connect();
+      console.log("Successfully connected to the database");
+      return con;
+    } catch (err) {
+      console.error("Error connecting to the database", err);
+      throw err;
     }
-    return con;
   }
 
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -28,33 +30,27 @@ class DB {
 
   // Sign up
   static async signup(userData) {
+    let result;
     let con;
     try {
-      let usernameValidation = await userDataValidation.validateUsername(userData.username);
-      let emailValidation = await userDataValidation.validateEmail(userData.email);
-      let passwordValidation = await userDataValidation.validatePassword(userData.password);
-      let genderValidation = await userDataValidation.validateGender(userData.gender);
-      let usernameExists = await this.checkUsernameExists(userData.username);
-      let emailExists = await this.checkEmailExists(userData.email);
-
-      if (!usernameValidation.passed || !emailValidation.passed || !passwordValidation.passed || !genderValidation.passed || usernameExists === true || emailExists === true) {
-        throw new Error("Validation failed to pass ...");
-      } else {
-        const hashedPassword = await bcrypt.hash(userData.password, 10);
-        con = await this.connect();
-        const stmt = "INSERT INTO users (username, email, password, gender) VALUES (?, ?, ?, ?);";
-        await con.query(stmt, [userData.username, userData.email, hashedPassword, userData.gender]);
-        return { isSuccess: true, msg: "Sign up success! (signup method inside DB.js)" };
-      }
+      con = await DB.connect();
+      const hashedPassword = await bcrypt.hash(userData.password, 10);
+      const query = {
+        text: "INSERT INTO users (username, email, password, gender) VALUES ($1, $2, $3, $4)",
+        values: [userData.username, userData.email, hashedPassword, userData.gender],
+      };
+      await con.query(query);
+      result = { isSuccess: true, msg: "Sign up success!" };
     } catch (err) {
       console.error(err.message);
-      return { isSuccess: false, msg: "Sign up failed .. (signup method inside DB.js)" };
+      result = { isSuccess: false, msg: "Sign up failed .." };
     } finally {
       if (con) {
-        con.end();
-        console.log("Database connection closed.");
+        con.release();
+        console.log("Database connection released.");
       }
     }
+    return result;
   }
 
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,12 +58,15 @@ class DB {
 
   // Login
   static async login(userCreds) {
-    let result = { isSuccess: false, msg: "Something went wrong" };
+    let result;
     let con;
     try {
-      con = await this.connect();
-      const stmt = "SELECT * FROM users WHERE email = ? OR username = ?;";
-      const [rows] = await con.query(stmt, [userCreds.usernameOrEmail, userCreds.usernameOrEmail]);
+      con = await DB.connect();
+      const query = {
+        text: "SELECT * FROM users WHERE email = $1 OR username = $2;",
+        values: [userCreds.usernameOrEmail, userCreds.usernameOrEmail],
+      };
+      const { rows } = await con.query(query);
 
       if (rows.length === 0) {
         throw new Error("Email or password is incorrect");
@@ -82,11 +81,11 @@ class DB {
       }
     } catch (err) {
       console.error(err.message);
-      result.msg = err;
+      result = { isSuccess: false, msg: err.message };
     } finally {
       if (con) {
-        con.end();
-        console.log("Database connection closed.");
+        con.release();
+        console.log("Database connection released.");
       }
     }
 
@@ -98,14 +97,18 @@ class DB {
 
   // Check Username Already Exists in DB, return true or false
   static async checkUsernameExists(username) {
-    let exists = true;
+    let exists;
     let con;
     try {
-      con = await this.connect();
-      const stmt = "SELECT username FROM users WHERE username = ?;";
-      const [rows] = await con.query(stmt, [username]);
+      con = await DB.connect();
+      const query = {
+        text: "SELECT username FROM users WHERE username = $1",
+        values: [username],
+      };
+      const { rows } = await con.query(query);
 
       if (rows.length > 0) {
+        exists = true;
         throw new Error("Username already exists");
       } else {
         exists = false;
@@ -114,8 +117,8 @@ class DB {
       console.error(err.message);
     } finally {
       if (con) {
-        con.end();
-        console.log("Database connection closed.");
+        con.release();
+        console.log("Database connection released.");
       }
     }
 
@@ -127,14 +130,18 @@ class DB {
 
   // Check Email Already Exists in DB, return true or false
   static async checkEmailExists(email) {
-    let exists = true;
+    let exists;
     let con;
     try {
-      con = await this.connect();
-      const stmt = "SELECT email FROM users WHERE email = ?;";
-      const [rows] = await con.query(stmt, [email]);
+      con = await DB.connect();
+      const query = {
+        text: "SELECT email FROM users WHERE email = $1",
+        values: [email],
+      };
+      const { rows } = await con.query(query);
 
       if (rows.length > 0) {
+        exists = true;
         throw new Error("Email already exists");
       } else {
         exists = false;
@@ -143,8 +150,8 @@ class DB {
       console.error(err.message);
     } finally {
       if (con) {
-        con.end();
-        console.log("Database connection closed.");
+        con.release();
+        console.log("Database connection released.");
       }
     }
 
@@ -159,25 +166,26 @@ class DB {
     let courses = null;
     let con;
     try {
-      con = await this.connect();
-      const stmt = `
-      SELECT courses.id, courses.code, courses.name
-      FROM courses
-      INNER JOIN courseDepartments ON courses.id = courseDepartments.courseId
-      INNER JOIN departments ON courseDepartments.depId = departments.id
-      WHERE departments.abbr = ?
-      ORDER BY LEFT(courses.code, 1) ASC, CAST(SUBSTRING_INDEX(courses.code, '-', -1) AS UNSIGNED) ASC
-      ;
-        `;
-      const [rows] = await con.query(stmt, [depAbbr]);
+      con = await DB.connect();
+      const query = {
+        text: `
+        SELECT courses.code
+        FROM courses
+        INNER JOIN courses_departments ON courses.id = courses_departments.course_id
+        INNER JOIN departments ON courses_departments.dep_id = departments.id
+        WHERE departments.abbr = $1;
+        `,
+        values: [depAbbr],
+      };
+      const { rows } = await con.query(query);
       courses = rows;
       console.log(courses);
     } catch (err) {
       console.error(err.message);
     } finally {
       if (con) {
-        con.end();
-        console.log("Database connection closed.");
+        con.release();
+        console.log("Database connection released.");
       }
     }
     return courses;
@@ -190,43 +198,52 @@ class DB {
   static async getPosts(courseCode, limit = 10, offset = 0) {
     let con;
     try {
-      con = await this.connect();
+      con = await DB.connect();
 
       // Check if the course code exists in the courses table
-      const checkStmt = `
-      SELECT COUNT(*) AS count
-      FROM courses
-      WHERE code = ?;
-    `;
-      const [checkRows] = await con.query(checkStmt, [courseCode]);
-      const count = checkRows[0].count;
+      const query1 = {
+        text: `
+        SELECT COUNT(*) AS count
+        FROM courses
+        WHERE code = $1;
+      `,
+        values: [courseCode],
+      };
+      const checkResult = await con.query(query1);
+      const count = checkResult.rows[0].count;
       if (count === 0) {
         return null;
       }
 
       // Fetch the posts for the given course code
-      const postsStmt = `
-      SELECT posts.title, posts.fileType, posts.s3FileName, users.username, users.gender, posts.createdAt
-      FROM posts
-      JOIN users ON posts.userId = users.id
-      JOIN courses ON posts.courseId = courses.id
-      WHERE courses.code = ?
-      ORDER BY posts.createdAt DESC
-      LIMIT ?
-      OFFSET ?;
-    `;
-      const [postsRows] = await con.query(postsStmt, [courseCode, limit, offset]);
-      const posts = postsRows;
+      const query2 = {
+        text: `
+        SELECT posts.title, posts.file_type AS "fileType", posts.s3_file_name AS "s3FileName", users.username, users.gender, posts."created_at" AS "createdAt"
+        FROM posts
+        JOIN users ON posts."user_id" = users.id
+        JOIN courses ON posts."course_id" = courses.id
+        WHERE courses.code = $1
+        ORDER BY posts."created_at" DESC
+        LIMIT $2
+        OFFSET $3;
+      `,
+        values: [courseCode, limit, offset],
+      };
+      const postsResult = await con.query(query2);
+      const posts = postsResult.rows;
 
       // Count the total number of posts for the given course code
-      const countStmt = `
-      SELECT COUNT(*) AS totalPosts
-      FROM posts
-      JOIN courses ON posts.courseId = courses.id
-      WHERE courses.code = ?;
-    `;
-      const [countRows] = await con.query(countStmt, [courseCode]);
-      const totalPosts = countRows[0].totalPosts;
+      const query3 = {
+        text: `
+          SELECT COUNT(*) AS total_posts
+          FROM posts
+          JOIN courses ON posts."course_id" = courses.id
+          WHERE courses.code = $1;
+        `,
+        values: [courseCode],
+      };
+      const countResult = await con.query(query3);
+      const totalPosts = countResult.rows[0].total_posts;
 
       return { posts, totalPosts };
     } catch (err) {
@@ -234,8 +251,8 @@ class DB {
       return null;
     } finally {
       if (con) {
-        con.end();
-        console.log("Database connection closed.");
+        con.release();
+        console.log("Database connection released.");
       }
     }
   }
@@ -248,32 +265,39 @@ class DB {
     let isSuccess = false;
     let con;
     try {
-      con = await this.connect();
+      con = await DB.connect();
 
-      // Query the courses table to retrieve the ID of the course with the given code
-      const [courseRows] = await con.query("SELECT id FROM courses WHERE code = ?", [postInfo.courseCode]);
-      const courseId = courseRows[0].id;
+      // Query1: retrieve the ID of the course with the given course code
+      const query1 = {
+        text: "SELECT id FROM courses WHERE code = $1",
+        values: [postInfo.courseCode],
+      };
+      const { rows } = await con.query(query1);
+      const courseId = rows[0].id;
 
-      // Insert post info to DB
-      const stmt1 = "INSERT INTO posts (userId, courseId, title, s3FileName, s3FileUrl, fileType, fileSizeInKB, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW());";
-      const values = [postInfo.userId, courseId, postInfo.title, postInfo.s3FileName, postInfo.s3FileUrl, postInfo.fileType, postInfo.fileSizeInKB];
+      // Query2: Insert post info to DB
+      const query2 = {
+        text: "INSERT INTO posts (user_id, course_id, title, s3_file_name, s3_file_url, file_type, file_size_in_kb, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), NOW()) RETURNING id",
+        values: [postInfo.userId, courseId, postInfo.title, postInfo.s3FileName, postInfo.s3FileUrl, postInfo.fileType, postInfo.fileSizeInKB],
+      };
+      const result = await con.query(query2);
 
-      const [postRows] = await con.query(stmt1, values);
-      const postId = postRows.insertId; // Get the ID of the inserted post
-
-      // Insert post ID and default download count to fileDownloads table
-      const stmt2 = "INSERT INTO fileDownloads (postId, downloadCount) VALUES (?, ?);";
-      const fileValues = [postId, 0];
-      await con.query(stmt2, fileValues);
+      // Query3: Grab post ID then insert it and its default download count to file_downloads table
+      const postId = result.rows[0].id;
+      const query3 = {
+        text: "INSERT INTO file_downloads (post_id, count) VALUES ($1, $2);",
+        values: [postId, 0],
+      };
+      await con.query(query3);
 
       isSuccess = true;
-      console.log(postRows);
+      console.log(result.rows);
     } catch (err) {
       console.error(err.message);
     } finally {
       if (con) {
-        con.end();
-        console.log("Database connection closed.");
+        con.release();
+        console.log("Database connection released.");
       }
     }
     return isSuccess;
@@ -286,27 +310,27 @@ class DB {
     let isSuccess = false;
     let con;
     try {
-      con = await this.connect();
+      con = await DB.connect();
 
-      const stmt = `
-      UPDATE fileDownloads
-      SET downloadCount = downloadCount + 1
-      WHERE postId IN (
-        SELECT id
-        FROM posts
-        WHERE s3FileName = ?
-      );
+      const query = `
+        UPDATE file_downloads
+        SET count = count + 1
+        WHERE post_id IN (
+          SELECT id
+          FROM posts
+          WHERE s3_file_name = $1
+        );
       `;
 
-      await con.query(stmt, s3FileName);
+      await con.query(query, [s3FileName]);
       isSuccess = true;
       console.log("Incremented file download count successfully!");
     } catch (err) {
       console.error(err.message);
     } finally {
       if (con) {
-        con.end();
-        console.log("Database connection closed.");
+        con.release();
+        console.log("Database connection released.");
       }
     }
 
@@ -321,24 +345,30 @@ class DB {
     let isSuccess = false;
     let con;
     try {
-      con = await this.connect();
+      con = await DB.connect();
 
-      // Delete from fileDownloads table
-      const stmt1 = "DELETE FROM fileDownloads WHERE postId IN (SELECT id FROM posts WHERE s3FileName = ?)";
-      await con.query(stmt1, [s3FileName]);
+      // Delete from file downloads table
+      const query1 = {
+        text: "DELETE FROM file_downloads WHERE post_id IN (SELECT id FROM posts WHERE s3_file_name = $1)",
+        values: [s3FileName],
+      };
+      await con.query(query1);
 
       // Delete from posts table
-      const stmt2 = "DELETE FROM posts WHERE s3FileName = ?";
-      const [rows] = await con.query(stmt2, [s3FileName]);
+      const query2 = {
+        text: "DELETE FROM posts WHERE s3_file_name = $1",
+        values: [s3FileName],
+      };
+      const { rowCount } = await con.query(query2);
 
       isSuccess = true;
-      console.log(rows);
+      console.log(rowCount + " row(s) deleted from posts table");
     } catch (err) {
       console.error(err.message);
     } finally {
       if (con) {
-        con.end();
-        console.log("Database connection closed.");
+        con.release();
+        console.log("Database connection released.");
       }
     }
     return isSuccess;
@@ -347,29 +377,29 @@ class DB {
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //
 
-  // Update user account data based in user id (Builds the query depending on the properties given dynamically)
+  // Update user account data based on user id (Builds the query depending on the properties given dynamically)
   static async updateAccountData(userData) {
     let result = {};
     let con;
     try {
-      con = await this.connect();
+      con = await DB.connect();
       let stmt = `UPDATE users SET `;
       let values = [];
 
       if (userData.username) {
-        stmt += `username = ?, `;
+        stmt += `username = $1, `;
         values.push(userData.username);
         result.newUsername = userData.username;
       }
 
       if (userData.email) {
-        stmt += `email = ?, `;
+        stmt += `email = $1, `;
         values.push(userData.email);
         result.newEmail = userData.email;
       }
 
       if (userData.password) {
-        stmt += `password = ?, `;
+        stmt += `password = $1, `;
         userData.password = await bcrypt.hash(userData.password, 10);
         values.push(userData.password);
         result.newPassword = userData.password;
@@ -379,11 +409,16 @@ class DB {
       stmt = stmt.slice(0, -2);
 
       // Add the WHERE clause to identify the user to update
-      stmt += ` WHERE id = ?`;
+      stmt += ` WHERE id = $2`;
       values.push(userData.id);
 
-      const [rows] = await con.query(stmt, values);
-      console.log(rows);
+      const query = {
+        text: stmt,
+        values: values,
+      };
+
+      await con.query(query);
+
       result.isSuccess = true;
     } catch (err) {
       console.error(err.message);
@@ -403,34 +438,37 @@ class DB {
   static async getPostsOfUser(userId, limit = 10, offset = 0) {
     let con;
     try {
-      con = await this.connect();
-      const stmt = `
+      con = await DB.connect();
+      const query = {
+        text: `
         SELECT
           posts.id,
           posts.title,
-          posts.fileType,
-          posts.s3FileName,
+          posts.file_type AS "fileType",
+          posts.s3_file_name AS "s3FileName",
           users.username,
           users.gender,
-          posts.createdAt,
-          courses.code AS courseCode
+          posts.created_at AS "createdAt",
+          courses.code AS "courseCode"
         FROM
           posts
-          JOIN users ON posts.userId = users.id
-          JOIN courses ON posts.courseId = courses.id
+          JOIN users ON posts.user_id = users.id
+          JOIN courses ON posts.course_id = courses.id
         WHERE
-          posts.userId = ?
+          posts.user_id = $1
         ORDER BY
-          posts.createdAt DESC
-        LIMIT ?
-        OFFSET ?;
-      `;
-      const [rows] = await con.query(stmt, [userId, limit, offset]);
+          posts.created_at DESC
+        LIMIT $2
+        OFFSET $3;
+      `,
+        values: [userId, limit, offset],
+      };
+      const { rows } = await con.query(query);
       const posts = rows;
 
-      const countStmt = "SELECT COUNT(*) AS totalPosts FROM posts WHERE userId = ?";
-      const [countRows] = await con.query(countStmt, [userId]);
-      const totalPosts = countRows[0].totalPosts;
+      const countQuery = "SELECT COUNT(*) AS total_posts FROM posts WHERE user_id = $1";
+      const countResult = await con.query(countQuery, [userId]);
+      const totalPosts = countResult.rows[0].total_posts;
 
       return { posts, totalPosts };
     } catch (err) {
@@ -438,8 +476,8 @@ class DB {
       return null;
     } finally {
       if (con) {
-        con.end();
-        console.log("Database connection closed.");
+        con.release();
+        console.log("Database connection released.");
       }
     }
   }
@@ -451,14 +489,13 @@ class DB {
     let isSuccess = false;
     let con;
     try {
-      con = await this.connect();
-      const stmt = `
-        UPDATE posts
-        SET title = ?
-        WHERE id = ?;
-      `;
-      const [result] = await con.query(stmt, [newTitle, postId]);
-      isSuccess = result.affectedRows > 0;
+      con = await DB.connect();
+      const query = {
+        text: "UPDATE posts SET title = $1 WHERE id = $2",
+        values: [newTitle, postId],
+      };
+      const { rowCount } = await con.query(query);
+      isSuccess = rowCount > 0;
     } catch (err) {
       console.error(err);
     } finally {
@@ -477,11 +514,14 @@ class DB {
     let isSuccess = false;
     let con;
     try {
-      con = await this.connect();
+      con = await DB.connect();
       const hashedPassword = await bcrypt.hash(newPassword, 10);
-      const stmt = "UPDATE users SET password = ? WHERE email = ?";
-      const [rows] = await con.query(stmt, [hashedPassword, email]);
-      if (rows.affectedRows > 0) {
+      const query = {
+        text: "UPDATE users SET password = $1 WHERE email = $2",
+        values: [hashedPassword, email],
+      };
+      const { rowCount } = await con.query(query);
+      if (rowCount > 0) {
         isSuccess = true;
       }
     } catch (err) {

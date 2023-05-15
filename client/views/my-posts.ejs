@@ -97,6 +97,15 @@
         </div>
         <% })} %>
       </div>
+
+      <!-- Pagination -->
+      <div class="pagination d-flex justify-content-center align-items-center mt-5">
+        <% if(typeof totalPages !== 'undefined' && totalPages > 1) { %> <i><</i> <% for (let i = 1; i <= totalPages; i++) { %> <% if(i === currentPage) { %>
+        <a href="?page=<%= i %>" class="link page-number-link text-light mx-2"><%= i %></a>
+        <% } else { %>
+        <a href="?page=<%= i %>" class="link page-number-link text-decoration-none text-light mx-2"><%= i %></a>
+        <% } %> <% } %> <i>></i> <% } %>
+      </div>
     </main>
 
     <%- include('partials/footer.ejs') %>

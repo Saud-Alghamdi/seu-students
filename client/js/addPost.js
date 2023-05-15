@@ -1,8 +1,7 @@
 // Module Purpose: validates post data (title, file) on input and on submit, and if validated it will send the post data to the server.
 
-import axios from "axios";
-import { Validation } from "./Validation.js";
-import { showLoader } from "./loader.js";
+import {Validation} from './Validation.js'
+import axios from 'axios'
 
 const addPostForm = document.querySelector(".add-post-form");
 const fileInput = document.querySelector(".file-input");
@@ -47,7 +46,6 @@ export async function sendPostToServer() {
     }
     // if not, then send the post to the server
     else {
-      showLoader();
       const formData = new FormData();
       formData.append("title", title);
       formData.append("file", file);

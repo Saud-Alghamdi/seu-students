@@ -1,8 +1,8 @@
 // Module Purpose: validate account data change on submit, if validated, send data to the server to update user info in the database.
 
-import { Validation } from "./Validation.js";
-import { showLoader, removeLoader} from "./loader.js";
+import { removeLoader } from "./loader.js";
 import axios from "axios";
+import { Validation } from "./Validation.js";
 
 export async function updateAccountData() {
   await updateUsername();
@@ -26,7 +26,6 @@ async function updateUsername() {
 
     saveButton.addEventListener("click", async (e) => {
       e.preventDefault();
-      showLoader()
       const newUsername = document.querySelector(".new-username-input").value;
       const validator = await Validation.validateUsername(newUsername);
 
@@ -37,12 +36,12 @@ async function updateUsername() {
             window.location.href = "/dashboard/my-account?updateSuccess=true";
           })
           .catch((err) => {
-            removeLoader()
+            removeLoader();
             console.log(err);
             window.location.href = "/dashboard/my-account?updateSuccess=false";
           });
       } else {
-        removeLoader()
+        removeLoader();
         const error = document.querySelector(".username-error-message");
         error.innerText = validator.msg;
       }
@@ -66,7 +65,6 @@ async function updateEmail() {
 
     saveButton.addEventListener("click", async (e) => {
       e.preventDefault();
-      showLoader()
       const newEmail = document.querySelector(".new-email-input").value;
       const validator = await Validation.validateEmail(newEmail);
 
@@ -77,12 +75,12 @@ async function updateEmail() {
             window.location.href = "/dashboard/my-account?updateSuccess=true";
           })
           .catch((err) => {
-            removeLoader()
+            removeLoader();
             console.log(err);
             window.location.href = "/dashboard/my-account?updateSuccess=false";
           });
       } else {
-        removeLoader()
+        removeLoader();
         const error = document.querySelector(".email-error-message");
         error.innerText = validator.msg;
       }
@@ -106,7 +104,6 @@ async function updatePassword() {
 
     saveButton.addEventListener("click", async (e) => {
       e.preventDefault();
-      showLoader()
       const newPassword = document.querySelector(".new-password-input").value;
       const repeatNewPassword = document.querySelector(".repeat-new-password-input").value;
       const validator = await Validation.validatePassword(newPassword, repeatNewPassword);
@@ -118,12 +115,12 @@ async function updatePassword() {
             window.location.href = "/dashboard/my-account?updateSuccess=true";
           })
           .catch((err) => {
-            removeLoader()
+            removeLoader();
             console.log(err);
             window.location.href = "/dashboard/my-account?updateSuccess=false";
           });
       } else {
-        removeLoader()
+        removeLoader();
         const error = document.querySelector(".password-error-message");
         error.innerText = validator.msg;
       }

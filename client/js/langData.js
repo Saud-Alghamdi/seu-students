@@ -1,6 +1,6 @@
 // Module Purpose: Loads current set language json file
 
-import axios from "axios";
+import axios from 'axios'
 
 let langData = null;
 
