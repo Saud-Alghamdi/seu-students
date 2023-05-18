@@ -2,7 +2,7 @@
 
 import { removeLoader } from "./loader.js";
 import axios from "axios";
-import { Validation } from "./Validation.js";
+import { Validation } from "../../common/Validation.js";
 
 export async function updateAccountData() {
   await updateUsername();

@@ -1,12 +1,10 @@
 import DB from "./DB.js";
 import { insertFileToS3, getFileFromS3, deleteFileFromS3 } from "./s3.js";
 import path from "path";
-import * as helper from "./helper.js";
+import * as helper from "../common/helper.js";
 import NodeCache from "node-cache";
 import nodemailer from "nodemailer";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { Validation } from "../common/Validation.js";
 
 const cache = new NodeCache({ stdTTL: 0 }); // Set cache expiry to 0 means no expiry
 
@@ -66,6 +64,19 @@ class RouteHandler {
 
   static async signupProcess(req, res) {
     const userData = req.body;
+
+    console.log("---USERDATA---");
+    console.log(userData);
+
+    if (
+      !Validation.validateUsername(userData.username).passed ||
+      !Validation.validateEmail(userData.email).passed ||
+      !Validation.validatePassword(userData.password, userData.repeat - password).passed ||
+      !Validation.validateGender(userData.gender).passed
+    ) {
+      res.redirect("signup?signupSuccess=false");
+    }
+
     const result = await DB.signup(userData);
 
     if (result.isSuccess === true) {
@@ -73,7 +84,7 @@ class RouteHandler {
       res.redirect(`login?signupSuccess=true`);
     } else if (result.isSuccess === false) {
       console.log("Sign up process failed ... (signup process in RouteHandler.js)");
-      res.redirect("signup?signupSuccess=true");
+      res.redirect("signup?signupSuccess=false");
     }
   }
 

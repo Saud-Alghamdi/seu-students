@@ -1,4 +1,4 @@
-import * as helper from "./helper.js";
+import * as helper from "../common/helper.js";
 import crypto from "crypto";
 import { promisify } from "util";
 import zlib from "zlib";

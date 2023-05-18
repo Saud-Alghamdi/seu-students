@@ -1,9 +1,3 @@
-export function snakeToCamel(str) {
-  return str.replace(/_([a-z])/g, function (match, letter) {
-    return letter.toUpperCase();
-  });
-}
-
 export function formatDate(dateFromDB) {
   const date = new Date(dateFromDB + " UTC");
 

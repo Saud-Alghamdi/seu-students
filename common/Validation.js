@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getLangData } from "./langData.js";
+import { getLangData } from "../client/js/langData.js";
 
 export class Validation {
   // Validate Username

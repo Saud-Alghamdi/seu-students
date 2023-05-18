@@ -9,10 +9,10 @@ import enLangData from "./lang/en.json" assert { type: "json" };
 
 const app = express();
 const __dirname = path.resolve();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const MemoryStore = memorystore(session);
 const store = new MemoryStore({
-  checkPeriod: 3600000,
+  checkPeriod: 3600000, // 1 hour
 });
 
 // Session config + middleware
@@ -32,15 +32,15 @@ app.use(
 async function setLang(req, res, next) {
   let userLanguage;
 
-  // first option, check if there is a query to change language
+  // first statement, check if there is a query to change language
   if (req.query.lang) {
     userLanguage = req.query.lang;
   }
-  // second option, check session to see set language
+  // second statement, check session to see set language
   else if (req.session.lang) {
     userLanguage = req.session.lang;
   }
-  // third option, take the default user language
+  // third statement, take the default user language
   else {
     userLanguage = req.headers["accept-language"].split(",")[0].toLowerCase();
   }
