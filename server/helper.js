@@ -1,10 +1,10 @@
-function snakeToCamel(str) {
+export function snakeToCamel(str) {
   return str.replace(/_([a-z])/g, function (match, letter) {
     return letter.toUpperCase();
   });
 }
 
-function formatDate(dateFromDB) {
+export function formatDate(dateFromDB) {
   const date = new Date(dateFromDB + " UTC");
 
   const options = {
@@ -20,9 +20,7 @@ function formatDate(dateFromDB) {
   return new Intl.DateTimeFormat("en-US", options).format(date);
 }
 
-function bytesToKB(bytes) {
+export function bytesToKB(bytes) {
   const KB = bytes / 1024;
   return parseFloat(KB.toFixed(2));
 }
-
-module.exports = { snakeToCamel, formatDate, bytesToKB };

@@ -1,6 +1,8 @@
-const path = require("path");
+import path from "path";
 
-module.exports = {
+const __dirname = path.resolve();
+
+export default {
   mode: "production",
   entry: "./client/js/entry.js",
   output: {

@@ -1,21 +1,22 @@
-const helper = require("./helper");
-const crypto = require("crypto");
-const util = require("util");
-const zlib = require("zlib");
-const gzipPromise = util.promisify(zlib.gzip);
-const unzipPromse = util.promisify(zlib.unzip);
-const dotenv = require("dotenv");
+import * as helper from "./helper.js";
+import crypto from "crypto";
+import { promisify } from "util";
+import zlib from "zlib";
+import dotenv from "dotenv";
+
 dotenv.config();
 
+const gzipPromise = promisify(zlib.gzip);
+const unzipPromise = promisify(zlib.unzip);
 const randomFileName = (bytes = 32) => crypto.randomBytes(bytes).toString("hex");
 
 // S3 Confg
-const { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
+import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
-bucketName = process.env.BUCKET_NAME;
-bucketRegion = process.env.BUCKET_REGION;
-accessKey = process.env.ACCESS_KEY;
-secretAccessKey = process.env.SECRET_ACCESS_KEY;
+const bucketName = process.env.BUCKET_NAME;
+const bucketRegion = process.env.BUCKET_REGION;
+const accessKey = process.env.ACCESS_KEY;
+const secretAccessKey = process.env.SECRET_ACCESS_KEY;
 
 const s3 = new S3Client({
   credentials: {
@@ -25,7 +26,7 @@ const s3 = new S3Client({
   region: bucketRegion,
 });
 
-async function insertFileToS3(file) {
+export async function insertFileToS3(file) {
   // File backend validation (in case client side bypassed)
   const fileSizeInBytes = file.size;
   const fileSizeInKB = helper.bytesToKB(fileSizeInBytes);
@@ -86,7 +87,7 @@ async function insertFileToS3(file) {
 
 // Get file from S3
 // Note: There are files that have been uploaded before the implementation of compress library, so they will need a different handling to in order to be downloaded correctly
-async function getFileFromS3(fileName) {
+export async function getFileFromS3(fileName) {
   const params = {
     Bucket: bucketName,
     Key: fileName,
@@ -105,7 +106,7 @@ async function getFileFromS3(fileName) {
         });
         file.Body.on("end", () => {
           const buffer = Buffer.concat(chunks);
-          unzipPromse(buffer).then(resolve).catch(reject);
+          unzipPromise(buffer).then(resolve).catch(reject);
         });
       });
 
@@ -132,7 +133,7 @@ async function getFileFromS3(fileName) {
 }
 
 // Delete file from S3
-async function deleteFileFromS3(s3FileName) {
+export async function deleteFileFromS3(s3FileName) {
   const params = {
     Bucket: bucketName,
     Key: s3FileName,
@@ -154,5 +155,3 @@ async function deleteFileFromS3(s3FileName) {
     return false;
   }
 }
-
-module.exports = { insertFileToS3, getFileFromS3, deleteFileFromS3 };

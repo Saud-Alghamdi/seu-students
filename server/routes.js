@@ -1,10 +1,11 @@
-const express = require("express");
+import express from "express";
+import path from "path";
+import RouteHandler from "./RouteHandler.js";
+import multer from "multer";
+
 const router = express.Router();
-const path = require("path");
-const RouteHandler = require("./RouteHandler.js");
 
 // multer config for file handling
-const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
@@ -118,4 +119,4 @@ router.get("/langData", (req, res) => {
   res.sendFile(filePath);
 });
 
-module.exports = router;
+export default router;

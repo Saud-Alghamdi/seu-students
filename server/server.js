@@ -1,11 +1,16 @@
-const express = require("express");
+import express from "express";
+import session from "express-session";
+import memorystore from "memorystore";
+import path from "path";
+import routes from "./routes.js";
+import crypto from "crypto";
+import arLangData from "./lang/ar.json" assert { type: "json" };
+import enLangData from "./lang/en.json" assert { type: "json" };
+
 const app = express();
-const port = process.env.PORT || 3000;
-const path = require("path");
-const routes = require("./routes");
-const crypto = require("crypto");
-const session = require("express-session");
-const MemoryStore = require("memorystore")(session);
+const __dirname = path.resolve();
+const port = 3000;
+const MemoryStore = memorystore(session);
 const store = new MemoryStore({
   checkPeriod: 3600000,
 });
@@ -24,23 +29,25 @@ app.use(
 );
 
 // Language middleware
-function setLang(req, res, next) {
+async function setLang(req, res, next) {
   let userLanguage;
 
+  // first option, check if there is a query to change language
   if (req.query.lang) {
     userLanguage = req.query.lang;
-    req.session.userLanguage = userLanguage;
-  } else if (req.session.userLanguage) {
-    userLanguage = req.session.userLanguage;
-  } else {
+  }
+  // second option, check session to see set language
+  else if (req.session.lang) {
+    userLanguage = req.session.lang;
+  }
+  // third option, take the default user language
+  else {
     userLanguage = req.headers["accept-language"].split(",")[0].toLowerCase();
   }
 
-  // Set language info in session
   req.session.lang = userLanguage;
+  req.session.langData = req.session.lang === "ar" ? arLangData : enLangData;
   req.session.langDirection = userLanguage === "ar" ? "rtl" : "ltr";
-  req.session.langData = require(`./lang/${userLanguage}.json`);
-
   next();
 }
 
@@ -54,12 +61,11 @@ setInterval(() => {
 }, 3600000);
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "../client/views"));
+app.set("views", path.join(__dirname, "client/views"));
 
-app.use(express.static(path.join(__dirname, "../client")));
+app.use(express.static(path.join(__dirname, "client")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(setLang);
 app.use(routes);
-
-app.listen(port, () => console.log("Listening ..."));
+app.listen(port, () => console.log(`Listening on ${port} ...`));

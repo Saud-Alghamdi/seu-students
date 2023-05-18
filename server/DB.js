@@ -1,8 +1,9 @@
-const { Pool } = require("pg");
-// const Validation = require("../client/js/Validation.js");
-const bcrypt = require("bcrypt");
-const dotenv = require("dotenv");
+import pkg from 'pg';
+import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+
 dotenv.config();
+const { Pool } = pkg;
 
 const pool = new Pool({
   user: process.env.USER,
@@ -536,4 +537,4 @@ class DB {
   }
 }
 
-module.exports = DB;
+export default DB;

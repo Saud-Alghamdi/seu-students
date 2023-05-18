@@ -1,12 +1,14 @@
-const DB = require("./DB.js");
-const { insertFileToS3, getFileFromS3, deleteFileFromS3 } = require("./s3");
-const path = require("path");
-const helper = require("./helper");
-const NodeCache = require("node-cache");
-const cache = new NodeCache({ stdTTL: 0 }); // Set cache expiry to 0 means no expiry
-const nodemailer = require("nodemailer");
-const dotenv = require("dotenv");
+import DB from "./DB.js";
+import { insertFileToS3, getFileFromS3, deleteFileFromS3 } from "./s3.js";
+import path from "path";
+import * as helper from "./helper.js";
+import NodeCache from "node-cache";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+
 dotenv.config();
+
+const cache = new NodeCache({ stdTTL: 0 }); // Set cache expiry to 0 means no expiry
 
 // Check user is logged in
 function userIsLoggedIn(req) {
@@ -645,4 +647,4 @@ class RouteHandler {
   }
 }
 
-module.exports = RouteHandler;
+export default RouteHandler;
