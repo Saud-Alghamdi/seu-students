@@ -1,9 +1,9 @@
 // Gathers all the modules together
 // Runs the appropriate module depending on the currently viewed page
 
-import { signupValidation } from "./signupValidation.js";
-import { sendPostToServer } from "./addPostValidation.js";
-import { updateAccountData } from "./updateAccountData.js";
+import { signupValidation } from "./validation/signup.js";
+import { sendPostToServer } from "./validation/addPost.js";
+import { updateAccountDataValidation } from "./validation/updateAccountData.js";
 
 async function handlePage() {
   const currentPage = document.querySelector("body").getAttribute("id");
@@ -18,7 +18,7 @@ async function handlePage() {
       break;
 
     case "my-account-page":
-      await updateAccountData();
+      await updateAccountDataValidation();
       break;
 
     default:

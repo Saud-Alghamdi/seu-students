@@ -1,7 +1,7 @@
 // Module Purpose: validates sign up data on input and on submit.
 
-import { Validation } from "../../common/Validation.js";
-import { removeLoader } from "./loader.js";
+import { Validation } from "../../../common/Validation.js";
+import { removeLoader } from "../loader.js";
 
 // Input Elements
 const signupForm = document.querySelector(".signup-page__form");

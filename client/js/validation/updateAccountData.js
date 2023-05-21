@@ -1,9 +1,9 @@
 // Module Purpose: validate account data change on submit, if validated, send data to the server to update user info in the database.
 
-import { removeLoader } from "./loader.js";
-import { Validation } from "../../common/Validation.js";
+import { removeLoader } from "../loader.js";
+import { Validation } from "../../../common/Validation.js";
 
-export async function updateAccountData() {
+export async function updateAccountDataValidation() {
   await updateUsername();
   await updateEmail();
   await updatePassword();

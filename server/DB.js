@@ -64,7 +64,7 @@ class DB {
     try {
       con = await DB.connect();
       const query = {
-        text: "SELECT * FROM users WHERE email = $1 OR username = $2;",
+        text: "SELECT * FROM users WHERE email ILIKE $1 OR username ILIKE $2;",
         values: [userCreds.usernameOrEmail, userCreds.usernameOrEmail],
       };
       const { rows } = await con.query(query);
@@ -103,7 +103,7 @@ class DB {
     try {
       con = await DB.connect();
       const query = {
-        text: "SELECT username FROM users WHERE username = $1",
+        text: "SELECT username FROM users WHERE username ILIKE $1",
         values: [username],
       };
       const { rows } = await con.query(query);
@@ -136,7 +136,7 @@ class DB {
     try {
       con = await DB.connect();
       const query = {
-        text: "SELECT email FROM users WHERE email = $1",
+        text: "SELECT email FROM users WHERE email ILIKE $1",
         values: [email],
       };
       const { rows } = await con.query(query);
@@ -174,7 +174,7 @@ class DB {
         FROM courses
         INNER JOIN courses_departments ON courses.id = courses_departments.course_id
         INNER JOIN departments ON courses_departments.dep_id = departments.id
-        WHERE departments.abbr = $1;
+        WHERE departments.abbr ILIKE $1;
         `,
         values: [depAbbr],
       };
@@ -206,7 +206,7 @@ class DB {
         text: `
         SELECT COUNT(*) AS count
         FROM courses
-        WHERE code = $1;
+        WHERE code ILIKE $1;
       `,
         values: [courseCode],
       };
@@ -223,7 +223,7 @@ class DB {
         FROM posts
         JOIN users ON posts."user_id" = users.id
         JOIN courses ON posts."course_id" = courses.id
-        WHERE courses.code = $1
+        WHERE courses.code ILIKE $1
         ORDER BY posts."created_at" DESC
         LIMIT $2
         OFFSET $3;
@@ -239,7 +239,7 @@ class DB {
           SELECT COUNT(*) AS total_posts
           FROM posts
           JOIN courses ON posts."course_id" = courses.id
-          WHERE courses.code = $1;
+          WHERE courses.code ILIKE $1;
         `,
         values: [courseCode],
       };
@@ -350,14 +350,14 @@ class DB {
 
       // Delete from file downloads table
       const query1 = {
-        text: "DELETE FROM file_downloads WHERE post_id IN (SELECT id FROM posts WHERE s3_file_name = $1)",
+        text: "DELETE FROM file_downloads WHERE post_id IN (SELECT id FROM posts WHERE s3_file_name ILIKE $1)",
         values: [s3FileName],
       };
       await con.query(query1);
 
       // Delete from posts table
       const query2 = {
-        text: "DELETE FROM posts WHERE s3_file_name = $1",
+        text: "DELETE FROM posts WHERE s3_file_name ILIKE $1",
         values: [s3FileName],
       };
       const { rowCount } = await con.query(query2);
@@ -388,19 +388,19 @@ class DB {
       let values = [];
 
       if (userData.username) {
-        stmt += `username = $1, `;
+        stmt += `username ILIKE $1, `;
         values.push(userData.username);
         result.newUsername = userData.username;
       }
 
       if (userData.email) {
-        stmt += `email = $1, `;
+        stmt += `email ILIKE $1, `;
         values.push(userData.email);
         result.newEmail = userData.email;
       }
 
       if (userData.password) {
-        stmt += `password = $1, `;
+        stmt += `password ILIKE $1, `;
         userData.password = await bcrypt.hash(userData.password, 10);
         values.push(userData.password);
         result.newPassword = userData.password;
@@ -518,7 +518,7 @@ class DB {
       con = await DB.connect();
       const hashedPassword = await bcrypt.hash(newPassword, 10);
       const query = {
-        text: "UPDATE users SET password = $1 WHERE email = $2",
+        text: "UPDATE users SET password ILIKE $1 WHERE email ILIKE $2",
         values: [hashedPassword, email],
       };
       const { rowCount } = await con.query(query);
