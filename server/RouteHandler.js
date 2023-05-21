@@ -65,25 +65,32 @@ class RouteHandler {
   static async signupProcess(req, res) {
     const userData = req.body;
 
-    console.log("---USERDATA---");
-    console.log(userData);
+    const validationPromises = [Validation.validateUsername(userData.username), Validation.validateEmail(userData.email), Validation.validatePassword(userData.password, userData.repeatPassword), Validation.validateGender(userData.gender)];
 
-    if (
-      !Validation.validateUsername(userData.username).passed ||
-      !Validation.validateEmail(userData.email).passed ||
-      !Validation.validatePassword(userData.password, userData.repeat - password).passed ||
-      !Validation.validateGender(userData.gender).passed
-    ) {
+    const validationResults = await Promise.all(validationPromises);
+    const errors = [];
+
+    validationResults.forEach((result) => {
+      if (!result.passed) {
+        errors.push(result.msg);
+      }
+    });
+
+    const allValidationsPassed = errors.length === 0;
+
+    if (!allValidationsPassed) {
+      console.log(errors);
       res.redirect("signup?signupSuccess=false");
+      return
     }
 
-    const result = await DB.signup(userData);
+    const signupInDB = await DB.signup(userData);
 
-    if (result.isSuccess === true) {
-      console.log("Sign up process successful! (signup process in RouteHandler.js)");
+    if (signupInDB.isSuccess === true) {
+      console.log("Sign up process successful!");
       res.redirect(`login?signupSuccess=true`);
-    } else if (result.isSuccess === false) {
-      console.log("Sign up process failed ... (signup process in RouteHandler.js)");
+    } else if (signupInDB.isSuccess === false) {
+      console.log("Sign up process failed ...");
       res.redirect("signup?signupSuccess=false");
     }
   }
@@ -502,6 +509,9 @@ class RouteHandler {
 
   static async updateAccountDataProcess(req, res) {
     const userData = req.body;
+
+    
+
     userData.id = req.session.user.id;
     const result = await DB.updateAccountData(userData);
     if (result.isSuccess === true) {

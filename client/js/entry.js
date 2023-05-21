@@ -1,8 +1,8 @@
 // Gathers all the modules together
 // Runs the appropriate module depending on the currently viewed page
 
-import { signupValidation } from "./signup.js";
-import { sendPostToServer } from "./addPost.js";
+import { signupValidation } from "./signupValidation.js";
+import { sendPostToServer } from "./addPostValidation.js";
 import { updateAccountData } from "./updateAccountData.js";
 
 async function handlePage() {

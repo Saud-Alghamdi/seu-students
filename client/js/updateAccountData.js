@@ -128,7 +128,7 @@ async function updatePassword() {
   });
 }
 
-//---- AJAX Update data ----/// 👇
+//---- AJAX request to Update data ----/// 👇
 async function updateAccountDataInServer(userData) {
   let isSuccess = false;
   await axios

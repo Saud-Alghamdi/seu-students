@@ -1,20 +1,23 @@
 import axios from "axios";
-import { getLangData } from "../client/js/langData.js";
+import langData from "../lang/en.json" assert { type: "json" };
 
 export class Validation {
   // Validate Username
   static async validateUsername(username) {
-    const langData = await getLangData();
     const startWithLetterRegex = /^[a-zA-Z]/;
     const lettersNumbersUnderscoresRegex = /^[a-zA-Z0-9_]+$/;
     const lengthRegex = /^.{3,25}$/;
 
     const checkUsernameExists = async (username) => {
       let exists = false;
-      await axios
-        .post(`/checkUsernameExists`, { username })
-        .then((res) => (exists = res.data))
-        .catch((err) => console.log(err));
+      try {
+        const response = await axios.post("http://localhost:3000/checkUsernameExists", {
+          username,
+        });
+        exists = response.data;
+      } catch (error) {
+        console.error(error.message);
+      }
       return exists;
     };
 
@@ -33,16 +36,18 @@ export class Validation {
 
   // Validate Email
   static async validateEmail(email) {
-    const langData = await getLangData();
     const regex = /^(?!.*\s)\S+@\S+\.\S+$/;
 
     const checkEmailExists = async (email) => {
       let exists = false;
-      await axios
-        .post(`/checkEmailExists`, { email })
-        .then((res) => (exists = res.data))
-        .catch((err) => console.log(err));
-
+      try {
+        const response = await axios.post("http://localhost:3000/checkEmailExists", {
+          email,
+        });
+        exists = response.data;
+      } catch (error) {
+        console.error(error.message);
+      }
       return exists;
     };
 
@@ -57,7 +62,6 @@ export class Validation {
 
   // Validate Password
   static async validatePassword(password, repeatPassword) {
-    const langData = await getLangData();
     const containsSpaceRegex = /\s/;
     const lengthRegex = /^.{6,}$/;
 
@@ -74,7 +78,6 @@ export class Validation {
 
   // Validate Gender
   static async validateGender(gender) {
-    const langData = await getLangData();
     if (!gender) {
       return { passed: false, msg: langData.val_GENDER_NOT_SELECTED };
     } else {
@@ -84,7 +87,6 @@ export class Validation {
 
   // Validate Post title
   static async validatePostTitle(title) {
-    const langData = await getLangData();
     if (!title) {
       return { passed: false, msg: langData.val_NO_TITLE_WRITTEN };
     } else {
@@ -94,8 +96,6 @@ export class Validation {
 
   // Validate Post file
   static async validatePostFile(file) {
-    const langData = await getLangData();
-
     if (!file) {
       return { passed: false, msg: langData.val_NO_FILE_SELECTED };
     }

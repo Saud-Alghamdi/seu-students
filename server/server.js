@@ -4,8 +4,8 @@ import memorystore from "memorystore";
 import path from "path";
 import routes from "./routes.js";
 import crypto from "crypto";
-import arLangData from "./lang/ar.json" assert { type: "json" };
-import enLangData from "./lang/en.json" assert { type: "json" };
+import arLangData from "../lang/ar.json" assert { type: "json" };
+import enLangData from "../lang/en.json" assert { type: "json" };
 
 const app = express();
 const __dirname = path.resolve();
@@ -42,7 +42,7 @@ async function setLang(req, res, next) {
   }
   // third statement, take the default user language
   else {
-    userLanguage = req.headers["accept-language"].split(",")[0].toLowerCase();
+    userLanguage = req.headers["accept-language"]?.split(",")[0]?.toLowerCase() || "ar";
   }
 
   req.session.lang = userLanguage;

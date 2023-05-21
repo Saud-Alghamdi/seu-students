@@ -86,11 +86,11 @@
             </div>
             <div class="col d-flex justify-content-evenly justify-content-sm-center">
               <form class="m-0" action="/dashboard/my-posts/<%=post.id%>/update-post-title" method="GET">
-                <button class="edit-post-button btn btn-primary btn-sm mx-sm-1 text-light"><%=langData.myPostsPage_EDIT%></button>
+                <button type="submit" class="edit-post-button btn btn-primary btn-sm mx-sm-1 text-light"><%=langData.myPostsPage_EDIT%></button>
               </form>
               <form class="m-0" action="/dashboard/my-posts/deletePost" method="POST">
                 <input type="hidden" name="s3FileName" value="<%=post.s3FileName%>" />
-                <button class="delete-post-button btn btn-danger btn-sm mx-sm-1"><%=langData.myPostsPage_DELETE%></button>
+                <button type="submit" class="delete-post-button btn btn-danger btn-sm mx-sm-1"><%=langData.myPostsPage_DELETE%></button>
               </form>
             </div>
           </div>
