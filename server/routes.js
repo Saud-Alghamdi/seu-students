@@ -1,5 +1,4 @@
 import express from "express";
-import path from "path";
 import RouteHandler from "./RouteHandler.js";
 import multer from "multer";
 

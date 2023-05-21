@@ -1,12 +1,12 @@
 const loader = document.getElementById("loader-container");
-const form = document.querySelector("form");
+const forms = document.querySelectorAll("form");
 
 // Runs the loader automatically after any form submission
-if (form) {
+forms.forEach((form) => {
   form.addEventListener("submit", (e) => {
     loader.classList.remove("visually-hidden");
   });
-}
+});
 
 export function removeLoader() {
   const loader = document.getElementById("loader-container");

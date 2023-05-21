@@ -81,7 +81,7 @@ class RouteHandler {
     if (!allValidationsPassed) {
       console.log(errors);
       res.redirect("signup?signupSuccess=false");
-      return
+      return;
     }
 
     const signupInDB = await DB.signup(userData);
@@ -509,18 +509,40 @@ class RouteHandler {
 
   static async updateAccountDataProcess(req, res) {
     const userData = req.body;
+    let validation;
 
-    
+    if (userData.username) {
+      const username = userData.username;
+      validation = await Validation.validateUsername(username);
+    } else if (userData.email) {
+      const email = userData.email;
+      validation = await Validation.validateEmail(email);
+    } else if (userData.password) {
+      const password = userData.password;
+      const repeatPassword = userData.repeatPassword;
+      validation = await Validation.validatePassword(password, repeatPassword);
+    }
+
+    if (!validation.passed) {
+      res.redirect("my-account?updateSuccess=false");
+      console.log(validation.msg);
+      return;
+    }
 
     userData.id = req.session.user.id;
-    const result = await DB.updateAccountData(userData);
-    if (result.isSuccess === true) {
-      if (result.newUsername) req.session.user.username = result.newUsername;
-      if (result.newEmail) req.session.user.email = result.newEmail;
-      if (result.newPassword) req.session.user.password = result.newPassword;
-      res.json({ isSuccess: true });
+    const updateAccountDataInDB = await DB.updateAccountData(userData);
+
+    if (updateAccountDataInDB.isSuccess === true) {
+      if (updateAccountDataInDB.newUsername) {
+        req.session.user.username = updateAccountDataInDB.newUsername;
+      } else if (updateAccountDataInDB.newEmail) {
+        req.session.user.email = updateAccountDataInDB.newEmail;
+      } else if (updateAccountDataInDB.newPassword) {
+        req.session.user.password = updateAccountDataInDB.newPassword;
+      }
+      res.redirect("my-account?updateSuccess=true");
     } else {
-      res.json({ isSuccess: false });
+      res.redirect("my-account?updateSuccess=false");
     }
   }
 
