@@ -29,7 +29,7 @@
 
       <form class="form update-post-title-page-container__form mt-4 bg-secondary p-4 rounded-5 mx-auto" method="POST" action="./updatePostTitleProcess">
         <label for="" class="form-label"><%=langData.updatePostTitlePage_NEW_TITLE%></label>
-        <input name="newTitle" type="text" class="new-title-input form-control" id="new-title" maxlength="70" />
+        <input name="newTitle" type="text" class="new-title-input form-control" id="new-title" maxlength="70" required/>
         <button id="updateButton" type="submit" class="update-post-title-page-container__button btn btn-lg btn-regular d-block mx-auto mt-4"><%=langData.updatePostTitlePage_EDIT%></button>
       </form>
     </main>

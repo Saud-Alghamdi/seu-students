@@ -32,7 +32,7 @@
       </form>
 
       <!-- if post added successfully -->
-      <% if(typeof user !== 'undefined' && typeof postSuccess !== 'undefined') { %>
+      <% if(typeof addPostSuccess !== 'undefined' && addPostSuccess === true) { %>
       <script>
         showToast(true, "<%= langData.toast_ADD_POST_SUCCESS %>");
       </script>

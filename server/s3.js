@@ -27,23 +27,13 @@ const s3 = new S3Client({
 });
 
 export async function insertFileToS3(file) {
-  // File backend validation (in case client side bypassed)
-  const fileSizeInBytes = file.size;
-  const fileSizeInKB = helper.bytesToKB(fileSizeInBytes);
-  const maxfileSizeInKB = 50000; // = 50 MB
-  const allowedExtensions = [".pdf", ".doc", ".docx", ".ppt", ".pptx"];
-  const filePath = file.originalname;
-  const extension = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
-
-  if (!file.title || !file.buffer || fileSizeInKB > maxfileSizeInKB || !allowedExtensions.includes(extension)) {
-    throw new Error("File received in s3.js is unacceptable ..");
-  }
-
   // Compressing file
   const compresseedFileBuffer = await gzipPromise(file.buffer);
   const compressedFileSizeInKB = helper.bytesToKB(compresseedFileBuffer.length);
 
   // Inserting to S3 Bucket
+  const filePath = file.name || file.originalname;
+  const extension = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
   const fileName = randomFileName() + extension;
 
   const params = {
@@ -86,7 +76,6 @@ export async function insertFileToS3(file) {
 }
 
 // Get file from S3
-// Note: There are files that have been uploaded before the implementation of compress library, so they will need a different handling to in order to be downloaded correctly
 export async function getFileFromS3(fileName) {
   const params = {
     Bucket: bucketName,

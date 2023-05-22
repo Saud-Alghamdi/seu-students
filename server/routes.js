@@ -71,7 +71,7 @@ router.get("/departments/:depAbbr/:courseCode/add-post", async (req, res) => {
 });
 
 // Add Post Process
-router.post("/departments/:depAbbr/:courseCode/add-post/addPostProcess", upload.single("file"), async (req, res) => {
+router.post("/departments/:depAbbr/:courseCode/addPostProcess", upload.single("file"), async (req, res) => {
   await RouteHandler.addPostProcess(req, res);
 });
 

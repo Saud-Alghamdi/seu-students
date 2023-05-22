@@ -1,5 +1,6 @@
 import axios from "axios";
 import langData from "../lang/en.json" assert { type: "json" };
+import * as helper from "./helper.js";
 
 export class Validation {
   // Validate Username
@@ -85,28 +86,20 @@ export class Validation {
     }
   }
 
-  // Validate Post title
-  static async validatePostTitle(title) {
-    if (!title) {
-      return { passed: false, msg: langData.val_NO_TITLE_WRITTEN };
-    } else {
-      return { passed: true };
-    }
-  }
-
   // Validate Post file
   static async validatePostFile(file) {
     if (!file) {
       return { passed: false, msg: langData.val_NO_FILE_SELECTED };
     }
 
-    const allowedExtensions = [".pdf", ".doc", ".docx", ".ppt", ".pptx"];
+    const fileSizeInBytes = file.size;
+    const fileSizeInKB = helper.bytesToKB(fileSizeInBytes);
     const maxFileSizeInKB = 50000; // = 50 MB
-    const fileName = file.name.toLowerCase();
-    const fileSizeInKB = file.size / 1024; // Convert bytes to KB
-    const fileExtension = fileName.substring(fileName.lastIndexOf("."));
+    const allowedExtensions = [".pdf", ".doc", ".docx", ".ppt", ".pptx"];
+    const filePath = file.name || file.originalname
+    const extension = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
 
-    if (!allowedExtensions.includes(fileExtension)) {
+    if (!allowedExtensions.includes(extension)) {
       return { passed: false, msg: langData.val_INVALID_FILE_TYPE };
     } else if (fileSizeInKB > maxFileSizeInKB) {
       return { passed: false, msg: langData.val_INVALID_FILE_SIZE };

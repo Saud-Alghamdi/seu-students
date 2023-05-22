@@ -11,6 +11,13 @@
       <div id="loader"></div>
     </div>
 
+    <!-- If failed to add a post -->
+    <% if(typeof addPostSuccess !== 'undefined' && addPostSuccess === false) { %>
+    <script>
+      showToast(false, "<%= langData.toast_ADD_POST_FAIL%>");
+    </script>
+    <% } %>
+
     <main class="container position-relative flex-grow-1 text-light my-4">
       <!-- Back link -->
       <% if(langDirection === 'rtl') { %>
@@ -27,7 +34,7 @@
         <h1><%=langData.addPostPage_HEADER%></h1>
       </header>
 
-      <form enctype="multipart/form-data" class="form add-post-form mt-4 bg-secondary p-4 rounded-5 mx-auto">
+      <form action="./addPostProcess" method="POST" enctype="multipart/form-data" class="form add-post-form mt-4 bg-secondary p-4 rounded-5 mx-auto">
         <div class="mb-3">
           <label for="" class="form-label"><%=langData.addPostPage_POST_TITLE%></label>
           <input name="title" type="text" class="title-input form-control" id="title" maxlength="70" required />
@@ -36,7 +43,7 @@
         <div class="mb-3">
           <label for="document" class="form-label">
             <%=langData.addPostPage_FILE%>
-            <input type="file" class="file-input w-100" accept=".pdf, .ppt, .pptx, .doc, .docx" required />
+            <input type="file" name="file" class="file-input w-100" accept=".pdf, .ppt, .pptx, .doc, .docx" required />
             <span class="error-message error-message-file-input"></span>
             <br />
             <small><%=langData.addPostPage_FILE_RULE1%></small>

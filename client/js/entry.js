@@ -2,7 +2,7 @@
 // Runs the appropriate module depending on the currently viewed page
 
 import { signupValidation } from "./validation/signup.js";
-import { sendPostToServer } from "./validation/addPost.js";
+import { validatePostFile } from "./validation/addPost.js";
 import { updateAccountDataValidation } from "./validation/updateAccountData.js";
 
 async function handlePage() {
@@ -14,7 +14,7 @@ async function handlePage() {
       break;
 
     case "add-post-page":
-      await sendPostToServer();
+      await validatePostFile();
       break;
 
     case "my-account-page":

@@ -322,14 +322,14 @@ class RouteHandler {
     });
 
     // Redirected after successfully adding post
-    if (userIsLoggedIn(req) && req.query.postSuccess === "true") {
+    if (userIsLoggedIn(req) && req.query.addPostSuccess === "true") {
       res.render("posts", {
         courseCode,
         posts,
         currentPage,
         totalPages,
         user: req.session.user,
-        postSuccess: true,
+        addPostSuccess: true,
         langData: req.session.langData,
         langDirection: req.session.langDirection,
       });
@@ -364,12 +364,22 @@ class RouteHandler {
   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   static async renderAddPostPage(req, res) {
-    if (userIsLoggedIn(req)) {
+    // Failed to add a post
+    if (userIsLoggedIn(req) && req.query.addPostSuccess === "false") {
+      res.render("add-post", {
+        user: req.session.user,
+        addPostSuccess: false,
+        langData: req.session.langData,
+        langDirection: req.session.langDirection,
+      });
+      // User is logged in and has requested the page
+    } else if (userIsLoggedIn(req)) {
       res.render("add-post", {
         user: req.session.user,
         langData: req.session.langData,
         langDirection: req.session.langDirection,
       });
+      // Not logged in
     } else {
       res.redirect("posts?needLogin");
     }
@@ -384,9 +394,15 @@ class RouteHandler {
       ...(req.file || {}),
     };
 
+    let validation = await Validation.validatePostFile(file);
+
+    if (!validation.passed) {
+      res.redirect("add-post?addPostSuccess=false");
+      return;
+    }
+
     const response = await insertFileToS3(file);
     if (response.err) {
-      console.log("insertFileToS3() failed ..");
       res.status(400).json({ err: response.err });
     }
 
@@ -405,9 +421,9 @@ class RouteHandler {
 
     if (insertPostToDBResponse === true) {
       console.log("All success!");
-      res.sendStatus(200);
+      res.redirect("posts?addPostSuccess=true");
     } else {
-      res.status(400).json({ err: "insertPostToDBResponse() failed .." });
+      res.redirect("add-post?addPostSuccess=false");
     }
   }
 
