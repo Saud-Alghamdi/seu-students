@@ -109,9 +109,8 @@ router.post("/dashboard/my-posts/:postId/updatePostTitleProcess", async (req, re
   await RouteHandler.updatePostTitleProcess(req, res);
 });
 
-// Send language json file to client-side javascript
+// Send current language data to Validation.js file
 router.get("/langData", (req, res) => {
-  console.log("Client-side has requested langData");
   res.json(req.session.langData);
 });
 

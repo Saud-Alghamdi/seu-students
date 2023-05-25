@@ -1,10 +1,11 @@
 import axios from "axios";
-import langData from "../lang/en.json" assert { type: "json" };
 import * as helper from "./helper.js";
 
 export class Validation {
   // Validate Username
   static async validateUsername(username) {
+    const langData = await helper.getLangData();
+
     const startWithLetterRegex = /^[a-zA-Z]/;
     const lettersNumbersUnderscoresRegex = /^[a-zA-Z0-9_]+$/;
     const lengthRegex = /^.{3,25}$/;
@@ -37,6 +38,8 @@ export class Validation {
 
   // Validate Email
   static async validateEmail(email) {
+    const langData = await helper.getLangData();
+
     const regex = /^(?!.*\s)\S+@\S+\.\S+$/;
 
     const checkEmailExists = async (email) => {
@@ -63,6 +66,8 @@ export class Validation {
 
   // Validate Password
   static async validatePassword(password, repeatPassword) {
+    const langData = await helper.getLangData();
+
     const containsSpaceRegex = /\s/;
     const lengthRegex = /^.{6,}$/;
 
@@ -79,6 +84,8 @@ export class Validation {
 
   // Validate Gender
   static async validateGender(gender) {
+    const langData = await helper.getLangData();
+
     if (!gender) {
       return { passed: false, msg: langData.val_GENDER_NOT_SELECTED };
     } else {
@@ -88,6 +95,8 @@ export class Validation {
 
   // Validate Post file
   static async validatePostFile(file) {
+    const langData = await helper.getLangData();
+
     if (!file) {
       return { passed: false, msg: langData.val_NO_FILE_SELECTED };
     }
@@ -96,7 +105,7 @@ export class Validation {
     const fileSizeInKB = helper.bytesToKB(fileSizeInBytes);
     const maxFileSizeInKB = 50000; // = 50 MB
     const allowedExtensions = [".pdf", ".doc", ".docx", ".ppt", ".pptx"];
-    const filePath = file.name || file.originalname
+    const filePath = file.name || file.originalname;
     const extension = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
 
     if (!allowedExtensions.includes(extension)) {

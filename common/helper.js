@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export function formatDate(dateFromDB) {
   const date = new Date(dateFromDB + " UTC");
 
@@ -17,4 +19,15 @@ export function formatDate(dateFromDB) {
 export function bytesToKB(bytes) {
   const KB = bytes / 1024;
   return parseFloat(KB.toFixed(2));
+}
+
+export async function getLangData() {
+  let langData;
+
+  await axios
+    .get("/langData")
+    .then((res) => (langData = res.data))
+    .catch((err) => console.log(err));
+
+  return langData;
 }
