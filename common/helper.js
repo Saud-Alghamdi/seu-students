@@ -22,10 +22,11 @@ export function bytesToKB(bytes) {
 }
 
 export async function getLangData() {
+  const baseURL = 'http://localhost:3000'
   let langData;
 
   await axios
-    .get("/langData")
+    .get(`${baseURL}/langData`)
     .then((res) => (langData = res.data))
     .catch((err) => console.log(err));
 

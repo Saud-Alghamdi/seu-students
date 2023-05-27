@@ -388,19 +388,19 @@ class DB {
       let values = [];
 
       if (userData.username) {
-        stmt += `username ILIKE $1, `;
+        stmt += `username = $1, `;
         values.push(userData.username);
         result.newUsername = userData.username;
       }
 
       if (userData.email) {
-        stmt += `email ILIKE $1, `;
+        stmt += `email = $2, `;
         values.push(userData.email);
         result.newEmail = userData.email;
       }
 
       if (userData.password) {
-        stmt += `password ILIKE $1, `;
+        stmt += `password = $3, `;
         userData.password = await bcrypt.hash(userData.password, 10);
         values.push(userData.password);
         result.newPassword = userData.password;

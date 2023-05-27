@@ -13,12 +13,13 @@ export class Validation {
     const checkUsernameExists = async (username) => {
       let exists = false;
       try {
-        const response = await axios.post("http://localhost:3000/checkUsernameExists", {
+        const baseURL = 'http://localhost:3000'
+        const response = await axios.post(`${baseURL}/checkUsernameExists`, {
           username,
         });
         exists = response.data;
-      } catch (error) {
-        console.error(error.message);
+      } catch (err) {
+        console.error(err.message);
       }
       return exists;
     };
@@ -45,7 +46,8 @@ export class Validation {
     const checkEmailExists = async (email) => {
       let exists = false;
       try {
-        const response = await axios.post("http://localhost:3000/checkEmailExists", {
+        const baseURL = 'http://localhost:3000'
+        const response = await axios.post(`${baseURL}/checkEmailExists`, {
           email,
         });
         exists = response.data;
