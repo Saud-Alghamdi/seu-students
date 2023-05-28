@@ -1,4 +1,4 @@
-<html dir="<%=langDirection%>">
+<html dir="<%=langData.DIRECTION%>">
   <head>
     <%- include('partials/head.ejs') %>
     <title><%=langData.loginPage_TITLE%></title>
@@ -13,7 +13,7 @@
 
     <main class="login-page container position-relative flex-grow-1 text-light my-4">
       <!-- Back link -->
-      <% if(langDirection === 'rtl') { %>
+      <% if(langData.DIRECTION === 'rtl') { %>
       <a class="link back-link position-absolute text-light mt-3" onclick="history.back()">
         <i class="fas fa-reply fa-lg fa-flip-horizontal"></i>
       </a>

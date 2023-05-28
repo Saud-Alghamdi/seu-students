@@ -19,7 +19,6 @@ class RouteHandler {
     if (!userIsLoggedIn(req)) {
       res.render("home", {
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
     // just logged in
@@ -28,7 +27,6 @@ class RouteHandler {
         justLoggedIn: true,
         user: req.session.user,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
     // already logged in
@@ -36,7 +34,6 @@ class RouteHandler {
       res.render("home", {
         user: req.session.user,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
   }
@@ -49,12 +46,10 @@ class RouteHandler {
       res.render("signup", {
         signupSuccess: false,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     } else {
       res.render("signup", {
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
   }
@@ -104,7 +99,6 @@ class RouteHandler {
       res.render("login", {
         signupSuccess: true,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
     // coming from logout
@@ -112,7 +106,6 @@ class RouteHandler {
       res.render("login", {
         logoutSuccess: true,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
     // coming from reset password + reset sent successfully
@@ -120,7 +113,6 @@ class RouteHandler {
       res.render("login", {
         sendResetPasswordSuccess: true,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
     // coming from reset password + reset failed to send
@@ -128,7 +120,6 @@ class RouteHandler {
       res.render("login", {
         sendResetPasswordSuccess: false,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
     // Incorrect login credentials
@@ -136,14 +127,12 @@ class RouteHandler {
       res.render("login", {
         loginSuccess: false,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
     // coming from any other place other than the above
     else {
       res.render("login", {
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
   }
@@ -171,12 +160,10 @@ class RouteHandler {
       res.render("reset-password", {
         emailExists: false,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     } else {
       res.render("reset-password", {
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
   }
@@ -251,12 +238,10 @@ class RouteHandler {
       res.render("departments", {
         user: req.session.user,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     } else {
       res.render("departments", {
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
   }
@@ -285,14 +270,12 @@ class RouteHandler {
         courses,
         user: req.session.user,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     } else {
       res.render("courses", {
         depAbbr,
         courses,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
   }
@@ -331,7 +314,6 @@ class RouteHandler {
         user: req.session.user,
         addPostSuccess: true,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
     // Trying to visit add-post page while not logged in
@@ -343,7 +325,6 @@ class RouteHandler {
         totalPages,
         needLogin: true,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
     // Visit posts page anytime while logged in
@@ -355,7 +336,6 @@ class RouteHandler {
         totalPages,
         user: req.session.user,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
   }
@@ -370,14 +350,12 @@ class RouteHandler {
         user: req.session.user,
         addPostSuccess: false,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
       // User is logged in and has requested the page
     } else if (userIsLoggedIn(req)) {
       res.render("add-post", {
         user: req.session.user,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
       // Not logged in
     } else {
@@ -491,7 +469,6 @@ class RouteHandler {
       res.render("dashboard", {
         user: req.session.user,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     } else {
       res.send("<h3>Unauthorized access .. You must log in first</h3>");
@@ -507,7 +484,6 @@ class RouteHandler {
         user: req.session.user,
         updateSuccess: true,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     } else if (!userIsLoggedIn(req)) {
       res.send("<h3>Unauthorized access .. You must log in first</h3>");
@@ -515,7 +491,6 @@ class RouteHandler {
       res.render("my-account", {
         user: req.session.user,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
   }
@@ -588,7 +563,6 @@ class RouteHandler {
           currentPage,
           deletePostSuccess: true,
           langData: req.session.langData,
-          langDirection: req.session.langDirection,
         });
       }
       // Logged in + there are posts + delete post failed
@@ -601,7 +575,6 @@ class RouteHandler {
           currentPage,
           deletePostSuccess: false,
           langData: req.session.langData,
-          langDirection: req.session.langDirection,
         });
       }
       // Logged in + update post title successful
@@ -613,7 +586,6 @@ class RouteHandler {
           currentPage,
           updatePostTitleSuccess: true,
           langData: req.session.langData,
-          langDirection: req.session.langDirection,
         });
       }
       // Logged in + update post title failed
@@ -626,7 +598,6 @@ class RouteHandler {
           currentPage,
           updatePostTitleSuccess: false,
           langData: req.session.langData,
-          langDirection: req.session.langDirection,
         });
       }
       // Logged in + there are posts
@@ -638,7 +609,6 @@ class RouteHandler {
           totalPages,
           currentPage,
           langData: req.session.langData,
-          langDirection: req.session.langDirection,
         });
       }
       // Logged in + there are NO posts
@@ -647,7 +617,6 @@ class RouteHandler {
           user: req.session.user,
           areTherePosts: false,
           langData: req.session.langData,
-          langDirection: req.session.langDirection,
         });
       }
       // Other - Default
@@ -685,7 +654,6 @@ class RouteHandler {
       res.render("update-post-title", {
         user: req.session.user,
         langData: req.session.langData,
-        langDirection: req.session.langDirection,
       });
     }
   }

@@ -9,4 +9,14 @@ export default {
     filename: "bundle.js",
     path: path.resolve(__dirname, "client/js/dist"),
   },
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
+    ],
+  },
 };
