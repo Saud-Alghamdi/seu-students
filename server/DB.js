@@ -1,8 +1,6 @@
 import pkg from "pg";
 import bcrypt from "bcrypt";
-import dotenv from "dotenv";
 
-dotenv.config();
 const { Pool } = pkg;
 
 const pool = new Pool({
