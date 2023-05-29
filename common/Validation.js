@@ -1,10 +1,13 @@
 import axios from "axios";
-import {bytesToKB} from "./helper.js";
-import {enLangData as langData} from "../lang/en.js"
+import * as helper from "./helper.js";
+import { enLangData as enLangData } from "../lang/en.js";
+import { arLangData as arLangData } from "../lang/ar.js";
 
 export class Validation {
   // Validate Username
   static async validateUsername(username) {
+    const langData = (await helper.getCurrentLanguage()) === "en" ? enLangData : arLangData;
+
     const startWithLetterRegex = /^[a-zA-Z]/;
     const lettersNumbersUnderscoresRegex = /^[a-zA-Z0-9_]+$/;
     const lengthRegex = /^.{3,25}$/;
@@ -12,7 +15,7 @@ export class Validation {
     const checkUsernameExists = async (username) => {
       let exists = false;
       try {
-        const baseURL = "https://seu-students.onrender.com";
+        const baseURL = "http://localhost:3000";
         const response = await axios.post(`${baseURL}/checkUsernameExists`, {
           username,
         });
@@ -38,12 +41,14 @@ export class Validation {
 
   // Validate Email
   static async validateEmail(email) {
+    const langData = (await helper.getCurrentLanguage()) === "en" ? enLangData : arLangData;
+
     const regex = /^(?!.*\s)\S+@\S+\.\S+$/;
 
     const checkEmailExists = async (email) => {
       let exists = false;
       try {
-        const baseURL = "https://seu-students.onrender.com";
+        const baseURL = "http://localhost:3000";
         const response = await axios.post(`${baseURL}/checkEmailExists`, {
           email,
         });
@@ -65,6 +70,8 @@ export class Validation {
 
   // Validate Password
   static async validatePassword(password, repeatPassword) {
+    const langData = (await helper.getCurrentLanguage()) === "en" ? enLangData : arLangData;
+
     const containsSpaceRegex = /\s/;
     const lengthRegex = /^.{6,}$/;
 
@@ -81,6 +88,8 @@ export class Validation {
 
   // Validate Gender
   static async validateGender(gender) {
+    const langData = (await helper.getCurrentLanguage()) === "en" ? enLangData : arLangData;
+
     if (!gender) {
       return { passed: false, msg: langData.val_GENDER_NOT_SELECTED };
     } else {
@@ -90,12 +99,14 @@ export class Validation {
 
   // Validate Post file
   static async validatePostFile(file) {
+    const langData = (await helper.getCurrentLanguage()) === "en" ? enLangData : arLangData;
+
     if (!file) {
       return { passed: false, msg: langData.val_NO_FILE_SELECTED };
     }
 
     const fileSizeInBytes = file.size;
-    const fileSizeInKB = bytesToKB(fileSizeInBytes);
+    const fileSizeInKB = helper.bytesToKB(fileSizeInBytes);
     const maxFileSizeInKB = 50000; // = 50 MB
     const allowedExtensions = [".pdf", ".doc", ".docx", ".ppt", ".pptx"];
     const filePath = file.name || file.originalname;

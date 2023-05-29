@@ -21,14 +21,14 @@ export function bytesToKB(bytes) {
   return parseFloat(KB.toFixed(2));
 }
 
-export async function getLangData() {
-  const baseURL = "https://seu-students.onrender.com";
-  let langData;
+export async function getCurrentLanguage() {
+  const baseURL = "http://localhost:3000";
+  let lang;
 
   await axios
-    .get(`${baseURL}/langData`)
-    .then((res) => (langData = res.data))
+    .get(`${baseURL}/currentLang`)
+    .then((res) => (lang = res.data))
     .catch((err) => console.log(err));
 
-  return langData;
+  return lang;
 }

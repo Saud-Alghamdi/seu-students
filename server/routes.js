@@ -109,9 +109,9 @@ router.post("/dashboard/my-posts/:postId/updatePostTitleProcess", async (req, re
   await RouteHandler.updatePostTitleProcess(req, res);
 });
 
-// Send current language data to Validation.js file
-router.get("/langData", (req, res) => {
-  res.json(req.session.langData);
+// Send current language
+router.get("/currentLang", (req, res) => {
+  res.json(req.session.lang);
 });
 
 export default router;
