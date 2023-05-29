@@ -1,8 +1,7 @@
-import path from "path";
+const path = require("path");
+const Dotenv = require('dotenv-webpack');
 
-const __dirname = path.resolve();
-
-export default {
+module.exports = {
   mode: "production",
   entry: "./client/js/entry.js",
   output: {
@@ -19,4 +18,7 @@ export default {
       },
     ],
   },
+  plugins: [
+    new Dotenv()
+  ]
 };
