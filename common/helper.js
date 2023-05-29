@@ -22,10 +22,11 @@ export function bytesToKB(bytes) {
 }
 
 export async function getLangData() {
+  const baseURL = "https://seu-students.onrender.com";
   let langData;
 
   await axios
-    .get(`${process.env.URL}/langData`)
+    .get(`${baseURL}/langData`)
     .then((res) => (langData = res.data))
     .catch((err) => console.log(err));
 
