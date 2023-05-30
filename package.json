@@ -17,6 +17,7 @@
     "@aws-sdk/client-s3": "^3.282.0",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^16.0.3",
     "dotenv-webpack": "^8.0.1",

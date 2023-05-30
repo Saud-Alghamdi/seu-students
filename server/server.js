@@ -4,6 +4,7 @@ import memorystore from "memorystore";
 import path from "path";
 import routes from "./routes.js";
 import crypto from "crypto";
+import cors from 'cors';
 import {arLangData} from "../lang/ar.js";
 import {enLangData} from "../lang/en.js";
 
@@ -65,6 +66,7 @@ app.set("views", path.join(__dirname, "client/views"));
 
 app.use(express.static(path.join(__dirname, "client")));
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use(express.json());
 app.use(setLang);
 app.use(routes);
