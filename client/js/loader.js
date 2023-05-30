@@ -8,10 +8,11 @@ forms.forEach((form) => {
   });
 });
 
-// clear any loader when page has finished loading
 // this is a savior if a user has clicked the back button and a loader just hangs from the previous page
-window.addEventListener("load", () => {
-  removeLoader();
+window.addEventListener("pageshow", function (e) {
+  if (e.persisted) {
+    removeLoader();
+  }
 });
 
 export function removeLoader() {

@@ -6,9 +6,7 @@ import routes from "./routes.js";
 import crypto from "crypto";
 import {arLangData} from "../lang/ar.js";
 import {enLangData} from "../lang/en.js";
-import dotenv from "dotenv";
 
-dotenv.config();
 const app = express();
 const __dirname = path.resolve();
 const port = process.env.PORT || 3000;
