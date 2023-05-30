@@ -518,9 +518,10 @@ class DB {
       con = await DB.connect();
       const hashedPassword = await bcrypt.hash(newPassword, 10);
       const query = {
-        text: "UPDATE users SET password ILIKE $1 WHERE email ILIKE $2",
+        text: "UPDATE users SET password = $1 WHERE email ILIKE $2",
         values: [hashedPassword, email],
       };
+      
       const { rowCount } = await con.query(query);
       if (rowCount > 0) {
         isSuccess = true;
