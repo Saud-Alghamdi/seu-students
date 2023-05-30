@@ -15,7 +15,7 @@ export class Validation {
     const checkUsernameExists = async (username) => {
       let exists = false;
       try {
-        const baseURL = "http://localhost:3000";
+        const baseURL = "https://seu-students.com";
         const response = await axios.post(`${baseURL}/checkUsernameExists`, {
           username,
         });
