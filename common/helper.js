@@ -22,11 +22,10 @@ export function bytesToKB(bytes) {
 }
 
 export async function getCurrentLanguage() {
-  const baseURL = "https://seu-students.com";
   let lang;
 
   await axios
-    .get(`${baseURL}/currentLang`)
+    .get(`/currentLang`)
     .then((res) => (lang = res.data))
     .catch((err) => console.log(err));
 

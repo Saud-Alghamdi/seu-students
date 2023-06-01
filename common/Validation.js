@@ -15,8 +15,7 @@ export class Validation {
     const checkUsernameExists = async (username) => {
       let exists = false;
       try {
-        const baseURL = "https://seu-students.com";
-        const response = await axios.post(`${baseURL}/checkUsernameExists`, {
+        const response = await axios.post(`/checkUsernameExists`, {
           username,
         });
         exists = response.data;
@@ -48,8 +47,7 @@ export class Validation {
     const checkEmailExists = async (email) => {
       let exists = false;
       try {
-        const baseURL = "https://seu-students.com";
-        const response = await axios.post(`${baseURL}/checkEmailExists`, {
+        const response = await axios.post(`/checkEmailExists`, {
           email,
         });
         exists = response.data;
