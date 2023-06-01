@@ -67,3 +67,7 @@ The content must be either a  **PDF**, **PowerPoint**, or **Word** file.
 ```npm run build```:
 
 Runs the server and the webpack bundle concurrently and listens to changes done in the ```server``` folder and the ```client``` folder
+
+## issues
+
+There is a  ```Axios ECONNREFUSED``` error that appears in the terminal logs when the user updates his account data. The function works fine, but just want to note that this error is by the ```getCurrentLanguage()``` function inside ```Validation.js``` file.
