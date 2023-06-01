@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as helper from "./helper.js";
-import { enLangData as enLangData } from "../lang/en.js";
-import { arLangData as arLangData } from "../lang/ar.js";
+import { enLangData as enLangData } from "./lang/en.js";
+import { arLangData as arLangData } from "./lang/ar.js";
 
 export class Validation {
   // Validate Username

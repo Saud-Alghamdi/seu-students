@@ -4,8 +4,8 @@ import memorystore from "memorystore";
 import path from "path";
 import routes from "./routes.js";
 import crypto from "crypto";
-import { arLangData } from "../lang/ar.js";
-import { enLangData } from "../lang/en.js";
+import { arLangData } from "../common/lang/ar.js";
+import { enLangData } from "../common/lang/en.js";
 
 const app = express();
 const __dirname = path.resolve();
