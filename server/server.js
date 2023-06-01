@@ -4,9 +4,8 @@ import memorystore from "memorystore";
 import path from "path";
 import routes from "./routes.js";
 import crypto from "crypto";
-import cors from 'cors';
-import {arLangData} from "../lang/ar.js";
-import {enLangData} from "../lang/en.js";
+import { arLangData } from "../lang/ar.js";
+import { enLangData } from "../lang/en.js";
 
 const app = express();
 const __dirname = path.resolve();
@@ -64,9 +63,16 @@ setInterval(() => {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "client/views"));
 
+// Enable cors
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://www.seu-students.com");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
 app.use(express.static(path.join(__dirname, "client")));
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 app.use(express.json());
 app.use(setLang);
 app.use(routes);
