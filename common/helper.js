@@ -22,7 +22,7 @@ export function bytesToKB(bytes) {
 }
 
 export async function getCurrentLanguage() {
-  const baseURL = "https://seu-students.onrender.com";
+  const baseURL = "https://seu-students.com";
   let lang;
 
   await axios

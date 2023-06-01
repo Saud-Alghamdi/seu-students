@@ -394,13 +394,13 @@ class DB {
       }
 
       if (userData.email) {
-        stmt += `email = $2, `;
+        stmt += `email = $1, `;
         values.push(userData.email);
         result.newEmail = userData.email;
       }
 
       if (userData.password) {
-        stmt += `password = $3, `;
+        stmt += `password = $1, `;
         userData.password = await bcrypt.hash(userData.password, 10);
         values.push(userData.password);
         result.newPassword = userData.password;
