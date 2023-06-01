@@ -51,8 +51,8 @@ export class Validation {
           email,
         });
         exists = response.data;
-      } catch (error) {
-        console.error(error.message);
+      } catch (err) {
+        console.error(err.message);
       }
       return exists;
     };
