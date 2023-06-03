@@ -170,12 +170,13 @@ class DB {
       con = await DB.connect();
       const query = {
         text: `
-        SELECT courses.code
-        FROM courses
-        INNER JOIN courses_departments ON courses.id = courses_departments.course_id
-        INNER JOIN departments ON courses_departments.dep_id = departments.id
-        WHERE departments.abbr ILIKE $1;
-        `,
+      SELECT courses.code
+      FROM courses
+      INNER JOIN courses_departments ON courses.id = courses_departments.course_id
+      INNER JOIN departments ON courses_departments.dep_id = departments.id
+      WHERE departments.abbr ILIKE $1
+      ORDER BY courses.code ASC; -- Added ORDER BY clause
+      `,
         values: [depAbbr],
       };
       const { rows } = await con.query(query);
@@ -521,7 +522,7 @@ class DB {
         text: "UPDATE users SET password = $1 WHERE email ILIKE $2",
         values: [hashedPassword, email],
       };
-      
+
       const { rowCount } = await con.query(query);
       if (rowCount > 0) {
         isSuccess = true;
