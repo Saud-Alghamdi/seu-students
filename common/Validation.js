@@ -85,10 +85,10 @@ export class Validation {
   }
 
   // Validate Gender
-  static async validateGender(gender) {
+  static async validateGender(maleChecked, femaleChecked) {
     const langData = (await helper.getCurrentLanguage()) === "en" ? enLangData : arLangData;
 
-    if (!gender) {
+    if (!maleChecked && !femaleChecked) {
       return { passed: false, msg: langData.val_GENDER_NOT_SELECTED };
     } else {
       return { passed: true };
