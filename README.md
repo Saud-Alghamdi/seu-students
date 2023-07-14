@@ -8,7 +8,7 @@ The project's main goal is to make SEU students be able to share and download th
 
 Currently, the project is only targeting the College of Computing and Informatics. Until the number of consumers grow and the project's popularity rises, we will be covering all colleges in the university.
 
-As a user, you can simply just browser through the department you want, the course you want, and you will find all of the uploaded content related to that course.
+As a user, you can simply just browse through the department you want, the course you want, and you will find all of the uploaded content related to that course.
 
 ## Who uploads the content?
 
